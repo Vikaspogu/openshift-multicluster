@@ -2,8 +2,6 @@
 # OpenShift home cluster
 
 <br/>
-<br/>
-<br/>
 
 <div align="center">
 
@@ -17,4 +15,4 @@
 
 Welcome to my OpenShift operations repository.
 
-:construction: In progress :construction:
+For more information, head on over to my [docs](./docs/README.md).
