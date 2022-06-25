@@ -22,3 +22,7 @@ _... managed by ArgoCD_ :robot:
 Welcome to my OpenShift operations repository.
 
 For more information, head on over to my [docs](./docs/README.md).
+
+## 🔍 Features
+
+- [ ] Secret Management 🚧
