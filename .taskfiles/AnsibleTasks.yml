@@ -1,0 +1,71 @@
+---
+version: "3"
+
+env:
+  ANSIBLE_CONFIG: "{{.PROJECT_DIR}}/ansible.cfg"
+
+vars:
+  ANSIBLE_PLAYBOOK_DIR: "{{.ANSIBLE_DIR}}/playbooks"
+  ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory"
+
+tasks:
+  init:
+    desc: Install / Upgrade Ansible galaxy deps
+    dir: provision/ansible
+    cmds:
+      - ansible-galaxy install -r requirements.yml --roles-path ~/.ansible/roles --force
+      - ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections --force
+
+  list:
+    desc: List all the hosts
+    dir: provision/ansible
+    cmds:
+      - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --list-hosts
+
+  prepare-proxmox:
+    desc: Prepare all the proxmox nodes
+    dir: provision/ansible
+    cmds:
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/proxmox-prepare.yml
+
+  ping:
+    desc: Ping all the hosts
+    dir: provision/ansible
+    cmds:
+      - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -m 'ping'
+
+  uptime:
+    desc: Uptime of all the hosts
+    dir: provision/ansible
+    cmds:
+      - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -a 'uptime'
+
+  reboot:
+    desc: Reboot all the proxmox nodes
+    dir: provision/ansible
+    cmds:
+      - ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl reboot' --become
+
+  poweroff:
+    desc: Shutdown all the proxmox nodes
+    dir: provision/ansible
+    cmds:
+      - ansible proxmox -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl poweroff' --become
+
+  ocp4-install:
+    desc: Prepare and deploy ocp4
+    dir: provision/ansible
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-install.yml
+
+  ocp4-post-install:
+    desc: Post install task ocp4
+    dir: provision/ansible
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-post-install.yml
+
+  ocp4-nuke:
+    desc: Prepare and deploy ocp4
+    dir: provision/ansible
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-nuke.yml

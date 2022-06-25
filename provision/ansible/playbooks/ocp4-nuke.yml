@@ -1,0 +1,35 @@
+---
+- hosts: proxmox
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: init terraform
+      shell: terraform init
+      args:
+        chdir: ../../terraform/proxmox/10-vm
+      delegate_to: localhost
+      become: false
+
+    - name: Deploy ocp services and bootstrap VM
+      community.general.terraform:
+        project_path: ../../terraform/proxmox/10-vm
+        state: absent
+      delegate_to: localhost
+      become: false
+
+  tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../roles/ocp4/vars/secret.sops.yml
+        expressions: ignore
+
+    - name: Stop VMs for OCP cluster
+      command: qm stop "{{ vimidStart }}{{ item.vimid }}"
+      loop: "{{ vms_info }}"
+      ignore_errors: true
+
+    - name: Destroy VMs for OCP cluster
+      command: qm destroy "{{ vimidStart }}{{ item.vimid }}"
+      loop: "{{ vms_info }}"
+      ignore_errors: true

@@ -1,0 +1,103 @@
+- name: Cleanup old auto pxeboot files
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg/{{ ( '01-' + macstart + mac + item.macend ) | replace(':','-') }}
+    state: absent
+  with_items: "{{ vms_info }}"
+
+- name: Setup Auto pxe boot
+  template:
+    src: pxe/{{ item.ign }}
+    dest: /var/lib/tftpboot/pxelinux.cfg/{{ ( '01-' + macstart + mac + item.macend ) | replace(':','-') }}
+    force: yes
+    mode: "u=rx,g=rx,o=rx"
+  loop: "{{ vms_info }}"
+
+- name: Cleanup left over files from previous install
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/var/www/html/ignition"
+    - "/var/www/html/install"
+    - "/etc/apache2/logs/"
+    - "{{ ansible_env.HOME }}/ocp4"
+    - "{{ ansible_env.HOME }}/scripts"
+
+- name: Create needed directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "/var/www/html/ignition"
+    - "/var/www/html/install"
+    - "/etc/apache2/logs/"
+    - "{{ ansible_env.HOME }}/ocp4"
+    - "{{ ansible_env.HOME }}/scripts"
+
+- name: download RHCOS
+  get_url: url={{ rhcos_download_url }}/{{ item }} dest=/var/www/html/install/
+  with_items: "{{ rhcos }}"
+
+- name: Setup install-config.yaml
+  template:
+    src: install-config.ocp
+    dest: "{{ ansible_env.HOME }}/ocp4/install-config.yaml"
+    force: yes
+    mode: "u=rw,g=r,o=r"
+
+- name: Copy prepare ignition script
+  template:
+    src: 11-prep-ignitions.sh
+    dest: "{{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
+    force: yes
+    mode: "u=rwx,g=rwx,o=r"
+
+- name: Cleanup client apps oc, kubctl, openshift-install
+  file:
+    path: /tmp/{{ item }}
+    state: absent
+  with_items: "{{ ocp_client }}"
+
+- name: download OCP installer
+  get_url: url={{ client_download_url }}/{{ item }} dest=/tmp/{{ item }}
+  with_items: "{{ ocp_client }}"
+
+- name: download Helm
+  get_url: url={{ helm_download_url }} dest=/tmp/helm-linux-amd64.tar.gz
+
+- name: extract and copy helm
+  ansible.builtin.unarchive:
+    src: /tmp/helm-linux-amd64.tar.gz
+    dest: /usr/local/bin/.
+    remote_src: true
+
+- name: extract and copy client apps oc, kubctl, openshift-install
+  ansible.builtin.unarchive:
+    src: /tmp/{{ item }}
+    dest: /usr/local/bin/.
+    remote_src: true
+  with_items: "{{ ocp_client }}"
+
+- name: Create ignition files
+  command: "sh {{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
+
+- name: reboot servers
+  reboot:
+
+- name: "wait for apache2 to come up"
+  uri:
+    url: "http://{{ ansible_default_ipv4.address }}:8080/"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1
+
+- name: "wait for haproxy to come up"
+  uri:
+    url: "http://{{ ansible_default_ipv4.address  }}:9000"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1

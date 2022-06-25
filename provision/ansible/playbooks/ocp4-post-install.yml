@@ -1,0 +1,155 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../roles/ocp4/vars/secret.sops.yml
+        expressions: ignore
+
+    - name: Get root level directory
+      shell: "git rev-parse --show-toplevel"
+      register: root_dir
+
+    - name: Get kubeadmin password
+      shell: "cat {{ root_dir.stdout_lines[0] }}/provision/kubeadmin-password"
+      register: result_kubeadmin
+
+    - name: oc login to cluster
+      shell: "oc login https://api.{{clusterID}}.{{domain}}:6443 --username=kubeadmin --password={{result_kubeadmin.stdout_lines[0]}} --insecure-skip-tls-verify"
+
+    - name: Check if secret exists
+      shell: oc get secret htpass-secret -n openshift-config
+      register: result
+      ignore_errors: true
+
+    - name: Add a user to a password file and ensure permissions are set
+      community.general.htpasswd:
+        path: /tmp/passwdfile
+        name: "{{ocp_user}}"
+        password: "{{ocp_user_pass}}"
+      when: '"not found" in result.stderr'
+
+    - name: Create htpass secret
+      shell: "oc create secret generic htpass-secret --from-file=htpasswd=/tmp/passwdfile -n openshift-config"
+      when: '"not found" in result.stderr'
+
+    - name: Add cluster admin access to user
+      shell: "oc adm policy add-cluster-role-to-user cluster-admin {{ocp_user}}"
+      when: '"not found" in result.stderr'
+
+    - name: Remove a user from a password file
+      community.general.htpasswd:
+        path: /tmp/passwdfile
+        name: "{{ocp_user}}"
+        state: absent
+      when: '"not found" in result.stderr'
+
+    - name: Create a cloudflare-api-key secret
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: cloudflare-api-key
+            namespace: openshift-operators
+          type: Opaque
+          stringData:
+            api-key: "{{CF_API_KEY}}"
+
+    - name: Create cluster operators
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/operators"
+
+    - name: Wait for oauth pods to rollout
+      shell: "oc rollout status -n openshift-authentication deployment/oauth-openshift"
+
+    - name: Wait for cert-manager deployment
+      shell: "oc rollout status deployment/{{item}} -n openshift-operators -w"
+      register: rollout_status
+      retries: 10
+      until: rollout_status is success
+      with_items:
+        - cert-manager
+        - cert-manager-cainjector
+        - cert-manager-webhook
+
+    - name: Check if clusterissuer is already present
+      shell: "oc get clusterissuer letsencrypt-production"
+      ignore_errors: true
+      register: result_clusterissuer
+
+    - name: Create cluster issuer
+      shell: "source {{root_dir.stdout_lines[0]}}/environment.sh; envsubst < {{root_dir.stdout_lines[0]}}/cluster/core/cert-manager/cluster-issuer.yaml | kubectl apply -f -"
+      when: '"not found" in result_clusterissuer.stderr'
+
+    - name: Wait for clusterissuer to be ready
+      shell: oc wait --for=condition=Ready clusterissuer/letsencrypt-production
+      register: wait_for_cluster_issuer
+      retries: 10
+      delay: 60
+      until: wait_for_cluster_issuer is success
+
+    - name: Create cluster issuer
+      shell: "source {{root_dir.stdout_lines[0]}}/environment.sh; envsubst < {{root_dir.stdout_lines[0]}}/cluster/core/cert-manager/certificates/{{item}} | kubectl apply -f -"
+      with_items:
+        - api-certificate.yaml
+
+    - name: Wait for certificates to be ready
+      shell: "oc wait --for=condition=Ready certificates/{{item.name}} -n {{item.namespace}}"
+      register: wait_for_certificates
+      retries: 10
+      delay: 60
+      until: wait_for_certificates is success
+      with_items:
+        - { name: api-tls, namespace: openshift-config }
+
+    - name: extract TLS certificates
+      shell: "oc extract secret/api-tls -n openshift-config --to={{ root_dir.stdout_lines[0] }}/provision --confirm"
+
+    - name: Check if secret exists
+      shell: oc get secret console-tls -n openshift-ingress
+      register: ingress_secret
+      ignore_errors: true
+
+    - name: create TLS secret for console certificate
+      shell: "oc create secret tls console-tls --cert {{ root_dir.stdout_lines[0] }}/provision/tls.crt --key {{ root_dir.stdout_lines[0] }}/provision/tls.key -n openshift-ingress"
+      when: '"not found" in ingress_secret.stderr'
+
+    - name: Check if apiserver is using api-tls cert
+      shell: oc get APIServer -o jsonpath='{.items[*].spec.servingCerts.namedCertificates[*].servingCertificate.name}'
+      register: result_apiserver
+
+    - name: Configure the API server to use the api-tls secret
+      shell: "source {{root_dir.stdout_lines[0]}}/environment.sh; envsubst < {{root_dir.stdout_lines[0]}}/cluster/core/cert-manager/api-server.yaml | kubectl apply -f -"
+      when: '"api-tls" not in result_apiserver.stdout'
+
+    - name: Wait for operator to be progressing
+      shell: oc wait co/kube-apiserver --for condition=Progressing
+      register: wait_for_apiserver
+      retries: 10
+      delay: 60
+      until: wait_for_apiserver is success
+      when: '"api-tls" not in result_apiserver.stdout'
+
+    - name: Check default certificate
+      shell: oc get ingresscontroller.operator -n openshift-ingress-operator -o jsonpath='{.items[*].spec.defaultCertificate.name}'
+      register: result_ingresscontroller_cert
+
+    - name: Patch console certificate
+      shell: 'oc patch ingresscontroller.operator default --type=merge -p ''{"spec":{"defaultCertificate": {"name": "console-tls"}}}'' -n openshift-ingress-operator'
+      when: '"console-tls" not in result_ingresscontroller_cert.stdout'
+
+    - name: Wait for ingress pods to rollout
+      shell: "oc rollout status -n openshift-ingress deployment/router-default"
+      when: '"console-tls" not in result_ingresscontroller_cert.stdout'
+
+    - name: Update ArgoCD instance
+      shell: "source {{root_dir.stdout_lines[0]}}/environment.sh; envsubst < {{root_dir.stdout_lines[0]}}/cluster/core/argocd/instance.yaml | kubectl apply -f -"
+
+    - name: Deploy base argocd application
+      kubernetes.core.k8s:
+        state: present
+        src: "{{root_dir.stdout_lines[0]}}/cluster/core/argocd/base-application.yaml"

@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-subdir-external-provisioner
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-nfs-storage
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    chart: nfs-subdir-external-provisioner
+    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    targetRevision: "4.0.16"
+    helm:
+      releaseName: nfs-subdir-external-provisioner
+      parameters:
+        - name: nfs.server
+          value: "192.168.20.45"
+        - name: nfs.path
+          value: "/mnt/nfs_server"
+        - name: storageClass.defaultClass
+          value: "true"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

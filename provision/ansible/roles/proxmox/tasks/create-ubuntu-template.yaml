@@ -1,0 +1,27 @@
+---
+- name: download cloud image
+  get_url:
+    url: "{{ ubuntu.cloud_image_url }}"
+    dest: "{{ ubuntu.cloud_image_path }}"
+    mode: 0700
+
+- name: create a VM to use as a template
+  command: "qm create {{ ubuntu.template_id }} --name {{ ubuntu.template_name }} --memory {{ ubuntu.template_memory }} --net0 virtio,bridge=vmbr0"
+
+- name: import disk image
+  command: "qm importdisk {{ ubuntu.template_id }} {{ ubuntu.cloud_image_path }} {{ ubuntu.storage }}"
+
+- name: configure VM to use imported image
+  command: "qm set {{ ubuntu.template_id }} --scsihw virtio-scsi-pci --scsi0 {{ ubuntu.storage }}:vm-{{ ubuntu.template_id }}-disk-0"
+
+- name: add cloud-init image as CDROM
+  command: "qm set {{ ubuntu.template_id }} --ide2 {{ ubuntu.storage }}:cloudinit"
+
+- name: configure boot from the image
+  command: "qm set {{ ubuntu.template_id }} --boot c --bootdisk scsi0"
+
+- name: attach serial console
+  command: "qm set {{ ubuntu.template_id }} --serial0 socket --vga serial0"
+
+- name: create template
+  command: "qm template {{ ubuntu.template_id }}"

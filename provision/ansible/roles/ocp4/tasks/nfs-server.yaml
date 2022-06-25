@@ -1,0 +1,29 @@
+- name: Ensure group "nobody" exists
+  group:
+    name: nobody
+    state: present
+
+- name: Create a mountable directory if it does not exist
+  file:
+    path: /mnt/nfs_server
+    state: directory
+    owner: nobody
+    group: nobody
+    mode: "0777"
+
+- name: Copy exports file.
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: NFS apply change configrue
+  shell: exportfs -a;systemctl reload nfs-server.service
+
+- name: restart rpcbind service
+  service:
+    name: rpcbind
+    enabled: yes
+    state: started

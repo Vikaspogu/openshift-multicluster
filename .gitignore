@@ -1,0 +1,25 @@
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# k8s
+kubeconfig
+# vscode-sops
+.decrypted~*.yaml
+.config.env
+*.agekey
+# Ansible
+xanmanning.k3s*
+mrlesmithjr.manage-lvm*
+zaxos.glances-ansible-role*
+# Terraform
+.terraform
+.terraform.lock.hcl
+.terraform.tfstate*
+terraform.tfstate*
+tmpl
+old_work
+.cluster-secrets.env
+provision/kubeadmin-password
+tls.*

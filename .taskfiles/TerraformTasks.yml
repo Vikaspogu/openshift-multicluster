@@ -1,0 +1,39 @@
+---
+version: "3"
+
+tasks:
+  cloudfare-init:
+    desc: Initialize terraform dependencies
+    dir: provision/terraform/cloudfare
+    cmds:
+      - terraform init {{.CLI_ARGS}}
+
+  cloudfare-plan:
+    desc: Show the changes terraform will make
+    dir: provision/terraform/cloudfare
+    cmds:
+      - terraform plan {{.CLI_ARGS}}
+
+  cloudfare-apply:
+    desc: Apply the changes to Cloudflare
+    dir: provision/terraform/cloudfare
+    cmds:
+      - terraform apply {{.CLI_ARGS}}
+
+  proxmox-init:
+    desc: Initialize terraform dependencies
+    dir: "{{.DIR}}"
+    cmds:
+      - terraform init {{.CLI_ARGS}}
+
+  proxmox-plan:
+    desc: Show the changes terraform will make
+    dir: "{{.DIR}}"
+    cmds:
+      - terraform plan {{.CLI_ARGS}}
+
+  proxmox-apply:
+    desc: Apply the changes to proxmox vm
+    dir: "{{.DIR}}"
+    cmds:
+      - terraform apply {{.CLI_ARGS}}

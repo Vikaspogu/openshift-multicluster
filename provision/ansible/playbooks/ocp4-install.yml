@@ -1,0 +1,140 @@
+---
+- hosts: proxmox
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: init terraform
+      shell: terraform init
+      args:
+        chdir: ../../terraform/proxmox/10-vm
+      delegate_to: localhost
+      become: false
+
+    - name: Deploy ocp services VM
+      community.general.terraform:
+        project_path: ../../terraform/proxmox/10-vm
+        state: present
+      delegate_to: localhost
+      become: false
+
+  tasks:
+    - name: Load encrypted credentials
+      community.sops.load_vars:
+        file: ../roles/ocp4/vars/secret.sops.yml
+        expressions: ignore
+
+    - name: Create new VMs for OCP cluster
+      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 raid-hhd-vg:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
+      loop: "{{ vms_info }}"
+
+    - name: Start Bootstrap VM
+      command: qm start "{{ vimidStart }}{{ vms_info[0].vimid }}"
+
+    - name: Wait until bootstrap MC is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[0].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 60
+      delay: 60
+
+    - name: Wait until bootstrap API is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[0].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 60
+      delay: 60
+
+    - name: Start Masters VMs
+      command: qm start "{{ vimidStart }}{{ item.vimid }}"
+      loop:
+        - "{{ vms_info[1] }}"
+        - "{{ vms_info[2] }}"
+        - "{{ vms_info[3] }}"
+
+    - name: Wait till master2 MC is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[3].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Wait till master2 API is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[3].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Wait till master1 API is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[2].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Wait till master1 MC is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[2].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Wait till master0 API is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[1].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Wait till master0 MC is ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[1].name }}
+      register: result
+      until: result.stdout.find("active_up") != -1
+      retries: 100
+      delay: 60
+
+    - name: Stop Bootstrap
+      command: qm stop "{{ vimidStart }}{{ vms_info[0].vimid }}"
+      tags:
+        - install_ocp
+
+    - name: Start workers VMs
+      command: qm start "{{ vimidStart }}{{ item.vimid }}"
+      loop:
+        - "{{ vms_info[4] }}"
+        - "{{ vms_info[5] }}"
+        - "{{ vms_info[6] }}"
+
+    - name: Pause for 10 minutes
+      pause:
+        minutes: 10
+
+  post_tasks:
+    - name: Create kube dir
+      file:
+        path: ~/.kube
+        state: directory
+      delegate_to: ocp4-services
+
+    - name: Copy OCP Auth to for generic access
+      copy:
+        src: "/root/ocp4/auth/kubeconfig"
+        dest: ~/.kube/config
+        force: yes
+        remote_src: true
+        mode: "u=rx,g=rwx,o=rwx"
+      delegate_to: ocp4-services
+
+    - name: Finish the bootstrap process
+      shell: openshift-install --dir=/root/ocp4/ wait-for bootstrap-complete --log-level=debug
+      delegate_to: ocp4-services
+
+    - name: Pause for 5 minutes
+      pause:
+        minutes: 5
+
+    - name: Approve any pending certs
+      shell: "oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve"
+      ignore_errors: true
+      delegate_to: ocp4-services

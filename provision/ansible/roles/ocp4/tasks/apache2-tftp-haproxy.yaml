@@ -1,0 +1,57 @@
+- name: Configure apache2 to listen on 8080
+  template:
+    src: apache2.conf
+    dest: /etc/apache2/apache2.conf
+    force: yes
+    mode: "u=rw,g=r,o=r"
+
+- name: Create TFTP directories for auto boot and rhcos
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "/var/lib/tftpboot/pxelinux.cfg"
+    - "/var/lib/tftpboot/rhcos"
+
+- name: setup TFTP
+  shell: "cp -a /usr/lib/syslinux/modules/efi64/* /var/lib/tftpboot"
+
+- name: copy ldlinux.c32
+  shell: "cp -a /usr/lib/syslinux/modules/bios/ldlinux.c32 /var/lib/tftpboot"
+
+- name: copy ldlinux.c32
+  shell: "cp -a /usr/lib/PXELINUX/pxelinux.0 /var/lib/tftpboot/"
+
+- name: Update the TFTP server directory
+  ansible.builtin.replace:
+    path: /etc/default/tftpd-hpa
+    regexp: "/srv/tftp"
+    replace: "/var/lib/tftpboot/"
+
+- name: restart tftp service
+  service:
+    name: tftpd-hpa
+    enabled: yes
+    state: restarted
+
+- name: start firewalld service
+  service:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: configure haproxy
+  template:
+    src: haproxy.j2
+    dest: /etc/haproxy/haproxy.cfg
+    force: yes
+    mode: "u=rw,g=r,o=r"
+
+- name: add tftp service to  firewalld
+  firewalld:
+    permanent: yes
+    immediate: yes
+    state: enabled
+    service: "tftp"
+  run_once: true
