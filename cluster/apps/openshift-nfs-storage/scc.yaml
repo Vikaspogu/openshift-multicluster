@@ -9,7 +9,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: nfs-subdir-external-provisioner
-    namespace: default
+    namespace: openshift-nfs-storage
   - kind: ServiceAccount
     name: nfs-subdir-external-provisioner
     namespace: openshift-nfs-storage

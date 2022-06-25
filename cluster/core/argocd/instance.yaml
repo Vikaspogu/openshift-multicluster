@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
   name: openshift-gitops
+  namespace: openshift-gitops
 spec:
   kustomizeBuildOptions: "--enable-alpha-plugins"
   server:
@@ -76,10 +77,7 @@ spec:
         image: viaductoss/ksops:v3.0.2
         command: ["/bin/sh", "-c"]
         args:
-          - echo "Installing KSOPS...";
-            mv ksops /custom-tools/;
-            mv $GOPATH/bin/kustomize /custom-tools/;
-            echo "Done.";
+          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; echo "Done.";'
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools

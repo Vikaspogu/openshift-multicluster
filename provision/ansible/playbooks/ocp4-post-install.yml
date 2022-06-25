@@ -153,3 +153,6 @@
       kubernetes.core.k8s:
         state: present
         src: "{{root_dir.stdout_lines[0]}}/cluster/core/argocd/base-application.yaml"
+
+    - name: Create namespace resources
+      shell: "kubectl apply -k {{root_dir.stdout_lines[0]}}/cluster/core/namespaces"
