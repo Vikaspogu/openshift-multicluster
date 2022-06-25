@@ -149,10 +149,8 @@
     - name: Update ArgoCD instance
       shell: "source {{root_dir.stdout_lines[0]}}/environment.sh; envsubst < {{root_dir.stdout_lines[0]}}/cluster/core/argocd/instance.yaml | kubectl apply -f -"
 
-    - name: Deploy base argocd application
-      kubernetes.core.k8s:
-        state: present
-        src: "{{root_dir.stdout_lines[0]}}/cluster/core/argocd/base-application.yaml"
+    - name: Deploy base argocd application and rolemapping
+      shell: "kubectl apply -k {{root_dir.stdout_lines[0]}}/cluster/core/argocd"
 
     - name: Create namespace resources
       shell: "kubectl apply -k {{root_dir.stdout_lines[0]}}/cluster/core/namespaces"

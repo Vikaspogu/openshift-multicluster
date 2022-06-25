@@ -1,50 +1,64 @@
-# Provision
+# Setup
+
+## Provisioning Proxmox
+
+Installing proxmox is straight forward Download boot ISO, flash to a USB and configure via GUI.
 
 ## Additional LVM Storage
 
-To add additional storage choose `Datacenter` > `Storage` > `Add` > `LVM`
+Once proxmox is installed, add additional storage choose `Datacenter` > `Storage` > `Add` > `LVM`
 
 ![Storage](./images/storage.png)
 
-## Run provision playbook
+## Run proxmox playbook
 
-[Provision playbook](../provision/ansible/playbooks/proxmox-prepare.yml)
+[Proxmox prepare playbook](../provision/ansible/playbooks/proxmox-prepare.yml)
 
-* Dark theme
-* Terraform role, user and access control
+Playbook does several things:
+
+* Install dark theme
+* Create terraform role, user and access control
 * Create ubuntu cloud init template
 * Enable correct proxmox repositories
-* Disable nag
+* Disable subscription nag
 
 ```bash
 task ansible:prepare-proxmox
 ```
 
-## 00 VMs
+## k3s node
 
-* k8s node
+* [Terraform](../provision/terraform/proxmox/00-vm) to create a VM based on ubuntu template for k3s node
 
 ```bash
 task terraform:proxmox-apply DIR=provision/terraform/proxmox/00-vm
 ```
 
-## Deploy OCP4
+## Baremetal OCP installation on Proxmox
 
-* Provision OCP4 Service node - Haproxy, PXE, NFS
-* Create bootstrap, master and worker VMs
+* Provision a Service VM using [Terraform](../provision/terraform/proxmox/10-vm/) and Setup Haproxy, PXE boot and NFS server using Ansible [role](../provision/ansible/roles/ocp4/)
+* [Install Playbook](../provision/ansible/playbooks/ocp4-install.yml)
 
-```bash
-task ansible:ocp4-install
-```
+  * Create bootstrap, master and worker VMs
+  * Wait for bootstrap process to finish
+  * Approve pending CSRs
 
-## Post Deploy OCP4
+    ```bash
+    task ansible:ocp4-install
+    ```
 
-* Provision OCP4 Service node - Haproxy, PXE, NFS
-* Create bootstrap, master and worker VMs
+* [Post install Playbook](../provision/ansible/playbooks/ocp4-post-install.yml)
 
-```bash
-task ansible:ocp4-post-install
-```
+  * Create htpasswd user and add new identity provider
+  * Install cert-manager, openshift-gitops operator
+  * Create cert manager cluster-issuer object
+  * Create certificate
+  * Update APIServer and Ingress operator with new certificates
+  * Update ArgoCD instance with ingress and KSOPS plugin
+
+    ```bash
+    task ansible:ocp4-post-install
+    ```
 
 ## Resources
 
