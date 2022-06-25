@@ -1,6 +1,12 @@
 <!-- markdownlint-disable MD041 -->
+<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="144px" height="144px"/>
+
 # OpenShift home cluster
 
+_... managed by ArgoCD_ :robot:
+
+<br/>
+<br/>
 <br/>
 
 <div align="center">
