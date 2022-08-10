@@ -20,5 +20,20 @@
     - name: oc login to cluster
       shell: "oc login https://api.{{clusterID}}.{{domain}}:6443 --username=kubeadmin --password={{result_kubeadmin.stdout_lines[0]}} --insecure-skip-tls-verify"
 
+    - name: Check if secret exists
+      shell: oc get secret sops-age -n openshift-gitops
+      register: result
+      ignore_errors: true
+
+    - name: Create sops key secret for decryption
+      shell: "cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin"
+      when: '"not found" in result.stderr'
+
     - name: Provision base cluster operations
       shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/operators"
+
+    - name: Wait for openshift-gitops-server pods to rollout
+      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
+
+    - name: Apply base application for ArgoCD
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/openshift-gitops"
