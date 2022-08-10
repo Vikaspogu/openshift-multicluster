@@ -22,9 +22,3 @@
 
     - name: Provision base cluster operations
       shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/operators"
-
-    - name: Wait for ingress pods to rollout
-      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
-
-    - name: Update Argo instance with custom plugin
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/argo"

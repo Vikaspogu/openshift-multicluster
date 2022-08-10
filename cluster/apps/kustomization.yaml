@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - oauth
   - cert-manager-operator
+  - openshift-gitops
   - openshift-nfs-storage
