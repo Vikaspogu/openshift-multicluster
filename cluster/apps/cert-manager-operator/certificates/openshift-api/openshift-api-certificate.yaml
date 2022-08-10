@@ -1,13 +1,13 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: api-tls
+  name: openshift-api
   namespace: openshift-config
 spec:
-  secretName: api-tls
+  secretName: openshift-api-certificate
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - "*.apps.${OCP4_DOMAIN}"
-    - "api.${OCP4_DOMAIN}"
+    - api.ocp4.v3spogu.xyz

@@ -11,7 +11,7 @@
       delegate_to: localhost
       become: false
 
-    - name: Deploy ocp services and bootstrap VM
+    - name: Destroy OCP services and bootstrap VM
       community.general.terraform:
         project_path: ../../terraform/proxmox/10-vm
         state: absent

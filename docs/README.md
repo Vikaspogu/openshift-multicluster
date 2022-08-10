@@ -36,16 +36,16 @@ task terraform:proxmox-apply DIR=provision/terraform/proxmox/00-vm
 
 ## Baremetal OCP installation on Proxmox
 
-* Provision a Service VM using [Terraform](../provision/terraform/proxmox/10-vm/) and Setup Haproxy, PXE boot and NFS server using Ansible [role](../provision/ansible/roles/ocp4/)
 * [Install Playbook](../provision/ansible/playbooks/ocp4-install.yml)
 
+  * Provision a Service VM using [Terraform](../provision/terraform/proxmox/10-vm/) and Setup Haproxy, PXE boot and NFS server using Ansible [role](../provision/ansible/roles/ocp4/)
   * Create bootstrap, master and worker VMs
   * Wait for bootstrap process to finish
   * Approve pending CSRs
 
-    ```bash
-    task ansible:ocp4-install
-    ```
+  ```bash
+  task ansible:ocp4-install
+  ```
 
 * [Post install Playbook](../provision/ansible/playbooks/ocp4-post-install.yml)
 
