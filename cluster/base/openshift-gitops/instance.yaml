@@ -20,7 +20,7 @@ spec:
         cpu: 125m
         memory: 128Mi
     route:
-      enabled: false
+      enabled: true
     service:
       type: ""
   grafana:
