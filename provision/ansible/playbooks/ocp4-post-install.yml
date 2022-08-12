@@ -36,7 +36,7 @@
       when: '"not found" in result.stderr'
 
     - name: Apply argo label to Openshift config namespace
-      shell: "oc label project openshift-config argocd.argoproj.io/managed-by=openshift-gitops --overwrite"
+      shell: "oc label namespace openshift-config argocd.argoproj.io/managed-by=openshift-gitops --overwrite"
 
     - name: Provision base cluster operations
       shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base"
