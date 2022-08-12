@@ -20,6 +20,12 @@
     - name: oc login to cluster
       shell: "oc login https://api.{{clusterID}}.{{domain}}:6443 --username=kubeadmin --password={{result_kubeadmin.stdout_lines[0]}} --insecure-skip-tls-verify"
 
+    - name: Provision base cluster operations
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/operators"
+
+    - name: Wait for openshift-gitops-server pods to rollout
+      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
+
     - name: Check if secret exists
       shell: oc get secret sops-age -n openshift-gitops
       register: result
