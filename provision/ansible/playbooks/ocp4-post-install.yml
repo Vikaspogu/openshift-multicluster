@@ -29,11 +29,8 @@
       shell: "cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin"
       when: '"not found" in result.stderr'
 
+    - name: Apply argo label to Openshift config namespace
+      shell: "oc label project openshift-config argocd.argoproj.io/managed-by=openshift-gitops --overwrite"
+
     - name: Provision base cluster operations
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/operators"
-
-    - name: Wait for openshift-gitops-server pods to rollout
-      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
-
-    - name: Apply base application for ArgoCD
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base/openshift-gitops"
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/base"

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps-of-apps
+  name: core-application
   namespace: openshift-gitops
 spec:
   destination:
@@ -10,7 +10,7 @@ spec:
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    path: cluster/apps
+    path: cluster/core
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: HEAD
   syncPolicy:
