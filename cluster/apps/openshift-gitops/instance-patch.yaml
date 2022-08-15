@@ -15,7 +15,7 @@ spec:
     host: openshift-gitops-server-openshift-gitops.apps.ocp4.v3spogu.xyz
     ingress:
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
+        cert-manager.io/cluster-issuer: letsencrypt-prod
       enabled: true
       tls:
         - hosts:

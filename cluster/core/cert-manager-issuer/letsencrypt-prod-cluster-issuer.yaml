@@ -8,7 +8,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: "vikaspoguadf@gmail.com"
     privateKeySecretRef:
-      name: letsencrypt-production
+      name: letsencrypt-prod
     solvers:
       - dns01:
           cloudflare:
