@@ -23,6 +23,22 @@ Welcome to my OpenShift operations repository.
 
 For more information, head on over to my [docs](./docs/README.md).
 
+### GitOps
+
+[OpenShift GitOps Operator](https://github.com/fluxcd/flux2) watches my [cluster](./cluster/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
+
+### Directories
+
+This Git repository contains the following directories (_kustomizatons_) under [cluster](./cluster/).
+
+```sh
+📁 cluster      # openshift cluster defined as code
+├─📁 config     # cluster config, loaded before 📁 core and 📁 apps
+├─📁 core       # crucial apps, namespaced dir tree, loaded before 📁 apps
+└─📁 apps       # regular apps, namespaced dir tree, loaded last
+```
+
 ## 🔍 Features
 
-- [ ] Secret Management 🚧
+- [X] Secret Management
+- [X] API and Wildcard cert generation using Argo Hooks
