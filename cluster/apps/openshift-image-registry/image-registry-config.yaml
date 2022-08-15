@@ -1,0 +1,22 @@
+---
+apiVersion: imageregistry.operator.openshift.io/v1
+kind: Config
+metadata:
+  name: cluster
+spec:
+  logLevel: Normal
+  managementState: Managed
+  observedConfig: null
+  operatorLogLevel: Normal
+  replicas: 1
+  requests:
+    read:
+      maxWaitInQueue: 0s
+    write:
+      maxWaitInQueue: 0s
+  rolloutStrategy: Recreate
+  unsupportedConfigOverrides: null
+  defaultRoute: true
+  storage:
+    pvc:
+      claim: 'image-registry-storage'

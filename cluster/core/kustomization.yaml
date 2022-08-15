@@ -5,6 +5,7 @@ bases:
   - ../base/argo-application
 resources:
   - oauth
+  - openshift-nfs-storage
   - cert-manager-issuer
 patches:
   - target:
