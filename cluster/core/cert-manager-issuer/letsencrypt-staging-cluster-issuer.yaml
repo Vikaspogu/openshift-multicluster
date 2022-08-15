@@ -13,7 +13,7 @@ spec:
       - dns01:
           cloudflare:
             email: "vikaspoguadf@gmail.com"
-            apiKeySecretRef:
+            apiTokenSecretRef:
               name: cloudflare-api-token
               key: api-token
         selector:
