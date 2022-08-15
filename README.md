@@ -25,7 +25,7 @@ For more information, head on over to my [docs](./docs/README.md).
 
 ### GitOps
 
-[OpenShift GitOps Operator](https://github.com/fluxcd/flux2) watches my [cluster](./cluster/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
+[OpenShift GitOps Operator](https://docs.openshift.com/container-platform/4.11/cicd/gitops/understanding-openshift-gitops.html) watches my [cluster](./cluster/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
 
 ### Directories
 
@@ -41,4 +41,8 @@ This Git repository contains the following directories (_kustomizatons_) under [
 ## 🔍 Features
 
 - [X] Secret Management
-- [X] API and Wildcard cert generation using Argo Hooks
+- [X] API and Wildcard certificate configuration using Argo Hooks
+
+## :hammer: TODO
+
+- [] cloudfared tunnel

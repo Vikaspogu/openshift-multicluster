@@ -5,12 +5,14 @@ Tools used:
 - [Ansible](https://www.ansible.com/)
 - [Terraform](https://www.terraform.io/)
 - [Proxmox](https://www.proxmox.com/en/)
+- [mozilla/sops](https://toolkit.fluxcd.io/guides/mozilla-sops/): Manages secrets for OpenShift, Ansible and Terraform.
+- [cert-manager](https://cert-manager.io/docs/): Creates SSL certificates for services in my OpenShift cluster.
 
-## Provisioning Proxmox instance
+## Install Proxmox
 
 Installing proxmox is straightforward. Download boot ISO, flash to a USB, and complete the setup via GUI.
 
-## Additional LVM Storage
+## Additional Storage
 
 Once proxmox is installed, add additional storage choose `Datacenter` > `Storage` > `Add` > `LVM`
 
