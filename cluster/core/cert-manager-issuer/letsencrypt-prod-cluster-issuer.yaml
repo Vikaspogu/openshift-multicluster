@@ -14,8 +14,8 @@ spec:
           cloudflare:
             email: "vikaspoguadf@gmail.com"
             apiKeySecretRef:
-              name: cloudflare-api-key
-              key: api-key
+              name: cloudflare-api-token
+              key: api-token
         selector:
           dnsZones:
             - "v3spogu.xyz"
