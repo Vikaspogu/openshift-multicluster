@@ -40,9 +40,9 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ## 🔍 Features
 
-- [X] Secret Management
+- [X] Secret Management using Kustomise and SOPS
 - [X] API and Wildcard certificate configuration using Argo Hooks
 
 ## :hammer: TODO
 
-- [] cloudfared tunnel
+- [ ] cloudfared tunnel

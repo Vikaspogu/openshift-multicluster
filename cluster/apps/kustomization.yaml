@@ -5,3 +5,4 @@ resources:
   - openshift-image-registry
   - cert-manager-certificates
   - openshift-gitops
+  - cloudflared
