@@ -6,7 +6,7 @@ bases:
 resources:
   - oauth
   - openshift-nfs-storage
-  - cert-manager-issuer
+  - cert-manager
 patches:
   - target:
       kind: Application
