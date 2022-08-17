@@ -1,0 +1,85 @@
+{
+  enabled: true,
+  timezone: "America/Chicago",
+  semanticCommits: "enabled",
+  dependencyDashboard: true,
+  dependencyDashboardTitle: "Renovate Dashboard 🤖",
+  commitBody: "Signed-off-by: Vikas Pogu <vikaspogu@users.noreply.github.com>",
+  suppressNotifications: ["prIgnoreNotification"],
+  rebaseWhen: "conflicted",
+  commitMessageTopic: "{{depName}}",
+  commitMessageExtra: "to {{newVersion}}",
+  commitMessageSuffix: "",
+  assignees: ["@vikaspogu"],
+  "helm-values": {
+    fileMatch: ["cluster/.+\\.ya?ml$"],
+  },
+  helmv3: {
+    fileMatch: ["charts/.+/Chart\\.ya?ml$"],
+  },
+  regexManagers: [
+    {
+      fileMatch: ["cluster/.+\\.yaml$"],
+      matchStrings: [
+        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
+      ],
+      datasourceTemplate: "helm",
+    }
+  ],
+  packageRules: [
+    // Setup datasources
+    {
+      datasources: ["helm"],
+      commitMessageTopic: "Helm chart {{depName}}",
+      separateMinorPatch: true,
+      ignoreDeprecated: true,
+    },
+    {
+      matchDatasources: ["docker"],
+      enabled: true,
+      matchUpdateTypes: ["major", "minor", "patch"],
+    },
+    {
+      matchDatasources: ["docker"],
+      semanticCommitScope: "images",
+      separateMinorPatch: true,
+    },
+    // add labels according to package and update types
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(images)!: ",
+      labels: ["renovate/image", "dep/major"],
+    },
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      labels: ["renovate/image", "dep/minor"],
+    },
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      labels: ["renovate/image", "dep/patch"],
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(charts)!: ",
+      labels: ["renovate/helm", "dep/major"],
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      labels: ["renovate/helm", "dep/minor"],
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      labels: ["renovate/helm", "dep/patch"],
+    }
+  ],
+}
