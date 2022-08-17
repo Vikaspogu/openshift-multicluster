@@ -2,7 +2,7 @@
 replicaCount: 3
 image:
   repository: raspbernetes/cloudflared
-  tag: "2022.8.1"
+  tag: "2022.8.2"
 cloudflared:
   # Tunnel ID should be unique per instance of running cloudflared
   tunnelID: "b98edfb1-3d2d-4955-b053-5eeff8bd9786"
