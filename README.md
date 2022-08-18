@@ -42,7 +42,7 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 - [X] Secret Management using Kustomise and SOPS
 - [X] API and Wildcard certificate configuration using Argo Hooks
+- [X] cloudfared tunnel
+- [X] Renovate bot
 
 ## :hammer: TODO
-
-- [ ] cloudfared tunnel
