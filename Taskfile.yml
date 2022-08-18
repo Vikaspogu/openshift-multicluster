@@ -33,13 +33,12 @@ tasks:
         age
         ansible
         direnv
-        fluxcd/tap/flux
         gitleaks
         go-task/tap/go-task
         helm
         ipcalc
         jq
-        kubernetes-cli
+        openshift-client
         kustomize
         pre-commit
         prettier

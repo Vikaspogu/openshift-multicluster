@@ -74,14 +74,6 @@ task ansible:ocp4-post-install
 - Configure cert-manager cluster-issuer object
 - Create certificate's for APIServer and Ingress. Update certificates as postsync hook job
 
-## k3s node
-
-- [Terraform](../provision/terraform/proxmox/00-vm) to create a VM based on ubuntu template for k3s node
-
-```bash
-task terraform:proxmox-apply DIR=provision/terraform/proxmox/00-vm
-```
-
 ## Resources
 
 - [Eth issue](https://forum.proxmox.com/threads/e1000e-unexpected-adapter-resets.89459/)
