@@ -24,7 +24,7 @@ provider "proxmox" {
 }
 
 resource "proxmox_vm_qemu" "ocp4-services" {
-  count       = 1
+  count       = var.count
   name        = "ocp4-services"
   target_node = var.pm_node
 
