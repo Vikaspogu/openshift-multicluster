@@ -1,6 +1,8 @@
 variable "pm_node" {
-  default = "proxmox"
+  default = "proxmox-0"
 }
+
+variable "vm_count"{}
 
 variable "ssh_key_file" {
   default = "~/.ssh/id_rsa.pub"

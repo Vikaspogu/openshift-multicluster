@@ -109,10 +109,8 @@ backend secure
     balance source
     server {{ vms_info[4].name }} {{ vms_info[4].ipadd }}:443 check
     server {{ vms_info[5].name }} {{ vms_info[5].ipadd }}:443 check
-    server {{ vms_info[6].name }} {{ vms_info[6].ipadd }}:443 check
 
 backend insecure
     balance source
     server {{ vms_info[4].name }} {{ vms_info[4].ipadd }}:80 check
     server {{ vms_info[5].name }} {{ vms_info[5].ipadd }}:80 check
-    server {{ vms_info[6].name }} {{ vms_info[6].ipadd }}:80 check

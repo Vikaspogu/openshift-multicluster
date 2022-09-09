@@ -4,4 +4,4 @@
   gather_facts: true
   any_errors_fatal: true
   roles:
-    - ocp4
+    - openshift-services

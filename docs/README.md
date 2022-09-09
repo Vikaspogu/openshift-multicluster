@@ -36,13 +36,13 @@ task ansible:prepare-proxmox
 
 ## Baremetal OpenShift installation
 
-[Install Playbook](../provision/ansible/playbooks/ocp4-install.yml) does following:
+[Install Playbook](../provision/ansible/playbooks/openshift-install.yml) does following:
 
 ```bash
-task ansible:ocp4-install
+task ansible:openshift-install
 ```
 
-For my setup I am using a Ubuntu VM provisioned by [Terraform](../provision/terraform/proxmox/10-vm/) and Ansible [role](../provision/ansible/roles/ocp4/) to configure Load balancer, NFS and PXE boot services. DNS is configured on Synology NAS.
+For my setup I am using a Ubuntu VM provisioned by [Terraform](../provision/terraform/proxmox/00-openshift-services-vm/) and Ansible [role](../provision/ansible/roles/openshift/) to configure Load balancer, NFS and PXE boot services. DNS is configured on Synology NAS.
 
 For some reason I ran into issue while trying to create RHCOS VM's using Terraform, so i switched to `qm` commands to create, stop bootstrap, master, and worker VMs.
 
@@ -59,10 +59,10 @@ At this point, I have a running OpenShift cluster.
 
 ## Post Install
 
-Next, I will use ansible to create critical config resources using [Post install Playbook](../provision/ansible/playbooks/ocp4-post-install.yml) so ArgoCD can watch changes to my cluster folder.
+Next, I will use ansible to create critical config resources using [Post install Playbook](../provision/ansible/playbooks/openshift-post-install.yml) so ArgoCD can watch changes to my cluster folder.
 
 ```bash
-task ansible:ocp4-post-install
+task ansible:openshift-post-install
 ```
 
 - Install cert-manager, openshift-gitops operator

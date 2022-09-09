@@ -36,12 +36,10 @@
       deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
 
 - name: Disable no subscription nag
-  ansible.builtin.copy:
-    content: DPkg::Post-Invoke { \"dpkg -V proxmox-widget-toolkit | grep -q '/proxmoxlib\.js$'; if [ \$? -eq 1 ]; then { echo 'Removing subscription nag from UI...'; sed -i '/data.status/{s/\!//;s/Active/NoMoreNagging/}' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js; }; fi\"; };
-    dest: /etc/apt/apt.conf.d/no-nag-script
+  shell: echo "DPkg::Post-Invoke { \"dpkg -V proxmox-widget-toolkit | grep -q '/proxmoxlib\.js$'; if [ \$? -eq 1 ]; then { echo 'Removing subscription nag from UI...'; sed -i '/data.status/{s/\!//;s/Active/NoMoreNagging/}' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js; }; fi\"; };" > /etc/apt/apt.conf.d/no-nag-script
 
 - name: Reinstall proxmox proxmox-widget-toolkit
-  shell: apt --reinstall install proxmox-widget-toolkit
+  shell: apt-get --reinstall install proxmox-widget-toolkit
 
 - name: Disable IPv6
   sysctl:

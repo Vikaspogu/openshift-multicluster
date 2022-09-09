@@ -10,4 +10,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - api.ocp4.v3spogu.xyz
+    - api.proxmox-0.v3spogu.xyz

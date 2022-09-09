@@ -9,6 +9,6 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: '*.apps.ocp4.v3spogu.xyz'
+  commonName: '*.apps.proxmox-0.v3spogu.xyz'
   dnsNames:
-    - '*.apps.ocp4.v3spogu.xyz'
+    - '*.apps.proxmox-0.v3spogu.xyz'

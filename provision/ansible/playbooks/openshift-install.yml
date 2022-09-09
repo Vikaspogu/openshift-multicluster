@@ -7,27 +7,27 @@
     - name: init terraform
       shell: terraform init
       args:
-        chdir: ../../terraform/proxmox/10-vm
+        chdir: ../../terraform/proxmox/00-openshift-services-vm
       delegate_to: localhost
       become: false
 
     - name: Deploy ocp services VM
       community.general.terraform:
-        project_path: ../../terraform/proxmox/10-vm
+        project_path: ../../terraform/proxmox/00-openshift-services-vm
         state: present
         variables:
-          count: 0
+          vm_count: 1
       delegate_to: localhost
       become: false
 
   tasks:
     - name: Load encrypted credentials
       community.sops.load_vars:
-        file: ../roles/ocp4/vars/secret.sops.yml
+        file: ../roles/openshift-services/vars/secret.sops.yml
         expressions: ignore
 
     - name: Create new VMs for OCP cluster
-      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 raid-hhd-vg:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
+      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 hhd-zfs:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
       loop: "{{ vms_info }}"
 
     - name: Start Bootstrap VM
@@ -54,52 +54,30 @@
         - "{{ vms_info[2] }}"
         - "{{ vms_info[3] }}"
 
-    - name: Wait till master2 MC is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[3].name }}
+    - name: Wait till master machines are ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ item.name }}
       register: result
       until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
+      retries: 150
+      delay: 120
+      loop:
+        - "{{ vms_info[1] }}"
+        - "{{ vms_info[2] }}"
+        - "{{ vms_info[3] }}"
 
-    - name: Wait till master2 API is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[3].name }}
+    - name: Wait till master API's are ready
+      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ item.name }}
       register: result
       until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
-
-    - name: Wait till master1 API is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[2].name }}
-      register: result
-      until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
-
-    - name: Wait till master1 MC is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[2].name }}
-      register: result
-      until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
-
-    - name: Wait till master0 API is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[1].name }}
-      register: result
-      until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
-
-    - name: Wait till master0 MC is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[1].name }}
-      register: result
-      until: result.stdout.find("active_up") != -1
-      retries: 100
-      delay: 60
+      retries: 150
+      delay: 120
+      loop:
+        - "{{ vms_info[1] }}"
+        - "{{ vms_info[2] }}"
+        - "{{ vms_info[3] }}"
 
     - name: Stop Bootstrap
       command: qm stop "{{ vimidStart }}{{ vms_info[0].vimid }}"
-      tags:
-        - install_ocp
 
     - name: Start workers VMs
       command: qm start "{{ vimidStart }}{{ item.vimid }}"
@@ -116,20 +94,20 @@
       file:
         path: ~/.kube
         state: directory
-      delegate_to: ocp4-services
+      delegate_to: openshift-services
 
     - name: Copy OCP Auth to for generic access
       copy:
-        src: "/root/ocp4/auth/kubeconfig"
+        src: "/root/openshift/auth/kubeconfig"
         dest: ~/.kube/config
         force: yes
         remote_src: true
         mode: "u=rx,g=rwx,o=rwx"
-      delegate_to: ocp4-services
+      delegate_to: openshift-services
 
     - name: Finish the bootstrap process
-      shell: openshift-install --dir=/root/ocp4/ wait-for bootstrap-complete --log-level=debug
-      delegate_to: ocp4-services
+      shell: openshift-install --dir=/root/openshift/ wait-for bootstrap-complete --log-level=debug
+      delegate_to: openshift-services
 
     - name: Pause for 5 minutes
       pause:
@@ -138,4 +116,4 @@
     - name: Approve any pending certs
       shell: "oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve"
       ignore_errors: true
-      delegate_to: ocp4-services
+      delegate_to: openshift-services

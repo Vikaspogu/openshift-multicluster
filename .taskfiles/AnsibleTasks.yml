@@ -52,20 +52,20 @@ tasks:
     cmds:
       - ansible proxmox -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl poweroff' --become
 
-  ocp4-install:
-    desc: Prepare and deploy ocp4
+  openshift-install:
+    desc: Prepare and deploy openshift
     dir: provision/ansible
     cmds:
-      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-install.yml
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/openshift-install.yml
 
-  ocp4-post-install:
-    desc: Post install task ocp4
+  openshift-post-install:
+    desc: Post install task openshift
     dir: provision/ansible
     cmds:
-      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-post-install.yml
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/openshift-post-installation.yml
 
-  ocp4-nuke:
-    desc: Prepare and deploy ocp4
+  openshift-destroy:
+    desc: Prepare and deploy openshift
     dir: provision/ansible
     cmds:
-      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/ocp4-nuke.yml
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/openshift-destroy.yml

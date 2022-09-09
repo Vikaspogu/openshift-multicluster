@@ -1,4 +1,4 @@
-cd /root/ocp4
+cd /root/openshift
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 sshKeyVar=$(cat ~/.ssh/id_rsa.pub)

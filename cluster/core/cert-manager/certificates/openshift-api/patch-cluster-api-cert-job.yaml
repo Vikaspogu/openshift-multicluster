@@ -52,7 +52,7 @@ spec:
         - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
           env:
             - name: API_HOST_NAME
-              value: api.ocp4.v3spogu.xyz
+              value: api.proxmox-0.v3spogu.xyz
           command:
             - /bin/bash
             - -c

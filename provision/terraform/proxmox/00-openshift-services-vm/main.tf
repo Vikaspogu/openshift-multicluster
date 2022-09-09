@@ -23,25 +23,26 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-resource "proxmox_vm_qemu" "ocp4-services" {
-  count       = var.count
-  name        = "ocp4-services"
+resource "proxmox_vm_qemu" "openshift-services" {
+  count       = var.vm_count
+  name        = "openshift-services"
   target_node = var.pm_node
 
   clone = "ubuntu-2004-cloudinit-template"
 
   os_type  = "cloud-init"
-  cores    = 8
+  cores    = 4
   sockets  = "1"
   cpu      = "host"
-  memory   = 16384
+  memory   = 8102
   scsihw   = "virtio-scsi-pci"
   bootdisk = "scsi0"
+  onboot   = true
 
   disk {
     size    = "1000G"
     type    = "scsi"
-    storage = "raid-hhd-vg"
+    storage = "hhd-zfs"
   }
 
   network {
@@ -51,14 +52,14 @@ resource "proxmox_vm_qemu" "ocp4-services" {
 
   # cloud-init settings
   # adjust the ip and gateway addresses as needed
-  ipconfig0 = "ip=${data.sops_file.proxmox_secrets.data["ocp4_service_ip"]}/24,gw=${data.sops_file.proxmox_secrets.data["gw_ip"]}"
+  ipconfig0 = "ip=${data.sops_file.proxmox_secrets.data["openshift_service_ip"]}/24,gw=${data.sops_file.proxmox_secrets.data["gw_ip"]}"
   ssh_user  = data.sops_file.proxmox_secrets.data["ssh_user"]
   sshkeys   = file(var.ssh_keys["pub"])
   ciuser    = data.sops_file.proxmox_secrets.data["ssh_user"]
 
   # defines ssh connection to check when the VM is ready for ansible provisioning
   connection {
-    host        = data.sops_file.proxmox_secrets.data["ocp4_service_ip"]
+    host        = data.sops_file.proxmox_secrets.data["openshift_service_ip"]
     user        = data.sops_file.proxmox_secrets.data["ssh_user"]
     private_key = file(var.ssh_keys["priv"])
     agent       = false
@@ -71,7 +72,7 @@ resource "proxmox_vm_qemu" "ocp4-services" {
 
   provisioner "local-exec" {
     working_dir = "../../../ansible/playbooks"
-    command     = "ansible-playbook -u ${data.sops_file.proxmox_secrets.data["ssh_user"]} --key-file ${var.ssh_keys["priv"]} -i ${data.sops_file.proxmox_secrets.data["ocp4_service_ip"]}, ocp4-services-prepare.yml"
+    command     = "ansible-playbook -u ${data.sops_file.proxmox_secrets.data["ssh_user"]} --key-file ${var.ssh_keys["priv"]} -i ${data.sops_file.proxmox_secrets.data["openshift_service_ip"]}, openshift-services-vm-prepare.yml"
   }
 
 }

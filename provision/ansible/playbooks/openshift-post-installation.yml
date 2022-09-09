@@ -6,7 +6,7 @@
   tasks:
     - name: Load encrypted credentials
       community.sops.load_vars:
-        file: ../roles/ocp4/vars/secret.sops.yml
+        file: ../roles/openshift-services/vars/secret.sops.yml
         expressions: ignore
 
     - name: Get root level directory

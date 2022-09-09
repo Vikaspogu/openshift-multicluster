@@ -48,7 +48,8 @@
     state: present
   loop: "{{ infra.packages }}"
   register: apt_install_common
-  retries: 10
+  retries: 100
+  delay: 60
   until: apt_install_common is success
 
 - name: Open up firewall ports

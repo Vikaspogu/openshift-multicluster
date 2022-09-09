@@ -20,7 +20,7 @@
     - "/var/www/html/ignition"
     - "/var/www/html/install"
     - "/etc/apache2/logs/"
-    - "{{ ansible_env.HOME }}/ocp4"
+    - "{{ ansible_env.HOME }}/openshift"
     - "{{ ansible_env.HOME }}/scripts"
 
 - name: Create needed directories
@@ -31,7 +31,7 @@
     - "/var/www/html/ignition"
     - "/var/www/html/install"
     - "/etc/apache2/logs/"
-    - "{{ ansible_env.HOME }}/ocp4"
+    - "{{ ansible_env.HOME }}/openshift"
     - "{{ ansible_env.HOME }}/scripts"
 
 - name: download RHCOS
@@ -41,7 +41,7 @@
 - name: Setup install-config.yaml
   template:
     src: install-config.ocp
-    dest: "{{ ansible_env.HOME }}/ocp4/install-config.yaml"
+    dest: "{{ ansible_env.HOME }}/openshift/install-config.yaml"
     force: yes
     mode: "u=rw,g=r,o=r"
 

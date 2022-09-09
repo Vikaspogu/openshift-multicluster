@@ -33,6 +33,6 @@
 
 - name: Copy kubeadmin to provision folder
   ansible.builtin.fetch:
-    src: "/root/ocp4/auth/kubeadmin-password"
+    src: "/root/openshift/auth/kubeadmin-password"
     dest: "{{ repo_abs_path.stdout }}/provision/kubeadmin-password"
     flat: true

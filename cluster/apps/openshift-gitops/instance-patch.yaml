@@ -12,14 +12,14 @@ spec:
       ingress:
         enabled: false
     insecure: true
-    host: openshift-gitops-server-openshift-gitops.apps.ocp4.v3spogu.xyz
+    host: openshift-gitops-server-openshift-gitops.apps.proxmox-0.v3spogu.xyz
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       enabled: true
       tls:
         - hosts:
-            - openshift-gitops-server-openshift-gitops.apps.ocp4.v3spogu.xyz
+            - openshift-gitops-server-openshift-gitops.apps.proxmox-0.v3spogu.xyz
           secretName: openshift-gitops-server-tls
     resources:
       limits:
