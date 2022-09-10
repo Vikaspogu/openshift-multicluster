@@ -25,6 +25,10 @@
 
     - name: Wait for openshift-gitops-server pods to rollout
       shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
+      register: rollout_status
+      until: rollout_status.rc == 0
+      retries: 30
+      delay: 60
 
     - name: Check if secret exists
       shell: oc get secret sops-age -n openshift-gitops
