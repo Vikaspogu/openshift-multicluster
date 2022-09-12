@@ -13,6 +13,6 @@ spec:
       metadata:
         nrql: "SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' FROM Metric WHERE appName='HTTP Server App' AND (transactionType = 'Web') LIMIT MAX SINCE 1800 seconds AGO TIMESERIES "
         noDataError: "true"
-        threshold: 300000
-        authenticationRef:
-          name: keda-trigger-auth-new-relic
+        threshold: "300000"
+      authenticationRef:
+        name: keda-trigger-auth-new-relic
