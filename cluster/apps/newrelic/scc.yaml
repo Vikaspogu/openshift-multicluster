@@ -2,8 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-infrastructure-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -16,8 +15,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-infrastructure-controlplane-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -30,8 +28,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-bundle-kube-state-metrics-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -44,8 +41,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-bundle-newrelic-logging-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -58,8 +54,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-bundle-nri-kube-events-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -72,8 +67,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: newrelic-bundle-nri-metadata-injection-admission-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -86,8 +80,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: null
-  name: system:openshift:scc:privileged
+  name: default-sa-newrelic-privileged-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
