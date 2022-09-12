@@ -16,7 +16,7 @@ spec:
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-      enabled: true
+      enabled: false
       tls:
         - hosts:
             - openshift-gitops-server-openshift-gitops.apps.proxmox-0.v3spogu.xyz
@@ -29,6 +29,6 @@ spec:
         cpu: 125m
         memory: 128Mi
     route:
-      enabled: false
+      enabled: true
     service:
       type: ""
