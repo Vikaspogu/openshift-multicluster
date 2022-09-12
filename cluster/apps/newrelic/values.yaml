@@ -14,8 +14,6 @@ newrelic-pixie:
 pixie-chart:
   # pixie-chart.enabled -- Install the [`pixie-chart` chart](https://docs.pixielabs.ai/installing-pixie/install-schemes/helm/#3.-deploy)
   enabled: true
-  deployOLM: "false"
-  olmNamespace: "openshift-operator-lifecycle-manager"
   clusterName: homelab-proxmox-0
   # The deploy key may be read from a custom secret in the Pixie namespace. This secret should be formatted where the
   # key of the deploy key is "deploy-key".
