@@ -1,4 +1,25 @@
 ---
+global:
+  # -- The cluster name for the Kubernetes cluster.
+  cluster: "homelab-proxmox-0"
+  # -- Name of the Secret object where the license key is stored
+  customSecretName: "newrelic-credentials"
+  # -- Key in the Secret object where the license key is stored
+  customSecretLicenseKey: "licenseKey"
+  lowDataMode: true
+
+newrelic-infrastructure:
+  privileged: true
+
+ksm:
+  enabled: true
+
+kubeEvents:
+  enabled: true
+
+prometheus:
+  enabled: true
+
 newrelic-pixie:
   # newrelic-pixie.enabled -- Install the [`newrelic-pixie`](https://github.com/newrelic/helm-charts/tree/master/charts/newrelic-pixie)
   enabled: true
@@ -14,28 +35,9 @@ newrelic-pixie:
 pixie-chart:
   # pixie-chart.enabled -- Install the [`pixie-chart` chart](https://docs.pixielabs.ai/installing-pixie/install-schemes/helm/#3.-deploy)
   enabled: true
+  deployOLM: "false"
+  olmNamespace: "openshift-operator-lifecycle-manager"
   clusterName: homelab-proxmox-0
   # The deploy key may be read from a custom secret in the Pixie namespace. This secret should be formatted where the
   # key of the deploy key is "deploy-key".
   customDeployKeySecret: "newrelic-credentials"
-
-newrelic-infrastructure:
-  privileged: true
-
-ksm:
-  enabled: true
-
-kubeEvents:
-  enabled: true
-
-prometheus:
-  enabled: true
-
-global:
-  # -- The cluster name for the Kubernetes cluster.
-  cluster: "homelab-proxmox-0"
-  # -- Name of the Secret object where the license key is stored
-  customSecretName: "newrelic-credentials"
-  # -- Key in the Secret object where the license key is stored
-  customSecretLicenseKey: "licenseKey"
-  lowDataMode: true
