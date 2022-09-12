@@ -80,3 +80,7 @@ task ansible:openshift-post-install
 - [Proxmox helper scripts](https://tteck.github.io/Proxmox/)
 - [Proxmox OCP playbooks](https://github.com/Keyvan-rh/Proxmox-OCP-Installer)
 - [GitOps Catalog by RedHat COP](https://github.com/redhat-cop/gitops-catalog)
+
+## NewRelic
+
+Install newrelic, create a new account use helm installation method
