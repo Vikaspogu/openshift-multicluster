@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - openshift-image-registry
   - openshift-gitops
+  - newrelic
