@@ -1,0 +1,18 @@
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: newrelic-scaledobject
+  namespace: openshift-keda
+spec:
+  maxReplicaCount: 3
+  scaleTargetRef:
+    name: server-http
+  triggers:
+    - type: new-relic
+      metadata:
+        nrql: "SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' FROM Metric WHERE appName='HTTP Server App' AND (transactionType = 'Web') LIMIT MAX SINCE 1800 seconds AGO TIMESERIES "
+        noDataError: "true"
+        threshold: 300000
+        authenticationRef:
+          name: keda-trigger-auth-new-relic

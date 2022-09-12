@@ -7,6 +7,8 @@ resources:
   - oauth
   - openshift-nfs-storage
   - cert-manager
+  - newrelic
+  - openshift-custom-metrics-autoscaler-operator
 patches:
   - target:
       kind: Application

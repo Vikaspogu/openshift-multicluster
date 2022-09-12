@@ -1,0 +1,17 @@
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-trigger-auth-new-relic
+  namespace: openshift-keda
+spec:
+  secretTargetRef:
+    - parameter: queryKey
+      name: newrelic-apikey
+      key: apiKey
+    - parameter: account
+      name: newrelic-apikey
+      key: account
+    - parameter: region
+      name: newrelic-apikey
+      key: region
