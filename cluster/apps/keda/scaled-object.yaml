@@ -3,7 +3,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: newrelic-scaledobject
-  namespace: openshift-keda
+  namespace: example
 spec:
   maxReplicaCount: 3
   scaleTargetRef:
@@ -15,4 +15,5 @@ spec:
         noDataError: "true"
         threshold: "300000"
       authenticationRef:
-        name: keda-trigger-auth-new-relic
+        name: keda-cluster-trigger-auth-new-relic
+        kind: ClusterTriggerAuthentication

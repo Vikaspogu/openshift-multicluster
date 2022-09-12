@@ -1,9 +1,8 @@
 ---
 apiVersion: keda.sh/v1alpha1
-kind: TriggerAuthentication
+kind: ClusterTriggerAuthentication
 metadata:
-  name: keda-trigger-auth-new-relic
-  namespace: openshift-keda
+  name: keda-cluster-trigger-auth-new-relic
 spec:
   secretTargetRef:
     - parameter: queryKey
