@@ -51,6 +51,3 @@
       until: rollout_status.rc == 0
       retries: 30
       delay: 60
-
-    - name: Create ArgoCD applications
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/argo-applications"

@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - instance.yaml
   - scc.yaml
+  - argo-applications.yaml
