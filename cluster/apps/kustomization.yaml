@@ -5,4 +5,4 @@ resources:
   - openshift-image-registry
   - openshift-gitops
   - openshift-keda
-  - example
+  - server-http

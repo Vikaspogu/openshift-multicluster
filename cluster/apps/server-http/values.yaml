@@ -1,0 +1,10 @@
+---
+image:
+  repository: docker.io/vikaspogu/server-http
+  tag: 2.0
+env:
+  NEW_RELIC_LICENSE_KEY:
+    valueFrom:
+      secretKeyRef:
+        name: newrelic-licensekey
+        key: licenseKey

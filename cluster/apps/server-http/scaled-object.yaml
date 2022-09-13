@@ -3,7 +3,7 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: newrelic-scaledobject
-  namespace: example
+  namespace: server-http
 spec:
   maxReplicaCount: 3
   minReplicaCount: 1
