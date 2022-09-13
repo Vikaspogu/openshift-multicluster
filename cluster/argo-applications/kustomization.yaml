@@ -6,6 +6,7 @@ resources:
   - oauth.yaml
   - openshift-nfs-storage.yaml
   - openshift-image-registry.yaml
+  - cert-manager.yaml
   - newrelic.yaml
   - openshift-custom-metrics-autoscaler-operator.yaml
   - openshift-keda.yaml
