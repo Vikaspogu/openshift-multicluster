@@ -8,3 +8,8 @@ env:
       secretKeyRef:
         name: newrelic-licensekey
         key: licenseKey
+service:
+  main:
+    ports:
+      http:
+        port: 8080
