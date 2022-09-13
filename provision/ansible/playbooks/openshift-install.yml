@@ -27,7 +27,7 @@
         expressions: ignore
 
     - name: Create new VMs for OCP cluster
-      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 hhd-zfs:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
+      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 lvm-thin-raid:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
       loop: "{{ vms_info }}"
 
     - name: Start Bootstrap VM

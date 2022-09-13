@@ -33,9 +33,9 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ```sh
 📁 cluster      # openshift cluster defined as code
-├─📁 config     # cluster config, loaded before 📁 core and 📁 apps
-├─📁 core       # crucial apps, namespaced dir tree, loaded before 📁 apps
-└─📁 apps       # regular apps, namespaced dir tree, loaded last
+├─📁 argo-applications   # argo application resource definitions for workloads
+├─📁 bootstrapping       # bootstrap operators and argocd
+└─📁 workloads           # regular apps
 ```
 
 ## 🔍 Features
@@ -44,5 +44,6 @@ This Git repository contains the following directories (_kustomizatons_) under [
 - [X] API and Wildcard certificate configuration using Argo Hooks
 - [X] cloudfared tunnel
 - [X] Renovate bot
+- [X] Newrelic
 
 ## :hammer: TODO
