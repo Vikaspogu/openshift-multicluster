@@ -5,7 +5,6 @@ namespace: openshift-keda
 resources:
   - controller.yaml
   - cluster-trigger-authentication.yaml
-  - scaled-object.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

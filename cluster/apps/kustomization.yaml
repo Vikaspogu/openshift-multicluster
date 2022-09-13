@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - openshift-image-registry
   - openshift-gitops
+  - openshift-keda
+  - example
