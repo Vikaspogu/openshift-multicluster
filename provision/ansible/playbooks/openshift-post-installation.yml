@@ -20,8 +20,8 @@
     - name: oc login to cluster
       shell: "oc login https://api.{{clusterID}}.{{domain}}:6443 --username=kubeadmin --password={{result_kubeadmin.stdout_lines[0]}} --insecure-skip-tls-verify"
 
-    - name: Provision bootstrapping operators
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/operators"
+    - name: Provision bootstrapping argocd operator
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-operator"
 
     - name: Wait for openshift-gitops-server pods to rollout
       shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
@@ -43,7 +43,7 @@
       shell: "oc label namespace openshift-config argocd.argoproj.io/managed-by=openshift-gitops --overwrite"
 
     - name: Update openshift-gitops instance
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops"
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-instance"
 
     - name: Wait for openshift-gitops-server pods to rollout
       shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
