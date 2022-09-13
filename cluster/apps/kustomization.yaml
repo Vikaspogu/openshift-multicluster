@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - openshift-image-registry
   - openshift-gitops
-  - keda
