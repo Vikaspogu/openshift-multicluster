@@ -2,11 +2,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - oauth
-  - openshift-nfs-storage
-  - cert-manager
-  - openshift-image-registry
-  - newrelic
-  - openshift-custom-metrics-autoscaler-operator
-  - openshift-keda
-  - server-http
+  - oauth.yaml
+  - openshift-nfs-storage.yaml
+  - cert-manager.yaml
+  - openshift-image-registry.yaml
+  - newrelic.yaml
+  - openshift-custom-metrics-autoscaler-operator.yaml
+  - openshift-keda.yaml
+  - server-http.yaml
