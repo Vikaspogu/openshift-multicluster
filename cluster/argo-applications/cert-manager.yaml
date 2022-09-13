@@ -15,5 +15,3 @@ spec:
     path: cluster/workloads/cert-manager
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: main
-  syncPolicy:
-    automated: {}

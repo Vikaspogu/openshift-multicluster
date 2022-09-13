@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: openshift-nfs-storage
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
 spec:
   destination:
     namespace: openshift-gitops
