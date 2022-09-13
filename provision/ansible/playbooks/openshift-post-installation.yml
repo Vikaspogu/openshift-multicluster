@@ -53,4 +53,4 @@
       delay: 60
 
     - name: Create ArgoCD applications
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/argo-applications"
+      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/argo-applications"
