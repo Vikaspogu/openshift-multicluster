@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: cert-manager-config
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "5"
@@ -12,6 +12,8 @@ spec:
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    path: cluster/workloads/cert-manager
+    path: cluster/workloads/cert-manager-config
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: main
+  syncPolicy:
+    automated: {}
