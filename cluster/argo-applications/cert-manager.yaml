@@ -14,5 +14,4 @@ spec:
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: main
   syncPolicy:
-    automated:
-      prune: true
+    automated: {}
