@@ -16,5 +16,5 @@ spec:
     name: prom-go-app
     weight: 100
   port:
-    targetPort: 8080-tcp
+    targetPort: http
   wildcardPolicy: None
