@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: server-http
+  namespace: server-http
+  labels:
+    app.kubernetes.io/instance: server-http
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: server-http
+    helm.sh/chart: app-template-0.1.1
+spec:
+  host: server-http-server-http.apps.proxmox-0.v3spogu.xyz
+  to:
+    kind: Service
+    name: server-http
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
