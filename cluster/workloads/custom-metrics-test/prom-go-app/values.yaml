@@ -5,12 +5,12 @@ image:
 service:
   main:
     ports:
-      http:
+      8080-tcp:
         port: 8080
     monitor:
       enabled: true
       endpoints:
-        - port: http
+        - port: 8080-tcp
           scheme: http
           path: /metrics
           interval: 1m
