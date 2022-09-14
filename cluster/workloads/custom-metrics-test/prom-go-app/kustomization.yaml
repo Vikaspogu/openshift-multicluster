@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: custom-metrics-test
 resources:
   - route.yaml
+  - scaled-object.yaml
 helmCharts:
   - name: app-template
     releaseName: prom-go-app

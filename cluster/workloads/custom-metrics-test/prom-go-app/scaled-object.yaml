@@ -9,7 +9,7 @@ spec:
   minReplicaCount: 1
   pollingInterval: 30
   scaleTargetRef:
-    name: server-http
+    name: prom-go-app
   triggers:
     - type: prometheus
       metadata:
@@ -17,5 +17,5 @@ spec:
         namespace: custom-metrics-test
         metricName: http_requests_total
         threshold: '5'
-        query: sum(rate(http_requests_total{job="test-app"}[1m]))
+        query: sum(rate(promhttp_metric_handler_requests_total{job="prom-go-app"}[1m]))
         authModes: "basic"

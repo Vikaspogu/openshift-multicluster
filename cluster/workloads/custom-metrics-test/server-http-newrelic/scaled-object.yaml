@@ -9,7 +9,7 @@ spec:
   minReplicaCount: 1
   pollingInterval: 30
   scaleTargetRef:
-    name: server-http
+    name: server-http-newrelic
   triggers:
     - type: new-relic
       metadata:
