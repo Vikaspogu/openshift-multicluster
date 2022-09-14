@@ -1,17 +1,16 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: server-http
+namespace: custom-metrics-test
 resources:
-  - namespace.yaml
   - route.yaml
   - scaled-object.yaml
 generators:
   - ./secret-generator.yaml
 helmCharts:
   - name: app-template
-    releaseName: server-http
-    namespace: server-http
+    releaseName: server-http-newrelic
+    namespace: custom-metrics-test
     repo: https://bjw-s.github.io/helm-charts/
     version: "0.2.0"
     valuesFile: values.yaml

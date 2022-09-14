@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: prom-go-app
+  namespace: custom-metrics-test
+  labels:
+    app.kubernetes.io/instance: prom-go-app
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prom-go-app
+    helm.sh/chart: app-template-0.2.0
+spec:
+  host: prom-go-app-custom-metrics-test.apps.proxmox-0.v3spogu.xyz
+  to:
+    kind: Service
+    name: prom-go-app
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None

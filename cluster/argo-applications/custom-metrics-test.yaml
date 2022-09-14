@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: server-http
+  name: custom-metrics-test
   namespace: openshift-gitops
 spec:
   destination:
@@ -10,7 +10,7 @@ spec:
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    path: cluster/workloads/server-http
+    path: cluster/workloads/custom-metrics-test
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: main
   syncPolicy:

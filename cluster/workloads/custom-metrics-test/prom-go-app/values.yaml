@@ -1,0 +1,9 @@
+---
+image:
+  repository: docker.io/vikaspogu/prom-go-app
+  tag: "1.0"
+service:
+  main:
+    ports:
+      http:
+        port: 8080
