@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: server-http
 resources:
   - namespace.yaml
+  - route.yaml
   - scaled-object.yaml
 generators:
   - ./secret-generator.yaml
