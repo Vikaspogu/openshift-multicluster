@@ -12,5 +12,5 @@ helmCharts:
     releaseName: server-http
     namespace: server-http
     repo: https://bjw-s.github.io/helm-charts/
-    version: "0.1.1"
+    version: "0.2.0"
     valuesFile: values.yaml
