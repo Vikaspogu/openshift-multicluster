@@ -5,8 +5,15 @@ image:
 service:
   main:
     ports:
+      http:
+        enabled: false
+        primary: false
       web:
+        enabled: true
+        primary: true
         port: 8080
+        protocol: HTTP
+        targetPort: 8080
     monitor:
       enabled: true
       endpoints:
