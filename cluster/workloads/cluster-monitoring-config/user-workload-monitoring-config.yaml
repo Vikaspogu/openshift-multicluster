@@ -12,10 +12,3 @@ data:
         requests:
           cpu: 200m
           memory: 2Gi
-      volumeClaimTemplate:
-        spec:
-          storageClassName: nfs-client
-          volumeMode: Filesystem
-          resources:
-            requests:
-              storage: 10Gi
