@@ -17,5 +17,4 @@ spec:
         namespace: custom-metrics-test
         metricName: http_requests_total
         threshold: '5'
-        query: sum(rate(promhttp_metric_handler_requests_total{job="prom-go-app"}[1m]))
-        authModes: "basic"
+        query: sum(rate(http_requests_total{job="thanos-querier"}[1m]))
