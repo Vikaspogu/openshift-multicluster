@@ -4,15 +4,14 @@ image:
   tag: "1.0"
 service:
   main:
-    enabled: false
     ports:
       http:
         port: 8080
     monitor:
       enabled: true
       endpoints:
-        - port: 8080-tcp
+        - port: http
           scheme: http
           path: /metrics
-          interval: 1m
+          interval: 30s
           scrapeTimeout: 10s
