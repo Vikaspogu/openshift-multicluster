@@ -5,4 +5,3 @@ namespace: custom-metrics-test
 resources:
   - namespace.yaml
   - server-http-newrelic
-  - prom-go-app
