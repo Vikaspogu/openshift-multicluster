@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: oauth
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   destination:
     namespace: openshift-gitops

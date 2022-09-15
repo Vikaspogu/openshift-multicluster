@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: newrelic
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   destination:
     namespace: openshift-gitops
