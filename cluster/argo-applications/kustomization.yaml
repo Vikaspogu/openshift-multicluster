@@ -11,3 +11,4 @@ resources:
   - openshift-custom-metrics-autoscaler-operator.yaml
   - openshift-keda.yaml
   - custom-metrics-test.yaml
+  - thycotic.yaml
