@@ -12,3 +12,4 @@ resources:
   - openshift-keda.yaml
   - custom-metrics-test.yaml
   - thycotic.yaml
+  - thycotic-test.yaml
