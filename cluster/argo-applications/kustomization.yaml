@@ -13,3 +13,4 @@ resources:
   - custom-metrics-test.yaml
   - thycotic.yaml
   - thycotic-test.yaml
+  - kyverno.yaml
