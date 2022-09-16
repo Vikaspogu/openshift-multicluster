@@ -15,6 +15,9 @@ spec:
                 matchLabels:
                   injector: thycotic
       mutate:
+        targets:
+          - apiVersion: v1
+            kind: Secret
         patchStrategicMerge:
           data:
             keynew: "{{request.object.data.keyone}}-{{@}}"
