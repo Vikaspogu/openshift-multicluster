@@ -1,0 +1,20 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: mutate-thycotic-slug
+spec:
+  rules:
+    - name: mutate-thycotic-slug
+      match:
+        any:
+          - resources:
+              kinds:
+                - Secret
+              selector:
+                matchLabels:
+                  injector: thycotic
+      mutate:
+        patchStrategicMerge:
+          data:
+            keynew: "{{request.object.data.keyone}}-{{@}}"
