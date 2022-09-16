@@ -13,7 +13,7 @@ spec:
   triggers:
     - type: new-relic
       metadata:
-        nrql: "SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' FROM Metric WHERE (appName = 'HTTP Server App Test') AND (transactionType = 'Web') LIMIT MAX SINCE 60 seconds AGO"
+        nrql: "SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Web throughput' FROM Metric WHERE (appName = 'HTTP Server App') AND (transactionType = 'Web') LIMIT MAX SINCE 60 seconds AGO"
         noDataError: "true"
         threshold: "10000"
       authenticationRef:
