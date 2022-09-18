@@ -22,3 +22,5 @@ server:
   route:
     enabled: true
     host: "vault.apps.proxmox-0.v3spogu.xyz"
+    tls:
+      termination: edge
