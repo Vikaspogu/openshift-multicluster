@@ -14,3 +14,4 @@ resources:
   - thycotic.yaml
   - thycotic-test.yaml
   - kyverno.yaml
+  - vault.yaml
