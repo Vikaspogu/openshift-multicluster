@@ -18,3 +18,6 @@ server:
 
   dev:
     enabled: true
+
+  route:
+    enabled: true
