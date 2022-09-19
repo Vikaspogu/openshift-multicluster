@@ -16,3 +16,4 @@ resources:
   - kyverno.yaml
   - vault.yaml
   - secrets-store-csi-driver.yaml
+  - vault-test.yaml
