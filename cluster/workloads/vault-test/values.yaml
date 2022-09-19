@@ -8,13 +8,13 @@ service:
       http:
         port: 8080
 persistence:
-  csi:
+  secrets-store-inline:
     enabled: true
     type: custom
     mountPath: "/mnt/secrets-store"
     readOnly: true
     volumeSpec:
-      secrets-store-inline:
+      csi:
         driver: secrets-store.csi.k8s.io
         readOnly: true
         volumeAttributes:
