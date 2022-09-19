@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: vault-test
 resources:
   - namespace.yaml
+  - scc.yaml
   - rbac.yaml
   - spc-vault-database.yaml
 
