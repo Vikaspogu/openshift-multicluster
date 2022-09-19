@@ -1,0 +1,21 @@
+---
+image:
+  repository: jweissig/app
+  tag: "0.0.1"
+service:
+  main:
+    ports:
+      http:
+        port: 8080
+persistence:
+  csi:
+    enabled: true
+    type: custom
+    mountPath: "/mnt/secrets-store"
+    readOnly: true
+    volumeSpec:
+      secrets-store-inline:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "vault-database"

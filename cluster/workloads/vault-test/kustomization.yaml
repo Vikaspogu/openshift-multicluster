@@ -5,3 +5,11 @@ namespace: vault-test
 resources:
   - namespace.yaml
   - spc-vault-database.yaml
+
+helmCharts:
+  - name: app-template
+    releaseName: webapp
+    namespace: vault-test
+    repo: https://bjw-s.github.io/helm-charts/
+    version: "0.2.1"
+    valuesFile: values.yaml
