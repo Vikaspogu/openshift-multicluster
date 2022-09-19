@@ -1,5 +1,19 @@
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: system:openshift:scc:restricted-csi
+rules:
+  - apiGroups:
+      - security.openshift.io
+    resourceNames:
+      - restricted-csi
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: webapp-sa-restricted
