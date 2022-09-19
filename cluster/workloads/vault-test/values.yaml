@@ -6,7 +6,7 @@ service:
   main:
     ports:
       http:
-        port: 8080
+        port: 8000
 serviceAccount:
   create: true
   name: "webapp-sa"
