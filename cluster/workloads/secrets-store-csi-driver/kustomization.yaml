@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+
+helmCharts:
+  - name: secrets-store-csi-driver
+    releaseName: secrets-store-csi-driver
+    namespace: secrets-store-csi-driver
+    repo: https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+    version: "1.2.4"
+    valuesFile: values.yaml

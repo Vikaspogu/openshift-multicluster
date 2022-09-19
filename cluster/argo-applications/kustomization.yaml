@@ -15,3 +15,4 @@ resources:
   - thycotic-test.yaml
   - kyverno.yaml
   - vault.yaml
+  - secrets-store-csi-driver.yaml

@@ -3,6 +3,7 @@ global:
   openshift: true
 
 injector:
+  enabled: false
   image:
     repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
     tag: "1.0.0-ubi"
@@ -24,3 +25,6 @@ server:
     host: "vault.apps.proxmox-0.v3spogu.xyz"
     tls:
       termination: edge
+
+csi:
+  enabled: true
