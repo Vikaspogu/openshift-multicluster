@@ -8,6 +8,7 @@ resources:
   - rbac.yaml
   - spc-vault-database.yaml
   - spc-azure.yaml
+  - vault-external-secret.yaml
 
 helmCharts:
   - name: app-template
