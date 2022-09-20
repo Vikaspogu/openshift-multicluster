@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - rbac.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+
+helmCharts:
+  - name: csi-secrets-store-provider-azure
+    releaseName: csi-secrets-store-provider-azure
+    namespace: csi-secrets-store-provider-azure
+    repo: https://azure.github.io/secrets-store-csi-driver-provider-azure/charts
+    version: "1.2.4"
+    valuesFile: values.yaml

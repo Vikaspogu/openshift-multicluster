@@ -1,0 +1,6 @@
+---
+linux:
+  privileged: true
+
+secrets-store-csi-driver:
+  install: false

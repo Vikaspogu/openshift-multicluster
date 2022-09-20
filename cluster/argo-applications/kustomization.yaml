@@ -17,3 +17,4 @@ resources:
   - vault.yaml
   - secrets-store-csi-driver.yaml
   - vault-test.yaml
+  - csi-secrets-store-provider-azure.yaml
