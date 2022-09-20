@@ -1,10 +1,6 @@
 # vault
 
+## Resources
 
-## Application deployment
-
-Patch the restricted SCC and, will add it to the service account in the application namespace
-
-```bash
-oc patch scc restricted --type='merge' -p '{"volumes":["configMap","csi","downwardAPI","emptyDir","persistentVolumeClaim","projected","secret"]}'
-```
+- https://kiratech.io/installing-the-hashicorp-vault-csi-on-openshift-4-6bc0b2c0b841
+- https://learn.hashicorp.com/tutorials/vault/kubernetes-secret-store-driver?in=vault/kubernetes

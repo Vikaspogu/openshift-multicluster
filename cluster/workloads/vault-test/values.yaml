@@ -21,4 +21,4 @@ persistence:
         driver: secrets-store.csi.k8s.io
         readOnly: true
         volumeAttributes:
-          secretProviderClass: "vault-database"
+          secretProviderClass: "azure-kvname"
