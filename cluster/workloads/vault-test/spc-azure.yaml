@@ -9,7 +9,7 @@ spec:
     usePodIdentity: "false"
     useVMManagedIdentity: "false"
     userAssignedIdentityID: ""
-    keyvaultName: https://vpogu-keyvault.vault.azure.net/
+    keyvaultName: vpogu-keyvault
     objects: |
       array:
         - |
