@@ -22,3 +22,5 @@ persistence:
         readOnly: true
         volumeAttributes:
           secretProviderClass: "azure-kvname"
+        nodePublishSecretRef:                       # Only required when using service principal mode
+          name: secrets-store-creds
