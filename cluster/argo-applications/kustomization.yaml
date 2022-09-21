@@ -7,6 +7,7 @@ resources:
   - openshift-nfs-storage.yaml
   - openshift-image-registry.yaml
   - cert-manager-config.yaml
+  - newrelic.yaml
   - openshift-custom-metrics-autoscaler-operator.yaml
   - openshift-keda.yaml
   - custom-metrics-test.yaml
