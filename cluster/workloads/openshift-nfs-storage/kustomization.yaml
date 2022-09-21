@@ -5,3 +5,6 @@ resources:
   - namespace.yaml
   - rbac.yaml
   - application.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -45,5 +45,8 @@ This Git repository contains the following directories (_kustomizatons_) under [
 - [X] cloudfared tunnel
 - [X] Renovate bot
 - [X] Newrelic
+- [X] Vault
+- [X] External Secret Operator
+- [X] Kyverno
 
 ## :hammer: TODO

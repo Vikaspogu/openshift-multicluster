@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
   - image-registry-pvc.yaml
   - image-registry-config.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

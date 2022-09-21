@@ -4,6 +4,11 @@ kind: Application
 metadata:
   name: openshift-custom-metrics-autoscaler-operator
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: openshift-gitops

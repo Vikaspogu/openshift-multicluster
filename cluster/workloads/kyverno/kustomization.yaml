@@ -7,6 +7,9 @@ resources:
   - namespace.yaml
   - rbac.yaml
 
+generatorOptions:
+  disableNameSuffixHash: true
+
 helmCharts:
   - name: kyverno
     releaseName: kyverno

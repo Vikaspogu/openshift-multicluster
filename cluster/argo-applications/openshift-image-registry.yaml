@@ -4,6 +4,12 @@ kind: Application
 metadata:
   name: openshift-image-registry
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: openshift-gitops

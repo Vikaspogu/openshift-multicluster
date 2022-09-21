@@ -4,6 +4,10 @@ kind: Application
 metadata:
   name: thycotic-test
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: openshift-gitops

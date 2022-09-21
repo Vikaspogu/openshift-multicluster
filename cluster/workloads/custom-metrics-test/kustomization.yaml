@@ -5,3 +5,6 @@ namespace: custom-metrics-test
 resources:
   - namespace.yaml
   - server-http-newrelic
+
+generatorOptions:
+  disableNameSuffixHash: true

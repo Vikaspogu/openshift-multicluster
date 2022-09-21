@@ -7,9 +7,6 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: true
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
 
 generators:
   - ./secret-generator.yaml
