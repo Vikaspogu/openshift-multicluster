@@ -9,12 +9,10 @@ resources:
   - cert-manager-config.yaml
   - openshift-custom-metrics-autoscaler-operator.yaml
   - openshift-keda.yaml
-  - custom-metrics-test.yaml
   - thycotic.yaml
-  - thycotic-test.yaml
   - kyverno.yaml
   - vault.yaml
   - secrets-store-csi-driver.yaml
-  - vault-test.yaml
   - csi-secrets-store-provider-azure.yaml
   - external-secrets.yaml
+  - secret-management-test.yaml
