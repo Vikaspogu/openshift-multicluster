@@ -109,9 +109,9 @@
       shell: openshift-install --dir=/root/openshift/ wait-for bootstrap-complete --log-level=debug
       delegate_to: openshift-services
 
-    - name: Pause for 5 minutes
+    - name: Pause for 10 minutes
       pause:
-        minutes: 5
+        minutes: 10
 
     - name: Approve any pending certs
       shell: "oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve"
