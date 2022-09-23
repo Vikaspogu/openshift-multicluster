@@ -5,6 +5,12 @@ metadata:
   name: vault-database
 spec:
   provider: vault
+  secretObjects:
+    - data:
+        - key: password
+          objectName: db-password
+      secretName: db-password
+      type: Opaque
   parameters:
     vaultAddress: "http://vault.vault:8200"
     roleName: "database"

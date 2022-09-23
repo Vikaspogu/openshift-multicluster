@@ -5,3 +5,4 @@ namespace: secret-management-test
 
 resources:
   - spc-azure.yaml
+  - spc-vault-database.yaml
