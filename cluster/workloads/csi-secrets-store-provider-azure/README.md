@@ -11,7 +11,7 @@ az keyvault secret set --vault-name "vpogu-keyvault" --name "ExamplePassword" --
 
 ```bash
 export SERVICE_PRINCIPAL_CLIENT_SECRET="$(az ad sp create-for-rbac --skip-assignment --name http://vpogu-keyvault-test --query 'password' -otsv)"
-export SERVICE_PRINCIPAL_CLIENT_ID="$(az ad sp show --id a7891faf-b6c9-4e4b-a091-2c9930d0cde9 --query 'appId' -otsv)"
+export SERVICE_PRINCIPAL_CLIENT_ID="$(az ad sp show --id <ID> --query 'appId' -otsv)"
 az keyvault set-policy -n vpogu-keyvault --secret-permissions get --spn ${SERVICE_PRINCIPAL_CLIENT_ID}
 
 kubectl create secret generic secrets-store-creds --from-literal clientid=${SERVICE_PRINCIPAL_CLIENT_ID} --from-literal clientsecret=${SERVICE_PRINCIPAL_CLIENT_SECRET}

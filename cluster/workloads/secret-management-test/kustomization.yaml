@@ -12,6 +12,9 @@ resources:
 generatorOptions:
   disableNameSuffixHash: true
 
+generators:
+  - ./secret-generator.yaml
+
 helmCharts:
   - name: app-template
     releaseName: webapp
