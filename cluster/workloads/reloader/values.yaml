@@ -3,4 +3,5 @@ nameOverride: reloader
 fullnameOverride: reloader
 reloader:
   isOpenshift: true
-  securityContext: {}
+  deployment:
+    securityContext: {}
