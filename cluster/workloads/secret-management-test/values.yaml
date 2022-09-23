@@ -2,6 +2,9 @@
 image:
   repository: jweissig/app
   tag: "0.0.1"
+controller:
+  annotations:
+    secret.reloader.stakater.com/reload: db-password
 service:
   main:
     ports:
