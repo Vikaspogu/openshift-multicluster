@@ -14,3 +14,12 @@ helmCharts:
     repo: https://stakater.github.io/stakater-charts
     version: "v0.0.119"
     valuesFile: values.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: reloader
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/securityContext
+        value: {}
