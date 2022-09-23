@@ -1,3 +1,6 @@
 ---
 nameOverride: reloader
 fullnameOverride: reloader
+reloader:
+  isOpenshift: true
+  securityContext: {}
