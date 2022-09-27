@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - rbac.yaml
+  - pvc.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

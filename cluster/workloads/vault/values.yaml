@@ -16,6 +16,15 @@ server:
   image:
     repository: "registry.connect.redhat.com/hashicorp/vault"
     tag: "1.11.3-ubi"
+  dataStorage:
+    enabled: false
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: vault-data
+  volumeMounts:
+    - name: data
+      mountPath: /vault/data
   standalone:
     enabled: true
     config: |
