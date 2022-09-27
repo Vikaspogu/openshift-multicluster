@@ -17,14 +17,17 @@ server:
     repository: "registry.connect.redhat.com/hashicorp/vault"
     tag: "1.11.3-ubi"
 
-  dev:
-    enabled: true
-
   route:
     enabled: true
     host: "vault.apps.proxmox-0.v3spogu.xyz"
     tls:
       termination: edge
+
+  postStart:
+    - /bin/sh
+    - -c
+    - if [ "$VAULT_KEY" ]; then until vault operator unseal $VAULT_KEY > /dev/null 2>&1;
+      do sleep 5; done; fi
 
 csi:
   enabled: true
