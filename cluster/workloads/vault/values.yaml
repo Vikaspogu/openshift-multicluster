@@ -16,39 +16,15 @@ server:
   image:
     repository: "registry.connect.redhat.com/hashicorp/vault"
     tag: "1.11.3-ubi"
-  dataStorage:
+
+  dev:
     enabled: false
-  volumes:
-    - name: data
-      persistentVolumeClaim:
-        claimName: vault-data
-  volumeMounts:
-    - name: data
-      mountPath: /vault/data
-  standalone:
-    enabled: true
-    config: |
-      ui = true
-      listener "tcp" {
-        tls_disable = 1
-        address = "[::]:8200"
-        cluster_address = "[::]:8201"
-      }
-      storage "file" {
-        path = "/vault/data"
-      }
 
   route:
     enabled: true
     host: "vault.apps.proxmox-0.v3spogu.xyz"
     tls:
       termination: edge
-
-  postStart:
-    - /bin/sh
-    - -c
-    - if [ "$VAULT_KEY" ]; then until vault operator unseal $VAULT_KEY > /dev/null 2>&1;
-      do sleep 5; done; fi
 
 csi:
   enabled: true

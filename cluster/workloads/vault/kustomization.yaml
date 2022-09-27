@@ -4,13 +4,9 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - rbac.yaml
-  - pvc.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
-
-generators:
-  - ./secret-generator.yaml
 
 helmCharts:
   - name: vault
@@ -29,16 +25,3 @@ patches:
         path: /spec/template/spec/containers/0/securityContext
         value:
           "privileged": true
-  - target:
-      kind: StatefulSet
-      name: vault
-    patch: |-
-      - op: add
-        path: /spec/template/spec/containers/0/env/-
-        value:
-          name: VAULT_KEY
-          valueFrom:
-            secretKeyRef:
-              name: vault-secret
-              key: VAULT_KEY
-              optional: true
