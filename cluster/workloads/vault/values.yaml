@@ -18,7 +18,7 @@ server:
     tag: "1.11.3-ubi"
 
   dev:
-    enabled: false
+    enabled: true
 
   route:
     enabled: true
