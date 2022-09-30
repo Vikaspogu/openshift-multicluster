@@ -23,8 +23,8 @@ spec:
         any:
           - resources:
               namespaces:
-                - kube-system
-                - "openshift-*"
+                - "kube*"
+                - "openshift*"
       mutate:
         patchStrategicMerge:
           spec:
