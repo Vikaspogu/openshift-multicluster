@@ -13,6 +13,7 @@ resources:
   - reloader.yaml
   - kyverno.yaml
   - vault.yaml
+  - policies.yaml
   - secrets-store-csi-driver.yaml
   - csi-secrets-store-provider-azure.yaml
   - external-secrets.yaml

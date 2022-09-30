@@ -2,12 +2,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kyverno
+  name: policies
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -16,11 +14,14 @@ spec:
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    path: cluster/workloads/kyverno
+    path: cluster/workloads/policies
     repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
     targetRevision: main
   syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
+    automated: {}
+    retry:
+      limit: 10
+      backoff:
+        duration: 120s
+        factor: 2
+        maxDuration: 5m0s

@@ -1,0 +1,25 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: set-ndots-on-pods
+spec:
+  rules:
+    - name: set-ndots-on-pods
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - default
+                - "openshift*"
+      mutate:
+        patchesJson6902: |-
+          - op: add
+            path: "/spec/"
+            value: {"dnsConfig": {"options": [{"name": "ndots","value": "2"}]}}
