@@ -16,5 +16,5 @@ helmCharts:
     releaseName: newrelic-bundle
     namespace: newrelic
     repo: https://helm-charts.newrelic.com
-    version: "4.8.10"
+    version: "4.8.11"
     valuesFile: values.yaml
