@@ -6,3 +6,4 @@ namespace: istio-system
 resources:
   - istio-system-namespace.yaml
   - servicemesh-controlplane.yaml
+  - default-memberroll.yaml

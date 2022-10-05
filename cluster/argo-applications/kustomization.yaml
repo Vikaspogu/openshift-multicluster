@@ -22,3 +22,4 @@ resources:
   - external-secrets.yaml
   - secret-management-test.yaml
   - openshift-servicemesh-instance.yaml
+  - bookinfo.yaml
