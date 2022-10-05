@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - openshift-cert-manager-operator.yaml
   - elasticsearch-operator.yaml
+  - jaeger-operator.yaml
+  - kiali-operator.yaml
   - openshift-servicemesh-operator.yaml
   - oauth.yaml
   - openshift-nfs-storage.yaml

@@ -1,0 +1,24 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger-operator
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: cluster/workloads/jaeger-operator
+    repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
