@@ -10,6 +10,7 @@ generatorOptions:
   disableNameSuffixHash: true
   annotations:
     argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
 
 generators:
   - ./secret-generator.yaml
