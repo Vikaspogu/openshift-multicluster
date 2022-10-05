@@ -5,8 +5,8 @@ metadata:
   name: oauth
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
