@@ -12,6 +12,4 @@ resources:
   - openshift-image-registry.yaml
   - cert-manager-config.yaml
   - reloader.yaml
-  - kyverno.yaml
-  - policies.yaml
   - openshift-servicemesh-instance.yaml
