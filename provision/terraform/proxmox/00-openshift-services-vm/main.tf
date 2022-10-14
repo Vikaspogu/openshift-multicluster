@@ -42,7 +42,7 @@ resource "proxmox_vm_qemu" "openshift-services" {
   disk {
     size    = "1000G"
     type    = "scsi"
-    storage = "lvm-thin-raid"
+    storage = "lvm-hhd"
   }
 
   network {
