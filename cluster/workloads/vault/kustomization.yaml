@@ -13,7 +13,7 @@ helmCharts:
     releaseName: vault
     namespace: vault
     repo: https://helm.releases.hashicorp.com
-    version: "0.22.0"
+    version: "0.22.1"
     valuesFile: values.yaml
 
 patches:
