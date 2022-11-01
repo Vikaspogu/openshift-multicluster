@@ -38,7 +38,7 @@ tasks:
         helm
         ipcalc
         jq
-        openshift-client
+        openshift-cli
         kustomize
         pre-commit
         prettier
