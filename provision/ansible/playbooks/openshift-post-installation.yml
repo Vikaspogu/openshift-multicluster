@@ -21,14 +21,27 @@
       shell: "oc login https://api.{{clusterID}}.{{domain}}:6443 --username=kubeadmin --password={{result_kubeadmin.stdout_lines[0]}} --insecure-skip-tls-verify"
 
     - name: Provision bootstrapping argocd operator
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-operator"
+      k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='{{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-operator') }}"
 
-    - name: Wait for openshift-gitops-server pods to rollout
-      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
-      register: rollout_status
-      until: rollout_status.rc == 0
+    #- name: Provision bootstrapping argocd operator
+      #shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-operator"
+
+    - name: Wait till the openshift-gitops-server pods is created
+      kubernetes.core.k8s_info:
+        kind: Pod
+        namespace: openshift-gitops
+      register: pod_list
+      until: pod_list|json_query('resources[*].status.phase')|unique == ["Running"]
       retries: 30
       delay: 60
+
+    #- name: Wait for openshift-gitops-server pods to rollout
+      #shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
+      #register: rollout_status
+      #until: rollout_status.rc == 0
+      #retries: 30
+      #delay: 60
 
     - name: Check if secret exists
       shell: oc get secret sops-age -n openshift-gitops
@@ -43,11 +56,24 @@
       shell: "oc label namespace openshift-config argocd.argoproj.io/managed-by=openshift-gitops --overwrite"
 
     - name: Update openshift-gitops instance
-      shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-instance"
+      k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='{{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-instance') }}"
 
-    - name: Wait for openshift-gitops-server pods to rollout
-      shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
-      register: rollout_status
-      until: rollout_status.rc == 0
+    #- name: Update openshift-gitops instance
+      #shell: "oc apply -k {{root_dir.stdout_lines[0]}}/cluster/bootstrapping/openshift-gitops-instance"
+
+    - name: Wait till the openshift-gitops-server pods is created
+      kubernetes.core.k8s_info:
+        kind: Pod
+        namespace: openshift-gitops
+      register: pod_list
+      until: pod_list|json_query('resources[*].status.phase')|unique == ["Running"]
       retries: 30
       delay: 60
+
+    #- name: Wait for openshift-gitops-server pods to rollout
+      #shell: "oc rollout status -n openshift-gitops deployment/openshift-gitops-server"
+      #register: rollout_status
+      #until: rollout_status.rc == 0
+      #retries: 30
+      #delay: 60
