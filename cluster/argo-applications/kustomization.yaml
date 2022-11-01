@@ -3,13 +3,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - openshift-cert-manager-operator.yaml
-  - elasticsearch-operator.yaml
-  - jaeger-operator.yaml
-  - kiali-operator.yaml
-  - openshift-servicemesh-operator.yaml
   - oauth.yaml
   - openshift-nfs-storage.yaml
   - openshift-image-registry.yaml
   - cert-manager-config.yaml
   - reloader.yaml
-  - openshift-servicemesh-instance.yaml
+  - kyverno.yaml
