@@ -7,6 +7,7 @@ metadata:
     name: "k3s-baremetal"
     cloud: auto-detect
     vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: default
   annotations: {}
 spec:
   hubAcceptsClient: true
