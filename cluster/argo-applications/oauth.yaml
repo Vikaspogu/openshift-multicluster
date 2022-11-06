@@ -20,5 +20,8 @@ spec:
     targetRevision: main
   syncPolicy:
     automated: {}
+    syncOptions:
+      - RespectIgnoreDifferences=true
   ignoreDifferences:
-    - kind: Secret
+    - group: ""
+      kind: Secret
