@@ -20,10 +20,3 @@ spec:
     targetRevision: main
   syncPolicy:
     automated: {}
-    syncOptions:
-      - RespectIgnoreDifferences=true
-  ignoreDifferences:
-    - group: "*"
-      namespace: openshift-authentication
-      kind: "Secret"
-      name: "v4-0-config-user-idp-0-file-data"

@@ -6,11 +6,12 @@ resources:
   - cluster-admin-role.yaml
   - oauth-htpass.yaml
 
+commonAnnotations:
+  argocd.argoproj.io/compare-options: IgnoreExtraneous
+  argocd.argoproj.io/sync-options: Prune=false
+
 generatorOptions:
   disableNameSuffixHash: true
-  annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: Prune=false
 
 generators:
   - ./secret-generator.yaml
