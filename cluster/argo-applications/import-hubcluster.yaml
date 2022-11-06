@@ -23,5 +23,5 @@ spec:
     syncOptions:
       - RespectIgnoreDifferences=true
   ignoreDifferences:
-    - group: "*"
+    - group: "internal.open-cluster-management.io"
       kind: "ManagedClusterInfo"

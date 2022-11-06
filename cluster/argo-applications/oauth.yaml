@@ -24,6 +24,5 @@ spec:
       - RespectIgnoreDifferences=true
   ignoreDifferences:
     - group: "*"
-      kind: "*"
-      managedFieldsManagers:
-        - Go-http-client
+      kind: "Secret"
+      name: "v4-0-config-user-idp-0-file-data"
