@@ -23,5 +23,7 @@ spec:
     syncOptions:
       - RespectIgnoreDifferences=true
   ignoreDifferences:
-    - group: ""
-      kind: Secret
+    - group: "*"
+      kind: "*"
+      managedFieldsManagers:
+        - Go-http-client
