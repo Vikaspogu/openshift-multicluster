@@ -1,0 +1,24 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: "k3s-baremetal"
+  namespace: "k3s-baremetal"
+spec:
+  clusterName: "k3s-baremetal"
+  clusterNamespace: "k3s-baremetal"
+  clusterLabels:
+    name: "k3s-baremetal"
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+    argocdCluster: false
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true

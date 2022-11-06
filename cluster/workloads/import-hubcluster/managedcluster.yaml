@@ -1,0 +1,12 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: "k3s-baremetal"
+  labels:
+    name: "k3s-baremetal"
+    cloud: auto-detect
+    vendor: auto-detect
+  annotations: {}
+spec:
+  hubAcceptsClient: true
