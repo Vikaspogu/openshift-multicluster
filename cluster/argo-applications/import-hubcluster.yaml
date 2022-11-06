@@ -20,3 +20,8 @@ spec:
     targetRevision: main
   syncPolicy:
     automated: {}
+  ignoreDifferences:
+    - group: "internal.open-cluster-management.io"
+      kind: "ManagedClusterInfo"
+      managedFieldsManagers:
+        - controller
