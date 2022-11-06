@@ -26,4 +26,4 @@ spec:
     - group: "internal.open-cluster-management.io"
       kind: "ManagedClusterInfo"
       jsonPointers:
-        /spec/loggingCA
+        - /spec/loggingCA
