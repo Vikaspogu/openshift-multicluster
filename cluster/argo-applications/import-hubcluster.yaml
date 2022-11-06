@@ -23,5 +23,5 @@ spec:
   ignoreDifferences:
     - group: "internal.open-cluster-management.io"
       kind: "ManagedClusterInfo"
-      json6902Paths:
+      jsonPointers:
         - '*'
