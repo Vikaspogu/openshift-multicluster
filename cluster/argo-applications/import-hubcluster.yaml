@@ -20,3 +20,8 @@ spec:
     targetRevision: main
   syncPolicy:
     automated: {}
+    syncOptions:
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: "*"
+      kind: "ManagedClusterInfo"
