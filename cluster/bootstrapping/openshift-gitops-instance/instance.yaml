@@ -199,6 +199,12 @@ spec:
         memory: 256Mi
   resourceExclusions: |
     - apiGroups:
+      - internal.open-cluster-management.io
+      kinds:
+      - ManagedClusterInfo
+      clusters:
+      - "*"
+    - apiGroups:
       - tekton.dev
       clusters:
       - '*'
