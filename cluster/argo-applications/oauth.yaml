@@ -20,3 +20,5 @@ spec:
     targetRevision: main
   syncPolicy:
     automated: {}
+  ignoreDifferences:
+    - kind: Secret
