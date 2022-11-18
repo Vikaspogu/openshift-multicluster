@@ -6,6 +6,9 @@ metadata:
   namespace: openshift-gitops
 spec:
   kustomizeBuildOptions: --enable-alpha-plugins
+  extraConfig:
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
   server:
     autoscale:
       enabled: false
