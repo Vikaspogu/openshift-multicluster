@@ -10,9 +10,9 @@
     - vm-setup
 
 - name: Include task to create Apache2,TFTP,HAProxy
-  include: apache2-tftp-haproxy.yaml
+  include: httpd-tftp-haproxy.yaml
   tags:
-    - apache2-tftp-haproxy
+    - httpd-tftp-haproxy
 
 - name: Include task to setup PXE boot with ignition
   include: pxe-ignition.yaml

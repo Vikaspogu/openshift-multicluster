@@ -1,4 +1,18 @@
 ---
+- name: "Replace line in file examples"
+  replace:
+    path: /etc/systemd/resolved.conf
+    regexp: '^#DNS=$'
+    replace: 'DNS=1.1.1.1'
+
+- name: Restart systemd-resolved
+  ansible.builtin.service:
+    name: "{{item}}"
+    state: restarted
+    enabled: true
+  with_items:
+    - systemd-resolved
+
 - name: Set timezone
   community.general.timezone:
     name: "{{ timezone }}"
@@ -42,7 +56,7 @@
     force: no
 
 - name: Install packages
-  apt:
+  package:
     name:
       - "{{ item }}"
     state: present
@@ -52,6 +66,14 @@
   delay: 60
   until: apt_install_common is success
 
+- name: Start firewalld
+  ansible.builtin.service:
+    name: "{{item}}"
+    state: restarted
+    enabled: true
+  with_items:
+    - firewalld
+
 - name: Open up firewall ports
   firewalld:
     permanent: yes
@@ -59,4 +81,14 @@
     state: enabled
     port: "{{ item }}"
   loop: "{{ infra.ports }}"
+  run_once: true
+
+- name: Open up firewall services
+  firewalld:
+    permanent: yes
+    immediate: yes
+    state: enabled
+    service: "{{ item }}"
+  with_items:
+    - tftp
   run_once: true

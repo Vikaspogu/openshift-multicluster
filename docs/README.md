@@ -26,7 +26,7 @@ Playbook does following:
 
 - Install's dark theme
 - Provision's terraform role, user, and access control
-- Create's ubuntu cloud-init template for VMs
+- Create's fedora cloud-init template for VMs
 - Enable's correct proxmox repositories
 - Disable's subscription nag
 
@@ -42,7 +42,7 @@ task ansible:prepare-proxmox
 task ansible:openshift-install
 ```
 
-For my setup I am using a Ubuntu VM provisioned by [Terraform](../provision/terraform/proxmox/00-openshift-services-vm/) and Ansible [role](../provision/ansible/roles/openshift/) to configure Load balancer, NFS and PXE boot services. DNS is configured on Synology NAS.
+For my setup I am using a fedora VM provisioned by [Terraform](../provision/terraform/proxmox/00-openshift-services-vm/) and Ansible [role](../provision/ansible/roles/openshift/) to configure Load balancer, NFS and PXE boot services. DNS is configured on Synology NAS.
 
 For some reason I ran into issue while trying to create RHCOS VM's using Terraform, so i switched to `qm` commands to create, stop bootstrap, master, and worker VMs.
 

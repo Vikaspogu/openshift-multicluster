@@ -19,7 +19,6 @@
   with_items:
     - "/var/www/html/ignition"
     - "/var/www/html/install"
-    - "/etc/apache2/logs/"
     - "{{ ansible_env.HOME }}/openshift"
     - "{{ ansible_env.HOME }}/scripts"
 
@@ -30,7 +29,6 @@
   with_items:
     - "/var/www/html/ignition"
     - "/var/www/html/install"
-    - "/etc/apache2/logs/"
     - "{{ ansible_env.HOME }}/openshift"
     - "{{ ansible_env.HOME }}/scripts"
 
@@ -81,12 +79,15 @@
 - name: Create ignition files
   command: "sh {{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
 
-- name: reboot servers
-  reboot:
+- name: Enable and start HTTPD servers
+  service:
+    name: httpd
+    enabled: yes
+    state: started
 
-- name: "wait for apache2 to come up"
+- name: "wait for httpd to come up"
   uri:
-    url: "http://{{ ansible_default_ipv4.address }}:8080/"
+    url: "http://{{ ansible_default_ipv4.address }}:8080/ignition/"
     status_code: 200
   register: result
   until: result.status == 200

@@ -1,0 +1,27 @@
+---
+- name: download cloud image
+  get_url:
+    url: "{{ fedora.cloud_image_url }}"
+    dest: "{{ fedora.cloud_image_path }}"
+    mode: 0700
+
+- name: create a VM to use as a template
+  command: "qm create {{ fedora.template_id }} --name {{ fedora.template_name }} --memory {{ fedora.template_memory }} --net0 virtio,bridge=vmbr0"
+
+- name: import disk image
+  command: "qm importdisk {{ fedora.template_id }} {{ fedora.cloud_image_path }} {{ fedora.storage }}"
+
+- name: configure VM to use imported image
+  command: "qm set {{ fedora.template_id }} --scsihw virtio-scsi-pci --scsi0 {{ fedora.storage }}:vm-{{ fedora.template_id }}-disk-0"
+
+- name: add cloud-init image as CDROM
+  command: "qm set {{ fedora.template_id }} --ide2 {{ fedora.storage }}:cloudinit"
+
+- name: configure boot from the image
+  command: "qm set {{ fedora.template_id }} --boot c --bootdisk scsi0"
+
+- name: attach serial console
+  command: "qm set {{ fedora.template_id }} --serial0 socket --vga serial0"
+
+- name: create template
+  command: "qm template {{ fedora.template_id }}"

@@ -28,7 +28,7 @@ resource "proxmox_vm_qemu" "openshift-services" {
   name        = "openshift-services"
   target_node = var.pm_node
 
-  clone = "ubuntu-2004-cloudinit-template"
+  clone = "fedora-37-1.7-cloudinit-template"
 
   os_type  = "cloud-init"
   cores    = 4

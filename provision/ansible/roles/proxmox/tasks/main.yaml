@@ -111,9 +111,9 @@
   ansible.builtin.shell: qm list
   register: qm_list
 
-- name: Include create ubuntu vm task
-  include: create-ubuntu-template.yaml
-  when: "'9000 ubuntu-2004-cloudinit-template' not in qm_list.stdout"
+- name: Include create fedora vm task
+  include: create-fedora-template.yaml
+  when: "'9000 fedora-37-1.7-cloudinit-template' not in qm_list.stdout"
 
 - name: Disable offloading features
   ansible.builtin.lineinfile:

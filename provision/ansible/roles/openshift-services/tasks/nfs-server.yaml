@@ -1,3 +1,12 @@
+- name: Start services
+  ansible.builtin.service:
+    name: "{{item}}"
+    state: started
+    enabled: true
+  with_items:
+    - rpcbind
+    - nfs-server
+
 - name: Ensure group "nobody" exists
   group:
     name: nobody
@@ -20,10 +29,13 @@
     mode: 0644
 
 - name: NFS apply change configrue
-  shell: exportfs -a;systemctl reload nfs-server.service
+  shell: exportfs -a;
 
-- name: restart rpcbind service
-  service:
-    name: rpcbind
-    enabled: yes
-    state: started
+- name: Restart services
+  ansible.builtin.service:
+    name: "{{item}}"
+    state: restarted
+    enabled: true
+  with_items:
+    - rpcbind
+    - nfs-server
