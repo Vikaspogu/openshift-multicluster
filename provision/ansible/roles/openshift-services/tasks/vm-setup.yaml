@@ -3,7 +3,7 @@
   replace:
     path: /etc/systemd/resolved.conf
     regexp: '^#DNS=$'
-    replace: 'DNS=1.1.1.1'
+    replace: "DNS={{dns}}"
 
 - name: Restart systemd-resolved
   ansible.builtin.service:
