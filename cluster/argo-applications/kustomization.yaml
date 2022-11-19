@@ -10,5 +10,4 @@ resources:
   - openshift-image-registry.yaml
   - cert-manager-config.yaml
   - reloader.yaml
-  - ./import-hubcluster.yaml
   - ./kyverno.yaml
