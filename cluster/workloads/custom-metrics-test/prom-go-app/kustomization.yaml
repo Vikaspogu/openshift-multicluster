@@ -10,5 +10,5 @@ helmCharts:
     releaseName: prom-go-app
     namespace: custom-metrics-test
     repo: https://bjw-s.github.io/helm-charts/
-    version: "1.0.1"
+    version: "1.1.1"
     valuesFile: values.yaml
