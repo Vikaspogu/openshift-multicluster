@@ -18,21 +18,26 @@ then
     curl -L -o $ENVSUBST https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-Linux-x86_64 && chmod +x $ENVSUBST
 fi
 
-patchYaml="
----
-receivers:
-- name: PagerDuty
-  pagerduty_configs:
-  - severity: critical
-    routing_key: haghsghwjgakjkjhk
-"
+patchJson='{
+    "receivers": [
+        {
+            "name": "PagerDuty",
+            "pagerduty_configs": [
+                {
+                    "severity": "critical",
+                    "routing_key": "${WEBHOOK}"
+                }
+            ]
+        }
+    ]
+}'
 
 echo "Extract current alert manager config..."
 oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 
 cat /tmp/alertmanager.yaml
 echo "Env substitute..."
-echo $patchYaml | $YQ | $ENVSUBST > /tmp/alertmanager-envsub.yaml
+echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yaml
 
 cat /tmp/alertmanager-envsub.yaml
 
