@@ -3,13 +3,13 @@
 set -o nounset
 set -o errexit
 
-JQ=/tmp/jq
+YQ=/tmp/yq
 ENVSUBST=/tmp/envsubst
 
-if ! command -v $JQ &> /dev/null
+if ! command -v $YQ &> /dev/null
 then
     echo "jq could not be found... installing"
-    curl -L -o $JQ https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && chmod +x $JQ
+    curl -L -o $YQ https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && chmod +x $YQ
 fi
 
 if ! command -v $ENVSUBST &> /dev/null
@@ -18,31 +18,26 @@ then
     curl -L -o $ENVSUBST https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-Linux-x86_64 && chmod +x $ENVSUBST
 fi
 
-patchJson='{
-    "receivers": [
-        {
-            "name": "PagerDuty",
-            "pagerduty_configs": [
-                {
-                    "severity": "critical",
-                    "routing_key": "${WEBHOOK}"
-                }
-            ]
-        }
-    ]
-}'
+patchYaml="
+receivers:
+- name: PagerDuty
+  pagerduty_configs:
+  - severity: critical
+    routing_key: haghsghwjgakjkjhk
+"
 
 echo "Extract current alert manager config..."
 oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
+
 cat /tmp/alertmanager.yaml
 echo "Env substitute..."
 echo $patchJson | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
 cat /tmp/alertmanager-envsub.yaml
 
-echo "JQ join files..."
+echo "YQ join files..."
 # Join
-$JQ -s '.[0] * .[1]' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
+$YQ eval-all '. as $item ireduce ({}; . * $item)' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
 
 echo "Setting secret data with new config..."
 # Set patched data
