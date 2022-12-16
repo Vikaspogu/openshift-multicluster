@@ -34,10 +34,10 @@ patchJson='{
 
 oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 
-echo $patchJson | $ENVSUBST > /tmp/alertmanager-patch.yaml
+echo $patchJson | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
 # Join
-$JQ -s '.[0] * .[1]' /tmp/alertmanager.yaml $patchJson > /tmp/alertmanager-patch.yaml
+$JQ -s '.[0] * .[1]' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
 
 # Set patched data
 oc set data secret/alertmanager-main \
