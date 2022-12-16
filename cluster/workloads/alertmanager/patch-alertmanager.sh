@@ -33,7 +33,7 @@ patchJson='{
         "routes": [
             {
                 "matchers": [
-                    "severity =~ "warning|critical""
+                    "severity =~ warning|critical"
                 ],
                 "receiver": "Critical-Webhook"
             }
