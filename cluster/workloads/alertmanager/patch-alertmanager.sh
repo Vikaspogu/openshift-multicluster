@@ -43,9 +43,10 @@ cat /tmp/alertmanager-envsub.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
-$YQ eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-test.yaml
+$YQ eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-yq.yaml
 
-cat /tmp/alertmanager-test.yaml
+mv /tmp/alertmanager-yq.yaml /tmp/alertmanager.yaml
+cat /tmp/alertmanager.yaml
 
 echo "Setting secret data with new config..."
 # Set patched data
