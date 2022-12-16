@@ -19,6 +19,7 @@ then
 fi
 
 patchYaml="
+---
 receivers:
 - name: PagerDuty
   pagerduty_configs:
