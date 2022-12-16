@@ -21,13 +21,12 @@ fi
 patchJson='{
     "receivers": [
         {
-            "name": "PagerDuty",
-            "pagerduty_configs": [
-                {
-                    "severity": "critical",
-                    "routing_key": "${WEBHOOK}"
-                }
-            ]
+        "name": "Critical",
+        "webhook_configs": [
+            {
+                "url": "${WEBHOOK}"
+            }
+        ]
         }
     ]
 }'
