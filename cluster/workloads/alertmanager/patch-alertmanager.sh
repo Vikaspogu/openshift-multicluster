@@ -10,6 +10,13 @@ then
     curl -L -o $JQ https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && chmod +x $JQ
 fi
 
+if ! command -v envsubst &> /dev/null
+then
+    echo "envsubst could not be found... installing"
+    ENVSUBST=/usr/bin/envsubst
+    curl -L -o $ENVSUBST https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-Linux-x86_64 && chmod +x $ENVSUBST
+fi
+
 patchJson='{
     "receivers": [
         {
