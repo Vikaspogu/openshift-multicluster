@@ -40,7 +40,7 @@ echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yam
 
 echo "YQ join files..."
 #| $ENVSUBST Join
-$YQ eval-all '. as $item ireduce ({}; . *n $item)' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-yq.yaml
+$YQ eval-all "select(fileIndex == 0) *n select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-yq.yaml
 
 mv /tmp/alertmanager-yq.yaml /tmp/alertmanager.yaml
 
