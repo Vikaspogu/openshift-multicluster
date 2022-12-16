@@ -64,7 +64,7 @@ spec:
             defaultMode: 0775
             sources:
               - configMap:
-                  name: *app
+                  name: patch-alertmanager
                   items:
                     - key: *scriptName
                       path: *scriptName
