@@ -5,4 +5,4 @@ metadata:
   name: ops-cluster
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
-    security.openshift.io/scc.podSecurityLabelSync: false
+    security.openshift.io/scc.podSecurityLabelSync: "false"
