@@ -43,7 +43,7 @@ cat /tmp/alertmanager-envsub.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
-$YQ eval-all '. as $item ireduce ({}; . *+ $item)' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager.yaml
+$YQ eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager.yaml
 
 echo "Setting secret data with new config..."
 # Set patched data
