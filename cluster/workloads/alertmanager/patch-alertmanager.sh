@@ -8,7 +8,7 @@ ENVSUBST=/tmp/envsubst
 
 if ! command -v $YQ &> /dev/null
 then
-    echo "jq could not be found... installing"
+    echo "yq could not be found... installing"
     curl -L -o $YQ https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && chmod +x $YQ
 fi
 
@@ -31,15 +31,15 @@ oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 
 cat /tmp/alertmanager.yaml
 echo "Env substitute..."
-echo $patchJson | yq | $ENVSUBST > /tmp/alertmanager-envsub.yaml
+echo $patchYaml | yq | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
 cat /tmp/alertmanager-envsub.yaml
 
 echo "YQ join files..."
 # Join
-$YQ eval-all '. as $item ireduce ({}; . * $item)' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
+$YQ eval-all '. as $item ireduce ({}; . * $item)' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager.yaml
 
 echo "Setting secret data with new config..."
 # Set patched data
 oc set data secret/alertmanager-main \
-  -n openshift-monitoring --from-file /tmp/alertmanager-patch.yaml
+  -n openshift-monitoring --from-file /tmp/alertmanager.yaml
