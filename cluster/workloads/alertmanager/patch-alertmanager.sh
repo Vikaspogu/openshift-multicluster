@@ -43,9 +43,13 @@ cat /tmp/alertmanager-envsub.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
-$YQ eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager.yaml
+$YQ eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-test.yaml
+
+cat /tmp/alertmanager-test.yaml
 
 echo "Setting secret data with new config..."
 # Set patched data
 oc set data secret/alertmanager-main \
   -n openshift-monitoring --from-file /tmp/alertmanager.yaml
+
+sleep 5m
