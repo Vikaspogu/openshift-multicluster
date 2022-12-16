@@ -49,6 +49,7 @@ echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yam
 
 echo "Delete old entry"
 $YQ e 'del(.receivers[] | select(.name == "Critical-Webhook"))' --inplace /tmp/alertmanager.yaml
+$YQ e 'del(.route.routes[] | select(.receiver == "Critical-Webhook"))' --inplace /tmp/alertmanager.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
