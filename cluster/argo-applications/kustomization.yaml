@@ -11,4 +11,3 @@ resources:
   - cert-manager-config.yaml
   - reloader.yaml
   - ./kyverno.yaml
-  - ./alertmanager.yaml

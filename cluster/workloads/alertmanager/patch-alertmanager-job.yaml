@@ -41,7 +41,6 @@ metadata:
 spec:
   template:
     spec:
-      securityContext: {}
       containers:
         - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
           env:
@@ -59,7 +58,6 @@ spec:
               subPath: &scriptName patch-alertmanager.sh
               readOnly: true
           name: *app
-          securityContext: {}
       volumes:
         - name: *app
           projected:
