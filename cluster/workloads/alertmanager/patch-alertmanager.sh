@@ -38,7 +38,13 @@ oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 echo "Env substitute..."
 echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yaml
 
+echo "YQ join files..."
+#| $ENVSUBST Join
+$YQ eval-all "select(fileIndex == 0) n+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-yq.yaml
+
+mv /tmp/alertmanager-yq.yaml /tmp/alertmanager.yaml
+
 echo "Setting secret data with new config..."
 # Set patched data
 oc set data secret/alertmanager-main \
-    -n openshift-monitoring --from-literal=alertmanager.yaml=$($YQ eval-all "select(fileIndex == 0) n+ select(fileIndex == 1)" /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml )
+  -n openshift-monitoring --from-file /tmp/alertmanager.yaml
