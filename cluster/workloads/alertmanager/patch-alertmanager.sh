@@ -32,13 +32,17 @@ patchJson='{
     ]
 }'
 
+echo "Extract current alert manager config..."
 oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 
+echo "Env substitute..."
 echo $patchJson | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
+echo "JQ join files..."
 # Join
 $JQ -s '.[0] * .[1]' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
 
+echo "Setting secret data with new config..."
 # Set patched data
 oc set data secret/alertmanager-main \
   -n openshift-monitoring --from-file /tmp/alertmanager-patch.yaml
