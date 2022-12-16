@@ -38,7 +38,7 @@ echo "Env substitute..."
 echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yaml
 
 echo "Delete old entry"
-$YQ e 'del(.receivers[] | select(.name == "Critical"))' /tmp/alertmanager.yaml
+$YQ e 'del(.receivers[] | select(.name == "Critical"))' --inplace /tmp/alertmanager.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
