@@ -38,6 +38,8 @@ oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 echo "Env substitute..."
 echo $patchJson | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
+cat /tmp/alertmanager-envsub.yaml
+
 echo "JQ join files..."
 # Join
 $JQ -s '.[0] * .[1]' /tmp/alertmanager.yaml /tmp/alertmanager-envsub.yaml > /tmp/alertmanager-patch.yaml
