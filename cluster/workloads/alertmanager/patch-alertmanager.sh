@@ -21,14 +21,24 @@ fi
 patchJson='{
     "receivers": [
         {
-        "name": "Critical",
+        "name": "Critical-Webhook",
         "webhook_configs": [
             {
                 "url": "${WEBHOOK}"
             }
         ]
         }
-    ]
+    ],
+    "route": {
+        "routes": [
+            {
+                "matchers": [
+                    "severity =~ "warning|critical""
+                ],
+                "receiver": "Critical-Webhook"
+            }
+        ]
+    }
 }'
 
 echo "Extract current alert manager config..."
@@ -38,7 +48,7 @@ echo "Env substitute..."
 echo $patchJson | $ENVSUBST | $YQ -p json -o yaml > /tmp/alertmanager-envsub.yaml
 
 echo "Delete old entry"
-$YQ e 'del(.receivers[] | select(.name == "Critical"))' --inplace /tmp/alertmanager.yaml
+$YQ e 'del(.receivers[] | select(.name == "Critical-Webhook"))' --inplace /tmp/alertmanager.yaml
 
 echo "YQ join files..."
 #| $ENVSUBST Join
