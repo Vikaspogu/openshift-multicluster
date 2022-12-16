@@ -34,7 +34,7 @@ patchJson='{
 
 echo "Extract current alert manager config..."
 oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
-
+cat /tmp/alertmanager.yaml
 echo "Env substitute..."
 echo $patchJson | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
