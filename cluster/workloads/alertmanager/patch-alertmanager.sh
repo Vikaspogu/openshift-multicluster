@@ -31,7 +31,7 @@ oc extract secret/alertmanager-main --to /tmp/ -n openshift-monitoring --confirm
 
 cat /tmp/alertmanager.yaml
 echo "Env substitute..."
-echo $patchYaml | yq | $ENVSUBST > /tmp/alertmanager-envsub.yaml
+echo $patchYaml | $YQ | $ENVSUBST > /tmp/alertmanager-envsub.yaml
 
 cat /tmp/alertmanager-envsub.yaml
 
