@@ -13,5 +13,5 @@ helmCharts:
     releaseName: csi-secrets-store-provider-azure
     namespace: csi-secrets-store-provider-azure
     repo: https://azure.github.io/secrets-store-csi-driver-provider-azure/charts
-    version: "1.3.0"
+    version: "1.4.0"
     valuesFile: values.yaml
