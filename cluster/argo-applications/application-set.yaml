@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workloads-application-set
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/vikaspogu/openshift-home-cluster.git
+        revision: main
+        directories:
+          - path: cluster/workloads/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      destination:
+        namespace: openshift-gitops
+        server: "https://kubernetes.default.svc"
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        path: "{{path}}"
+        repoURL: "https://github.com/vikaspogu/openshift-home-cluster.git"
+        targetRevision: "main"
