@@ -33,20 +33,16 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ```sh
 📁 cluster      # openshift cluster defined as code
-├─📁 argo-applications   # argo application resource definitions for workloads
-├─📁 bootstrapping       # bootstrap operators and argocd
-└─📁 workloads           # regular apps
+├─📁 argo-applications   # argo application set definition for workloads
+├─📁 bootstrapping       # bootstrap operators and OpenShift GitOps operator
+└─📁 workloads           # regular apps/operators
 ```
 
 ## 🔍 Features
 
 - [X] Secret Management using Kustomise and SOPS
 - [X] API and Wildcard certificate configuration using Argo Hooks
-- [X] cloudfared tunnel
 - [X] Renovate bot
-- [X] Newrelic
-- [X] Vault
-- [X] External Secret Operator
 - [X] Kyverno
 
 ## :hammer: TODO
