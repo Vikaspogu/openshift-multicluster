@@ -22,8 +22,12 @@ spec:
       requests:
         cpu: 125m
         memory: 128Mi
+    insecure: true
     route:
       enabled: true
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
     service:
       type: ""
   resourceCustomizations: |
