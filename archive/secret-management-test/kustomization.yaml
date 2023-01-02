@@ -20,5 +20,5 @@ helmCharts:
     releaseName: webapp
     namespace: secret-management-test
     repo: https://bjw-s.github.io/helm-charts/
-    version: "1.2.0"
+    version: "1.2.1"
     valuesFile: values.yaml
