@@ -1,7 +1,3 @@
-replicaCount: 1
-extraArgs:
-  - --autogenInternals=false
-  - --clientRateLimitQPS=30
-  - --clientRateLimitBurst=60
+replicaCount: 3
 serviceMonitor:
   enabled: true

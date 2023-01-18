@@ -13,8 +13,6 @@ spec:
         revision: main
         directories:
           - path: cluster/workloads/*
-          - exclude: true
-            path: cluster/workloads/kyverno
   template:
     metadata:
       name: '{{path.basename}}'
