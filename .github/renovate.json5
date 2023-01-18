@@ -11,6 +11,7 @@
   commitMessageExtra: "to {{newVersion}}",
   commitMessageSuffix: "",
   assignees: ["@vikaspogu"],
+  "ignorePaths": ["**/archive/**"]
   "helm-values": {
     fileMatch: ["cluster/.+\\.ya?ml$"],
   },
