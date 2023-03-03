@@ -4,50 +4,13 @@
     file: vars/secret.sops.yml
     expressions: ignore
 
-- name: add proxmox gpg key
-  ansible.builtin.apt_key:
-    url: "https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg"
-    state: present
-
-- name: Removing proxmox enterprise repository file
-  ansible.builtin.file:
-    path: /etc/apt/sources.list.d/pve-enterprise.list
-    state: absent
-
-- name: Remove specified repository from sources list
-  ansible.builtin.apt_repository:
-    repo: deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
-    state: present
-    filename: pve-install-repo
-
-- name: Remove specified repository from sources list
-  ansible.builtin.apt_repository:
-    repo: deb http://security.debian.org/debian-security bullseye-security main contrib
-    state: present
-
-- name: Enable No-Subscription Repository and Add/Correct PVE7 Sources
-  ansible.builtin.lineinfile:
-    path: /etc/apt/sources.list
-    insertafter: EOF
-    line: |
-      deb http://ftp.debian.org/debian bullseye main contrib
-      deb http://ftp.debian.org/debian bullseye-updates main contrib
-      deb http://security.debian.org/debian-security bullseye-security main contrib
-      deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
-
-- name: Disable no subscription nag
-  shell: echo "DPkg::Post-Invoke { \"dpkg -V proxmox-widget-toolkit | grep -q '/proxmoxlib\.js$'; if [ \$? -eq 1 ]; then { echo 'Removing subscription nag from UI...'; sed -i '/data.status/{s/\!//;s/Active/NoMoreNagging/}' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js; }; fi\"; };" > /etc/apt/apt.conf.d/no-nag-script
-
-- name: Reinstall proxmox proxmox-widget-toolkit
-  shell: apt-get --reinstall install proxmox-widget-toolkit
-
 - name: Disable IPv6
-  sysctl:
+  ansible.posix.sysctl:
     name: "{{ item }}"
     value: "1"
     sysctl_set: true
     state: present
-  with_items:
+  loop:
     - net.ipv6.conf.all.disable_ipv6
     - net.ipv6.conf.default.disable_ipv6
     - net.ipv6.conf.lo.disable_ipv6
@@ -64,7 +27,7 @@
   until: apt_upgrade is success
 
 - name: Upgrade the OS (apt-get dist-upgrade)
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
   register: apt_dist_upgrade
   retries: 5
@@ -83,10 +46,6 @@
   retries: 5
   until: apt_install_common is success
 
-- name: Proxmox Discord Dark Theme
-  ansible.builtin.shell: bash <(curl -s https://raw.githubusercontent.com/Weilbyte/PVEDiscordDark/master/PVEDiscordDark.sh ) install
-  ignore_errors: true
-
 - name: Check if terraform role exists
   ansible.builtin.shell: pveum role list
   register: pvenum_role
@@ -100,20 +59,27 @@
   register: pvenum_user
 
 - name: Create terraform user
-  ansible.builtin.shell: pveum user add {{ username }}@pve --password {{ password }}
-  when: '"{{ username }}@pve" not in pvenum_user.stdout'
+  ansible.builtin.shell: pveum user add {{ proxmox.username }}@pve --password {{ proxmox.password }}
+  when: '"{{ proxmox.username }}@pve" not in pvenum_user.stdout'
 
 - name: Access control
-  ansible.builtin.shell: pveum aclmod / -user {{ username }}@pve -role TerraformProv
-  when: '"{{ username }}@pve" not in pvenum_user.stdout'
+  ansible.builtin.shell: pveum aclmod / -user {{ proxmox.username }}@pve -role TerraformProv
+  when: '"{{ proxmox.username }}@pve" not in pvenum_user.stdout'
 
 - name: Check if cloud init template exists
   ansible.builtin.shell: qm list
   register: qm_list
 
 - name: Include create fedora vm task
-  include: create-fedora-template.yaml
+  ansible.builtin.include_tasks: create-fedora-template.yaml
   when: "'9000 fedora-37-1.7-cloudinit-template' not in qm_list.stdout"
+
+- name: Check whether interfaces contains offloading feature
+  command: grep -Fxq "pre-up /sbin/ethtool --offload vmbr0 gso off tso off sg off gro off" /etc/network/interfaces
+  register: check_offloading_feature
+  check_mode: no
+  ignore_errors: true
+  changed_when: no
 
 - name: Disable offloading features
   ansible.builtin.lineinfile:
@@ -122,6 +88,7 @@
     line: |
       pre-up /sbin/ethtool --offload vmbr0 gso off tso off sg off gro off
       pre-up /sbin/ethtool --offload enp0s25 gso off tso off sg off gro off
+  when: check_offloading_feature.rc == 1
 
 - name: reboot servers
-  reboot:
+  ansible.builtin.reboot:

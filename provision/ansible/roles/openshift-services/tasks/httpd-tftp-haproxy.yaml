@@ -1,41 +1,34 @@
 - name: Configure httpd to listen on 8080
-  template:
-    src: ./templates/httpd.conf
-    dest: /etc/httpd/conf/httpd.conf
+  ansible.builtin.template:
+    src: "./templates/{{item.template_src}}"
+    dest: "{{ item.template_dest }}"
     force: yes
     mode: "u=rw,g=r,o=r"
+  loop:
+    - { template_src: 'httpd.conf', template_dest: '/etc/httpd/conf/httpd.conf' }
+    - { template_src: 'haproxy.j2', template_dest: '/etc/haproxy/haproxy.cfg' }
 
 - name: Create TFTP directories for auto boot and rhcos
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0755
-  with_items:
+  loop:
     - "/var/lib/tftpboot/pxelinux.cfg"
     - "/var/lib/tftpboot/rhcos"
 
-- name: setup TFTP
-  shell: "cp -a /usr/share/syslinux/* /var/lib/tftpboot"
+- name: Run shell commands to copy tftpboot files and setsebool for haproxy
+  ansible.builtin.shell:
+    cmd: "{{item}}"
+  loop:
+    - "cp -a /usr/share/syslinux/* /var/lib/tftpboot"
+    - "setsebool -P haproxy_connect_any=1"
 
 - name: restart tftp service
-  service:
-    name: tftp
+  ansible.builtin.service:
+    name: "{{item}}"
     enabled: yes
     state: restarted
-
-- name: configure haproxy
-  template:
-    src: ./templates/haproxy.j2
-    dest: /etc/haproxy/haproxy.cfg
-    force: yes
-    mode: "u=rw,g=r,o=r"
-
-- name: make sure the haproxy can bind to 6443
-  shell:
-    cmd: setsebool -P haproxy_connect_any=1
-
-- name: restart the haproxy
-  service:
-    name: haproxy
-    enabled: yes
-    state: restarted
+  loop:
+    - tftp
+    - haproxy

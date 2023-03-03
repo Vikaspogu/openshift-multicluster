@@ -1,67 +1,55 @@
 - name: Cleanup old auto pxeboot files
-  file:
+  ansible.builtin.file:
     path: /var/lib/tftpboot/pxelinux.cfg/{{ ( '01-' + macstart + mac + item.macend ) | replace(':','-') }}
     state: absent
-  with_items: "{{ vms_info }}"
+  loop: "{{ vms_info }}"
+
+- name: Cleanup and create directories
+  ansible.builtin.file:
+    path: "{{ item[1] }}"
+    state: "{{ item[0] }}"
+  loop: "{{ ['absent', 'directory'] |product(['/var/www/html/ignition', '/var/www/html/install', '{{ ansible_env.HOME }}/openshift', '{{ ansible_env.HOME }}/scripts'])|list }}"
+
+- name: Cleanup client apps oc, kubctl, openshift-install
+  ansible.builtin.file:
+    path: /tmp/{{ item }}
+    state: absent
+  loop: "{{ ocp_client|flatten(levels=1) }}"
 
 - name: Setup Auto pxe boot
-  template:
+  ansible.builtin.template:
     src: pxe/{{ item.ign }}
     dest: /var/lib/tftpboot/pxelinux.cfg/{{ ( '01-' + macstart + mac + item.macend ) | replace(':','-') }}
     force: yes
     mode: "u=rx,g=rx,o=rx"
   loop: "{{ vms_info }}"
 
-- name: Cleanup left over files from previous install
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - "/var/www/html/ignition"
-    - "/var/www/html/install"
-    - "{{ ansible_env.HOME }}/openshift"
-    - "{{ ansible_env.HOME }}/scripts"
+- name: Download RHCOS
+  ansible.builtin.get_url:
+    url: "{{ rhcos_download_url }}/{{ item }}"
+    dest: /var/www/html/install/
+  loop: "{{ rhcos|flatten(levels=1) }}"
 
-- name: Create needed directories
-  file:
-    path: "{{ item }}"
-    state: directory
-  with_items:
-    - "/var/www/html/ignition"
-    - "/var/www/html/install"
-    - "{{ ansible_env.HOME }}/openshift"
-    - "{{ ansible_env.HOME }}/scripts"
+- name: Download OCP installer
+  ansible.builtin.get_url:
+    url: "{{ client_download_url }}/{{ item }}"
+    dest: "/tmp/{{ item }}"
+  loop: "{{ ocp_client|flatten(levels=1) }}"
 
-- name: download RHCOS
-  get_url: url={{ rhcos_download_url }}/{{ item }} dest=/var/www/html/install/
-  with_items: "{{ rhcos }}"
+- name: Download Helm
+  ansible.builtin.get_url:
+    url: "{{ helm_download_url }}"
+    dest: /tmp/helm-linux-amd64.tar.gz
 
-- name: Setup install-config.yaml
-  template:
-    src: install-config.ocp
-    dest: "{{ ansible_env.HOME }}/openshift/install-config.yaml"
+- name: Copy template files install-config and prep-ignitions
+  ansible.builtin.template:
+    src: "{{ item,template_src }}"
+    dest: "{{ item.template_dest }}"
     force: yes
     mode: "u=rw,g=r,o=r"
-
-- name: Copy prepare ignition script
-  template:
-    src: 11-prep-ignitions.sh
-    dest: "{{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
-    force: yes
-    mode: "u=rwx,g=rwx,o=r"
-
-- name: Cleanup client apps oc, kubctl, openshift-install
-  file:
-    path: /tmp/{{ item }}
-    state: absent
-  with_items: "{{ ocp_client }}"
-
-- name: download OCP installer
-  get_url: url={{ client_download_url }}/{{ item }} dest=/tmp/{{ item }}
-  with_items: "{{ ocp_client }}"
-
-- name: download Helm
-  get_url: url={{ helm_download_url }} dest=/tmp/helm-linux-amd64.tar.gz
+  loop:
+    - { template_src: 'install-config.ocp', template_dest: "{{ ansible_env.HOME }}/openshift/install-config.yaml" }
+    - { template_src: '11-prep-ignitions.sh', template_dest: "{{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh" }
 
 - name: extract and copy helm
   ansible.builtin.unarchive:
@@ -74,19 +62,19 @@
     src: /tmp/{{ item }}
     dest: /usr/local/bin/.
     remote_src: true
-  with_items: "{{ ocp_client }}"
+  loop: "{{ ocp_client|flatten(levels=1) }}"
 
 - name: Create ignition files
-  command: "sh {{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
+  ansible.builtin.command: "sh {{ ansible_env.HOME }}/scripts/11-prep-ignitions.sh"
 
 - name: Enable and start HTTPD servers
-  service:
+  ansible.builtin.service:
     name: httpd
     enabled: yes
     state: started
 
 - name: "wait for httpd to come up"
-  uri:
+  ansible.builtin.uri:
     url: "http://{{ ansible_default_ipv4.address }}:8080/ignition/"
     status_code: 200
   register: result
@@ -95,7 +83,7 @@
   delay: 1
 
 - name: "wait for haproxy to come up"
-  uri:
+  ansible.builtin.uri:
     url: "http://{{ ansible_default_ipv4.address  }}:9000"
     status_code: 200
   register: result

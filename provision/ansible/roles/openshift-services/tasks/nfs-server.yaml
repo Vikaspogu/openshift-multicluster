@@ -3,17 +3,17 @@
     name: "{{item}}"
     state: started
     enabled: true
-  with_items:
+  loop:
     - rpcbind
     - nfs-server
 
 - name: Ensure group "nobody" exists
-  group:
+  ansible.builtin.group:
     name: nobody
     state: present
 
 - name: Create a mountable directory if it does not exist
-  file:
+  ansible.builtin.file:
     path: /mnt/nfs_server
     state: directory
     owner: nobody
@@ -21,7 +21,7 @@
     mode: "0777"
 
 - name: Copy exports file.
-  template:
+  ansible.builtin.template:
     src: exports.j2
     dest: /etc/exports
     owner: root
@@ -29,13 +29,13 @@
     mode: 0644
 
 - name: NFS apply change configrue
-  shell: exportfs -a;
+  ansible.builtin.shell: exportfs -a;
 
 - name: Restart services
   ansible.builtin.service:
     name: "{{item}}"
     state: restarted
     enabled: true
-  with_items:
+  loop:
     - rpcbind
     - nfs-server

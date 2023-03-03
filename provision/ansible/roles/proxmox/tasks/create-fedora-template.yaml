@@ -1,27 +1,27 @@
 ---
 - name: download cloud image
-  get_url:
-    url: "{{ fedora.cloud_image_url }}"
-    dest: "{{ fedora.cloud_image_path }}"
+  ansible.builtin.get_url:
+    url: "{{ proxmox.fedora_vm_template.cloud_image_url }}"
+    dest: "{{ proxmox.fedora_vm_template.cloud_image_path }}"
     mode: 0700
 
 - name: create a VM to use as a template
-  command: "qm create {{ fedora.template_id }} --name {{ fedora.template_name }} --memory {{ fedora.template_memory }} --net0 virtio,bridge=vmbr0"
+  ansible.builtin.command: "qm create {{ proxmox.fedora_vm_template.id }} --name {{ proxmox.fedora_vm_template.name }} --memory {{ proxmox.fedora_vm_template.memory }} --net0 virtio,bridge=vmbr0"
 
 - name: import disk image
-  command: "qm importdisk {{ fedora.template_id }} {{ fedora.cloud_image_path }} {{ fedora.storage }}"
+  ansible.builtin.command: "qm importdisk {{ proxmox.fedora_vm_template.id }} {{ proxmox.fedora_vm_template.cloud_image_path }} {{ proxmox.fedora_vm_template.storage }}"
 
 - name: configure VM to use imported image
-  command: "qm set {{ fedora.template_id }} --scsihw virtio-scsi-pci --scsi0 {{ fedora.storage }}:vm-{{ fedora.template_id }}-disk-0"
+  ansible.builtin.command: "qm set {{ proxmox.fedora_vm_template.id }} --scsihw virtio-scsi-pci --scsi0 {{ proxmox.fedora_vm_template.storage }}:vm-{{ proxmox.fedora_vm_template.id }}-disk-0"
 
 - name: add cloud-init image as CDROM
-  command: "qm set {{ fedora.template_id }} --ide2 {{ fedora.storage }}:cloudinit"
+  ansible.builtin.command: "qm set {{ proxmox.fedora_vm_template.id }} --ide2 {{ proxmox.fedora_vm_template.storage }}:cloudinit"
 
 - name: configure boot from the image
-  command: "qm set {{ fedora.template_id }} --boot c --bootdisk scsi0"
+  ansible.builtin.command: "qm set {{ proxmox.fedora_vm_template.id }} --boot c --bootdisk scsi0"
 
 - name: attach serial console
-  command: "qm set {{ fedora.template_id }} --serial0 socket --vga serial0"
+  ansible.builtin.command: "qm set {{ proxmox.fedora_vm_template.id }} --serial0 socket --vga serial0"
 
 - name: create template
-  command: "qm template {{ fedora.template_id }}"
+  ansible.builtin.command: "qm template {{ proxmox.fedora_vm_template.id }}"

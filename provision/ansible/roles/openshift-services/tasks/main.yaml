@@ -5,22 +5,22 @@
     expressions: ignore
 
 - name: Include initial VM setup task
-  include: vm-setup.yaml
+  ansible.builtin.include_tasks: vm-setup.yaml
   tags:
     - vm-setup
 
 - name: Include task to create Apache2,TFTP,HAProxy
-  include: httpd-tftp-haproxy.yaml
+  ansible.builtin.include_tasks: httpd-tftp-haproxy.yaml
   tags:
     - httpd-tftp-haproxy
 
 - name: Include task to setup PXE boot with ignition
-  include: pxe-ignition.yaml
+  ansible.builtin.include_tasks: pxe-ignition.yaml
   tags:
     - pxe-ignition
 
 - name: Include task to setup nfs server
-  include: nfs-server.yaml
+  ansible.builtin.include_tasks: nfs-server.yaml
   tags:
     - nfs-server
 

@@ -3,7 +3,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "Telmate/proxmox"
-      version = "2.9.13"
+      version = "2.9.10"
     }
     sops = {
       source  = "carlpett/sops"
@@ -68,11 +68,6 @@ resource "proxmox_vm_qemu" "openshift-services" {
 
   provisioner "remote-exec" {
     inline = ["echo 'Ready for ansible provisioning...'"]
-  }
-
-  provisioner "local-exec" {
-    working_dir = "../../../ansible/playbooks"
-    command     = "ansible-playbook -u ${data.sops_file.proxmox_secrets.data["ssh_user"]} --key-file ${var.ssh_keys["priv"]} -i ${data.sops_file.proxmox_secrets.data["openshift_service_ip"]}, openshift-services-vm-prepare.yml"
   }
 
 }

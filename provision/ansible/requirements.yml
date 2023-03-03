@@ -4,5 +4,7 @@ collections:
     version: 6.4.0
   - name: community.sops
     version: 1.6.1
+  - name: community.crypto
+    version: 2.10.0
   - name: ansible.posix
     version: 1.5.1

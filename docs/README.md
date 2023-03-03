@@ -27,11 +27,18 @@ Playbook does following:
 - Install's dark theme
 - Provision's terraform role, user, and access control
 - Create's fedora cloud-init template for VMs
-- Enable's correct proxmox repositories
-- Disable's subscription nag
 
 ```bash
 task ansible:prepare-proxmox
+```
+
+Install Edge kernel repos and dark theme
+
+```bash
+ssh proxmox
+bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/misc/edge-kernel.sh)"
+bash <(curl -s https://raw.githubusercontent.com/Weilbyte/PVEDiscordDark/master/PVEDiscordDark.sh ) install
+
 ```
 
 ## Baremetal OpenShift installation

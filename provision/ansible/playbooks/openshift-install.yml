@@ -1,11 +1,11 @@
 ---
 - hosts: proxmox
-  become: true
-  gather_facts: true
+  become: false
+  gather_facts: false
   any_errors_fatal: true
   pre_tasks:
     - name: init terraform
-      shell: terraform init
+      ansible.builtin.shell: terraform init
       args:
         chdir: ../../terraform/proxmox/00-openshift-services-vm
       delegate_to: localhost
@@ -21,41 +21,39 @@
       become: false
 
   tasks:
-    - name: Load encrypted credentials
-      community.sops.load_vars:
-        file: ../roles/openshift-services/vars/secret.sops.yml
-        expressions: ignore
+    - ansible.builtin.import_role:
+        name: openshift-services
 
     - name: Create new VMs for OCP cluster
-      command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 lvm-nvme:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
+      ansible.builtin.command: qm create "{{ vimidStart }}{{ item.vimid }}" --net0 virtio="{{ macstart }}{{ mac }}{{ item.macend }}",bridge=vmbr0 --name "{{ item.name }}"  --scsihw virtio-scsi-pci --scsi0 lvm-nvme:200 --cores "{{ item.cpu }}" --memory "{{ item.mem }}" -cpu cputype="host"
       loop: "{{ vms_info }}"
 
     - name: Start Bootstrap VM
-      command: qm start "{{ vimidStart }}{{ vms_info[0].vimid }}"
+      ansible.builtin.command: qm start "{{ vimidStart }}{{ vms_info[0].vimid }}"
 
     - name: Wait until bootstrap MC is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[0].name }}
+      ansible.builtin.shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ vms_info[0].name }}
       register: result
       until: result.stdout.find("active_up") != -1
       retries: 60
       delay: 60
 
     - name: Wait until bootstrap API is ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[0].name }}
+      ansible.builtin.shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ vms_info[0].name }}
       register: result
       until: result.stdout.find("active_up") != -1
       retries: 60
       delay: 60
 
     - name: Start Masters VMs
-      command: qm start "{{ vimidStart }}{{ item.vimid }}"
+      ansible.builtin.command: qm start "{{ vimidStart }}{{ item.vimid }}"
       loop:
         - "{{ vms_info[1] }}"
         - "{{ vms_info[2] }}"
         - "{{ vms_info[3] }}"
 
     - name: Wait till master machines are ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ item.name }}
+      ansible.builtin.shell: curl http://{{ infra.ip }}:9000 |grep controlplanemc/{{ item.name }}
       register: result
       until: result.stdout.find("active_up") != -1
       retries: 150
@@ -66,7 +64,7 @@
         - "{{ vms_info[3] }}"
 
     - name: Wait till master API's are ready
-      shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ item.name }}
+      ansible.builtin.shell: curl http://{{ infra.ip }}:9000 |grep controlplaneapi/{{ item.name }}
       register: result
       until: result.stdout.find("active_up") != -1
       retries: 150
@@ -77,27 +75,27 @@
         - "{{ vms_info[3] }}"
 
     - name: Stop Bootstrap
-      command: qm stop "{{ vimidStart }}{{ vms_info[0].vimid }}"
+      ansible.builtin.command: qm stop "{{ vimidStart }}{{ vms_info[0].vimid }}"
 
     - name: Start workers VMs
-      command: qm start "{{ vimidStart }}{{ item.vimid }}"
+      ansible.builtin.command: qm start "{{ vimidStart }}{{ item.vimid }}"
       loop:
         - "{{ vms_info[4] }}"
         - "{{ vms_info[5] }}"
 
     - name: Pause for 10 minutes
-      pause:
+      ansible.builtin.pause:
         minutes: 10
 
   post_tasks:
     - name: Create kube dir
-      file:
+      ansible.builtin.file:
         path: ~/.kube
         state: directory
       delegate_to: openshift-services
 
     - name: Copy OCP Auth to for generic access
-      copy:
+      ansible.builtin.copy:
         src: "/root/openshift/auth/kubeconfig"
         dest: ~/.kube/config
         force: yes
@@ -106,14 +104,14 @@
       delegate_to: openshift-services
 
     - name: Finish the bootstrap process
-      shell: openshift-install --dir=/root/openshift/ wait-for bootstrap-complete --log-level=debug
+      ansible.builtin.shell: openshift-install --dir=/root/openshift/ wait-for bootstrap-complete --log-level=debug
       delegate_to: openshift-services
 
     - name: Pause for 10 minutes
-      pause:
+      ansible.builtin.pause:
         minutes: 10
 
     - name: Approve any pending certs
-      shell: "oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve"
+      ansible.builtin.shell: "oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve"
       ignore_errors: true
       delegate_to: openshift-services
