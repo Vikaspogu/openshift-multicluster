@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+baseDomain: v3s.us
+compute:
+  - architecture: amd64
+    hyperthreading: Enabled
+    name: worker
+    replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: pxm
+networking:
+  clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+  machineNetwork:
+    - cidr: 10.30.30.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+    - 172.30.0.0/16
+platform:
+  baremetal:
+    hosts:
+      - name: openshift-0
+        role: master
+        bootMACAddress: 52:50:56:11:22:11
+      - name: openshift-1
+        role: master
+        bootMACAddress: 52:50:56:11:22:22
+      - name: openshift-2
+        role: master
+        bootMACAddress: 52:50:56:11:22:33
+    apiVIPs:
+      - "10.30.30.145"
+    ingressVIPs:
+      - "10.30.30.146"
+pullSecret: ''
+sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRkdARMxVXHnGYyDJ3HRUiz2ynt8Y3bAm8fyLkqgAgPyc/2xcBbKL+rsfr9TO9odHdDojeOLKA8VVigcNvupMhTZsN5eJx6aJiaNXabLaaSf2Axg/WBOiIM4wnDYXQYjMvS48b5QgR/5ms04rY4av0VhcrN8VbBOKnRyLwKg2trTHN8jqR0+0+tsuKX3TSOvwoJTHIEO7YUaDcckxl0sJrPeL9fCfF+tOncb6noPcz6gXX5aSKBuwO5t0F7r0g11WZGMADDgRo59v+zCi0+AXU0BQ+NN9dFalrSFgIueGh05rAhssdbt7jfjRvoPNsSg2b+Xv1Cy/YTdeOZj7mJPguSO31WOLbfA4aBnLKTH63yuMZe2wyJVx9W1bAXJBfdVwhBlk3Zl+B4hlhBGhua2Oslk+q/IBHQZdTith3IoOSoNzHB8QDn2jtSGRxzbc7cJ8oPUGoxkIr+PBnO9Mdjs1Sl8ZARvjv/KMO5QdD8m4v6q6TluoQuPPkwiXETxh1Gqs= vikaspogu@vpogu-mac
