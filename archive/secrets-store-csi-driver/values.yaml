@@ -1,4 +1,0 @@
----
-syncSecret:
-  enabled: true
-enableSecretRotation: true

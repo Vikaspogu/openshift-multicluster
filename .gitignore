@@ -24,3 +24,5 @@ old_work
 provision/kubeadmin-password
 tls.*
 /**/charts
+openshift-install*
+installer/pxm

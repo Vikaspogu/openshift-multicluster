@@ -5,18 +5,11 @@ vars:
   PROJECT_DIR:
     sh: "git rev-parse --show-toplevel"
   CLUSTER_DIR: "{{.PROJECT_DIR}}/openshift-cluster-install"
-  ANSIBLE_DIR: "{{.PROJECT_DIR}}/provision/ansible"
-  TERRAFORM_DIR: "{{.PROJECT_DIR}}/provision/terraform"
 
 dotenv: [".config.env"]
 
-env:
-  KUBECONFIG: "{{.PROJECT_DIR}}/provision/kubeconfig"
-
 includes:
-  ansible: .taskfiles/AnsibleTasks.yml
   precommit: .taskfiles/PrecommitTasks.yml
-  terraform: .taskfiles/TerraformTasks.yml
 
 tasks:
   init:
