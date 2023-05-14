@@ -14,6 +14,7 @@ patches:
           - openshift-2
       - op: replace
         path: /spec/storageClassDevices/0/devicePaths
-        value: /dev/sdb
+        value:
+          - "/dev/sdb"
     target:
       kind: LocalVolume
