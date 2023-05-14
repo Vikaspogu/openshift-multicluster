@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/local-storage-configuration
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
+        value:
+          - openshift-0
+          - openshift-1
+          - openshift-2
+      - op: replace
+        path: /spec/storageClassDevices/0/devicePaths
+        value: /dev/sdb
+    target:
+      kind: LocalVolume

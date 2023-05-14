@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: external-secrets
+resources:
+  - ../../../bases/onepassword-connect-operator
+
+helmCharts:
+  - name: app-template
+    releaseName: onepassword-connect
+    namespace: external-secrets
+    repo: https://bjw-s.github.io/helm-charts/
+    version: "1.5.0"
+    valuesFile: values.yaml

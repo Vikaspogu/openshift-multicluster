@@ -1,0 +1,22 @@
+---
+replicaCount: 3
+image:
+  repository: raspbernetes/cloudflared
+  tag: "2022.8.2"
+cloudflared:
+  # Tunnel ID should be unique per instance of running cloudflared
+  tunnelID: "b98edfb1-3d2d-4955-b053-5eeff8bd9786"
+  # This is a reference to an existing secret containing the credentials;
+  existingSecret: cloudflare-tunnel-credentials
+  # Ingress hosts are directly copied into the configmap;
+  # Read: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configuration/configuration-file/ingress
+  ingress:
+    - hostname: 'oauth-openshift.apps.pxm.v3s.us'
+      originRequest:
+        noTLSVerify: true
+      service: https://oauth-openshift.openshift-authentication
+    - hostname: '*.apps.pxm.v3s.us'
+      originRequest:
+        noTLSVerify: true
+      service: https://router-internal-default.openshift-ingress
+    - service: http_status:404

@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/reloader-operator
+
+helmCharts:
+  - name: reloader
+    releaseName: reloader
+    namespace: reloader
+    repo: https://stakater.github.io/stakater-charts
+    version: "v1.0.16"
+    valuesInline:
+      nameOverride: reloader
+      fullnameOverride: reloader
+      reloader:
+        isOpenshift: true
+
+
+patches:
+  - target:
+      kind: Deployment
+      name: reloader
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/securityContext
+        value: {}
