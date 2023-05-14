@@ -1,0 +1,112 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app.kubernetes.io/instance: onepassword-connect
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: onepassword-connect
+    helm.sh/chart: app-template-1.3.0
+  name: onepassword-connect
+  namespace: external-secrets
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: onepassword-connect
+      app.kubernetes.io/name: onepassword-connect
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: onepassword-connect
+        app.kubernetes.io/name: onepassword-connect
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - env:
+        - name: OP_BUS_PEERS
+          value: localhost:11221
+        - name: OP_BUS_PORT
+          value: "11220"
+        - name: OP_HTTP_PORT
+          value: "8080"
+        - name: OP_SESSION
+          valueFrom:
+            secretKeyRef:
+              key: onepassword-credentials.json
+              name: onepassword-connect-secret
+        image: docker.io/1password/connect-api:1.7.0
+        imagePullPolicy: null
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /heartbeat
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          timeoutSeconds: 1
+        name: onepassword-connect
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 5m
+            memory: 10Mi
+        volumeMounts:
+        - mountPath: /home/opuser/.op/data
+          name: shared
+      - env:
+        - name: OP_SESSION
+          valueFrom:
+            secretKeyRef:
+              key: onepassword-credentials.json
+              name: onepassword-connect-secret
+        - name: OP_HTTP_PORT
+          value: "8081"
+        - name: OP_BUS_PORT
+          value: "11221"
+        - name: OP_BUS_PEERS
+          value: localhost:11220
+        image: docker.io/1password/connect-sync:1.7.0@sha256:fdc300b6c4c6593cee76e09c9e5099165f5c74d6561f5accd9006eb1b31cc306
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /heartbeat
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        name: sync
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 15
+        volumeMounts:
+        - mountPath: /home/opuser/.op/data
+          name: shared
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        runAsGroup: 999
+        runAsUser: 999
+      serviceAccountName: default
+      volumes:
+      - emptyDir: {}
+        name: shared
