@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: kyverno
 resources:
   - ../../../bases/kyverno-operator/
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 helmCharts:
   - name: kyverno
