@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/Vikaspogu/openshift-home-cluster.git
         revision: "main"
         directories:
-          - path: clusters/cluster-overlays/pxm
+          - path: clusters/cluster-overlays/pxm/*
   strategy:
     type: RollingSync
     rollingSync:
