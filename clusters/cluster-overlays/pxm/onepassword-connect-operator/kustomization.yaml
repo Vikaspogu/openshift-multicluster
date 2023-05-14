@@ -10,5 +10,5 @@ helmCharts:
     releaseName: onepassword-connect
     namespace: external-secrets
     repo: https://bjw-s.github.io/helm-charts/
-    version: "1.5.0"
+    version: "1.3.0"
     valuesFile: values.yaml
