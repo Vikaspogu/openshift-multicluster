@@ -34,7 +34,7 @@ Welcome to my OpenShift operations repository
     ```
 
 - Upload ISO to proxmox
-- Create 3 VMs
+- Create 3 VMs with CPU type as `max`
 - Wait for the cluster to install
 
     ```bash
