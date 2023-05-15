@@ -5,6 +5,7 @@ metadata:
   name: image-registry-storage
   namespace: openshift-image-registry
 spec:
+  storageClassName: local-sc
   accessModes:
     - ReadWriteOnce
   resources:
