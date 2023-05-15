@@ -4,6 +4,7 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
+  - ./certmanager.yaml
   - ./externalsecret.yaml
   - ./prod-cluster-issuer.yaml
   - ./staging-cluster-issuer.yaml
