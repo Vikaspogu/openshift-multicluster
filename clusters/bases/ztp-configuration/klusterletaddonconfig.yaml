@@ -1,0 +1,23 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: klusterlet
+  namespace: <REPLACE>
+spec:
+  clusterName: <REPLACE>
+  clusterNamespace: <REPLACE>
+  clusterLabels:
+    name: <REPLACE>
+    cloud: Baremetal
+  applicationManager:
+    argocdCluster: false
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true

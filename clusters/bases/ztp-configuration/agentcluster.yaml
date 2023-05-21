@@ -1,0 +1,23 @@
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: agentcluster
+  namespace: <REPLACE>
+spec:
+  clusterDeploymentRef:
+    name: <REPLACE>
+  imageSetRef:
+    name: openshift-4.12
+  networking:
+    clusterNetwork:
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+    machineNetwork:
+      - cidr: 10.30.30.0/24
+    networkType: OVNKubernetes
+    serviceNetwork:
+      - 172.30.0.0/16
+  provisionRequirements:
+    controlPlaneAgents: 1
+  sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRkdARMxVXHnGYyDJ3HRUiz2ynt8Y3bAm8fyLkqgAgPyc/2xcBbKL+rsfr9TO9odHdDojeOLKA8VVigcNvupMhTZsN5eJx6aJiaNXabLaaSf2Axg/WBOiIM4wnDYXQYjMvS48b5QgR/5ms04rY4av0VhcrN8VbBOKnRyLwKg2trTHN8jqR0+0+tsuKX3TSOvwoJTHIEO7YUaDcckxl0sJrPeL9fCfF+tOncb6noPcz6gXX5aSKBuwO5t0F7r0g11WZGMADDgRo59v+zCi0+AXU0BQ+NN9dFalrSFgIueGh05rAhssdbt7jfjRvoPNsSg2b+Xv1Cy/YTdeOZj7mJPguSO31WOLbfA4aBnLKTH63yuMZe2wyJVx9W1bAXJBfdVwhBlk3Zl+B4hlhBGhua2Oslk+q/IBHQZdTith3IoOSoNzHB8QDn2jtSGRxzbc7cJ8oPUGoxkIr+PBnO9Mdjs1Sl8ZARvjv/KMO5QdD8m4v6q6TluoQuPPkwiXETxh1Gqs= vikaspogu@vpogu-mac

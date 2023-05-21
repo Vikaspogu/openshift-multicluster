@@ -1,0 +1,34 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate
+  namespace: REPLACE
+  labels:
+    acm-ai-sno: sno-1
+spec:
+  config:
+    interfaces:
+      - name: ens18
+        type: ethernet
+        state: up
+        mac-address: <REPLACE>
+        ipv4:
+          enabled: true
+          address:
+            - ip: <REPLACE>
+              prefix-length: 23
+          dhcp: false
+    dns-resolver:
+      config:
+        server:
+          - 10.30.0.1
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.30.30.1
+          next-hop-interface: ens18
+          table-id: 254
+  interfaces:
+    - name: ens18
+      macAddress: <REPLACE>

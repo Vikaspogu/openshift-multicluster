@@ -1,0 +1,13 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: managedcluster
+  namespace: <REPLACE>
+  labels:
+    name: <REPLACE>
+    sriov: "true"
+    sno: "true"
+spec:
+  hubAcceptsClient: true
+  leaseDurationSeconds: 60
