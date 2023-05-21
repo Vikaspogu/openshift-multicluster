@@ -5,13 +5,6 @@ metadata:
   name: "local-disks"
   namespace: "openshift-local-storage"
 spec:
-  nodeSelector:
-    nodeSelectorTerms:
-      - matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-              - <REPLACE>
   storageClassDevices:
     - storageClassName: "local-sc"
       volumeMode: Filesystem
