@@ -7,8 +7,19 @@ resources:
 patches:
   - patch: |-
       - op: replace
-        path: /spec/storageClassDevices/0/devicePaths
+        path: /spec/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
         value:
-          - "/dev/sdb"
+          - openshift-0
+          - openshift-1
+          - openshift-2
     target:
-      kind: LocalVolume
+      kind: LocalVolumeDiscovery
+  - patch: |-
+      - op: replace
+        path: /spec/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
+        value:
+          - openshift-0
+          - openshift-1
+          - openshift-2
+    target:
+      kind: LocalVolumeSet

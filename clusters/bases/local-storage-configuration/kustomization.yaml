@@ -2,4 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./local-volume.yaml
+  - ./local-volume-discovery.yaml
+  - ./local-volume-set.yaml
