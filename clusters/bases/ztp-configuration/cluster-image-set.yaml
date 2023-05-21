@@ -4,4 +4,4 @@ kind: ClusterImageSet
 metadata:
   name: openshift-4.12
 spec:
-  releaseImage: registry.ci.openshift.org/ocp/release:4.12.0-0.nightly-2022-06-06-025509
+  releaseImage: quay.io/openshift-release-dev/ocp-release@sha256:0e0e42534fd5c999daf0377dec44e739e212dbad876937c6b816c2f3d1552208
