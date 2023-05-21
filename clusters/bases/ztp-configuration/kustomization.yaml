@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
+  - ./cluster-image-set.yaml
   - ./nmstate.yaml
   - ./agentcluster.yaml
   - ./clusterdeployment.yaml
