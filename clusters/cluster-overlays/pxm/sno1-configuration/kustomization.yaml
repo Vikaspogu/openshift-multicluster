@@ -127,9 +127,6 @@ patches:
         path: /spec/clusterRef/namespace
         value: sno-1
       - op: replace
-        path: /spec/agentLabelSelector/matchLabels/cluster-name
-        value: sno-1
-      - op: replace
         path: /spec/pullSecretRef/name
         value: pull-secret-sno-1
       - op: replace
