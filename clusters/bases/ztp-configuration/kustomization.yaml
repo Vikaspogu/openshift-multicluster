@@ -11,5 +11,3 @@ resources:
   - ./klusterletaddonconfig.yaml
   - ./managedcluster.yaml
   - ./infraenv.yaml
-  - ./externalsecret-bmc.yaml
-  - ./bmh.yaml
