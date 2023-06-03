@@ -2,6 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - instance.yaml
-  - rbac.yaml
-  - appset.yaml
+  - ./argocd.yaml
+  - ./cluster-rolebinding.yaml
+  - ./application-set.yaml

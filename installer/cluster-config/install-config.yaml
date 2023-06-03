@@ -12,7 +12,7 @@ controlPlane:
   name: master
   replicas: 3
 metadata:
-  name: pxm
+  name: pxm-acm
 networking:
   clusterNetwork:
     - cidr: 10.128.0.0/14

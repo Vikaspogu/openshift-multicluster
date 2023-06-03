@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: pxm-cluster-bootstrap-appset
+  name: acm-cluster
   namespace: openshift-gitops
 spec:
   generators:
@@ -10,32 +10,38 @@ spec:
         repoURL: https://github.com/Vikaspogu/openshift-home-cluster.git
         revision: "main"
         directories:
-          - path: clusters/cluster-overlays/pxm/*
+          - path: clusters/cluster-overlays/acm/*
   strategy:
     type: RollingSync
     rollingSync:
       steps:
         - matchExpressions:
-            - key: application-type
+            - key: type
               operator: In
               values:
                 - operator
+                - chart
         - matchExpressions:
-            - key: application-type
+            - key: type
               operator: In
               values:
-                - configuration
+                - config
         - matchExpressions:
-            - key: application-type
+            - key: type
               operator: In
               values:
-                - application
+                - app
+        - matchExpressions:
+            - key: type
+              operator: In
+              values:
+                - cluster
   goTemplate: true
   template:
     metadata:
       name: '{{ .path.basename }}'
       labels:
-        application-type: '{{ .path.basename | splitList "-" | last }}'
+        type: '{{ .path.basename | splitList "-" | last }}'
     spec:
       destination:
         server: "https://kubernetes.default.svc"

@@ -23,6 +23,7 @@ old_work
 .cluster-secrets.env
 provision/kubeadmin-password
 tls.*
-/**/charts
+/helm/charts/**/charts
+/kustomize/**/charts
 openshift-install*
-installer/pxm
+installer/pxm*

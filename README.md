@@ -28,9 +28,9 @@ Welcome to my OpenShift operations repository
 - Generate ISO
 
     ```bash
-    rm -rf installer/pxm
-    cp -r installer/cluster-config installer/pxm
-    ./openshift-install agent create image --dir installer/pxm
+    rm -rf installer/pxm-acm
+    cp -r installer/cluster-config installer/pxm-acm
+    ./openshift-install agent create image --dir installer/pxm-acm
     ```
 
 - Upload ISO to proxmox

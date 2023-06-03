@@ -11,24 +11,24 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/target/name
-        value: pull-secret-sno-1
+        value: pull-secret-sno
   - target:
       kind: NMStateConfig
       name: nmstate
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/labels
         value:
-          acm-ai-sno: sno-1
+          acm-ai-sno: sno
       - op: replace
         path: /spec/config/interfaces/0/ipv4/address/0/ip
         value: 10.30.30.103
@@ -44,71 +44,71 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterDeploymentRef/name
-        value: sno-1
+        value: sno
   - target:
       kind: ClusterDeployment
       name: clusterdeploy
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/baseDomain
         value: v3s.us
       - op: replace
         path: /spec/clusterName
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterInstallRef/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/platform/agentBareMetal/agentSelector/matchLabels/cluster-name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/pullSecretRef/name
-        value: pull-secret-sno-1
+        value: pull-secret-sno
   - target:
       kind: KlusterletAddonConfig
       name: klusterlet
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterName
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterNamespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterLabels/name
-        value: sno-1
+        value: sno
   - target:
       kind: ManagedCluster
       name: managedcluster
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/labels
         value:
-          name: "sno-1"
+          name: "sno"
           sno: "true"
   - target:
       kind: InfraEnv
@@ -116,19 +116,19 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /metadata/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterRef/name
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/clusterRef/namespace
-        value: sno-1
+        value: sno
       - op: replace
         path: /spec/pullSecretRef/name
-        value: pull-secret-sno-1
+        value: pull-secret-sno
       - op: replace
         path: /spec/nmStateConfigLabelSelector/matchLabels/acm-ai-sno
-        value: sno-1
+        value: sno

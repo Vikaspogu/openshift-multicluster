@@ -1,0 +1,71 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: external-secrets
+generators:
+  - ./secret-generator.yaml
+helmCharts:
+  - name: onepassword-connect
+    releaseName: app-template
+    namespace: external-secrets
+    repo: https://bjw-s.github.io/helm-charts/
+    version: 1.5.0
+    valuesInline:
+      controller:
+        annotations:
+          reloader.stakater.com/auto: "true"
+      image:
+        repository: docker.io/1password/connect-api
+        tag: 1.7.0
+      env:
+        OP_BUS_PORT: "11220"
+        OP_BUS_PEERS: "localhost:11221"
+        OP_HTTP_PORT: &port 8080
+        OP_SESSION:
+          valueFrom:
+            secretKeyRef:
+              name: onepassword-connect-secret
+              key: onepassword-credentials.json
+      service:
+        main:
+          ports:
+            http:
+              port: *port
+      ingress:
+        main:
+          enabled: false
+      probes:
+        liveness:
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /heartbeat
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+        readiness:
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /health
+              port: *port
+            initialDelaySeconds: 15
+        startup:
+          enabled: false
+      podSecurityContext:
+        runAsUser: 999
+        runAsGroup: 999
+      persistence:
+        shared:
+          enabled: true
+          type: emptyDir
+          mountPath: /home/opuser/.op/data
+      resources:
+        requests:
+          cpu: 5m
+          memory: 10Mi
+        limits:
+          memory: 100Mi
