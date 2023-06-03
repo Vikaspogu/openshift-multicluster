@@ -11,24 +11,24 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/target/name
-        value: pull-secret-sno
+        value: pull-secret-pxm-sno
   - target:
       kind: NMStateConfig
       name: nmstate
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/labels
         value:
-          acm-ai-sno: sno
+          acm-ai: pxm-sno
       - op: replace
         path: /spec/config/interfaces/0/ipv4/address/0/ip
         value: 10.30.30.103
@@ -44,91 +44,91 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterDeploymentRef/name
-        value: sno
+        value: pxm-sno
   - target:
       kind: ClusterDeployment
       name: clusterdeploy
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/baseDomain
         value: v3s.us
       - op: replace
         path: /spec/clusterName
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterInstallRef/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/platform/agentBareMetal/agentSelector/matchLabels/cluster-name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/pullSecretRef/name
-        value: pull-secret-sno
+        value: pull-secret-pxm-sno
   - target:
       kind: KlusterletAddonConfig
       name: klusterlet
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterName
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterNamespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterLabels/name
-        value: sno
+        value: pxm-sno
   - target:
       kind: ManagedCluster
       name: managedcluster
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/labels
         value:
-          name: "sno"
-          sno: "true"
+          name: "pxm-sno"
+          pxm-sno: "true"
   - target:
       kind: InfraEnv
       name: infraenv
     patch: |-
       - op: replace
         path: /metadata/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /metadata/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterRef/name
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/clusterRef/namespace
-        value: sno
+        value: pxm-sno
       - op: replace
         path: /spec/pullSecretRef/name
-        value: pull-secret-sno
+        value: pull-secret-pxm-sno
       - op: replace
-        path: /spec/nmStateConfigLabelSelector/matchLabels/acm-ai-sno
-        value: sno
+        path: /spec/nmStateConfigLabelSelector/matchLabels/acm-ai
+        value: pxm-sno
