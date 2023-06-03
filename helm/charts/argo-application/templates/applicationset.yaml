@@ -8,7 +8,7 @@ metadata:
     {{- include "argo-application.labels" . | nindent 4 }}
 spec:
   generators:
-    {{- if .Values.cluster.type == "bootstrap" }}
+    {{- if eq .Values.cluster.type "bootstrap" }}
     - matrix:
         generators:
           - clusterDecisionResource:
@@ -74,12 +74,16 @@ spec:
   goTemplate: true
   template:
     metadata:
-      name: '{{`{{.path.basename}}`}}'
+      {{- if eq .Values.cluster.type "bootstrap" }}
+      name: '{{bootstrap-`{{.path.basename}}`}}'
+      {{- else }}
+      name: "https://kubernetes.default.svc"
+      {{- end }}
       labels:
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
     spec:
       destination:
-        {{- if .Values.cluster.type == "bootstrap" }}
+        {{- if eq .Values.cluster.type "bootstrap" }}
         server: "{{.server}}"
         {{- else }}
         server: "https://kubernetes.default.svc"

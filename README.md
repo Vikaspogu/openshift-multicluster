@@ -47,9 +47,9 @@ Welcome to my OpenShift operations repository
 [OpenShift GitOps Operator](https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html) watches my [cluster](./cluster/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
 
 ```bash
-oc apply -k clusters/argo-bootstrap/operator
+oc apply -k kustomize/argo-bootstrap/openshift-gitops-operator
 cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin
-oc apply -k clusters/argo-bootstrap/instance
+oc apply -k kustomize/argo-bootstrap/openshift-gitops-config
 ```
 
 ### Directories
