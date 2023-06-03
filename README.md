@@ -38,8 +38,8 @@ Welcome to my OpenShift operations repository
 - Wait for the cluster to install
 
     ```bash
-    export KUBECONFIG=installer/pxm/auth/kubeconfig
-    ./openshift-install agent wait-for install-complete --dir installer/pxm --log-level=debug
+    export KUBECONFIG=installer/pxm-acm/auth/kubeconfig
+    ./openshift-install agent wait-for install-complete --dir installer/pxm-acm --log-level=debug
     ```
 
 ### GitOps
@@ -65,8 +65,9 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ## 🔍 Features
 
-- [X] Secret Management using Kustomize and SOPS
-- [X] API and Wildcard certificate configuration using Argo Hooks
+- [X] ArgoCD with SOPS plugin
+- [X] Secret Management using External secrets and 1Password
+- [X] Cert manager for API and Wildcard certificate
 - [X] Renovate bot
 - [X] Kyverno
 
