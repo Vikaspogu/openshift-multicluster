@@ -1,0 +1,14 @@
+---
+kind: NFSProvisioner
+apiVersion: cache.jhouse.com/v1alpha1
+metadata:
+  name: nfsprovisioner-sample
+  namespace: openshift-operators
+spec:
+  nfsImageConfiguration:
+    image: >-
+      k8s.gcr.io/sig-storage/nfs-provisioner@sha256:e943bb77c7df05ebdc8c7888b2db289b13bf9f012d6a3a5a74f14d4d5743d439
+    imagePullPolicy: IfNotPresent
+  scForNFS: nfs
+  scForNFSPvc: <REPLACE>
+  storageSize: <REPLACE>

@@ -10,13 +10,13 @@ patches:
       - op: replace
         path: /spec/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
         value:
-          - openshift-0
+          - openshift-1
     target:
       kind: LocalVolumeDiscovery
   - patch: |-
       - op: replace
         path: /spec/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
         value:
-          - openshift-0
+          - openshift-1
     target:
       kind: LocalVolumeSet

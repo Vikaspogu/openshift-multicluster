@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/nfs-provisioner-config/
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/scForNFSPvc
+        value: "local-sc"
+      - op: replace
+        path: /spec/storageSize
+        value: "200G"
+    target:
+      kind: NFSProvisioner
