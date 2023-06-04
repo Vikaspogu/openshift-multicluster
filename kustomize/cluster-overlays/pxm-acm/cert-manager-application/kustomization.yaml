@@ -9,14 +9,14 @@ patches:
       - op: replace
         path: /spec/dnsNames
         value:
-          - api.pxm.v3s.us
+          - api.pxm-acm.v3s.us
     target:
       kind: Certificate
       name: openshift-api
   - patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/env/0/value
-        value: api.pxm.v3s.us
+        value: api.pxm-acm.v3s.us
     target:
       kind: Job
       name: patch-cluster-api-cert
@@ -24,10 +24,10 @@ patches:
       - op: replace
         path: /spec/dnsNames
         value:
-          - '*.apps.pxm.v3s.us'
+          - '*.apps.pxm-acm.v3s.us'
       - op: replace
         path: /spec/commonName
-        value: '*.apps.pxm.v3s.us'
+        value: '*.apps.pxm-acm.v3s.us'
     target:
       kind: Certificate
       name: openshift-wildcard
