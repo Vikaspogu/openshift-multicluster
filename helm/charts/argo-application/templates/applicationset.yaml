@@ -65,8 +65,9 @@ spec:
             - key: type
               operator: In
               values:
-                - app
                 - application
+                - placement
+                - policy
         - matchExpressions:
             - key: type
               operator: In
