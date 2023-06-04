@@ -75,9 +75,9 @@ spec:
   template:
     metadata:
       {{- if eq .Values.cluster.type "bootstrap" }}
-      name: '{{bootstrap-`{{.path.basename}}`}}'
+      name: '{{`bootstrap-{{.path.basename}}`}}'
       {{- else }}
-      name: "https://kubernetes.default.svc"
+      name: '{{`{{.path.basename}}`}}'
       {{- end }}
       labels:
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'

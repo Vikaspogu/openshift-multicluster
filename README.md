@@ -50,6 +50,7 @@ Welcome to my OpenShift operations repository
 oc apply -k kustomize/argo-bootstrap/openshift-gitops-operator
 cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin
 oc apply -k kustomize/argo-bootstrap/openshift-gitops-config
+helm upgrade --install pxm-acm-argo-appset helm/charts/argo-application --debug --set cluster.name=pxm-acm
 ```
 
 ### Directories
