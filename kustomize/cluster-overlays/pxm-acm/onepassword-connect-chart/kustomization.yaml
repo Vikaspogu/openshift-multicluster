@@ -55,6 +55,9 @@ helmCharts:
             initialDelaySeconds: 15
         startup:
           enabled: false
+      podSecurityContext:
+        runAsUser: 999
+        runAsGroup: 999
       persistence:
         shared:
           enabled: true
