@@ -5,11 +5,11 @@ namespace: external-secrets
 generators:
   - ./secret-generator.yaml
 helmCharts:
-  - name: onepassword-connect
-    releaseName: app-template
+  - name: app-template
+    releaseName: onepassword-connect
     namespace: external-secrets
     repo: https://bjw-s.github.io/helm-charts/
-    version: 1.5.0
+    version: 1.5.1
     valuesInline:
       controller:
         annotations:

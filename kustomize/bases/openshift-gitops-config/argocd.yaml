@@ -2,10 +2,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
-  name: openshift-gitops
+  name: argocd
   namespace: openshift-gitops
 spec:
-  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/kustomize/helm-3.11
+  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm-3.11
   extraConfig:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
@@ -248,7 +248,15 @@ spec:
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
         args:
-          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;echo "Done.";'
+          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; echo "Done.";'
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+      - name: download-helm-311
+        image: alpine:3.8
+        command: [sh, -c]
+        args:
+          - wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
@@ -256,6 +264,9 @@ spec:
       - mountPath: /usr/local/bin/kustomize
         name: custom-tools
         subPath: kustomize
+      - mountPath: /usr/local/bin/helm-3.11
+        name: custom-tools
+        subPath: helm-3.11
       - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
         name: custom-tools
         subPath: ksops
