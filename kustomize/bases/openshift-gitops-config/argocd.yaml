@@ -5,7 +5,7 @@ metadata:
   name: argocd
   namespace: openshift-gitops
 spec:
-  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
+  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/kustomize/helm-3.11
   extraConfig:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
@@ -248,7 +248,7 @@ spec:
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
         args:
-          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; wget -O helm https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv helm /custom-tools/ && chmod +x /custom-tools/helm ;echo "Done.";'
+          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;echo "Done.";'
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
