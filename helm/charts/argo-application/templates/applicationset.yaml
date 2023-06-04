@@ -105,4 +105,4 @@ spec:
       source:
         path: "{{`{{.path.path}}`}}"
         repoURL: {{ .Values.git.url }}
-        targetRevision: {{ .Values.git.url }}
+        targetRevision: {{ .Values.git.revision }}
