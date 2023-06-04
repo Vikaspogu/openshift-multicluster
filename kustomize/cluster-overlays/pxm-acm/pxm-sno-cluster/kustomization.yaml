@@ -6,6 +6,12 @@ resources:
 
 patches:
   - target:
+      kind: Namespace
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: pxm-sno
+  - target:
       kind: ExternalSecret
       name: pull-secret
     patch: |-
