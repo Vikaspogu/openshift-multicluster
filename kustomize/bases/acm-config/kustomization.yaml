@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - ./multi-cluster-hub.yaml
+  - ./agent-service-config.yaml
