@@ -48,7 +48,7 @@ spec:
   template:
     spec:
       containers:
-        - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        - image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:09dc3e8e8b71674cbd069ac534816a6eac6ffe7fb2ea4767b28fc4261e1b1704
           command:
             - /bin/bash
             - -c
