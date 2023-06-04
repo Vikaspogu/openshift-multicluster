@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
-  name: argocd
+  name: openshift-gitops
   namespace: openshift-gitops
 spec:
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm-3.11

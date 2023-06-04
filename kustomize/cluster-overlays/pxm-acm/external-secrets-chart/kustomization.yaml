@@ -13,3 +13,27 @@ helmCharts:
     version: 0.8.3
     valuesInline:
       installCRDs: true
+
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets-cert-controller
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets-webhook
