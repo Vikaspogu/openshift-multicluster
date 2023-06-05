@@ -101,7 +101,7 @@ spec:
           limit: 10
           backoff:
             duration: "120s"
-            factor: 5
+            factor: 3
             maxDuration: "10m0s"
         syncOptions:
           - SkipDryRunOnMissingResource=true
