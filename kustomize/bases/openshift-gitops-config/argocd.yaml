@@ -294,15 +294,17 @@ spec:
       kinds:
       - TaskRun
       - PipelineRun
-  dex:
-    openShiftOAuth: true
-    resources:
-      limits:
-        cpu: 500m
-        memory: 256Mi
-      requests:
-        cpu: 250m
-        memory: 128Mi
+  sso:
+    dex:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+      openShiftOAuth: true
+    provider: dex
   ha:
     enabled: false
     resources:
