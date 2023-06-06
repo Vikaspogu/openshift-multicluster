@@ -90,7 +90,11 @@ spec:
   goTemplate: true
   template:
     metadata:
+      {{- if eq $clusterName "bootstrap-overlays" }}
+      name: {{$clusterName}}-{{.name}}-appset
+      {{- else }}
       name: {{$clusterName}}{{ `-{{.path.basename}}` }}
+      {{- end }}
       labels:
       {{- if eq $clusterName "bootstrap-overlays" }}
         type: application
