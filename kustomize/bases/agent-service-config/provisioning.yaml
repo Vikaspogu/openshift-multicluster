@@ -1,0 +1,8 @@
+apiVersion: metal3.io/v1alpha1
+kind: Provisioning
+metadata:
+  name: provisioning-configuration
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+spec:
+  watchAllNamespaces: true
