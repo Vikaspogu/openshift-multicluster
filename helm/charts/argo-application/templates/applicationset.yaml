@@ -91,7 +91,7 @@ spec:
   template:
     metadata:
       {{- if eq $clusterName "bootstrap-overlays" }}
-      name: {{$clusterName}}-{{.name}}-appset
+      name: {{$clusterName}}-{{`{{.name}}`}}-appset
       {{- else }}
       name: {{$clusterName}}{{ `-{{.path.basename}}` }}
       {{- end }}
