@@ -116,6 +116,7 @@ patches:
         value:
           name: "pxm-sno"
           pxm-sno: "true"
+          gitops-bootstrap: "true"
   - target:
       kind: InfraEnv
       name: infraenv
