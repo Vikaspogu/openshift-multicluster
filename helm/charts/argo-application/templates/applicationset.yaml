@@ -92,7 +92,7 @@ spec:
   goTemplate: true
   template:
     metadata:
-      name: '{{ `$clusterName-{{.path.basename}}` }}'
+      name: {{$clusterName}}{{ `-{{.path.basename}}` }}
       labels:
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
     spec:
