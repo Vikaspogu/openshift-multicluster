@@ -92,7 +92,11 @@ spec:
     metadata:
       name: {{$clusterName}}{{ `-{{.path.basename}}` }}
       labels:
+      {{- if eq $clusterName "bootstrap-overlays" }}
+        type: application
+      {{- else }}
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
+      {{- end }}
     spec:
       destination:
         {{- if eq $clusterName "local" }}
