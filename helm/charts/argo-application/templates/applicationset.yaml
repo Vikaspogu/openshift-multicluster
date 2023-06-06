@@ -90,7 +90,7 @@ spec:
     spec:
       destination:
         {{- if eq .Values.cluster.type "bootstrap" }}
-        server: "{{.server}}"
+        server: "`{{.server}}`"
         {{- else }}
         server: "https://kubernetes.default.svc"
         {{- end }}
