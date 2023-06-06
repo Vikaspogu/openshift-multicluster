@@ -2,9 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-cluster:
-  type: boostrap
-  name: ""
+clusters:
+  # "bootstrap-argo":
+  #   name: ""
+  # "bootstrap-overlays":
+  #   name: "test"
 git:
   url: https://github.com/Vikaspogu/openshift-home-cluster.git
   revision: main

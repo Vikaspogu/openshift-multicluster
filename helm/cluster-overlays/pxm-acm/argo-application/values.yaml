@@ -1,2 +1,5 @@
-cluster:
-  type: bootstrap
+clusters:
+  "bootstrap-argo":
+    name: ""
+  "bootstrap-overlays":
+    name: ""

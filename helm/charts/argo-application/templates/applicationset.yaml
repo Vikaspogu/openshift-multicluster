@@ -1,14 +1,17 @@
+{{- $releaseLabels := include "argo-application.labels" . -}}
+{{- $values := .Values -}}
+{{- range $clusterName, $cluster := $values.clusters }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.cluster.type | default "local" }}-clusters-appset
+  name: {{ $clusterName }}-appset
   namespace: openshift-gitops
   labels:
-    {{- include "argo-application.labels" . | nindent 4 }}
+    {{- $releaseLabels | nindent 4 }}
 spec:
   generators:
-    {{- if eq .Values.cluster.type "bootstrap" }}
+    {{- if eq $clusterName "bootstrap-argo" }}
     - matrix:
         generators:
           - clusterDecisionResource:
@@ -18,31 +21,40 @@ spec:
                   cluster.open-cluster-management.io/placement: default-clusterset
               requeueAfterSeconds: 3600
           - git:
-              repoURL: {{ .Values.git.url }}
-              revision: {{ .Values.git.revision }}
+              repoURL: {{ $values.git.url }}
+              revision: {{ $values.git.revision }}
               directories:
                 - path: kustomize/argo-bootstrap/*
-    {{- else }}
+    {{- else if eq $clusterName "bootstrap-overlays" }}
+    - matrix:
+        generators:
+          - clusterDecisionResource:
+              configMapRef: acm-placement
+              labelSelector:
+                matchLabels:
+                  cluster.open-cluster-management.io/placement: default-clusterset
+              requeueAfterSeconds: 3600
+    {{-  else if eq $clusterName "local" }}
     - git:
-        repoURL: {{ .Values.git.url }}
-        revision: {{ .Values.git.revision }}
+        repoURL: {{ $values.git.url }}
+        revision: {{ $values.git.revision }}
         directories:
-          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" .Values.cluster.name }}/*
+          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/*
     - git:
-        repoURL: {{ .Values.git.url }}
-        revision: {{ .Values.git.revision }}
+        repoURL: {{ $values.git.url }}
+        revision: {{ $values.git.revision }}
         directories:
-          - path: helm/cluster-overlays/{{ required "A valid cluster name is required!" .Values.cluster.name }}/*
+          - path: helm/cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/*
         template:
           metadata: {}
           spec:
             project: "default"
             source:
-              repoURL: {{ .Values.git.url }}
+              repoURL: {{ $values.git.url }}
               path: helm/charts/{{`{{.path.basename}}`}}
               helm:
                 valueFiles:
-                  - ../../cluster-overlays/{{ required "A valid cluster name is required!" .Values.cluster.name }}/{{`{{.path.basename}}`}}/values.yaml
+                  - ../../cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/{{`{{.path.basename}}`}}/values.yaml
             destination:
               server: "https://kubernetes.default.svc"
     {{- end }}
@@ -80,19 +92,15 @@ spec:
   goTemplate: true
   template:
     metadata:
-      {{- if eq .Values.cluster.type "bootstrap" }}
-      name: '{{`bootstrap-{{.path.basename}}`}}'
-      {{- else }}
-      name: '{{`{{.path.basename}}`}}'
-      {{- end }}
+      name: '{{ `$clusterName-{{.path.basename}}` }}'
       labels:
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
     spec:
       destination:
-        {{- if eq .Values.cluster.type "bootstrap" }}
-        server: "{{`{{.server}}`}}"
-        {{- else }}
+        {{- if eq $clusterName "local" }}
         server: "https://kubernetes.default.svc"
+        {{- else }}
+        server: "{{`{{.server}}`}}"
         {{- end }}
       project: default
       syncPolicy:
@@ -108,7 +116,19 @@ spec:
           - Validate=false
           - ApplyOutOfSyncOnly=true
           - RespectIgnoreDifferences=true
+      {{- if eq $clusterName "bootstrap-overlays" }}
+      source:
+        repoURL: {{ $values.git.url }}
+        path: helm/charts/argo-application
+        targetRevision: {{ $values.git.revision }}
+        helm:
+          parameters:
+            - name: clusters.local.name
+              value: "{{`{{.name}}`}}"
+      {{- else }}
       source:
         path: "{{`{{.path.path}}`}}"
-        repoURL: {{ .Values.git.url }}
-        targetRevision: {{ .Values.git.revision }}
+        repoURL: {{ $values.git.url }}
+        targetRevision: {{ $values.git.revision }}
+      {{- end }}
+{{- end }}
