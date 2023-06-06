@@ -8,12 +8,14 @@ metadata:
     unsupported.agent-install.openshift.io/assisted-service-configmap: "assisted-service-config"
 spec:
   databaseStorage:
+    storageClassName: nfs
     accessModes:
       - ReadWriteOnce
     resources:
       requests:
         storage: 40Gi
   filesystemStorage:
+    storageClassName: nfs
     accessModes:
       - ReadWriteOnce
     resources:
