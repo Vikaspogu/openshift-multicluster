@@ -13,4 +13,4 @@ spec:
     name: <REPLACE>
   nmStateConfigLabelSelector:
     matchLabels:
-      acm-ai-sno: <REPLACE>
+      acm-ai: <REPLACE>
