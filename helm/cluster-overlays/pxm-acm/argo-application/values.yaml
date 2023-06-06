@@ -1,5 +1,3 @@
 clusters:
-  "bootstrap-argo":
-    name: ""
-  # "bootstrap-overlays":
-  #   name: ""
+  - bootstrap-argo
+  - bootstrap-overlays

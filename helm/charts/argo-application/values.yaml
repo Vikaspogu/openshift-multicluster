@@ -3,10 +3,7 @@
 # Declare variables to be passed into your templates.
 
 clusters:
-  # "bootstrap-argo":
-  #   name: ""
-  # "bootstrap-overlays":
-  #   name: "test"
+  # - <CLUSTER-NAME-LIST>
 git:
   url: https://github.com/Vikaspogu/openshift-home-cluster.git
   revision: main

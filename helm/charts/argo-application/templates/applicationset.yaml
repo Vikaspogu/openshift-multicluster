@@ -1,6 +1,6 @@
 {{- $releaseLabels := include "argo-application.labels" . -}}
 {{- $values := .Values -}}
-{{- range $clusterName, $cluster := $values.clusters }}
+{{- range $clusterName := $values.clusters }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -37,12 +37,12 @@ spec:
         repoURL: {{ $values.git.url }}
         revision: {{ $values.git.revision }}
         directories:
-          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/*
+          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/*
     - git:
         repoURL: {{ $values.git.url }}
         revision: {{ $values.git.revision }}
         directories:
-          - path: helm/cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/*
+          - path: helm/cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/*
         template:
           metadata: {}
           spec:
@@ -52,7 +52,7 @@ spec:
               path: helm/charts/{{`{{.path.basename}}`}}
               helm:
                 valueFiles:
-                  - ../../cluster-overlays/{{ required "A valid cluster name is required!" $cluster.name }}/{{`{{.path.basename}}`}}/values.yaml
+                  - ../../cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/{{`{{.path.basename}}`}}/values.yaml
             destination:
               server: "https://kubernetes.default.svc"
     {{- end }}
@@ -103,10 +103,10 @@ spec:
       {{- end }}
     spec:
       destination:
-        {{- if contains $clusterName "acm" }}
-        server: "https://kubernetes.default.svc"
-        {{- else }}
+        {{- if contains "bootstrap" $clusterName }}
         server: "{{`{{.server}}`}}"
+        {{- else }}
+        server: "https://kubernetes.default.svc"
         {{- end }}
       project: default
       syncPolicy:
@@ -129,7 +129,7 @@ spec:
         targetRevision: {{ $values.git.revision }}
         helm:
           parameters:
-            - name: clusters.{{`{{.name}}`}}.name
+            - name: clusters.0
               value: "{{`{{.name}}`}}"
       {{- else }}
       source:
