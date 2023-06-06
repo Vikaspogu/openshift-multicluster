@@ -32,7 +32,7 @@ spec:
           matchLabels:
             cluster.open-cluster-management.io/placement: default-clusterset
         requeueAfterSeconds: 3600
-    {{-  else if eq $clusterName "local" }}
+    {{-  else }}
     - git:
         repoURL: {{ $values.git.url }}
         revision: {{ $values.git.revision }}
@@ -103,7 +103,7 @@ spec:
       {{- end }}
     spec:
       destination:
-        {{- if eq $clusterName "local" }}
+        {{- if contains $clusterName "acm" }}
         server: "https://kubernetes.default.svc"
         {{- else }}
         server: "{{`{{.server}}`}}"
@@ -129,7 +129,7 @@ spec:
         targetRevision: {{ $values.git.revision }}
         helm:
           parameters:
-            - name: clusters.local.name
+            - name: clusters.{{`{{.name}}`}}.name
               value: "{{`{{.name}}`}}"
       {{- else }}
       source:
