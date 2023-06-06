@@ -43,15 +43,14 @@ patches:
                   name: custom-tools
             - args:
               - -c
-              - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-                /policy-generator/PolicyGenerator
+              - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator /policy-generator/PolicyGenerator
               command:
-              - /bin/bash
+                - /bin/bash
               image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.5
               name: policy-generator-install
               volumeMounts:
-              - mountPath: /policy-generator
-                name: policy-generator
+                - mountPath: /policy-generator
+                  name: policy-generator
           volumeMounts:
             - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
               name: policy-generator
