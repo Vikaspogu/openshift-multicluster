@@ -16,6 +16,8 @@ patches:
               value: /.config
             - name: SOPS_AGE_KEY_FILE
               value: /.config/sops/age/keys.txt
+            - name: KUSTOMIZE_PLUGIN_HOME
+              value: /etc/kustomize/plugin
           volumes:
             - name: custom-tools
               emptyDir: {}
@@ -43,10 +45,11 @@ patches:
                   name: custom-tools
             - args:
               - -c
-              - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator /policy-generator/PolicyGenerator
+              - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+                /policy-generator/PolicyGenerator
               command:
                 - /bin/bash
-              image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.5
+              image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.7
               name: policy-generator-install
               volumeMounts:
                 - mountPath: /policy-generator
