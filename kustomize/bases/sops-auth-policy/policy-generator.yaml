@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: sops-auth-policy-generator
+policyDefaults:
+  namespace: openshift-gitops
+  severity: high
+  placement:
+    clusterSelectors:
+      gitops-bootstrap: "true"
+policies:
+  - name: sops-auth-policy
+    manifests:
+      - path: configuration-policy.yaml
+    remediationAction: enforce

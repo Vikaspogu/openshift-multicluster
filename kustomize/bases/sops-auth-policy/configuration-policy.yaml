@@ -1,0 +1,19 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: ConfigurationPolicy
+metadata:
+  name: sops-auth-policy
+spec:
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: sops-age
+          namespace: openshift-gitops
+        data:
+          keys.txt: '{{hub fromSecret "" "sops-age" "keys.txt" hub}}'
+        type: Opaque
+  remediationAction: enforce
+  pruneObjectBehavior: DeleteAll
