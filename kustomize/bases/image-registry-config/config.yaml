@@ -3,20 +3,16 @@ apiVersion: imageregistry.operator.openshift.io/v1
 kind: Config
 metadata:
   name: cluster
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
 spec:
-  logLevel: Normal
   managementState: Managed
-  observedConfig: null
-  operatorLogLevel: Normal
-  replicas: 1
-  requests:
-    read:
-      maxWaitInQueue: 0s
-    write:
-      maxWaitInQueue: 0s
-  rolloutStrategy: Recreate
-  unsupportedConfigOverrides: null
-  defaultRoute: true
   storage:
-    pvc:
-      claim: 'image-registry-storage'
+    managementState: Unmanaged
+    s3:
+      bucket: image-registry
+      region: us-1
+      regionEndpoint: 'https://s3.vikaspogu.com'
+      trustedCA:
+        name: ''
+      virtualHostedStyle: false
