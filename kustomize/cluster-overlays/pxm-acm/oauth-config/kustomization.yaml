@@ -8,24 +8,9 @@ patches:
   - target:
       kind: OAuth
     patch: |-
-      - op: add
-        path: /spec/identityProviders/1
-        value:
-          name: ldap-idp
-          mappingMethod: claim
-          type: LDAP
-          ldap:
-            attributes:
-              id:
-              - dn
-              email:
-              - mail
-              name:
-              - cn
-              preferredUsername:
-              - uid
-            bindDN: "uid=admin,ou=people,dc=home,dc=arpa"
-            bindPassword:
-              name: ldap-secret
-            insecure: true
-            url: "ldap://10.30.30.195/dc=home,dc=arpa"
+      - op: replace
+        path: /spec/identityProviders/1/bindDN
+        value: ""uid=admin,ou=people,dc=home,dc=arpa""
+      - op: replace
+        path: /spec/identityProviders/1/url
+        value: "ldap://10.30.30.195/dc=home,dc=arpa"
