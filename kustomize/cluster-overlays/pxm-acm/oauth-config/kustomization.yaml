@@ -27,5 +27,5 @@ patches:
             bindDN: "cn=admin,ou=users,dc=vikaspogu,dc=com"
             bindPassword:
               name: ldap-secret
-            insecure: false
+            insecure: true
             url: "ldap://lldap.vikaspogu.com/cn=admin,ou=users,dc=vikaspogu,dc=com?uid"
