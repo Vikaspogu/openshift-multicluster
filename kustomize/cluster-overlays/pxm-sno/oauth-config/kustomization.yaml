@@ -3,3 +3,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../../bases/oauth-config/
+
+patches:
+  - target:
+      kind: OAuth
+    patch: |-
+      - op: replace
+        path: /spec/identityProviders/1/bindDN
+        value: ""uid=admin,ou=people,dc=home,dc=arpa""
+      - op: replace
+        path: /spec/identityProviders/1/url
+        value: "ldap://10.30.30.195/dc=home,dc=arpa"
