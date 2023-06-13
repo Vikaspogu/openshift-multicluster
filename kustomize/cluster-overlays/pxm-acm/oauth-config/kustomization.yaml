@@ -28,4 +28,4 @@ patches:
             bindPassword:
               name: ldap-secret
             insecure: false
-            url: "ldaps://lldap.vikaspogu.com/dc=home,dc=arpa"
+            url: "ldaps://lldap.vikaspogu.com:389/dc=home,dc=arpa"
