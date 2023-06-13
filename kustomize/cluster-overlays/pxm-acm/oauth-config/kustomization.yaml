@@ -24,8 +24,8 @@ patches:
               - cn
               preferredUsername:
               - uid
-            bindDN: "cn=admin,ou=users,dc=vikaspogu,dc=com"
+            bindDN: "ou=users,dc=home,dc=arpa"
             bindPassword:
               name: ldap-secret
             insecure: true
-            url: "ldap://10.30.30.195/dc=home,dc=arpa"
+            url: "ldap://10.30.30.195/"
