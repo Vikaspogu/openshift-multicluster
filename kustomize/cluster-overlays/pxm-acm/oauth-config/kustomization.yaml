@@ -28,4 +28,4 @@ patches:
             bindPassword:
               name: ldap-secret
             insecure: false
-            url: "ldaps://lldap.vikaspogu.com"
+            url: "ldap://lldap.vikaspogu.com"
