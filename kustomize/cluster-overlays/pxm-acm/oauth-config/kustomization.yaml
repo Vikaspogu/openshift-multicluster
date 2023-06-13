@@ -24,7 +24,7 @@ patches:
               - cn
               preferredUsername:
               - uid
-            bindDN: "ou=users,dc=home,dc=arpa"
+            bindDN: "ou=people,dc=home,dc=arpa"
             bindPassword:
               name: ldap-secret
             insecure: true
