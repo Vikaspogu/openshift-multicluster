@@ -3,7 +3,7 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 commonAnnotations:
   argocd.argoproj.io/compare-options: IgnoreExtraneous
-  argocd.argoproj.io/sync-options: Prune=false
+  argocd.argoproj.io/sync-options: Delete=false
 resources:
   - ./externalsecret.yaml
   - ./oauth.yaml

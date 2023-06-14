@@ -4,6 +4,9 @@ kind: Kustomization
 resources:
   - ../../../bases/reloader-chart/
 
+commonAnnotations:
+  argocd.argoproj.io/sync-options: Delete=false
+
 helmCharts:
   - name: reloader
     releaseName: reloader

@@ -122,6 +122,7 @@ spec:
           - Validate=false
           - ApplyOutOfSyncOnly=true
           - RespectIgnoreDifferences=true
+          - Prune=true
       {{- if eq $clusterName "bootstrap-overlays" }}
       source:
         repoURL: {{ $values.git.url }}
