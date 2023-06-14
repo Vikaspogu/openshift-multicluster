@@ -9,8 +9,8 @@ patches:
       kind: OAuth
     patch: |-
       - op: replace
-        path: /spec/identityProviders/1/bindDN
-        value: ""uid=admin,ou=people,dc=home,dc=arpa""
+        path: /spec/identityProviders/1/ldap/bindDN
+        value: "uid=admin,ou=people,dc=home,dc=arpa"
       - op: replace
-        path: /spec/identityProviders/1/url
+        path: /spec/identityProviders/1/ldap/url
         value: "ldap://10.30.30.195/dc=home,dc=arpa"
