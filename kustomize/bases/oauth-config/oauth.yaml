@@ -5,12 +5,6 @@ metadata:
   name: cluster
 spec:
   identityProviders:
-    - name: login_provider
-      mappingMethod: claim
-      type: HTPasswd
-      htpasswd:
-        fileData:
-          name: htpass-secret
     - name: ldap-idp
       mappingMethod: claim
       type: LDAP

@@ -11,6 +11,3 @@ subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: <REPLACE>
-  - apiGroup: rbac.authorization.k8s.io
-    kind: Group
-    name: cluster-admins

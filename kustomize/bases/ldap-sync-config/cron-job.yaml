@@ -5,7 +5,7 @@ metadata:
   name: ldap-group-syncer
   namespace: ldap-sync
 spec:
-  schedule: "0 0 * * *"
+  schedule: "*/30 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
