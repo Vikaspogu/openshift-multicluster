@@ -110,7 +110,8 @@ spec:
         {{- end }}
       project: default
       syncPolicy:
-        automated: {}
+        automated:
+          prune: true
         retry:
           limit: 10
           backoff:
@@ -122,7 +123,6 @@ spec:
           - Validate=false
           - ApplyOutOfSyncOnly=true
           - RespectIgnoreDifferences=true
-          - Prune=true
       {{- if eq $clusterName "bootstrap-overlays" }}
       source:
         repoURL: {{ $values.git.url }}

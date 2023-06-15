@@ -229,7 +229,7 @@ spec:
   rbac:
     policy: |
       g, system:cluster-admins, role:admin
-      g, cluster-admins, role:admin
+      g, cluster-admin-groups, role:admin
     scopes: "[groups]"
   repo:
     env:
