@@ -93,7 +93,7 @@ spec:
       {{- if eq $clusterName "bootstrap-overlays" }}
       name: {{$clusterName}}-{{`{{.name}}`}}-appset
       {{- else }}
-      name: {{$clusterName}}{{ `-{{.path.basename}}` }}
+      name: {{ `{{.path.basename}}` }}
       {{- end }}
       labels:
       {{- if eq $clusterName "bootstrap-overlays" }}
