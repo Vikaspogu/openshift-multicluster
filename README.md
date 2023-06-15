@@ -49,7 +49,7 @@ Welcome to my OpenShift operations repository
 ```bash
 oc apply -k kustomize/argo-bootstrap/openshift-gitops-operator
 cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin
-oc apply -k kustomize/argo-bootstrap/openshift-gitops-config
+oc apply -k kustomize/argo-acm-bootstrap -n openshift-gitops
 helm upgrade --install pxm-acm-argo-appset helm/charts/argo-application --debug --set clusters.0=pxe-acm
 ```
 

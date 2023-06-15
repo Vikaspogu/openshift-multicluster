@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../bases/openshift-gitops-config/
+  - ../bases/openshift-gitops-config
 
 patches:
   - target:
@@ -33,14 +33,6 @@ patches:
               volumeMounts:
                 - mountPath: /custom-tools
                   name: custom-tools
-            - name: download-helm-311
-              image: alpine:3.8
-              command: [sh, -c]
-              args:
-                - wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;
-              volumeMounts:
-                - mountPath: /custom-tools
-                  name: custom-tools
             - args:
               - -c
               - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
@@ -58,9 +50,6 @@ patches:
             - mountPath: /usr/local/bin/kustomize
               name: custom-tools
               subPath: kustomize
-            - mountPath: /usr/local/bin/helm-3.11
-              name: custom-tools
-              subPath: helm-3.11
             - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
               name: custom-tools
               subPath: ksops
