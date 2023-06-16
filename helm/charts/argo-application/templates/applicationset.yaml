@@ -90,8 +90,10 @@ spec:
   goTemplate: true
   template:
     metadata:
-      {{- if or ( eq $clusterName "bootstrap-overlays" ) ( eq $clusterName "bootstrap-argo" ) }}
+      {{- if eq $clusterName "bootstrap-overlays" }}
       name: {{$clusterName}}-{{`{{.name}}`}}-appset
+      {{- else if eq $clusterName "bootstrap-argo" }}
+      name: {{$clusterName}}-{{`{{.name}}-{{.path.basename}`}}
       {{- else }}
       name: '{{ `{{.path.basename}}` }}'
       {{- end }}
