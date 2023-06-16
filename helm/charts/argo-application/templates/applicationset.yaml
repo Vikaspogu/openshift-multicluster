@@ -19,7 +19,7 @@ spec:
               labelSelector:
                 matchLabels:
                   cluster.open-cluster-management.io/placement: default-clusterset
-              requeueAfterSeconds: 3600
+              requeueAfterSeconds: 300
           - git:
               repoURL: {{ $values.git.url }}
               revision: {{ $values.git.revision }}
@@ -31,7 +31,7 @@ spec:
         labelSelector:
           matchLabels:
             cluster.open-cluster-management.io/placement: default-clusterset
-        requeueAfterSeconds: 3600
+        requeueAfterSeconds: 300
     {{-  else }}
     - git:
         repoURL: {{ $values.git.url }}
