@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./agent-service-config.yaml
   - ./provisioning.yaml
+  - ./config-map.yaml
