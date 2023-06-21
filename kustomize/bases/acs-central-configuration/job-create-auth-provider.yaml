@@ -29,7 +29,7 @@ spec:
               export DATA={\"name\":\"local-cluster\"}
               curl -X POST -u "admin:$PASSWORD" -k https://central/v1/authProviders --data '{"name": "OpenShift OAuth", "type": "openshift", "enabled": true}' > /tmp/output.json
               AUTH_PROVIDER_ID=$(sed 's/,/\n/g' /tmp/output.json | grep -w id | awk -F\" '{ print $4 }') ### Since the image does not have the 'jq' command
-              JSON_PAYLOAD="{\"roleName\":\"Admin\",\"props\":{\"authProviderId\":\"$AUTH_PROVIDER_ID\",\"key\":\"name\",\"value\":\"kube:admin\"}}"
+              JSON_PAYLOAD="{\"roleName\":\"Admin\",\"props\":{\"authProviderId\":\"$AUTH_PROVIDER_ID\",\"key\":\"groups\",\"value\":\"openshift-admins\"}}"
               curl -X POST -u "admin:$PASSWORD" -k https://central/v1/groups -s --data "$JSON_PAYLOAD" ### Adding the Admin entry for the KubeAdmin user
           imagePullPolicy: Always
           name: create-auth-provider

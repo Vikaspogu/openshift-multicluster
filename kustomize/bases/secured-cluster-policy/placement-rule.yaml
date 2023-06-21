@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: secured-cluster-secret-placement
+  namespace: stackrox
+spec:
+  # This will go to all managed clusters
+  clusterConditions:
+    - status: 'True'
+      type: ManagedClusterConditionAvailable

@@ -1,0 +1,15 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: secured-cluster-secret-policy-generator
+policyDefaults:
+  namespace: stackrox
+  severity: high
+  placement:
+    placementRulePath: placement-rule.yaml
+policies:
+  - name: secured-cluster-secret-policy
+    manifests:
+      - path: configuration-policy.yaml
+    remediationAction: enforce
