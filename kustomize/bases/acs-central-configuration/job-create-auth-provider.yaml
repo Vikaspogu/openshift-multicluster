@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "7"
+  name: create-auth-provider
+  namespace: stackrox
+spec:
+  template:
+    metadata:
+      annotations:
+        argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    spec:
+      containers:
+        - image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:09dc3e8e8b71674cbd069ac534816a6eac6ffe7fb2ea4767b28fc4261e1b1704
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: central-htpasswd
+                  key: password
+          command:
+            - /bin/bash
+            - -c
+            - |
+              #!/usr/bin/env bash
+              echo "Creating auth provider in RHACS"
+              export DATA={\"name\":\"local-cluster\"}
+              curl -X POST -u "admin:$PASSWORD" -k https://central/v1/authProviders --data '{"name": "OpenShift OAuth", "type": "openshift", "enabled": true}' > /tmp/output.json
+              AUTH_PROVIDER_ID=$(sed 's/,/\n/g' /tmp/output.json | grep -w id | awk -F\" '{ print $4 }') ### Since the image does not have the 'jq' command
+              JSON_PAYLOAD="{\"roleName\":\"Admin\",\"props\":{\"authProviderId\":\"$AUTH_PROVIDER_ID\",\"key\":\"name\",\"value\":\"kube:admin\"}}"
+              curl -X POST -u "admin:$PASSWORD" -k https://central/v1/groups -s --data "$JSON_PAYLOAD" ### Adding the Admin entry for the KubeAdmin user
+          imagePullPolicy: Always
+          name: create-auth-provider
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      serviceAccount: create-cluster-init
+      serviceAccountName: create-cluster-init
+      terminationGracePeriodSeconds: 30

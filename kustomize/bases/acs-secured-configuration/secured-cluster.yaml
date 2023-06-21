@@ -1,0 +1,22 @@
+apiVersion: platform.stackrox.io/v1alpha1
+kind: SecuredCluster
+metadata:
+  name: secured-cluster
+  namespace: stackrox
+spec:
+  clusterName: <REPLACE>
+  auditLogs:
+    collection: Auto
+  admissionControl:
+    listenOnUpdates: true
+    bypass: BreakGlassAnnotation
+    contactImageScanners: DoNotScanInline
+    listenOnCreates: true
+    timeoutSeconds: 3
+    listenOnEvents: true
+  centralEndpoint: <REPLACE>
+  perNode:
+    collector:
+      collection: KernelModule
+      imageFlavor: Regular
+    taintToleration: TolerateTaints
