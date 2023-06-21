@@ -5,6 +5,7 @@ resources:
   - ../../../bases/acm-operator/
 commonAnnotations:
   argocd.argoproj.io/sync-options: Delete=false
+
 patches:
   - patch: |-
       - op: replace

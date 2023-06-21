@@ -6,3 +6,13 @@ resources:
 
 commonAnnotations:
   argocd.argoproj.io/sync-options: Delete=false
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - central-stackrox.apps.pxm-acm.v3s.us
+    target:
+      kind: Certificate
+      name: central-default-tls-cert

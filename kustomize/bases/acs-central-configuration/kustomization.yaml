@@ -9,6 +9,7 @@ commonAnnotations:
 
 resources:
   - namespace.yaml
+  - central-default-tls-cert.yaml
   - create-cluster-init-bundle-sa.yaml
   - central.yaml
   - create-cluster-init-bundle-job.yaml
