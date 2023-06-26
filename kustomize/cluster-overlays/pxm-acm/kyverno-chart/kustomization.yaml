@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: kyverno
 resources:
   - ../../../bases/kyverno-chart/
-
+commonAnnotations:
+  argocd.argoproj.io/sync-options: ServerSideApply=true
 helmCharts:
   - name: kyverno
     releaseName: kyverno
