@@ -63,3 +63,9 @@ patches:
         value: Validate=false,ServerSideApply=true
     target:
       kind: CustomResourceDefinition
+  - patch: |-
+      - op: add
+        path: /apiVersion
+        value: policy
+    target:
+      kind: PodDisruptionBudget
