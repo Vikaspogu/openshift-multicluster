@@ -6,9 +6,11 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: admin
+  name: cluster-admin
 subjects:
   - kind: ServiceAccount
     name: kyverno-admission-controller
+    namespace: kyverno
   - kind: ServiceAccount
     name: kyverno-cleanup-controller
+    namespace: kyverno
