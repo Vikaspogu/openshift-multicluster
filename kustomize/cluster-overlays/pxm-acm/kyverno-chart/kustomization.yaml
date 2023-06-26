@@ -17,5 +17,7 @@ helmCharts:
     valuesInline:
       crds:
         install: true
+        annotations:
+          argocd.argoproj.io/sync-options: Replace=true
       upgrade:
         fromV2: false
