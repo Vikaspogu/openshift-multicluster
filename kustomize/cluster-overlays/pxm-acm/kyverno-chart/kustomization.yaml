@@ -17,3 +17,5 @@ helmCharts:
     valuesInline:
       crds:
         install: true
+      upgrade:
+        fromV2: false
