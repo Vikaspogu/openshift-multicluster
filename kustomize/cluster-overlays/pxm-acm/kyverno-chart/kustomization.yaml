@@ -13,7 +13,7 @@ helmCharts:
     releaseName: kyverno
     namespace: kyverno
     repo: https://kyverno.github.io/kyverno
-    version: 2.7.5
+    version: 3.0.1
     valuesInline:
       installCRDs: true
       replicaCount: 3
