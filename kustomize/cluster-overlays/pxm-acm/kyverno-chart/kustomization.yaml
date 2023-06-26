@@ -20,4 +20,4 @@ helmCharts:
         annotations:
           argocd.argoproj.io/sync-options: Replace=true
       upgrade:
-        fromV2: false
+        fromV2: true
