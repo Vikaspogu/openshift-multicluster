@@ -64,8 +64,8 @@ patches:
     target:
       kind: CustomResourceDefinition
   - patch: |-
-      - op: add
+      - op: replace
         path: /apiVersion
-        value: policy
+        value: policy/v1
     target:
       kind: PodDisruptionBudget
