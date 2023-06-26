@@ -10,6 +10,6 @@ helmCharts:
     releaseName: kyverno
     namespace: kyverno
     repo: https://kyverno.github.io/kyverno/
-    version: 3.0.0
+    version: 3.0.1
     valuesInline:
       installCRDs: true
