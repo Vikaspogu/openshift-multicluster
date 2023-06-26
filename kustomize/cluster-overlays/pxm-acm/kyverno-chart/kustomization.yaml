@@ -13,4 +13,6 @@ helmCharts:
     repo: https://kyverno.github.io/kyverno/
     version: 3.0.0
     valuesInline:
-      installCRDs: true
+      crds:
+        install: true
+      replicaCount: 3
