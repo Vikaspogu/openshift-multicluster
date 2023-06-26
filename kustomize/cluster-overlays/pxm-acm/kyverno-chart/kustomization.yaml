@@ -5,9 +5,6 @@ namespace: kyverno
 resources:
   - ../../../bases/kyverno-chart/
 
-commonAnnotations:
-  argocd.argoproj.io/sync-options: Replace=true,ServerSideApply=true
-
 helmCharts:
   - name: kyverno
     releaseName: kyverno
