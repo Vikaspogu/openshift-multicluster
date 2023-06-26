@@ -5,6 +5,8 @@ namespace: kyverno
 resources:
   - ../../../bases/kyverno-chart/
   - https://github.com/kyverno/kyverno/releases/download/v1.10.0/install.yaml
+  - https://github.com/kyverno/kyverno/releases/download/v1.10.0/wgpolicyk8s.io_clusterpolicyreports.yaml
+  - https://github.com/kyverno/kyverno/releases/download/v1.10.0/wgpolicyk8s.io_policyreports.yaml
 
 commonAnnotations:
   argocd.argoproj.io/sync-options: ServerSideApply=true
