@@ -9,30 +9,7 @@ helmCharts:
   - name: kyverno
     releaseName: kyverno
     namespace: kyverno
-    repo: https://kyverno.github.io
+    repo: https://kyverno.github.io/kyverno/
     version: 3.0.0
     valuesInline:
       installCRDs: true
-
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/securityContext
-        value: {}
-    target:
-      kind: Deployment
-      name: external-secrets
-  - patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/securityContext
-        value: {}
-    target:
-      kind: Deployment
-      name: external-secrets-cert-controller
-  - patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/securityContext
-        value: {}
-    target:
-      kind: Deployment
-      name: external-secrets-webhook
