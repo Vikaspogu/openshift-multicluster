@@ -15,4 +15,59 @@ helmCharts:
     valuesInline:
       crds:
         install: true
-      replicaCount: 3
+      backgroundController:
+        serviceMonitor:
+          enabled: true
+        rbac:
+          clusterRole:
+            extraResources:
+              - apiGroups:
+                  - ""
+                resources:
+                  - pods
+              - apiGroups:
+                  - batch
+                resources:
+                  - cronjobs
+                  - jobs
+      cleanupController:
+        serviceMonitor:
+          enabled: true
+      reportsController:
+        serviceMonitor:
+          enabled: true
+      admissionController:
+        replicas: 3
+        serviceMonitor:
+          enabled: true
+        rbac:
+          clusterRole:
+            extraResources:
+              - apiGroups:
+                  - ""
+                resources:
+                  - pods
+                  - cronjobs
+                verbs:
+                  - create
+                  - update
+                  - delete
+              - verbs:
+                  - create
+                  - delete
+                  - deletecollection
+                  - patch
+                  - update
+                apiGroups:
+                  - batch
+                resources:
+                  - cronjobs
+                  - jobs
+        topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: DoNotSchedule
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/instance: kyverno
+                app.kubernetes.io/component: kyverno
