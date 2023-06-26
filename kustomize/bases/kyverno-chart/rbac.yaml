@@ -10,7 +10,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: kyverno-admission-controller
-    namespace: kyverno
   - kind: ServiceAccount
     name: kyverno-cleanup-controller
-    namespace: kyverno
