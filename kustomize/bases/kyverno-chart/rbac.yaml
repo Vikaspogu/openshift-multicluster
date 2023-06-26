@@ -9,7 +9,7 @@ roleRef:
   name: admin
 subjects:
   - kind: ServiceAccount
-    name: kyverno
+    name: kyverno-admission-controller
     namespace: kyverno
   - kind: ServiceAccount
     name: kyverno-cleanup-controller
