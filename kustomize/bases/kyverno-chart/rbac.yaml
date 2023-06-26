@@ -11,3 +11,6 @@ subjects:
   - kind: ServiceAccount
     name: kyverno
     namespace: kyverno
+  - kind: ServiceAccount
+    name: kyverno-cleanup-controller
+    namespace: kyverno
