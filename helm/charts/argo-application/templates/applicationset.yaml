@@ -138,7 +138,5 @@ spec:
         path: "{{`{{.path.path}}`}}"
         repoURL: {{ $values.git.url }}
         targetRevision: {{ $values.git.revision }}
-        directory:
-          recurse: true
       {{- end }}
 {{- end }}
