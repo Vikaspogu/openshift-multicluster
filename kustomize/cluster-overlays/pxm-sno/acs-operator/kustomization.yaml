@@ -11,6 +11,6 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/channel
-        value: "latest"
+        value: "stable"
     target:
       kind: Subscription
