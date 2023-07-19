@@ -55,7 +55,7 @@ spec:
             msg = ""
             for i, condition in pairs(obj.status.conditions) do
               msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. "\n"
-              if condition.type == "InstallPlanPending" and condition.status == "True" then
+              if condition.type == "InstallPlanPending" and condition.status == "True" and condition.reason ~= "RequiresApproval" then
                 numPending = numPending + 1
               elseif (condition.type == "InstallPlanMissing" and condition.reason ~= "ReferencedInstallPlanNotFound") then
                 numDegraded = numDegraded + 1
