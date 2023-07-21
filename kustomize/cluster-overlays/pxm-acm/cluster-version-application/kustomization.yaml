@@ -14,4 +14,4 @@ patches:
         value: stable-4.12
       - op: replace
         path: /spec/desiredUpdate/version
-        value: 4.12.24
+        value: 4.12.23
