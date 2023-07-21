@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/cluster-version-application/
+
+patches:
+  - target:
+      kind: ClusterVersion
+      name: version
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: stable-4.12
+      - op: replace
+        path: /spec/desiredUpdate/image
+        value: quay.io/openshift-release-dev/ocp-release@sha256:b0b11eedf91175459b5d7aefcf3936d0cabf00f01ced756677483f5f26227328
+      - op: replace
+        path: /spec/desiredUpdate/version
+        value: 4.12.24
