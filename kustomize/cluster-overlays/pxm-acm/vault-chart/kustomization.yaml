@@ -12,7 +12,21 @@ helmCharts:
     repo: https://helm.releases.hashicorp.com
     version: 0.25.0
     valuesInline:
+      global:
+        openshift: true
+      injector:
+        image:
+          repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+          tag: "1.2.1-ubi"
+
+        agentImage:
+          repository: "registry.connect.redhat.com/hashicorp/vault"
+          tag: "1.14.0-ubi"
+
       server:
+        image:
+          repository: "registry.connect.redhat.com/hashicorp/vault"
+          tag: "1.14.0-ubi"
         route:
           enabled: true
         dataStorage:
