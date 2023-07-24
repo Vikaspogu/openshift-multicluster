@@ -12,6 +12,12 @@ helmCharts:
     repo: https://helm.releases.hashicorp.com
     version: 0.25.0
     valuesInline:
-      installCRDs: true
+      global:
+        openshift: true
+      server:
+        route:
+          enabled: true
+        dataStorage:
+          storageClass: nfs
 
 patches: []
