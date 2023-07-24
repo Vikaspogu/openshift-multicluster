@@ -12,8 +12,6 @@ helmCharts:
     repo: https://helm.releases.hashicorp.com
     version: 0.25.0
     valuesInline:
-      global:
-        openshift: true
       server:
         route:
           enabled: true
