@@ -29,6 +29,7 @@ helmCharts:
           tag: "1.14.0-ubi"
         route:
           enabled: true
+          host: ""
         dataStorage:
           storageClass: nfs
 
