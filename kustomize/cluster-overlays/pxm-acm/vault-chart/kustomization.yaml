@@ -30,6 +30,8 @@ helmCharts:
         route:
           enabled: true
           host: ""
+          tls:
+            termination: edge
         dataStorage:
           storageClass: nfs
 
