@@ -294,8 +294,6 @@ spec:
       enabled: false
   initialSSHKnownHosts: {}
   applicationSet:
-    extraCommandArgs:
-      - --enable-progressive-syncs
     resources:
       limits:
         cpu: "2"
@@ -317,6 +315,8 @@ spec:
     volumes:
       - name: custom-tools
         emptyDir: {}
+      - name: policy-generator
+        emptyDir: {}
       - name: sops-age
         secret:
           secretName: sops-age
@@ -337,7 +337,20 @@ spec:
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
+      - name: policy-generator-install
+        args:
+          - -c
+          - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+            /policy-generator/PolicyGenerator
+        command:
+          - /bin/bash
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.7
+        volumeMounts:
+          - mountPath: /policy-generator
+            name: policy-generator
     volumeMounts:
+      - name: policy-generator
+        mountPath: /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
       - mountPath: /usr/local/bin/kustomize
         name: custom-tools
         subPath: kustomize
