@@ -15,11 +15,12 @@ patches:
       name: openshift-api
   - patch: |-
       - op: replace
-        path: /spec/template/spec/containers/0/env/0/value
-        value: api.pxm-acm.v3s.us
+        path: /spec/servingCerts/namedCertificates/0/names
+        value:
+          - api.pxm-acm.v3s.us
     target:
-      kind: Job
-      name: patch-cluster-api-cert
+      kind: APIServer
+      name: cluster
   - patch: |-
       - op: replace
         path: /spec/dnsNames
