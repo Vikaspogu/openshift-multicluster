@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: openshift-local-storage
+resources:
+  - ../../../bases/lvm-storage/
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/storage/deviceClasses/0/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
+        value:
+          - openshift-1
+    target:
+      kind: LVMCluster
