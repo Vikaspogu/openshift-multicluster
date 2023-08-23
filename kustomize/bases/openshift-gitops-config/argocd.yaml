@@ -30,6 +30,13 @@ spec:
         insecureEdgeTerminationPolicy: Redirect
     service:
       type: ""
+  resourceIgnoreDifferences:
+    resourceIdentifiers:
+      - group: admissionregistration.k8s.io
+        kind: MutatingWebhookConfiguration
+        customization:
+          jqPathExpressions:
+            - '.webhooks[]?.clientConfig.caBundle'
   resourceHealthChecks:
     - group: argoproj.io
       kind: Application
