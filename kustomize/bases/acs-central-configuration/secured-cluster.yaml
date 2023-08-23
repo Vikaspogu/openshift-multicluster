@@ -14,4 +14,11 @@ spec:
     collector:
       collection: EBPF
       imageFlavor: Regular
+      resources:
+        limits:
+          cpu: 750m
+          memory: 640Mi
+        requests:
+          cpu: 50m
+          memory: 320Mi
     taintToleration: TolerateTaints
