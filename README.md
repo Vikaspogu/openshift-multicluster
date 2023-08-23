@@ -60,7 +60,6 @@ This Git repository contains the following directories (_kustomizatons_) under [
 ```sh
 📁 clusters                # openshift clusters defined as code
 ├─📁 bases                 # argo application set definition for workloads
-├─📁 argo-bootstrap        # bootstrap operators and OpenShift GitOps operator
 └─📁 cluster-overlays      # regular apps/operators
 ```
 
@@ -69,8 +68,8 @@ This Git repository contains the following directories (_kustomizatons_) under [
 - [X] ArgoCD with SOPS plugin
 - [X] Secret Management using External secrets and 1Password
 - [X] Cert manager for API and Wildcard certificate
-- [X] Renovate bot
 - [X] Kyverno
+- [X] Renovate bot
 
 ## :hammer: TODO
 

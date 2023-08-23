@@ -71,6 +71,11 @@ spec:
             - key: type
               operator: In
               values:
+                - storage
+        - matchExpressions:
+            - key: type
+              operator: In
+              values:
                 - config
         - matchExpressions:
             - key: type
