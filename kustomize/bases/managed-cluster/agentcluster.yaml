@@ -8,7 +8,7 @@ spec:
   clusterDeploymentRef:
     name: <REPLACE>
   imageSetRef:
-    name: openshift-4.12
+    name: openshift-4.13
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14
