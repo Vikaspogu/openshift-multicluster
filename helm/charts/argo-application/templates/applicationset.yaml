@@ -24,7 +24,7 @@ spec:
               repoURL: {{ $values.git.url }}
               revision: {{ $values.git.revision }}
               directories:
-                - path: kustomize/argo-bootstrap/*
+                - path: kustomize/bases/[openshift-gitops-operator|openshift-gitops-config]
               requeueAfterSeconds: 300
     {{- else if eq $clusterName "bootstrap-overlays" }}
     - clusterDecisionResource:

@@ -1,3 +1,4 @@
+---
 apiVersion: platform.stackrox.io/v1alpha1
 kind: Central
 metadata:
@@ -19,11 +20,11 @@ spec:
       persistence:
         persistentVolumeClaim:
           claimName: central-db
-          storageClassName: nfs
+          storageClassName: lvms-vg1
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
-        storageClassName: nfs
+        storageClassName: lvms-vg1
   egress:
     connectivityPolicy: Online
   scanner:
