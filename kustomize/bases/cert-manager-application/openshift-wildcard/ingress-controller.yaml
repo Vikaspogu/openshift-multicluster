@@ -4,7 +4,7 @@ kind: IngressController
 metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/sync-options: ServerSideApply=true
+    argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
   name: default
   namespace: openshift-ingress-operator
 spec:
