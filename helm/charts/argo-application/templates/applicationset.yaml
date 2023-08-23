@@ -66,12 +66,16 @@ spec:
               operator: In
               values:
                 - operator
-                - chart
         - matchExpressions:
             - key: type
               operator: In
               values:
                 - storage
+        - matchExpressions:
+            - key: type
+              operator: In
+              values:
+                - chart
         - matchExpressions:
             - key: type
               operator: In
