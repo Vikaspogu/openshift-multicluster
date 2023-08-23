@@ -301,6 +301,8 @@ spec:
       enabled: false
   initialSSHKnownHosts: {}
   applicationSet:
+    extraCommandArgs:
+      - --enable-progressive-syncs
     resources:
       limits:
         cpu: "2"
