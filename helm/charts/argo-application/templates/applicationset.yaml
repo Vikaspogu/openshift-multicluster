@@ -22,8 +22,8 @@ spec:
               requeueAfterSeconds: 300
           - list:
               elements:
-                - folder: "kustomize/bases/openshift-gitops-operator"
-                - folder: "kustomize/bases/openshift-gitops-config"
+                - folder: "openshift-gitops-operator"
+                - folder: "openshift-gitops-config"
     {{- else if eq $clusterName "bootstrap-overlays" }}
     - clusterDecisionResource:
         configMapRef: acm-placement
@@ -146,7 +146,7 @@ spec:
               value: "{{`{{.name}}`}}"
       {{- else if eq $clusterName "bootstrap-argo" }}
       source:
-        path: "{{`{{.folder}}`}}"
+        path: "kustomize/bases/{{`{{.folder}}`}}"
         repoURL: {{ $values.git.url }}
         targetRevision: {{ $values.git.revision }}
       {{- else }}
