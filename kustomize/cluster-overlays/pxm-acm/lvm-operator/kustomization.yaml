@@ -8,6 +8,6 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/channel
-        value: "stable-4.12"
+        value: "stable-4.13"
     target:
       kind: Subscription
