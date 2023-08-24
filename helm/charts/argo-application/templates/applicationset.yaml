@@ -102,7 +102,7 @@ spec:
       {{- if eq $clusterName "bootstrap-overlays" }}
       name: {{$clusterName}}-{{`{{.name}}`}}-appset
       {{- else if eq $clusterName "bootstrap-argo" }}
-      name: {{$clusterName}}-{{`{{.name}}-{{.path.basename}}`}}
+      name: {{$clusterName}}-{{`{{.name}}-{{.folder}}`}}
       {{- else }}
       name: '{{ `{{.path.basename}}` }}'
       {{- end }}
