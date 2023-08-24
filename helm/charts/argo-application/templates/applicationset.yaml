@@ -20,12 +20,10 @@ spec:
                 matchLabels:
                   cluster.open-cluster-management.io/placement: default-clusterset
               requeueAfterSeconds: 300
-          - git:
-              repoURL: {{ $values.git.url }}
-              revision: {{ $values.git.revision }}
-              directories:
-                - path: kustomize/bases/[openshift-gitops-operator|openshift-gitops-config]
-              requeueAfterSeconds: 300
+          - list:
+              elements:
+                - folder: "kustomize/bases/openshift-gitops-operator"
+                - folder: "kustomize/bases/openshift-gitops-config"
     {{- else if eq $clusterName "bootstrap-overlays" }}
     - clusterDecisionResource:
         configMapRef: acm-placement
@@ -111,6 +109,8 @@ spec:
       labels:
       {{- if eq $clusterName "bootstrap-overlays" }}
         type: application
+      {{- else if eq $clusterName "bootstrap-argo" }}
+        type: '{{`{{ .folder | splitList "-" | last }}`}}'
       {{- else }}
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
       {{- end }}
@@ -144,6 +144,11 @@ spec:
           parameters:
             - name: clusters.0
               value: "{{`{{.name}}`}}"
+      {{- else if eq $clusterName "bootstrap-argo" }}
+      source:
+        path: "{{`{{.folder}}`}}"
+        repoURL: {{ $values.git.url }}
+        targetRevision: {{ $values.git.revision }}
       {{- else }}
       source:
         path: "{{`{{.path.path}}`}}"
