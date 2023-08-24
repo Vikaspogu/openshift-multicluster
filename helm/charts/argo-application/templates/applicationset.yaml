@@ -81,6 +81,7 @@ spec:
               operator: In
               values:
                 - config
+                - configuration
         - matchExpressions:
             - key: type
               operator: In
