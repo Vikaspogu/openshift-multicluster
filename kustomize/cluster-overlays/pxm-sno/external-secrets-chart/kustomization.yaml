@@ -10,7 +10,7 @@ helmCharts:
     releaseName: external-secrets
     namespace: external-secrets
     repo: https://charts.external-secrets.io
-    version: 0.9.3
+    version: 0.9.4
     valuesInline:
       installCRDs: true
 
