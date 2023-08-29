@@ -91,6 +91,7 @@ spec:
               values:
                 - application
                 - policy
+                - inventory
         - matchExpressions:
             - key: type
               operator: In
