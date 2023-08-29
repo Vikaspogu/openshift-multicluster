@@ -5,9 +5,9 @@ apiVersion: agent-install.openshift.io/v1beta1
 kind: NMStateConfig
 metadata:
   name: {{$index}}
-  namespace: {{ $values.cluster.name }}
+  namespace: {{ $values.inventory.name }}
   labels:
-    acm-ai-sno: {{ $values.cluster.name }}
+    infraenvs.agent-install.openshift.io: {{ $values.inventory.name }}
 spec:
   interfaces:
   {{- range $index,$interface := $node.interfaces }}

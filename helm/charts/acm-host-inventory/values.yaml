@@ -1,0 +1,30 @@
+inventory:
+  name:
+  location:
+
+sshPublicKey:
+
+dnsResolvers:
+  # - 192.168.0.1
+
+routesConfig:
+  # - destination: 0.0.0.0/0
+  #   next-hop-address: 192.168.30.1
+  #   next-hop-interface: en0
+  #   table-id: 254
+
+nodes:
+  # node1:
+  #   interfaces:
+  #     en0: 12:23:45:56:78
+  #   interfacesConfig:
+  #     ens1:
+  #       type: ethernet
+  #       network:
+  #         mac-address: 98:76:54:32:10
+  #         ipv4:
+  #           enabled: true
+  #           address:
+  #             - ip: 192.168.1.1
+  #               prefix-length: 23
+  #           dhcp: false
