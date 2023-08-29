@@ -1,0 +1,25 @@
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: {{.Values.cluster.name}}
+  namespace: {{.Values.cluster.name}}
+  labels:
+    {{- include "managed-cluster.labels" . | nindent 4 }}
+spec:
+  clusterDeploymentRef:
+    name: {{.Values.cluster.name}}
+  imageSetRef:
+    name: {{ include "managed-cluster.fullname" . }}-imageset
+  networking:
+    clusterNetwork:
+      - cidr: {{.Values.networking.clusterCidr}}
+        hostPrefix: 23
+    machineNetwork:
+      - cidr: {{.Values.networking.machineCidr}}
+    networkType: {{.Values.networking.networkType}}
+    serviceNetwork:
+      - {{.Values.networking.serviceNetwork}}
+  provisionRequirements:
+    controlPlaneAgents: {{.Values.controlPlaneSize}}
+  sshPublicKey: {{.Values.sshPublicKey}}

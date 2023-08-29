@@ -1,0 +1,14 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: {{.Values.cluster.name}}
+  namespace: {{.Values.cluster.name}}
+  labels:
+    name: {{.Values.cluster.name}}
+    {{- with .Values.cluster.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  hubAcceptsClient: true
+  leaseDurationSeconds: 60
