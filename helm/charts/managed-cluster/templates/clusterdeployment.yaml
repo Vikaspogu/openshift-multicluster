@@ -18,6 +18,6 @@ spec:
     agentBareMetal:
       agentSelector:
         matchLabels:
-          cluster-name: {{.Values.cluster.name}}
+          infraenvs.agent-install.openshift.io: {{.Values.cluster.infraEnv}}
   pullSecretRef:
     name: pull-secret-{{.Values.cluster.name}}
