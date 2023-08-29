@@ -4,6 +4,8 @@ kind: ClusterDeployment
 metadata:
   name: {{.Values.cluster.name}}
   namespace: {{.Values.cluster.name}}
+  annotations:
+    agentBareMetal-agentSelector/autoSelect: "true"
 spec:
   baseDomain: {{.Values.cluster.baseDomain}}
   clusterName: {{.Values.cluster.name}}
@@ -17,7 +19,6 @@ spec:
   platform:
     agentBareMetal:
       agentSelector:
-        matchLabels:
-          infraenvs.agent-install.openshift.io: {{.Values.cluster.infraEnv}}
+        matchLabels: {}
   pullSecretRef:
     name: pull-secret-{{.Values.cluster.name}}
