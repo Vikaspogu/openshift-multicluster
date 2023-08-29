@@ -18,7 +18,6 @@ spec:
     version: v1beta1
   platform:
     agentBareMetal:
-      agentSelector:
-        matchLabels: {}
+      agentSelector: {}
   pullSecretRef:
     name: pull-secret-{{.Values.cluster.name}}
