@@ -15,6 +15,8 @@ routesConfig:
 
 nodes:
   # node1:
+  #   labels:
+  #     agent-install.openshift.io/clusterdeployment-namespace: ''
   #   interfaces:
   #     en0: 12:23:45:56:78
   #   interfacesConfig:

@@ -8,6 +8,9 @@ metadata:
   namespace: {{ $values.inventory.name }}
   labels:
     infraenvs.agent-install.openshift.io: {{ $values.inventory.name }}
+    {{- with $node.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   interfaces:
   {{- range $index,$interface := $node.interfaces }}

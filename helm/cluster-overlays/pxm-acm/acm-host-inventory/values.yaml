@@ -15,6 +15,8 @@ routesConfig:
 
 nodes:
   pxm-sno:
+    labels:
+      agent-install.openshift.io/clusterdeployment-namespace: 'pxm-sno'
     interfaces:
       ens18: 52:50:56:11:22:44
     interfacesConfig:
@@ -29,6 +31,8 @@ nodes:
                 prefix-length: 23
             dhcp: false
   pxm-sno-2:
+    labels:
+      agent-install.openshift.io/clusterdeployment-namespace: 'pxm-sno-2'
     interfaces:
       ens18: 52:50:56:11:22:55
     interfacesConfig:
