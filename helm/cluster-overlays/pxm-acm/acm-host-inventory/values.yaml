@@ -16,7 +16,7 @@ routesConfig:
 nodes:
   pxm-sno:
     labels:
-      agent-install.openshift.io/bmh: pxm-sno
+      acm-ai: pxm-sno
     interfaces:
       ens18: 52:50:56:11:22:44
     interfacesConfig:
@@ -32,7 +32,7 @@ nodes:
             dhcp: false
   pxm-sno-2:
     labels:
-      agent-install.openshift.io/bmh: pxm-sno-2
+      acm-ai: pxm-sno-2
     interfaces:
       ens18: 52:50:56:11:22:55
     interfacesConfig:

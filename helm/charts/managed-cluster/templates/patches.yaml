@@ -17,7 +17,7 @@ spec:
         namespace: {{.Values.cluster.inventoryName}}
         labelSelector:
           matchExpressions:
-            - key: agent-install.openshift.io/bmh
+            - key: acm-ai
               operator: In
               {{- with .Values.cluster.hosts }}
               values:
