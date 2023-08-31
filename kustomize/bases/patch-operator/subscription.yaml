@@ -8,5 +8,12 @@ spec:
   channel: <REPLACE>
   installPlanApproval: Automatic
   name: patch-operator
-  source: redhat-operators
+  source: community-operators
   sourceNamespace: openshift-marketplace
+  config:
+    resources:
+      limits:
+        memory: 2000Mi
+      requests:
+        cpu: 100m
+        memory: 500Mi
