@@ -1,4 +1,5 @@
 cluster:
+  inventoryName: home-lab
   name: pxm-sno
   image: quay.io/openshift-release-dev/ocp-release:4.12.0-x86_64
   baseDomain: v3s.us

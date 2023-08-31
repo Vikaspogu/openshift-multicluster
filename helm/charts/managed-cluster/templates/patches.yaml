@@ -14,7 +14,7 @@ spec:
       targetObjectRef:
         apiVersion: agent-install.openshift.io/v1beta1
         kind: Agent
-        namespace: {{.Values.cluster.name}}
+        namespace: {{.Values.inventoryName}}
         labelSelector:
           matchExpressions:
             - key: agent-install.openshift.io/bmh
