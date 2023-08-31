@@ -1,0 +1,30 @@
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: agent-patches
+  labels:
+    {{- include "managed-cluster.labels" . | nindent 4 }}
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    agents-patch:
+      targetObjectRef:
+        apiVersion: agent-install.openshift.io/v1beta1
+        kind: Agent
+        namespace: {{.Values.cluster.name}}
+        labelSelector:
+          matchExpressions:
+            - key: agent-install.openshift.io/bmh
+              operator: In
+              {{- with .Values.cluster.hosts }}
+              values:
+              {{- toYaml . | nindent 16 }}
+              {{- end }}
+      patchTemplate: |
+        spec:
+          clusterDeploymentName:
+            name: {{.Values.cluster.name}}
+            namespace: {{.Values.cluster.name}}
+      patchType: application/merge-patch+json

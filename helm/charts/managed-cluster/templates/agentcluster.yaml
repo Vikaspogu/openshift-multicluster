@@ -15,8 +15,6 @@ spec:
     clusterNetwork:
       - cidr: {{.Values.networking.clusterCidr}}
         hostPrefix: 23
-    machineNetwork:
-      - cidr: {{.Values.networking.machineCidr}}
     networkType: OVNKubernetes
     serviceNetwork:
       - {{.Values.networking.serviceNetwork}}
