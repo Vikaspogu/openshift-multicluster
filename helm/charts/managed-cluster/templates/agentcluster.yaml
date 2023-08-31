@@ -9,6 +9,7 @@ metadata:
 spec:
   clusterDeploymentRef:
     name: {{.Values.cluster.name}}
+  holdInstallation: false
   imageSetRef:
     name: {{ include "managed-cluster.fullname" . }}-imageset
   networking:
