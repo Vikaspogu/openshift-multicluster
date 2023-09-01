@@ -27,3 +27,4 @@ tls.*
 /kustomize/**/charts
 openshift-install*
 installer/pxm*
+archived/
