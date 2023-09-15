@@ -41,19 +41,25 @@ metadata:
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-  {{- with $node.nmstate.spec -}}
-  {{- toYaml . | nindent 2 }}
+  interfaces:
+  {{- range $index,$interface := $node.nmstate.spec.interfaces }}
+    - name: {{ $index }}
+      macAddress: {{ $interface }}
+  {{- end  }}
+  config:
+  {{- with $node.nmstate.spec.config -}}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
-  dns-resolver:
-    config:
-      {{- with $values.dnsResolvers }}
-      server:
-          {{- toYaml . | nindent 6 }}
+    dns-resolver:
+      config:
+        {{- with $values.dnsResolvers }}
+        server:
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
+    routes:
+      {{- with $values.routesConfig }}
+      config:
+      {{- toYaml . | nindent 8 }}
       {{- end }}
-  routes:
-    {{- with $values.routesConfig }}
-    config:
-    {{- toYaml . | nindent 6 }}
-    {{- end }}
 {{- end }}
 {{- end }}

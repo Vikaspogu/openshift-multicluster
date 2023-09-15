@@ -26,12 +26,13 @@ servers:
       enabled: true
       spec:
         interfaces:
-          en0: 12:23:45:56:78
-        interfacesConfig:
-          ens1:
-            type: ethernet
-            network:
-              mac-address: 98:76:54:32:10
+          en0:
+        config:
+          interfaces:
+            - name: en0
+              type: ethernet
+              state: up
+              mac-address:
               ipv4:
                 enabled: true
                 address:
