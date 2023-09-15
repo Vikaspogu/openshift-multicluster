@@ -9,7 +9,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Name }}
 spec:
-  baseDomain: practice.redhat.com
+  baseDomain: {{.Values.baseDomain}}
   clusterInstallRef:
     group: extensions.hive.openshift.io
     kind: AgentClusterInstall
