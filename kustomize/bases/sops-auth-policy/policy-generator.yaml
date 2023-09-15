@@ -8,7 +8,7 @@ policyDefaults:
   severity: high
   placement:
     clusterSelectors:
-      gitops-bootstrap: "true"
+      cluster.open-cluster-management.io/clusterset: default
 policies:
   - name: sops-auth-policy
     manifests:
