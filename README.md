@@ -58,9 +58,13 @@ kustomize build kustomize/cluster-overlays/pxm-acm/argo-application --enable-alp
 This Git repository contains the following directories (_kustomizatons_) under [cluster](./cluster/).
 
 ```sh
-📁 clusters                # openshift clusters defined as code
-├─📁 bases                 # argo application set definition for workloads
-└─📁 cluster-overlays      # regular apps/operators
+📁 helm                     # openshift clusters defined as code
+├─📁 charts  
+├ └─ 📁 <CHART-NAME>  
+📁 kustomize                # openshift clusters defined as code
+├─📁 bases                  # argo application set definition for workloads
+└─📁 cluster-overlays       # regular apps/operators
+  └─ 📁 <CLUSTER-NAME>  
 ```
 
 ## 🔍 Features
