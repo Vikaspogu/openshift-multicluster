@@ -7,6 +7,8 @@ apiVIP: 10.1.196.49
 clusterSet: default
 baseDomain: example.com
 automaticHostBinding: true
-agentLabelSelector: agent-install.openshift.io/bmh
+agentLabelSelector:
+  patch: agent-install.openshift.io/bmh
+  deployment: {}
 hostNames:
 - host1

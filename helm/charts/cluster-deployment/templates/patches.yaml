@@ -10,7 +10,7 @@ spec:
   serviceAccountRef:
     name: default
   patches:
-{{ if .Values.automaticHostBinding }}
+{{- if .Values.automaticHostBinding }}
     agents-patch:
       targetObjectRef:
         apiVersion: agent-install.openshift.io/v1beta1
@@ -18,12 +18,12 @@ spec:
         namespace: {{ .Values.inventoryName }}
         labelSelector:
           matchExpressions:
-            - key: {{.Values.agentLabelSelector}}
+            - key: {{.Values.agentLabelSelector.patch}}
               operator: In
               values:
-              {{ range .Values.hostNames }}
+              {{- range .Values.hostNames }}
               - {{ . }}
-              {{ end }}
+              {{- end }}
       patchTemplate: |
         spec:
           approved: true

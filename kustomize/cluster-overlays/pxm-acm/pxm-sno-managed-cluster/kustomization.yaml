@@ -19,7 +19,10 @@ helmCharts:
       clusterSet: default
       baseDomain: v3s.us
       automaticHostBinding: true
-      agentLabelSelector: acm-ai
+      agentLabelSelector:
+        patch: acm-ai
+        deployment:
+          agentSelector: {}
       hostNames:
         - pxm-sno
   - name: cluster-registration

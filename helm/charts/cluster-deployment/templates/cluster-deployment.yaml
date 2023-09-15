@@ -18,8 +18,8 @@ spec:
   clusterName: {{ .Release.Name }}
   platform:
     agentBareMetal:
-      agentSelector:
-        matchLabels:
-          cluster-name: {{ .Release.Name }}
+      {{- with .Values.agentLabelSelector.deployment }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
   pullSecretRef:
     name: pull-secret-{{ .Release.Name }}
