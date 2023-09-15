@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD041 -->
 <img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="144px" height="144px"/>
 
-# OpenShift home cluster
+# OpenShift Multi-cluster IaC
 
 _... managed by ArgoCD_ :robot:
 
@@ -19,7 +19,7 @@ _... managed by ArgoCD_ :robot:
 
 ## :wave: Overview
 
-Welcome to my OpenShift operations repository
+Welcome to my OpenShift multi cluster Infrastructure as code repository
 
 ### Installing OpenShift cluster with Agent-based Installer
 
@@ -44,7 +44,7 @@ Welcome to my OpenShift operations repository
 
 ### GitOps
 
-[OpenShift GitOps Operator](https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html) watches my [cluster](./cluster/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
+[OpenShift GitOps Operator](https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html) watches my [cluster](./kustomize/cluster-overlays/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
 
 ```bash
 oc apply -k kustomize/bases/openshift-gitops-operator
@@ -58,13 +58,13 @@ kustomize build kustomize/cluster-overlays/pxm-acm/argo-application --enable-alp
 This Git repository contains the following directories (_kustomizatons_) under [cluster](./cluster/).
 
 ```sh
-📁 helm                     # openshift clusters defined as code
+📁 helm                     # helm charts folder
 ├─📁 charts  
-├ └─ 📁 <CHART-NAME>  
-📁 kustomize                # openshift clusters defined as code
-├─📁 bases                  # argo application set definition for workloads
-└─📁 cluster-overlays       # regular apps/operators
-  └─ 📁 <CLUSTER-NAME>  
+├ └─ 📁 <CHART-NAME>        # custom helm charts
+📁 kustomize                # openshift cluster defined as code
+├─📁 bases                  # bases contains resources that applies to all clusters
+└─📁 cluster-overlays       # Contains all the clusters managed by the repo
+  └─ 📁 <CLUSTER-NAME>      # Contains applications to deploy on cluster, using helm/charts or kustomize/bases as resources
 ```
 
 ## 🔍 Features
@@ -72,6 +72,7 @@ This Git repository contains the following directories (_kustomizatons_) under [
 - [X] ArgoCD with SOPS plugin
 - [X] Secret Management using External secrets and 1Password
 - [X] Cert manager for API and Wildcard certificate
+- [X] Multi cluster management
 - [X] Kyverno
 - [X] Renovate bot
 
