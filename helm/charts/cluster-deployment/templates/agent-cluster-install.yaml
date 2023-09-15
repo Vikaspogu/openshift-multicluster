@@ -10,7 +10,9 @@ spec:
   clusterDeploymentRef:
     name: {{ .Release.Name }}
   provisionRequirements:
+    {{- if gt (.Values.workers | int64) 0}}
     workerAgents: {{ .Values.workers }}
+    {{- end }}
     controlPlaneAgents: {{ .Values.masters }}
   imageSetRef:
     name: 'img4.13.9-multi-appsub'
