@@ -12,10 +12,9 @@ helmCharts:
     valuesInline:
       inventoryName: homelab-inventory
       location: homelab
-      workers: 0
       masters: 1
-      ingressVIP: 10.30.30.103
-      apiVIP: 10.30.30.104
+      networking:
+        machineCidr: 10.30.30.0/24
       clusterSet: default
       baseDomain: v3s.us
       automaticHostBinding: true

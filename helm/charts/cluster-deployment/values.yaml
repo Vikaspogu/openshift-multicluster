@@ -4,6 +4,10 @@ workers: 0
 masters: 3
 ingressVIP: 10.1.196.48
 apiVIP: 10.1.196.49
+networking:
+  clusterCidr: 10.128.0.0/14
+  machineCidr:
+  serviceNetwork: 172.30.0.0/16
 clusterSet: default
 baseDomain: example.com
 automaticHostBinding: true

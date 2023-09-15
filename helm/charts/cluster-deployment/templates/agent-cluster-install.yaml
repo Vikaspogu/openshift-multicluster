@@ -18,9 +18,17 @@ spec:
     name: 'img4.13.9-multi-appsub'
   networking:
     clusterNetwork:
-    - cidr: 10.128.0.0/14
-      hostPrefix: 23
+      - cidr: {{.Values.networking.clusterCidr}}
+        hostPrefix: 23
+    {{- if .Values.networking.machineCidr }}
+    machineNetwork:
+      - cidr: {{.Values.networking.machineCidr}}
+    {{- end }}
     serviceNetwork:
-    - 172.30.0.0/16
+      - {{.Values.networking.serviceNetwork}}
+  {{- if .Values.ingressVIP }}
   ingressVIP: {{ .Values.ingressVIP }}
+  {{- end }}
+  {{- if .Values.apiVIP }}
   apiVIP: {{ .Values.apiVIP }}
+  {{- end }}
