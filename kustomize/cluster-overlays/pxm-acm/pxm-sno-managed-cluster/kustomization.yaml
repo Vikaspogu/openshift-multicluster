@@ -11,7 +11,7 @@ helmCharts:
     namespace: pxm-sno
     valuesInline:
       inventoryName: homelab-inventory
-      location: home-lab
+      location: homelab
       workers: 0
       masters: 1
       ingressVIP: 10.30.30.103
