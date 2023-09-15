@@ -4,7 +4,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ $clusterName }}-appset
+  name: {{ $values.clusterName }}-appset
   namespace: openshift-gitops
   labels:
     {{- $releaseLabels | nindent 4 }}
@@ -45,10 +45,6 @@ spec:
               operator: In
               values:
                 - placement
-        - matchExpressions:
-            - key: type
-              operator: In
-              values:
                 - application
                 - policy
         - matchExpressions:
@@ -56,10 +52,6 @@ spec:
               operator: In
               values:
                 - infraenv
-        - matchExpressions:
-            - key: type
-              operator: In
-              values:
                 - clusterconfig
   goTemplate: true
   template:
