@@ -13,6 +13,7 @@ helmCharts:
       inventoryName: homelab-inventory
       location: homelab
       masters: 1
+      holdInstallation: false
       networking:
         machineCidr: 10.30.30.0/24
       clusterSet: default

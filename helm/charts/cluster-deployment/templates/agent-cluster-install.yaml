@@ -9,6 +9,7 @@ metadata:
 spec:
   clusterDeploymentRef:
     name: {{ .Release.Name }}
+  holdInstallation: {{ .Values.holdInstallation }}
   provisionRequirements:
     {{- if gt (.Values.workers | int64) 0}}
     workerAgents: {{ .Values.workers }}
