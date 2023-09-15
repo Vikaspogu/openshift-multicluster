@@ -31,10 +31,11 @@ helmCharts:
             spec:
               interfaces:
                 ens18: 52:50:56:11:22:44
-              interfacesConfig:
-                ens18:
-                  type: ethernet
-                  network:
+              config:
+                interfaces:
+                  - name: ens18
+                    type: ethernet
+                    state: up
                     mac-address: 52:50:56:11:22:44
                     ipv4:
                       enabled: true

@@ -41,9 +41,9 @@ metadata:
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-    {{- with $node.nmstate.spec -}}
-    {{- toYaml . | nindent 2 }}
-    {{- end }}
+  {{- with $node.nmstate.spec -}}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
   dns-resolver:
     config:
       {{- with $values.dnsResolvers }}
