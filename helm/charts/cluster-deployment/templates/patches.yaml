@@ -1,0 +1,33 @@
+
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: agent-patches-{{ .Release.Name }}
+  namespace: {{ .Release.Name }}
+  labels:
+    {{- include "cluster-deployment.labels" . | nindent 4 }}
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+{{ if .Values.automaticHostBinding }}
+    agents-patch:
+      targetObjectRef:
+        apiVersion: agent-install.openshift.io/v1beta1
+        kind: Agent
+        namespace: {{ .Values.Name }}
+        labelSelector:
+          matchExpressions:
+            - key: {{.Values.agentLabelSelector}}
+              operator: In
+              values:
+              {{ range .Values.hostNames }}
+              - {{ . }}
+              {{ end }}
+      patchTemplate: |
+        spec:
+          clusterDeploymentName:
+            name: {{ .Release.Name }}
+            namespace: {{ .Release.Name }}
+      patchType: application/merge-patch+json
+{{ end }}

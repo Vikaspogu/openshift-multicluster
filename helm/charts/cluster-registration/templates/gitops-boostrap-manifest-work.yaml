@@ -1,0 +1,88 @@
+apiVersion: work.open-cluster-management.io/v1
+kind: ManifestWork
+metadata:
+  namespace: {{ .Release.Name }}
+  name: gitops-boostrap
+spec:
+  workload:
+    manifests:
+    - apiVersion: argoproj.io/v1alpha1
+      kind: ApplicationSet
+      metadata:
+        name: {{ .Release.Name }}
+        namespace: openshift-gitops
+      spec:
+        generators:
+          - git:
+              directories:
+                - path: kustomize/cluster-overlays/{{ .Release.Name }}/*
+              repoURL: {{ .Values.repoURL }}
+              revision: main
+        goTemplate: true
+        strategy:
+          rollingSync:
+            steps:
+              - matchExpressions:
+                  - key: type
+                    operator: In
+                    values:
+                      - operator
+                      - chart
+              - matchExpressions:
+                  - key: type
+                    operator: In
+                    values:
+                      - config
+              - matchExpressions:
+                  - key: type
+                    operator: In
+                    values:
+                      - placement
+              - matchExpressions:
+                  - key: type
+                    operator: In
+                    values:
+                      - application
+                      - policy
+              - matchExpressions:
+                  - key: type
+                    operator: In
+                    values:
+                      - cluster
+          type: RollingSync
+        template:
+          metadata:
+            labels:
+              type: '{{ "{{" }} .path.basename | splitList "-" | last {{ "}}" }}'
+            name: '{{ "{{" }}.path.basename{{ "}}" }}'
+          spec:
+            destination:
+              server: 'https://kubernetes.default.svc'
+            ignoreDifferences:
+              - group: ''
+                jsonPointers:
+                  - /data
+                kind: Secret
+              - group: metal3.io
+                jsonPointers:
+                  - /spec/automatedCleaningMode
+                  - /spec/online
+                kind: BareMetalHost
+            project: default
+            source:
+              path: '{{ "{{" }}.path.path{{ "}}" }}'
+              repoURL: {{ .Values.repoURL }}
+              targetRevision: main
+            syncPolicy:
+              retry:
+                backoff:
+                  duration: 120s
+                  factor: 3
+                  maxDuration: 10m0s
+                limit: 10
+              syncOptions:
+                - SkipDryRunOnMissingResource=true
+                - Validate=false
+                - ApplyOutOfSyncOnly=true
+                - RespectIgnoreDifferences=true
+                - Prune=true

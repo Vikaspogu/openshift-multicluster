@@ -1,0 +1,2 @@
+clusterSet: default
+repoURL: https://github.com/raffaelespazzoli/openshift-iac-multicluster.git

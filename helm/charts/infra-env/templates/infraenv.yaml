@@ -1,0 +1,20 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "infra-env.labels" . | nindent 4 }}
+    agentclusterinstalls.extensions.hive.openshift.io/location: {{ .Values.location }}
+    networkType: static
+spec:
+  sshAuthorizedKey: {{ .Values.sshPublicKey }}
+  pullSecretRef:
+    name: pull-secret-{{ .Release.Name }}
+  agentLabels:
+    'agentclusterinstalls.extensions.hive.openshift.io/location': {{ .Values.location }}
+  nmStateConfigLabelSelector:
+    matchLabels:
+      infraenvs.agent-install.openshift.io: {{ .Release.Name }}
+  cpuArchitecture: x86_64

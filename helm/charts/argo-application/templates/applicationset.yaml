@@ -1,6 +1,5 @@
 {{- $releaseLabels := include "argo-application.labels" . -}}
 {{- $values := .Values -}}
-{{- range $clusterName := $values.clusters }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -11,50 +10,11 @@ metadata:
     {{- $releaseLabels | nindent 4 }}
 spec:
   generators:
-    {{- if eq $clusterName "bootstrap-argo" }}
-    - matrix:
-        generators:
-          - clusterDecisionResource:
-              configMapRef: acm-placement
-              labelSelector:
-                matchLabels:
-                  cluster.open-cluster-management.io/placement: default-clusterset
-              requeueAfterSeconds: 300
-          - list:
-              elements:
-                - folder: "openshift-gitops-operator"
-                - folder: "openshift-gitops-config"
-    {{- else if eq $clusterName "bootstrap-overlays" }}
-    - clusterDecisionResource:
-        configMapRef: acm-placement
-        labelSelector:
-          matchLabels:
-            cluster.open-cluster-management.io/placement: default-clusterset
-        requeueAfterSeconds: 300
-    {{-  else }}
     - git:
         repoURL: {{ $values.git.url }}
         revision: {{ $values.git.revision }}
         directories:
-          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/*
-    - git:
-        repoURL: {{ $values.git.url }}
-        revision: {{ $values.git.revision }}
-        directories:
-          - path: helm/cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/*
-        template:
-          metadata: {}
-          spec:
-            project: "default"
-            source:
-              repoURL: {{ $values.git.url }}
-              path: helm/charts/{{`{{.path.basename}}`}}
-              helm:
-                valueFiles:
-                  - ../../cluster-overlays/{{ required "A valid cluster name is required!" $clusterName }}/{{`{{.path.basename}}`}}/values.yaml
-            destination:
-              server: "https://kubernetes.default.svc"
-    {{- end }}
+          - path: kustomize/cluster-overlays/{{ required "A valid cluster name is required!" $values.clusterName }}/*
   strategy:
     type: RollingSync
     rollingSync:
@@ -91,37 +51,25 @@ spec:
               values:
                 - application
                 - policy
-                - inventory
         - matchExpressions:
             - key: type
               operator: In
               values:
-                - cluster
+                - infraenv
+        - matchExpressions:
+            - key: type
+              operator: In
+              values:
+                - clusterconfig
   goTemplate: true
   template:
     metadata:
-      {{- if eq $clusterName "bootstrap-overlays" }}
-      name: {{$clusterName}}-{{`{{.name}}`}}-appset
-      {{- else if eq $clusterName "bootstrap-argo" }}
-      name: {{$clusterName}}-{{`{{.name}}-{{.folder}}`}}
-      {{- else }}
       name: '{{ `{{.path.basename}}` }}'
-      {{- end }}
       labels:
-      {{- if eq $clusterName "bootstrap-overlays" }}
-        type: application
-      {{- else if eq $clusterName "bootstrap-argo" }}
-        type: '{{`{{ .folder | splitList "-" | last }}`}}'
-      {{- else }}
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
-      {{- end }}
     spec:
       destination:
-        {{- if contains "bootstrap" $clusterName }}
-        server: "{{`{{.server}}`}}"
-        {{- else }}
         server: "https://kubernetes.default.svc"
-        {{- end }}
       project: default
       syncPolicy:
         retry:
@@ -136,24 +84,7 @@ spec:
           - ApplyOutOfSyncOnly=true
           - RespectIgnoreDifferences=true
           - Prune=true
-      {{- if eq $clusterName "bootstrap-overlays" }}
-      source:
-        repoURL: {{ $values.git.url }}
-        path: helm/charts/argo-application
-        targetRevision: {{ $values.git.revision }}
-        helm:
-          parameters:
-            - name: clusters.0
-              value: "{{`{{.name}}`}}"
-      {{- else if eq $clusterName "bootstrap-argo" }}
-      source:
-        path: "kustomize/bases/{{`{{.folder}}`}}"
-        repoURL: {{ $values.git.url }}
-        targetRevision: {{ $values.git.revision }}
-      {{- else }}
       source:
         path: "{{`{{.path.path}}`}}"
         repoURL: {{ $values.git.url }}
         targetRevision: {{ $values.git.revision }}
-      {{- end }}
-{{- end }}

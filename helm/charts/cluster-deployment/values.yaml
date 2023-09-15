@@ -1,0 +1,15 @@
+location: insert-location-here
+workers: 2
+masters: 3
+ingressVIP: 10.1.196.48
+apiVIP: 10.1.196.49
+clusterSet: default
+baseDomain: practice.redhat.com
+automaticHostBinding: true
+agentLabelSelector: acm-ai
+hostNames:
+- pool4-compute1.practice.redhat.com
+- pool4-compute2.practice.redhat.com
+- pool4-controller1.practice.redhat.com
+- pool4-controller2.practice.redhat.com
+- pool4-controller3.practice.redhat.com

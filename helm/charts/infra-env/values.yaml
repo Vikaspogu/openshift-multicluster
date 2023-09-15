@@ -1,0 +1,40 @@
+# note this chart expects the secret: pull-secret-{{ .Release.Name }} to be present.
+
+
+location: insert-location-here
+sshPublicKey: insert-public-key-here
+
+dnsResolvers:
+  - 192.168.0.1
+
+routesConfig:
+  - destination: 0.0.0.0/0
+    next-hop-address: 192.168.30.1
+    next-hop-interface: en0
+    table-id: 254
+
+servers:
+  - hostname: server1.mydomain.example
+    role: worker
+    bmc:
+      enabled: false
+      bmcAddress: idrac-virtualmedia://10.1.177.44/redfish/v1/Systems/System.Embedded.1
+      bootMACAddress: E4:43:4B:4E:40:35
+      labels:
+        mylabel: myvalue
+    nmstate:
+      enabled: true
+      spec:
+        interfaces:
+          en0: 12:23:45:56:78
+        interfacesConfig:
+          ens1:
+            type: ethernet
+            network:
+              mac-address: 98:76:54:32:10
+              ipv4:
+                enabled: true
+                address:
+                  - ip: 192.168.1.1
+                    prefix-length: 23
+                dhcp: false

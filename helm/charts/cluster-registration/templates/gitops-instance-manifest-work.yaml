@@ -1,0 +1,454 @@
+apiVersion: work.open-cluster-management.io/v1
+kind: ManifestWork
+metadata:
+  namespace: {{ .Release.Name }}
+  name: gitops-instance
+spec:
+  workload:
+    manifests:
+    - apiVersion: argoproj.io/v1alpha1
+      kind: ArgoCD
+      metadata:
+        name: openshift-gitops
+        namespace: openshift-gitops
+      spec:
+        kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm-3.11
+        extraConfig:
+          resource.compareoptions: |
+            ignoreAggregatedRoles: true
+        server:
+          autoscale:
+            enabled: false
+          grpc:
+            ingress:
+              enabled: false
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 125m
+              memory: 128Mi
+          insecure: true
+          route:
+            enabled: true
+            tls:
+              termination: edge
+              insecureEdgeTerminationPolicy: Redirect
+          service:
+            type: ""
+        resourceIgnoreDifferences:
+          resourceIdentifiers:
+            - group: admissionregistration.k8s.io
+              kind: MutatingWebhookConfiguration
+              customization:
+                jqPathExpressions:
+                  - '.webhooks[]?.clientConfig.caBundle'
+        resourceHealthChecks:
+          - group: argoproj.io
+            kind: Application
+            check: |
+              hs = {}
+              hs.status = "Progressing"
+              hs.message = ""
+              if obj.status ~= nil then
+                if obj.status.health ~= nil then
+                  hs.status = obj.status.health.status
+                  hs.message = obj.status.health.message
+                end
+              end
+              return hs
+          - group: operators.coreos.com
+            kind: Subscription
+            check: |
+              health_status = {}
+              if obj.status ~= nil then
+                if obj.status.conditions ~= nil then
+                  numDegraded = 0
+                  numPending = 0
+                  msg = ""
+                  for i, condition in pairs(obj.status.conditions) do
+                    msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. "\n"
+                    if condition.type == "InstallPlanPending" and condition.status == "True" and condition.reason ~= "RequiresApproval" then
+                      numPending = numPending + 1
+                    elseif (condition.type == "InstallPlanMissing" and condition.reason ~= "ReferencedInstallPlanNotFound") then
+                      numDegraded = numDegraded + 1
+                    elseif (condition.type == "CatalogSourcesUnhealthy" or condition.type == "InstallPlanFailed" or condition.type == "ResolutionFailed") and condition.status == "True" then
+                      numDegraded = numDegraded + 1
+                    end
+                  end
+                  if numDegraded == 0 and numPending == 0 then
+                    health_status.status = "Healthy"
+                    health_status.message = msg
+                    return health_status
+                  elseif numPending > 0 and numDegraded == 0 then
+                    health_status.status = "Progressing"
+                    health_status.message = "An install plan for a subscription is pending installation"
+                    return health_status
+                  else
+                    health_status.status = "Degraded"
+                    health_status.message = msg
+                    return health_status
+                  end
+                end
+              end
+              health_status.status = "Progressing"
+              health_status.message = "An install plan for a subscription is pending installation"
+              return health_status
+          - group: operators.coreos.com
+            kind: InstallPlan
+            check: |
+              hs = {}
+              if obj.status ~= nil then
+                if obj.status.phase ~= nil then
+                  if obj.status.phase == "Complete" then
+                    hs.status = "Healthy"
+                    hs.message = obj.status.phase
+                    return hs
+                  end
+                end
+              end
+              hs.status = "Progressing"
+              hs.message = "Waiting for InstallPlan to complete"
+              return hs
+          - group: platform.stackrox.io
+            kind: Central
+            check: |
+              hs = {}
+              if obj.status ~= nil and obj.status.conditions ~= nil then
+                  for i, condition in ipairs(obj.status.conditions) do
+                    if condition.status == "True" or condition.reason == "InstallSuccessful" or condition.reason == "UpgradeSuccessful" then
+                        hs.status = "Healthy"
+                        hs.message = "Install Successful"
+                        return hs
+                    end
+                  end
+              end
+              hs.status = "Progressing"
+              hs.message = "Waiting for Central to deploy."
+              return hs
+          - group: image.openshift.io
+            kind: ImageStream
+            check: |
+              hs = {}
+              hs.status = "Progressing"
+              hs.message = ""
+              if obj.status ~= nil then
+                if obj.status.tags ~= nil then
+                  numTags = 0
+                  for _ , item in pairs(obj.status.tags) do
+                    numTags = numTags + 1
+                    numItems = 0
+                    if item.tags ~= nil then
+                      for _ , item in pairs(item.tags) do
+                        numItems = numItems + 1
+                      end
+                      if numItems == 0 then
+                        return hs
+                      end
+                    end
+                  end
+                  if numTags > 0 then
+                    hs.status = "Healthy"
+                    hs.message = "ImageStream has tags resolved"
+                    return hs
+                  end
+                end
+              end
+              return hs
+          - group: build.openshift.io
+            kind: Build
+            check: |
+              hs = {}
+              if obj.status ~= nil then
+                if obj.status.phase ~= nil then
+                  if obj.status.phase == "Complete" then
+                    hs.status = "Healthy"
+                    hs.message = obj.status.phase
+                    return hs
+                  end
+                end
+              end
+              hs.status = "Progressing"
+              hs.message = "Waiting for Build to complete"
+              return hs
+          - group: cert-manager.io
+            kind: Certificate
+            check: |
+              hs = {}
+              if obj.status ~= nil then
+                if obj.status.conditions ~= nil then
+                  for i, condition in ipairs(obj.status.conditions) do
+                    if condition.type == "Issuing" and condition.status == "True" then
+                      hs.status = "Progressing"
+                      hs.message = condition.message
+                      return hs
+                    end
+                    if condition.type == "Ready" and condition.status == "False" then
+                      hs.status = "Degraded"
+                      hs.message = condition.message
+                      return hs
+                    end
+                    if condition.type == "Ready" and condition.status == "True" then
+                      hs.status = "Healthy"
+                      hs.message = condition.message
+                      return hs
+                    end
+                  end
+                end
+              end
+
+              hs.status = "Progressing"
+              hs.message = "Waiting for certificate"
+              return hs
+          - group: cert-manager.io
+            kind: ClusterIssuer
+            check: |
+              hs = {}
+              if obj.status ~= nil then
+                if obj.status.conditions ~= nil then
+                  for i, condition in ipairs(obj.status.conditions) do
+                    if condition.type == "Ready" and condition.status == "False" then
+                      hs.status = "Degraded"
+                      hs.message = condition.message
+                      return hs
+                    end
+                    if condition.type == "Ready" and condition.status == "True" then
+                      hs.status = "Healthy"
+                      hs.message = condition.message
+                      return hs
+                    end
+                  end
+                end
+              end
+
+              hs.status = "Progressing"
+              hs.message = "Initializing issuer"
+              return hs
+          - group: route.openshift.io
+            kind: Route
+            check: |
+              health_status = {}
+              if obj.status ~= nil then
+                if obj.status.ingress ~= nil then
+                  numIngressRules = 0
+                  numTrue = 0
+                  numFalse = 0
+                  for _, ingressRules in pairs(obj.status.ingress) do
+                      numIngressRules = numIngressRules + 1
+                      if obj.status.ingress ~= nil then
+                        for _, condition in pairs(ingressRules.conditions) do
+                            if condition.type == "Admitted" and condition.status == "True" then
+                                numTrue = numTrue + 1
+                            elseif condition.type == "Admitted" and condition.status == "False" then
+                                numFalse = numFalse + 1
+                            end
+                        end
+                      end
+                      health_status.status = 'Test'
+                  end
+                  if numTrue == numIngressRules then
+                    health_status.status = "Healthy"
+                    health_status.message = "Route is healthy"
+                    return health_status
+                  elseif numFalse > 0 then
+                    health_status.status = "Degraded"
+                    health_status.message = "Route is degraded"
+                    return health_status
+                  else
+                    health_status.status = "Progressing"
+                    health_status.message = "Route is still getting admitted"
+                    return health_status
+                  end
+                end
+              end
+              health_status.status = "Progressing"
+              health_status.message = "Route is still getting admitted"
+              return health_status
+        # Bug in operator in how it generates check for objects with no group
+        resourceCustomizations: |
+          PersistentVolumeClaim:
+            health.lua: |
+              hs = {}
+              if obj.status ~= nil then
+                if obj.status.phase ~= nil then
+                  if obj.status.phase == "Pending" then
+                    hs.status = "Healthy"
+                    hs.message = obj.status.phase
+                    return hs
+                  end
+                  if obj.status.phase == "Bound" then
+                    hs.status = "Healthy"
+                    hs.message = obj.status.phase
+                    return hs
+                  end
+                end
+              end
+              hs.status = "Progressing"
+              hs.message = "Waiting for PVC to be bound"
+              return hs
+        grafana:
+          enabled: false
+          ingress:
+            enabled: false
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
+          route:
+            enabled: false
+        prometheus:
+          enabled: false
+          ingress:
+            enabled: false
+          route:
+            enabled: false
+        initialSSHKnownHosts: {}
+        applicationSet:
+          extraCommandArgs:
+            - --enable-progressive-syncs
+          resources:
+            limits:
+              cpu: "2"
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+        rbac:
+          policy: |
+            g, system:cluster-admins, role:admin
+            g, openshift-admins, role:admin
+          scopes: "[groups]"
+        repo:
+          env:
+            - name: XDG_CONFIG_HOME
+              value: /.config
+            - name: SOPS_AGE_KEY_FILE
+              value: /.config/sops/age/keys.txt
+          volumes:
+            - name: custom-tools
+              emptyDir: {}
+            - name: policy-generator
+              emptyDir: {}
+            - name: sops-age
+              secret:
+                secretName: sops-age
+          initContainers:
+            - name: install-custom-tools
+              image: viaductoss/ksops:v4.1.0
+              command: ["/bin/sh", "-c"]
+              args:
+                - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; echo "Done.";'
+              volumeMounts:
+                - mountPath: /custom-tools
+                  name: custom-tools
+            - name: download-helm-311
+              image: alpine:3.8
+              command: [sh, -c]
+              args:
+                - wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;
+              volumeMounts:
+                - mountPath: /custom-tools
+                  name: custom-tools
+            - name: policy-generator-install
+              args:
+                - -c
+                - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+                  /policy-generator/PolicyGenerator
+              command:
+                - /bin/bash
+              image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.7
+              volumeMounts:
+                - mountPath: /policy-generator
+                  name: policy-generator
+          volumeMounts:
+            - name: policy-generator
+              mountPath: /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+            - mountPath: /usr/local/bin/kustomize
+              name: custom-tools
+              subPath: kustomize
+            - mountPath: /usr/local/bin/helm-3.11
+              name: custom-tools
+              subPath: helm-3.11
+            - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              name: custom-tools
+              subPath: ksops
+            - mountPath: /.config/sops/age/keys.txt
+              name: sops-age
+              subPath: keys.txt
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+        resourceExclusions: |
+          - apiGroups:
+            - internal.open-cluster-management.io
+            kinds:
+            - ManagedClusterInfo
+            clusters:
+            - "*"
+          - apiGroups:
+            - tekton.dev
+            clusters:
+            - '*'
+            kinds:
+            - TaskRun
+            - PipelineRun
+        sso:
+          dex:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 256Mi
+              requests:
+                cpu: 250m
+                memory: 128Mi
+            openShiftOAuth: true
+          provider: dex
+        ha:
+          enabled: false
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
+        tls:
+          ca: {}
+        redis:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
+        controller:
+          processors: {}
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 250m
+              memory: 1Gi
+          sharding: {}
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: cluster-admin-gitops-sc
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: openshift-gitops-argocd-application-controller
+          namespace: openshift-gitops

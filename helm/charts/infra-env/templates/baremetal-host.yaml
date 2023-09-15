@@ -1,0 +1,59 @@
+{{- $values := .Values -}}
+{{- $release := .Release -}}
+{{- $rootContext := . -}}
+{{- range $index, $node := $values.servers }}
+{{- if $node.bmc.enabled }}
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: {{ $node.hostname }}
+    bmac.agent-install.openshift.io/role: {{ $node.role }}
+  labels:
+    infraenvs.agent-install.openshift.io: {{ $release.Name }}
+    {{- include "infra-env.labels" $rootContext | nindent 4 }}
+    {{- with $node.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ $node.hostname }}
+  namespace: {{ $release.Namespace }}
+spec:
+  automatedCleaningMode: metadata
+  bmc:
+    address: {{ $node.bmcAddress }}
+    credentialsName: {{ $release.Name }}-bmc-credentials
+    disableCertificateVerification: true
+  bootMACAddress: {{ $node.bootMACAddress }}
+  online: true
+{{- end }}
+{{ if $node.nmstate.enabled }}
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: {{ $node.hostname }}
+  namespace: {{ $release.Namespace }}
+  labels:
+    {{- include "infra-env.labels" $rootContext | nindent 4 }}
+    infraenvs.agent-install.openshift.io: {{ $release.Name }}
+    {{- with $node.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+    {{- with $node.nmstate.spec -}}
+    {{- toYaml . | nindent 2 }}
+    {{- end }}
+  dns-resolver:
+    config:
+    {{- with $values.dnsResolvers }}
+    server:
+        {{- toYaml . | nindent 6 }}
+    {{- end }}
+  routes:
+    {{- with $values.routesConfig }}
+    config:
+    {{- toYaml . | nindent 6 }}
+    {{- end }}
+{{- end }}
+{{- end }}

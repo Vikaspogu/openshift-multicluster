@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Release.Name }}
+  annotations:
+    argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    argocd.argoproj.io/managed-by: openshift-gitops
+    {{- include "cluster-deployment.labels" . | nindent 4 }}

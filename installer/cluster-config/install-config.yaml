@@ -24,16 +24,6 @@ networking:
     - 172.30.0.0/16
 platform:
   baremetal:
-    hosts:
-      - name: openshift-0
-        role: master
-        bootMACAddress: 52:50:56:11:22:11
-      - name: openshift-1
-        role: master
-        bootMACAddress: 52:50:56:11:22:22
-      - name: openshift-2
-        role: master
-        bootMACAddress: 52:50:56:11:22:33
     apiVIPs:
       - "10.30.30.145"
     ingressVIPs:

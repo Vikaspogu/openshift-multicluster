@@ -1,0 +1,44 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: pxm-sno
+
+helmGlobals:
+  chartHome: ../../../../helm/charts
+
+helmCharts:
+  - name: infra-env
+    releaseName: pxm-sno
+    namespace: pxm-sno
+    valuesInline:
+      location: home
+      sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEmAVZWnLeKQkHVuD5U0L2JOacFNBhn9m4tMXqN3/hUMRKSs9LvVkReFCSdOE0jmEZAEbLfExIbEzMhvYDcSJvXpHtHFYzlXADRL6IjqCv7XcuP6Ps/HQlRHmU57Y7OakB98Sv6LqyxPLq+gzVltXvwjjVZQU/ETqTdoe2tGTwFHRedzVATN/9YREMaSwY3XyP33g+lQiyztRDiLDq9fmw9PJ513E/EObuZ3J0iCcJYpGRlngm6Nqc7525mUIo5zsDcGaLh9STl1OXaeLQaNCcHrXazv1J9awrDpM/WyTDT0btVmZil7X2p7xyCGTxxW2WP9+f49Nq38S0uU3o8MYtbN/1Ok+3QsS2MtwmONy3cpOpoOZreUgU6mw4mqxVxd240ALd1aXqEXJr728fMFRrKu9xqqde4VWYJcaqOAT3AIm6jBdpZ1UXepxp/qoVDw5AXvfdjCs5/x3sPIGv8mZ7l0ElbK0nzZhUNI4VL8Fl2olooRCi4PdMk2U1+3eQHDc= vikaspogu@vpogu-mac
+      dnsResolvers:
+        - 10.30.0.1
+      routesConfig:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.30.30.1
+          next-hop-interface: ens18
+          table-id: 254
+      servers:
+        - hostname: pxm-sno
+          role: master
+          bmc:
+            enabled: false
+          labels:
+            cluster-name: home-lab
+          nmstate:
+            enabled: true
+            spec:
+              interfaces:
+                ens18: 52:50:56:11:22:44
+              interfacesConfig:
+                ens18:
+                  type: ethernet
+                  network:
+                    mac-address: 52:50:56:11:22:44
+                    ipv4:
+                      enabled: true
+                      address:
+                        - ip: 10.30.30.103
+                          prefix-length: 23
+                      dhcp: false
