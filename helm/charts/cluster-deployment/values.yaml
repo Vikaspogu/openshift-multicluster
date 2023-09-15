@@ -2,8 +2,8 @@ location: insert-location-here
 inventoryName:
 workers: 0
 masters: 3
-ingressVIP: 10.1.196.48
-apiVIP: 10.1.196.49
+ingressVIP:
+apiVIP:
 networking:
   clusterCidr: 10.128.0.0/14
   machineCidr:
