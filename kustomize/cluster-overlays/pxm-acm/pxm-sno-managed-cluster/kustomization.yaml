@@ -10,6 +10,7 @@ helmCharts:
     releaseName: pxm-sno
     namespace: pxm-sno
     valuesInline:
+      inventoryName: homelab-inventory
       location: home-lab
       workers: 0
       masters: 1
@@ -18,6 +19,7 @@ helmCharts:
       clusterSet: default
       baseDomain: v3s.us
       automaticHostBinding: true
+      agentLabelSelector: acm-ai
       hostNames:
         - pxm-sno
   - name: cluster-registration

@@ -15,7 +15,7 @@ spec:
       targetObjectRef:
         apiVersion: agent-install.openshift.io/v1beta1
         kind: Agent
-        namespace: {{ .Values.Name }}
+        namespace: {{ .Values.inventoryName }}
         labelSelector:
           matchExpressions:
             - key: {{.Values.agentLabelSelector}}
@@ -26,6 +26,7 @@ spec:
               {{ end }}
       patchTemplate: |
         spec:
+          approved: true
           clusterDeploymentName:
             name: {{ .Release.Name }}
             namespace: {{ .Release.Name }}
