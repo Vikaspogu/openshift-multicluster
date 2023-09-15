@@ -46,10 +46,10 @@ spec:
     {{- end }}
   dns-resolver:
     config:
-    {{- with $values.dnsResolvers }}
-    server:
-        {{- toYaml . | nindent 6 }}
-    {{- end }}
+      {{- with $values.dnsResolvers }}
+      server:
+          {{- toYaml . | nindent 6 }}
+      {{- end }}
   routes:
     {{- with $values.routesConfig }}
     config:
