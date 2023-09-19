@@ -67,6 +67,8 @@ This Git repository contains the following directories (_kustomizatons_) under [
   └─ 📁 <CLUSTER-NAME>      # Contains applications to deploy on cluster, using helm/charts or kustomize/bases as resources
 ```
 
+[Layout](https://excalidraw.com/#json=pjG0RFswZzr-OQo1Q3wFI,AxmWMj3pQv-FavGdkmgxRA)
+
 ## 🔍 Features
 
 - [X] ArgoCD with SOPS plugin
