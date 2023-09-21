@@ -4,7 +4,7 @@ workers: 0
 masters: 3
 ingressVIP:
 apiVIP:
-holdInstallation: true
+holdInstallation:
 networking:
   clusterCidr: 10.128.0.0/14
   machineCidr:
