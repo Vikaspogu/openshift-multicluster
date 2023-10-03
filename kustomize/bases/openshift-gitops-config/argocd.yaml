@@ -5,7 +5,7 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
-  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm template --validate
+  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
