@@ -5,7 +5,7 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
-  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
+  kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm-3.11
   extraConfig:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
@@ -258,10 +258,39 @@ spec:
         health_status.status = "Progressing"
         health_status.message = "Route is still getting admitted"
         return health_status
+  # Bug in operator in how it generates check for objects with no group
+  resourceCustomizations: |
+    PersistentVolumeClaim:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.phase ~= nil then
+            if obj.status.phase == "Pending" then
+              hs.status = "Healthy"
+              hs.message = obj.status.phase
+              return hs
+            end
+            if obj.status.phase == "Bound" then
+              hs.status = "Healthy"
+              hs.message = obj.status.phase
+              return hs
+            end
+          end
+        end
+        hs.status = "Progressing"
+        hs.message = "Waiting for PVC to be bound"
+        return hs
   grafana:
     enabled: false
     ingress:
       enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
     route:
       enabled: false
   prometheus:
@@ -309,6 +338,14 @@ spec:
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
+      - name: download-helm-311
+        image: alpine:3.8
+        command: [sh, -c]
+        args:
+          - wget -O /tmp/helm-3.11 https://developers.redhat.com/content-gateway/file/pub/openshift-v4/clients/helm/3.11.1/helm-linux-amd64 && mv /tmp/helm-3.11 /custom-tools/ && chmod +x /custom-tools/helm-3.11 ;
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
       - name: policy-generator-install
         args:
           - -c
@@ -326,6 +363,9 @@ spec:
       - mountPath: /usr/local/bin/kustomize
         name: custom-tools
         subPath: kustomize
+      - mountPath: /usr/local/bin/helm-3.11
+        name: custom-tools
+        subPath: helm-3.11
       - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
         name: custom-tools
         subPath: ksops
