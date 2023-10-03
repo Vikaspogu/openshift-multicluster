@@ -258,28 +258,6 @@ spec:
         health_status.status = "Progressing"
         health_status.message = "Route is still getting admitted"
         return health_status
-  # Bug in operator in how it generates check for objects with no group
-  resourceCustomizations: |
-    PersistentVolumeClaim:
-      health.lua: |
-        hs = {}
-        if obj.status ~= nil then
-          if obj.status.phase ~= nil then
-            if obj.status.phase == "Pending" then
-              hs.status = "Healthy"
-              hs.message = obj.status.phase
-              return hs
-            end
-            if obj.status.phase == "Bound" then
-              hs.status = "Healthy"
-              hs.message = obj.status.phase
-              return hs
-            end
-          end
-        end
-        hs.status = "Progressing"
-        hs.message = "Waiting for PVC to be bound"
-        return hs
   grafana:
     enabled: false
     ingress:
