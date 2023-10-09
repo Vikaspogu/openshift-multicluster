@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: auto-csr-approver-configuration
+    app.kubernetes.io/name: auto-csr-approver-configuration
+  name: auto-csr-approver-configuration
+  namespace: external-secrets
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: auto-csr-approver-configuration
+      app.kubernetes.io/name: auto-csr-approver-configuration
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: auto-csr-approver-configuration
+        app.kubernetes.io/name: auto-csr-approver-configuration
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - command:
+            - /bin/bash
+            - oc observe csr -- /tmp/approve_csr.sh
+          image: registry.redhat.io/openshift4/ose-tools-rhel8:latest
+          name: auto-csr-approver-configuration
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              memory: 100Mi
+            requests:
+              cpu: 5m
+              memory: 10Mi
+          volumeMounts:
+            - mountPath: /tmp/approve_csr.sh
+              name: config
+              readOnly: true
+              subPath: approve_csr.sh
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        runAsGroup: 999
+        runAsUser: 999
+      serviceAccountName: default
+      volumes:
+        - configMap:
+            defaultMode: 509
+            name: approve_csr-configmap
+          name: config

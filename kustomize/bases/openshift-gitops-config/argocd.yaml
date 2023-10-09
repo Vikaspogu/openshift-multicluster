@@ -36,7 +36,7 @@ spec:
         kind: MutatingWebhookConfiguration
         customization:
           jqPathExpressions:
-            - '.webhooks[]?.clientConfig.caBundle'
+            - ".webhooks[]?.clientConfig.caBundle"
   resourceHealthChecks:
     - group: argoproj.io
       kind: Application

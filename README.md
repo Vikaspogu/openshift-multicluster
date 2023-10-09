@@ -27,20 +27,20 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 
 - Generate ISO
 
-    ```bash
-    rm -rf installer/pxm-acm
-    cp -r installer/cluster-config installer/pxm-acm
-    ./openshift-install agent create image --dir installer/pxm-acm
-    ```
+  ```bash
+  rm -rf installer/pxm-acm
+  cp -r installer/cluster-config installer/pxm-acm
+  ./openshift-install agent create image --dir installer/pxm-acm
+  ```
 
 - Upload ISO to proxmox
 - Create 3 VMs with CPU type as `max`
 - Wait for the cluster to install
 
-    ```bash
-    export KUBECONFIG=installer/pxm-acm/auth/kubeconfig
-    ./openshift-install agent wait-for install-complete --dir installer/pxm-acm --log-level=debug
-    ```
+  ```bash
+  export KUBECONFIG=installer/pxm-acm/auth/kubeconfig
+  ./openshift-install agent wait-for install-complete --dir installer/pxm-acm --log-level=debug
+  ```
 
 ### GitOps
 
@@ -59,7 +59,7 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ```sh
 📁 helm                     # helm charts folder
-├─📁 charts  
+├─📁 charts
 ├ └─ 📁 <CHART-NAME>        # custom helm charts
 📁 kustomize                # openshift cluster defined as code
 ├─📁 bases                  # bases contains resources that applies to all clusters
@@ -71,12 +71,12 @@ This Git repository contains the following directories (_kustomizatons_) under [
 
 ## 🔍 Features
 
-- [X] ArgoCD with SOPS plugin
-- [X] Secret Management using External secrets and 1Password
-- [X] Cert manager for API and Wildcard certificate
-- [X] Multi cluster management
-- [X] Kyverno
-- [X] Renovate bot
+- [x] ArgoCD with SOPS plugin
+- [x] Secret Management using External secrets and 1Password
+- [x] Cert manager for API and Wildcard certificate
+- [x] Multi cluster management
+- [x] Kyverno
+- [x] Renovate bot
 
 ## :hammer: TODO
 

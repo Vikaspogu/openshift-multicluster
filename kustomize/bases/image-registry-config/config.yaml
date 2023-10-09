@@ -12,7 +12,7 @@ spec:
     s3:
       bucket: image-registry
       region: us-1
-      regionEndpoint: 'https://s3.vikaspogu.com'
+      regionEndpoint: "https://s3.vikaspogu.com"
       trustedCA:
-        name: ''
+        name: ""
       virtualHostedStyle: false

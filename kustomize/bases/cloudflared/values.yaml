@@ -11,11 +11,11 @@ cloudflared:
   # Ingress hosts are directly copied into the configmap;
   # Read: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configuration/configuration-file/ingress
   ingress:
-    - hostname: 'oauth-openshift.apps.pxm.v3s.us'
+    - hostname: "oauth-openshift.apps.pxm.v3s.us"
       originRequest:
         noTLSVerify: true
       service: https://oauth-openshift.openshift-authentication
-    - hostname: '*.apps.pxm.v3s.us'
+    - hostname: "*.apps.pxm.v3s.us"
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress

@@ -11,7 +11,7 @@
   commitMessageExtra: "to {{newVersion}}",
   commitMessageSuffix: "",
   assignees: ["@vikaspogu"],
-  "ignorePaths": ["**/archive/**"],
+  ignorePaths: ["**/archive/**"],
   "helm-values": {
     fileMatch: ["cluster/.+\\.ya?ml$"],
   },
@@ -25,7 +25,7 @@
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
       ],
       datasourceTemplate: "helm",
-    }
+    },
   ],
   packageRules: [
     // Setup datasources
@@ -81,6 +81,6 @@
       matchUpdateTypes: ["patch"],
       semanticCommitType: "fix",
       labels: ["renovate/helm", "dep/patch"],
-    }
+    },
   ],
 }

@@ -7,5 +7,5 @@ metadata:
 spec:
   # This will go to all managed clusters
   clusterConditions:
-    - status: 'True'
+    - status: "True"
       type: ManagedClusterConditionAvailable

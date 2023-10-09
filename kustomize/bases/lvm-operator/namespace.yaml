@@ -5,6 +5,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Delete=false
   labels:
-    openshift.io/cluster-monitoring: 'true'
+    openshift.io/cluster-monitoring: "true"
     argocd.argoproj.io/managed-by: openshift-gitops
   name: openshift-storage

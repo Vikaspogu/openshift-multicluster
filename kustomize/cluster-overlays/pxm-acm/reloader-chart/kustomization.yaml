@@ -19,7 +19,6 @@ helmCharts:
       reloader:
         isOpenshift: true
 
-
 patches:
   - target:
       kind: Deployment
