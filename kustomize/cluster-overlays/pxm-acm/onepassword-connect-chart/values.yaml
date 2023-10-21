@@ -1,11 +1,11 @@
 controllers:
   main:
+    annotations:
+      reloader.stakater.com/auto: "true"
     pod:
       securityContext:
         runAsUser: 999
         runAsGroup: 999
-      annotations:
-        reloader.stakater.com/auto: "true"
     containers:
       main:
         image:
