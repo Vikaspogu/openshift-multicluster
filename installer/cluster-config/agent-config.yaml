@@ -5,7 +5,7 @@ metadata:
   name: pxm-acm
 rendezvousIP: 10.30.30.100
 hosts:
-  - hostname: openshift-0 #28672 Memory # 12CPUs
+  - hostname: openshift-0 #38912 Memory # 12CPUs
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:11

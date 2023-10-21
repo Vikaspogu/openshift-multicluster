@@ -15,11 +15,11 @@ helmCharts:
       controllers:
         main:
           pod:
-            annotations:
-              reloader.stakater.com/auto: "true"
             securityContext:
               runAsUser: 999
               runAsGroup: 999
+            annotations:
+              reloader.stakater.com/auto: "true"
           containers:
             main:
               image:
