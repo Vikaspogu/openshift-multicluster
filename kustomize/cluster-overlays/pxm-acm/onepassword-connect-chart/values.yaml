@@ -26,6 +26,27 @@ controllers:
             memory: 10Mi
           limits:
             memory: 100Mi
+        probes:
+          liveness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /heartbeat
+                port: *port
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              failureThreshold: 3
+          readiness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /health
+                port: *port
+              initialDelaySeconds: 15
+          startup:
+            enabled: false
       sync:
         image:
           repository: docker.io/1password/connect-sync
@@ -67,31 +88,8 @@ ingress:
   main:
     enabled: false
 
-probes:
-  liveness:
-    enabled: true
-    custom: true
-    spec:
-      httpGet:
-        path: /heartbeat
-        port: *port
-      initialDelaySeconds: 15
-      periodSeconds: 30
-      failureThreshold: 3
-  readiness:
-    enabled: true
-    custom: true
-    spec:
-      httpGet:
-        path: /health
-        port: *port
-      initialDelaySeconds: 15
-  startup:
-    enabled: false
-
 persistence:
   shared:
-    enabled: true
     type: emptyDir
     globalMounts:
       - path: /home/opuser/.op/data
