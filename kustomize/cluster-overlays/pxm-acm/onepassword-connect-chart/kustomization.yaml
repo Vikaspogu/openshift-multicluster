@@ -12,14 +12,14 @@ helmCharts:
     repo: https://bjw-s.github.io/helm-charts/
     version: 2.0.3
     valuesInline:
-      defaultPodOptions:
-        securityContext:
-          runAsUser: 999
-          runAsGroup: 999
-        annotations:
-          reloader.stakater.com/auto: "true"
       controllers:
         main:
+          annotations:
+            reloader.stakater.com/auto: "true"
+          pod:
+            securityContext:
+              runAsUser: 999
+              runAsGroup: 999
           containers:
             main:
               image:
