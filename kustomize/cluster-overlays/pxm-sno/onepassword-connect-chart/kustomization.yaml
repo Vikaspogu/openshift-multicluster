@@ -9,7 +9,7 @@ helmCharts:
     releaseName: onepassword-connect
     namespace: external-secrets
     repo: https://bjw-s.github.io/helm-charts/
-    version: 2.0.1
+    version: 2.0.3
     valuesInline:
       controllers:
         main:
