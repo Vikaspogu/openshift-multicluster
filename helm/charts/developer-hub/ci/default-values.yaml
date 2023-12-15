@@ -1,8 +1,0 @@
-# Workaround for kind cluster in CI which has no Routes and no PVCs
-route:
-  enabled: false
-upstream:
-  postgresql:
-    primary:
-      persistence:
-        enabled: false
