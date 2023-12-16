@@ -24,7 +24,7 @@ dependencies:
   repository: https://charts.bitnami.com/bitnami
   tags:
   - bitnami-common
-  version: 2.13.3
+  version: 2.13.4
 - alias: upstream
   name: backstage
   repository: https://backstage.github.io/charts
