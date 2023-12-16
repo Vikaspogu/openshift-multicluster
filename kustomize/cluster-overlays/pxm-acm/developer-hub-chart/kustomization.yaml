@@ -14,8 +14,8 @@ generatorOptions:
   disableNameSuffixHash: true
 
 helmCharts:
-  - name: developer-hub
+  - name: redhat-developer-hub
     releaseName: developer-hub
     namespace: developer-hub
     valuesFile: values.yaml
-    repo: https://charts.openshift.io/redhat-developer-hub
+    repo: https://charts.openshift.io
