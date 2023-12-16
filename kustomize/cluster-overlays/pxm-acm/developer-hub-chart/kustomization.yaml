@@ -5,6 +5,7 @@ namespace: developer-hub
 resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
+  - ./externalsecret-pullsecret.yaml
 
 configMapGenerator:
   - name: app-config-rhdh
