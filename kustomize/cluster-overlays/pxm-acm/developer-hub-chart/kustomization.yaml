@@ -12,12 +12,3 @@ configMapGenerator:
 
 generatorOptions:
   disableNameSuffixHash: true
-
-helmGlobals:
-  chartHome: ../../../../helm/charts
-
-helmCharts:
-  - name: developer-hub
-    releaseName: developer-hub
-    namespace: developer-hub
-    valuesFile: values.yaml
