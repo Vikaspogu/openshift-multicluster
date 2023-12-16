@@ -13,9 +13,11 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
+helmGlobals:
+  chartHome: ../../../../helm/charts
+
 helmCharts:
-  - name: redhat-developer-hub
+  - name: developer-hub
     releaseName: developer-hub
     namespace: developer-hub
     valuesFile: values.yaml
-    repo: https://charts.openshift.io
