@@ -8,3 +8,7 @@ auth:
       development:
         clientId: ${GITHUB_APP_CLIENT_ID}
         clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+integrations:
+  github:
+    - host: github.com
+      token: ghp_${GH_TOKEN}
