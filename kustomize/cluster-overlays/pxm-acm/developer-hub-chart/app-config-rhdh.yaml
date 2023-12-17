@@ -11,4 +11,4 @@ auth:
 integrations:
   github:
     - host: github.com
-      token: ghp_${GH_TOKEN}
+      token: ${GH_TOKEN}
