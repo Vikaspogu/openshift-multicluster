@@ -18,7 +18,7 @@ spec:
     {{- end }}
     controlPlaneAgents: {{ .Values.masters }}
   imageSetRef:
-    name: 'img4.13.9-multi-appsub'
+    name: 'img{{.Values.openshiftVersion}}-multi-appsub'
   networking:
     clusterNetwork:
       - cidr: {{.Values.networking.clusterCidr}}
