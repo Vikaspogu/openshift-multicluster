@@ -20,7 +20,8 @@ spec:
           matchExpressions:
             - key: infraenvs.agent-install.openshift.io
               operator: In
-              values: {{ .Values.inventoryName }}
+              values:
+                - {{ .Values.inventoryName }}
             # - key: {{.Values.agentLabelSelector.patch}}
             #   operator: In
             #   values:
