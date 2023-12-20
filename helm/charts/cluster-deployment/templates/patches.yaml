@@ -18,12 +18,15 @@ spec:
         namespace: {{ .Values.inventoryName }}
         labelSelector:
           matchExpressions:
-            - key: {{.Values.agentLabelSelector.patch}}
+            - key: infraenvs.agent-install.openshift.io
               operator: In
-              values:
-              {{- range .Values.hostNames }}
-              - {{ . }}
-              {{- end }}
+              values: {{ .Values.inventoryName }}
+            # - key: {{.Values.agentLabelSelector.patch}}
+            #   operator: In
+            #   values:
+            #   {{- range .Values.hostNames }}
+            #   - {{ . }}
+            #   {{- end }}
       patchTemplate: |
         spec:
           approved: true
