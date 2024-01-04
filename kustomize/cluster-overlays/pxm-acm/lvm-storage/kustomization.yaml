@@ -12,6 +12,7 @@ patches:
           - openshift-1
       - op: replace
         path: /spec/storage/deviceClasses/0/deviceSelector/paths
-        value: /dev/sda
+        value:
+          - /dev/sda
     target:
       kind: LVMCluster
