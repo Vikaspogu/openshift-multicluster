@@ -68,7 +68,7 @@ This Git repository contains the following directories (_kustomizatons_) under [
 ```
 
 ```bash
-helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/pxm-acm/developer-hub-chart/values.yaml
+helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/pxm-acm/developer-hub-chart/values.yaml -n=developer-hub --kube-insecure-skip-tls-verify
 ```
 
 [Layout](https://excalidraw.com/#json=pjG0RFswZzr-OQo1Q3wFI,AxmWMj3pQv-FavGdkmgxRA)
