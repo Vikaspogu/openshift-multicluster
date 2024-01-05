@@ -126,6 +126,7 @@ upstream:
       checksum/dynamic-plugins: >-
         {{- include "common.tplvalues.render" ( dict "value"
         .Values.global.dynamic "context" $) | sha256sum }}
+      reloader.stakater.com/auto: "true"
     readinessProbe:
       failureThreshold: 3
       httpGet:
