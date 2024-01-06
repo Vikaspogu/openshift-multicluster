@@ -12,3 +12,9 @@ integrations:
   github:
     - host: github.com
       token: ${GH_TOKEN}
+catalog:
+  locations:
+    - type: url
+      target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
+      rules:
+        - allow: [Template]
