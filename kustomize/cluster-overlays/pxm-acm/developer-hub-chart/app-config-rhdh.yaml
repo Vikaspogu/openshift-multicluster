@@ -20,6 +20,6 @@ catalog:
       rules:
         - allow: [Template]
     - type: url
-      target: https://github.com/Vikaspogu/backstage-demo/blob/main/group-user/ops.yaml
+      target: https://github.com/Vikaspogu/backstage-demo/blob/main/groups/ops.yaml
       rules:
         - allow: [Group]
