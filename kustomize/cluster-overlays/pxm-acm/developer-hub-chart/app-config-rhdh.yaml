@@ -21,3 +21,5 @@ catalog:
         - allow: [Template]
     - type: url
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/group-user/org.yaml
+      rules:
+        - allow: [Group]
