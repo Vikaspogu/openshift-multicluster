@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
+  - ./rolebindings.yaml
   - ./sa.yaml
   - ./sa-secret.yaml
 
