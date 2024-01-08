@@ -8,7 +8,11 @@ global:
   dynamic:
     includes:
       - dynamic-plugins.default.yaml
-    plugins: []
+    plugins:
+      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+        disabled: false
   host: ""
 route:
   annotations: {}
@@ -61,6 +65,20 @@ upstream:
             key: postgres-password
             name: '{{- include "janus-idp.postgresql.secretName" . }}'
       - name: KUBE_TOKEN
+        valueFrom:
+          secretKeyRef:
+            key: token
+            name: developer-hub-sa
+      - name: KUBE_TOKEN
+        valueFrom:
+          secretKeyRef:
+            key: token
+            name: developer-hub-sa
+      - name: K8S_CLUSTER_NAME
+        value: openshift
+      - name: K8S_CLUSTER_URL
+        value: https://api.pxm-acm.v3s.us:6443
+      - name: K8S_CLUSTER_TOKEN
         valueFrom:
           secretKeyRef:
             key: token
