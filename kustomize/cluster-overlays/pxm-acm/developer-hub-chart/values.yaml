@@ -8,9 +8,7 @@ global:
   dynamic:
     includes:
       - dynamic-plugins.default.yaml
-    plugins:
-      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
-        disabled: false
+    plugins: []
   host: ""
 route:
   annotations: {}
