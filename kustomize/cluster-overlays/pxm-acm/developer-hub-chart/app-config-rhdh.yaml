@@ -1,5 +1,8 @@
 app:
   title: Red Hat Developer Hub
+reading:
+  allow:
+    - host: "*.apps.pxm-acm.v3s.us"
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
@@ -8,11 +11,45 @@ auth:
       development:
         clientId: ${GITHUB_APP_CLIENT_ID}
         clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+enabled:
+  argocd: true
+  github: true
+  githubOrg: false
+  gitlab: false
+  jenkins: false
+  keycloak: false
+  kubernetes: true
+  ocm: true
+  permission: false
+  sonarqube: false
+  techdocs: false
 integrations:
   github:
     - host: github.com
       token: ${GH_TOKEN}
-
+kubernetes:
+  serviceLocatorMethod:
+    type: "multiTenant"
+  clusterLocatorMethods:
+    - type: "config"
+      clusters:
+        - url: https://api.pxm-acm.v3s.us:6443
+          name: openshift
+          authProvider: "serviceAccount"
+          skipTLSVerify: true
+          serviceAccountToken: ${KUBE_TOKEN}
+  customResources:
+    - apiVersion: v1beta1
+      group: tekton.dev
+      plural: pipelineruns
+    - apiVersion: v1beta1
+      group: tekton.dev
+      plural: taskruns
+    - apiVersion: v1
+      group: route.openshift.io
+      plural: routes
+permission:
+  enabled: false
 catalog:
   orphanStrategy: delete
   locations:
@@ -20,3 +57,14 @@ catalog:
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
+  providers:
+    ocm:
+      default:
+        kubernetesPluginRef: dev-cluster-infra
+        name: multiclusterhub
+        owner: group:rhdh
+        schedule:
+          frequency:
+            seconds: 10
+          timeout:
+            seconds: 60

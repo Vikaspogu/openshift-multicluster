@@ -35,7 +35,18 @@ upstream:
             - secret: "${BACKEND_SECRET}"
         baseUrl: 'https://{{- include "janus-idp.hostname" . }}'
         cors:
+          credentials: true
+          methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
           origin: 'https://{{- include "janus-idp.hostname" . }}'
+        csp:
+          connect-src:
+            - "'self'"
+            - "http:"
+            - "https:"
         database:
           connection:
             password: "${POSTGRESQL_ADMIN_PASSWORD}"
@@ -61,20 +72,6 @@ upstream:
             key: postgres-password
             name: '{{- include "janus-idp.postgresql.secretName" . }}'
       - name: KUBE_TOKEN
-        valueFrom:
-          secretKeyRef:
-            key: token
-            name: developer-hub-sa
-      - name: KUBE_TOKEN
-        valueFrom:
-          secretKeyRef:
-            key: token
-            name: developer-hub-sa
-      - name: K8S_CLUSTER_NAME
-        value: openshift
-      - name: K8S_CLUSTER_URL
-        value: https://api.pxm-acm.v3s.us:6443
-      - name: K8S_CLUSTER_TOKEN
         valueFrom:
           secretKeyRef:
             key: token
@@ -107,7 +104,7 @@ upstream:
         - rhdh-pull-secret
       registry: registry.redhat.io
       repository: rhdh/rhdh-hub-rhel9
-      tag: 1.0-200
+      tag: 1.1-7
     initContainers:
       - command:
           - ./install-dynamic-plugins.sh
