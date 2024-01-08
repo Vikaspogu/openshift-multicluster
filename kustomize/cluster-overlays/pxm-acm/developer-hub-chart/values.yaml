@@ -60,6 +60,11 @@ upstream:
           secretKeyRef:
             key: postgres-password
             name: '{{- include "janus-idp.postgresql.secretName" . }}'
+      - name: KUBE_TOKEN
+        valueFrom:
+          secretKeyRef:
+            key: token
+            name: developer-hub-sa
     extraVolumeMounts:
       - mountPath: /opt/app-root/src/dynamic-plugins-root
         name: dynamic-plugins-root

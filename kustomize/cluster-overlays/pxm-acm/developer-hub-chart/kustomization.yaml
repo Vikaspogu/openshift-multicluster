@@ -6,6 +6,8 @@ resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
+  - ./sa.yaml
+  - ./sa-secret.yaml
 
 configMapGenerator:
   - name: app-config-rhdh

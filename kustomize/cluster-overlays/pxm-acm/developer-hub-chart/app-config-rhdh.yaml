@@ -12,6 +12,19 @@ integrations:
   github:
     - host: github.com
       token: ${GH_TOKEN}
+kubernetes:
+  serviceLocatorMethod:
+    type: "multiTenant"
+  clusterLocatorMethods:
+    - type: "config"
+      clusters:
+        - url: https://api.pxm-acm.v3s.us:6443
+          name: openshift
+          authProvider: "serviceAccount"
+          skipTLSVerify: true
+          serviceAccountToken: ${KUBE_TOKEN}
+          dashboardUrl: https://console-openshift-console.apps.pxm-acm.v3s.us
+          dashboardApp: openshift
 catalog:
   orphanStrategy: delete
   locations:
@@ -19,7 +32,3 @@ catalog:
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/backstage-demo/blob/main/groups/ops.yaml
-      rules:
-        - allow: [Group]
