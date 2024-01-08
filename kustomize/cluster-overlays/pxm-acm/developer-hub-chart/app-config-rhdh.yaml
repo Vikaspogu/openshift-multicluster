@@ -14,7 +14,7 @@ integrations:
       token: ${GH_TOKEN}
 kubernetes:
   serviceLocatorMethod:
-    type: "singleTenant"
+    type: "multiTenant"
   clusterLocatorMethods:
     - type: "config"
       clusters:
