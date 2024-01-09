@@ -1,8 +1,5 @@
 app:
   title: Red Hat Developer Hub
-reading:
-  allow:
-    - host: "*.apps.pxm-acm.v3s.us"
 argocd:
   appLocatorMethods:
     - instances:
@@ -65,14 +62,14 @@ catalog:
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
-  providers:
-    ocm:
-      default:
-        kubernetesPluginRef: pxm-acm
-        name: multiclusterhub
-        owner: group:rhdh
-        schedule:
-          frequency:
-            seconds: 10
-          timeout:
-            seconds: 60
+  # providers:
+  #   ocm:
+  #     default:
+  #       kubernetesPluginRef: pxm-acm
+  #       name: multiclusterhub
+  #       owner: group:rhdh
+  #       schedule:
+  #         frequency:
+  #           seconds: 10
+  #         timeout:
+  #           seconds: 60
