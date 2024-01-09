@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
+  - https://raw.githubusercontent.com/janus-idp/backstage-plugins/main/plugins/tekton/manifests/clusterrole.yaml
   - ./rolebindings.yaml
   - ./sa.yaml
   - ./sa-secret.yaml
