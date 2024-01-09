@@ -62,6 +62,10 @@ catalog:
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
+    - type: url
+      target: https://github.com/Vikaspogu/backstage-demo/blob/main/components/catalog-info.yaml
+      rules:
+        - allow: [Component]
   # providers:
   #   ocm:
   #     default:
