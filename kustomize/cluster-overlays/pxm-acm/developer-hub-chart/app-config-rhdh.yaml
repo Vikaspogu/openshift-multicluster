@@ -65,6 +65,10 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: url
+      target: https://github.com/Vikaspogu/backstage-demo/blob/main/catalog-info.yaml
+      rules:
+        - allow: [Component]
+    - type: url
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
