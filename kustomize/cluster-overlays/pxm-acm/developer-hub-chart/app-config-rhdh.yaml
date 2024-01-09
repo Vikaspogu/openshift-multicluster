@@ -43,16 +43,16 @@ kubernetes:
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${KUBE_TOKEN}
-  customResources:
-    - apiVersion: v1beta1
-      group: tekton.dev
-      plural: pipelineruns
-    - apiVersion: v1beta1
-      group: tekton.dev
-      plural: taskruns
-    - apiVersion: v1
-      group: route.openshift.io
-      plural: routes
+  # customResources:
+  #   - apiVersion: v1beta1
+  #     group: tekton.dev
+  #     plural: pipelineruns
+  #   - apiVersion: v1beta1
+  #     group: tekton.dev
+  #     plural: taskruns
+  #   - apiVersion: v1
+  #     group: route.openshift.io
+  #     plural: routes
 permission:
   enabled: false
 catalog:
