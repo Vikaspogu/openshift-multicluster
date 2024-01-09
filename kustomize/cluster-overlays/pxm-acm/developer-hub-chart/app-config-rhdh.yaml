@@ -24,7 +24,7 @@ enabled:
   jenkins: false
   keycloak: false
   kubernetes: true
-  ocm: true
+  ocm: false
   permission: false
   sonarqube: false
   techdocs: false

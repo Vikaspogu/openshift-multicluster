@@ -11,28 +11,24 @@ subjects:
     name: developer-hub
     namespace: developer-hub
 ---
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
 metadata:
-  name: default-anyuid
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:openshift:scc:anyuid
-subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: developer-hub
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: backstage-anyuid
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:openshift:scc:anyuid
-subjects:
-  - kind: ServiceAccount
-    name: developer-hub
-    namespace: developer-hub
+  name: backstage-ocm-plugin
+rules:
+  - apiGroups:
+      - cluster.open-cluster-management.io
+    resources:
+      - managedclusters
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - internal.open-cluster-management.io
+    resources:
+      - managedclusterinfos
+    verbs:
+      - get
+      - watch
+      - list
