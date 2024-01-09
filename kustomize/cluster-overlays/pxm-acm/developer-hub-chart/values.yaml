@@ -8,7 +8,51 @@ global:
   dynamic:
     includes:
       - dynamic-plugins.default.yaml
-    plugins: []
+    plugins:
+      - disabled: false
+        package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-security-insights
+      - disabled: false
+        package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
+      - disabled: false
+        package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/backstage-plugin-techdocs
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              janus-idp.backstage-plugin-tekton:
+                mountPoints:
+                  - config:
+                      if:
+                        allOf:
+                          - isTektonCIAvailable
+                      layout:
+                        gridColumn: 1 / -1
+                        gridRowStart: 1
+                    importName: TektonCI
+                    mountPoint: entity.page.ci/cards
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
+      - disabled: false
+        package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
   host: ""
 route:
   annotations: {}
@@ -104,7 +148,7 @@ upstream:
         - rhdh-pull-secret
       registry: registry.redhat.io
       repository: rhdh/rhdh-hub-rhel9
-      tag: 1.1-7
+      tag: 1.0-200
     initContainers:
       - command:
           - ./install-dynamic-plugins.sh

@@ -34,7 +34,7 @@ kubernetes:
     - type: "config"
       clusters:
         - url: https://api.pxm-acm.v3s.us:6443
-          name: openshift
+          name: pxm-acm
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${KUBE_TOKEN}
@@ -60,7 +60,7 @@ catalog:
   providers:
     ocm:
       default:
-        kubernetesPluginRef: dev-cluster-infra
+        kubernetesPluginRef: pxm-acm
         name: multiclusterhub
         owner: group:rhdh
         schedule:
