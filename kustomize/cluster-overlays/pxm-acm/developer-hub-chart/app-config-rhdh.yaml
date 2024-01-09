@@ -19,12 +19,12 @@ auth:
 enabled:
   argocd: true
   github: true
+  kubernetes: true
+  ocm: true
   githubOrg: false
   gitlab: false
   jenkins: false
   keycloak: false
-  kubernetes: true
-  ocm: false
   permission: false
   sonarqube: false
   techdocs: false
@@ -43,40 +43,44 @@ kubernetes:
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${KUBE_TOKEN}
-  customResources:
-    - apiVersion: v1beta1
-      group: tekton.dev
-      plural: pipelines
-    - apiVersion: v1beta1
-      group: tekton.dev
-      plural: pipelineruns
-    - apiVersion: v1beta1
-      group: tekton.dev
-      plural: taskruns
-    - apiVersion: v1
-      group: route.openshift.io
-      plural: routes
+          dashboardApp: openshift
+          dashboardUrl: https://console-openshift-console.apps.pxm-acm.v3s.us/
+          customResources:
+            - apiVersion: v1beta1
+              group: tekton.dev
+              plural: pipelines
+            - apiVersion: v1beta1
+              group: tekton.dev
+              plural: pipelineruns
+            - apiVersion: v1beta1
+              group: tekton.dev
+              plural: taskruns
+            - apiVersion: v1
+              group: route.openshift.io
+              plural: routes
 permission:
   enabled: false
 catalog:
-  orphanStrategy: delete
+  rules:
+    - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: url
       target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/backstage-demo/blob/main/components/catalog-info.yaml
+    - target: https://github.com/Vikaspogu/backstage-demo/blob/main/groups/org.yaml
+      type: url
       rules:
-        - allow: [Component]
-  # providers:
-  #   ocm:
-  #     default:
-  #       kubernetesPluginRef: pxm-acm
-  #       name: multiclusterhub
-  #       owner: group:rhdh
-  #       schedule:
-  #         frequency:
-  #           seconds: 10
-  #         timeout:
-  #           seconds: 60
+        - allow: [Group, User]
+
+  providers:
+    ocm:
+      default:
+        kubernetesPluginRef: pxm-acm
+        name: multiclusterhub
+        owner: group:ops
+        schedule:
+          frequency:
+            seconds: 10
+          timeout:
+            seconds: 60

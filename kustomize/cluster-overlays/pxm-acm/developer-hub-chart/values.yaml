@@ -23,10 +23,10 @@ global:
         package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
       - disabled: false
         package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
-      # - disabled: false
-      #   package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
-      # - disabled: false
-      #   package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+      - disabled: false
+        package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
       - disabled: false
         package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
       - disabled: false
