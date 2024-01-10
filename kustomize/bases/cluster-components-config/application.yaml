@@ -13,7 +13,7 @@ spec:
   source:
     directory:
       recurse: true
-      exclude: catalog-info.yaml
+      exclude: "**/catalog-info.yaml"
     path: <REPLACE>
     repoURL: "https://github.com/Vikaspogu/cluster-components"
   syncPolicy:
