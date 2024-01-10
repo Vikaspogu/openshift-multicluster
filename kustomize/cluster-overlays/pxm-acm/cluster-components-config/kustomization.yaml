@@ -10,4 +10,4 @@ patches:
         path: /spec/source/path
         value: pxm-acm
     target:
-      kind: Subscription
+      kind: Application
