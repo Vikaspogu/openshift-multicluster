@@ -64,19 +64,28 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: url
-      target: https://github.com/Vikaspogu/backstage-demo/blob/main/catalog-info.yaml
-      rules:
-        - allow: [Component]
-    - type: url
-      target: https://github.com/Vikaspogu/backstage-demo/blob/main/pgsql-cluster/template.yaml
+      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/pgsql-cluster/template.yaml
       rules:
         - allow: [Template]
-    - target: https://github.com/Vikaspogu/backstage-demo/blob/main/groups/org.yaml
+    - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
       type: url
       rules:
         - allow: [Group, User]
 
   providers:
+    github:
+      # the provider ID can be any camelCase string
+      components:
+        organization: "vikaspogu" # string
+        catalogPath: "/**/catalog-info.yaml" # string
+        filters:
+          branch: "main" # string
+          repository: "cluster-components" # Regex
+        schedule: # optional; same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 30 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
     ocm:
       default:
         kubernetesPluginRef: pxm-acm
