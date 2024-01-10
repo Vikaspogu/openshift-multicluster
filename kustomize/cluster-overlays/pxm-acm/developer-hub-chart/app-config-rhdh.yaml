@@ -75,7 +75,7 @@ catalog:
   providers:
     github:
       # the provider ID can be any camelCase string
-      components:
+      providerId:
         organization: "vikaspogu" # string
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
