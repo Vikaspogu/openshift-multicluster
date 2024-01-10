@@ -76,10 +76,11 @@ catalog:
     github:
       # the provider ID can be any camelCase string
       components:
+        organization: "vikaspogu" # string
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
           branch: "main" # string
-          repository: "vikaspogu/cluster-components" # Regex
+          repository: "cluster-components" # Regex
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
