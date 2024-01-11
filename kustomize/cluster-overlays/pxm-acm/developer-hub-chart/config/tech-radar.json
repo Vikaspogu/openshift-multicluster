@@ -57,7 +57,7 @@
       "timeline": [
         {
           "moved": 0,
-          "ringId": "assess",
+          "ringId": "adopt",
           "date": "2020-08-06T00:00:00.000Z"
         }
       ],
@@ -126,7 +126,7 @@
     {
       "timeline": [
         {
-          "ringId": "assess",
+          "ringId": "adopt",
           "date": "2020-08-06T00:00:00.000Z",
           "description": "long description"
         }
@@ -171,11 +171,6 @@
       "id": "trial",
       "name": "TRIAL",
       "color": "#93d2c2"
-    },
-    {
-      "id": "assess",
-      "name": "ASSESS",
-      "color": "#fbdb84"
     },
     {
       "id": "hold",

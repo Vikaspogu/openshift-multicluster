@@ -37,7 +37,10 @@ proxy:
       target: https://raw.githubusercontent.com/
       pathRewrite:
         "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-chart/config/home-page.json
-        "^/api/proxy/developer-hub/tech-radar": /Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-chart/config/tech-radar.json
+      changeOrigin: true
+      secure: true
+    "/developer-hub/tech-radar":
+      target: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-chart/config/tech-radar.json
       changeOrigin: true
       secure: true
 
