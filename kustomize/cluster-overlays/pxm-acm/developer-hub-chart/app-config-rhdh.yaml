@@ -57,6 +57,9 @@ kubernetes:
         - apiVersion: v1
           group: route.openshift.io
           plural: routes
+        - apiVersion: v1
+          group: postgresql.cnpg.io
+          plural: cluster
 permission:
   enabled: false
 catalog:
