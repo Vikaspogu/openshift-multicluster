@@ -27,6 +27,7 @@ enabled:
   permission: false
   sonarqube: false
   techdocs: false
+
 integrations:
   github:
     - host: github.com
@@ -34,9 +35,7 @@ integrations:
 proxy:
   endpoints:
     "/developer-hub":
-      target: https://raw.githubusercontent.com/
-      pathRewrite:
-        "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-chart/config/home-page.json
+      target: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-chart/config/home-page.json
       changeOrigin: true
       secure: true
     "/developer-hub/tech-radar":
