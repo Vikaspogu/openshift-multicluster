@@ -1,6 +1,6 @@
 kind: LDAPSyncConfig
 apiVersion: v1
-url: ldap://10.30.30.195:389
+url: ldap://10.30.30.157:389
 insecure: true
 bindDN: "uid=admin,ou=people,dc=home,dc=arpa"
 bindPassword:

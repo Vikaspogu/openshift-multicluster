@@ -13,4 +13,4 @@ patches:
         value: "uid=admin,ou=people,dc=home,dc=arpa"
       - op: replace
         path: /spec/identityProviders/0/ldap/url
-        value: "ldap://10.30.30.195/dc=home,dc=arpa"
+        value: "ldap://10.30.30.157/dc=home,dc=arpa"
