@@ -67,11 +67,11 @@ This Git repository contains the following directories (_kustomizatons_) under [
   └─ 📁 <CLUSTER-NAME>      # Contains applications to deploy on cluster, using helm/charts or kustomize/bases as resources
 ```
 
+### Deploy Developer Hub
+
 ```bash
 helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/pxm-acm/developer-hub-chart/values.yaml -n=developer-hub --kube-insecure-skip-tls-verify
 ```
-
-[Layout](https://excalidraw.com/#json=pjG0RFswZzr-OQo1Q3wFI,AxmWMj3pQv-FavGdkmgxRA)
 
 ## 🔍 Features
 
