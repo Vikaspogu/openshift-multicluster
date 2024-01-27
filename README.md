@@ -25,22 +25,28 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 
 [Getting started](https://docs.openshift.com/container-platform/4.12/installing/installing_with_agent_based_installer/installing-with-agent-based-installer.html) on Agent-based installer
 
+#### Manual Steps
+
 - Generate ISO
 
   ```bash
-  rm -rf installer/pxm-acm
-  cp -r installer/cluster-config installer/pxm-acm
-  ./openshift-install agent create image --dir installer/pxm-acm
+  rm -rf installer/pxm-acm #remove older cluster if any
+  cp -r installer/cluster-config installer/pxm-acm #copy cluster config files
+  ./openshift-install agent create image --dir installer/pxm-acm #create image
   ```
 
-- Upload ISO to proxmox
+- Upload ISO to proxmox from GUI
 - Create 3 VMs with CPU type as `max`
-- Wait for the cluster to install
+- Start VMs and wait for the cluster installation to finish
 
   ```bash
   export KUBECONFIG=installer/pxm-acm/auth/kubeconfig
   ./openshift-install agent wait-for install-complete --dir installer/pxm-acm --log-level=debug
   ```
+
+#### Automation
+
+[Playbooks](https://github.com/Vikaspogu/aap-playbooks) to automate manual steps described above
 
 ### GitOps
 
@@ -53,7 +59,7 @@ oc apply -k kustomize/bases/openshift-gitops-config -n openshift-gitops
 kustomize build kustomize/cluster-overlays/pxm-acm/argo-application --enable-alpha-plugins --load-restrictor LoadRestrictionsNone | oc apply -f-
 ```
 
-### Directories
+### Folder Layout
 
 This Git repository contains the following directories (_kustomizatons_) under [cluster](./cluster/).
 
