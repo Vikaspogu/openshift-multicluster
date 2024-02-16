@@ -17,6 +17,7 @@ auth:
     #   development:
     #     clientId: ${GITHUB_APP_CLIENT_ID}
     #     clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+signInPage: oauth2Proxy
 enabled:
   argocd: true
   github: true
