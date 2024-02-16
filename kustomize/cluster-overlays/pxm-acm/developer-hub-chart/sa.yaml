@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: developer-hub
-  namespace: developer-hub
-  annotations:
-    serviceaccounts.openshift.io/oauth-redirecturi.backstage: "https://developer-hub-developer-hub.apps.pxm-acm.v3s.us/oauth/callback"

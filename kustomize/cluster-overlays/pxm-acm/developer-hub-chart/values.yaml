@@ -245,6 +245,11 @@ upstream:
     host: "{{ .Values.global.host }}"
   oauthProxy:
     cookieSecret: ""
+  serviceAccount:
+    create: true
+    name: "developer-hub"
+    annotations:
+      serviceaccounts.openshift.io/oauth-redirecturi.backstage: "https://developer-hub-developer-hub.apps.pxm-acm.v3s.us/oauth/callback"
   nameOverride: developer-hub
   postgresql:
     auth:
