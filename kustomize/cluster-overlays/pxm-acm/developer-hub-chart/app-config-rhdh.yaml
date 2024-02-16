@@ -11,10 +11,12 @@ auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
-    github:
-      development:
-        clientId: ${GITHUB_APP_CLIENT_ID}
-        clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+    oauth2Proxy:
+      development: {}
+    # github:
+    #   development:
+    #     clientId: ${GITHUB_APP_CLIENT_ID}
+    #     clientSecret: ${GITHUB_APP_CLIENT_SECRET}
 enabled:
   argocd: true
   github: true
