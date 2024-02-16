@@ -9,7 +9,7 @@ argocd:
       type: config
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  environment: development
+  environment: production
   providers:
     oauth2Proxy:
       development: {}
