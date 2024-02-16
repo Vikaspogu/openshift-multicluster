@@ -11,8 +11,7 @@ auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: production
   providers:
-    oauth2Proxy:
-      development: {}
+    oauth2Proxy: {}
     # github:
     #   development:
     #     clientId: ${GITHUB_APP_CLIENT_ID}
