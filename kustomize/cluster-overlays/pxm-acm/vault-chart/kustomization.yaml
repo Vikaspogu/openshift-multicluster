@@ -128,7 +128,7 @@ helmCharts:
             image: registry.connect.redhat.com/hashicorp/vault:1.14.0-ubi
             env:
               - name: VAULT_ADDR
-                value: https://vault.vault.svc:8200
+                value: http://vault:8200
               - name: VAULT_CACERT
                 value: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
             command:
