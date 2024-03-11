@@ -6,6 +6,9 @@ resources:
   - ./namespace.yaml
   - ./external-secret.yaml
 
+commonAnnotations:
+  reloader.stakater.com/auto: "true"
+
 generatorOptions:
   disableNameSuffixHash: true
 
