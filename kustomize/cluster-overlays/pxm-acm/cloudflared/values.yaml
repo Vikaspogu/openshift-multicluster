@@ -7,6 +7,10 @@ cloudflared:
   tunnelID: "76cace65-155d-4719-9b29-4bfb94f5c013"
   existingSecret: cloudflared
   ingress:
+    - hostname: "api.pxm-acm.v3s.us"
+      originRequest:
+        noTLSVerify: true
+      service: https://apiserver.openshift-kube-apiserver.svc.cluster.local
     - hostname: "oauth-openshift.apps.pxm-acm.v3s.us"
       originRequest:
         noTLSVerify: true
