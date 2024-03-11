@@ -1,0 +1,31 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: namespace-config-policy
+spec:
+  rules:
+    - name: namespaces-with-team-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+              operations:
+                - CREATE
+              selector:
+                matchLabels:
+                  team: "?*"
+      generate:
+        synchronize: true
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: SecretEngineMount
+        metadata:
+          namespace: vault-admin
+          name: "{{request.object.metadata.name}}"
+        spec:
+          authentication:
+            path: kubernetes
+            role: policy-admin
+          type: kv
+          path: <REPLACE>
