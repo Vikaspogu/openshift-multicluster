@@ -14,5 +14,5 @@ cloudflared:
     - hostname: "*.apps.pxm-acm.v3s.us"
       originRequest:
         noTLSVerify: true
-      service: https://router-internal-default.openshift-ingress
+      service: https://router-internal-default.openshift-ingress.svc.cluster.local
     - service: http_status:404
