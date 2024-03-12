@@ -7,7 +7,7 @@ resources:
 patches:
   - patch: |-
       - op: replace
-        path: /spec/rules/0/generate/spec/path
+        path: /spec/rules/0/generate/data/spec/path
         value: pxm-acm/{{request.object.metadata.labels.team}}
     target:
       kind: ClusterPolicy
