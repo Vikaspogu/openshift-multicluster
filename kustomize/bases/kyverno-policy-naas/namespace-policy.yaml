@@ -20,9 +20,8 @@ spec:
         synchronize: true
         apiVersion: redhatcop.redhat.io/v1alpha1
         kind: SecretEngineMount
-        metadata:
-          namespace: vault-admin
-          name: "{{request.object.metadata.name}}"
+        namespace: vault-admin
+        name: "{{request.object.metadata.name}}"
         spec:
           authentication:
             path: kubernetes
