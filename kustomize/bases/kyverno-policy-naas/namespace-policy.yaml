@@ -6,6 +6,7 @@ metadata:
 spec:
   rules:
     - name: namespaces-with-team-label
+      skipBackgroundRequests: true
       match:
         any:
           - resources:
@@ -22,9 +23,10 @@ spec:
         kind: SecretEngineMount
         namespace: vault-admin
         name: "{{request.object.metadata.name}}"
-        spec:
-          authentication:
-            path: kubernetes
-            role: policy-admin
-          type: kv
-          path: <REPLACE>
+        data:
+          spec:
+            authentication:
+              path: kubernetes
+              role: policy-admin
+            type: kv
+            path: <REPLACE>
