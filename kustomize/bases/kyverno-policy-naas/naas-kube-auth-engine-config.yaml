@@ -2,10 +2,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: namespace-config-policy
+  name: naas-kube-auth-engine-config
 spec:
   rules:
-    - name: namespaces-with-team-label
+    - name: naas-kube-auth-engine-config
       skipBackgroundRequests: true
       match:
         any:
@@ -20,13 +20,16 @@ spec:
       generate:
         synchronize: true
         apiVersion: redhatcop.redhat.io/v1alpha1
-        kind: SecretEngineMount
+        kind: KubernetesAuthEngineConfig
         namespace: vault-admin
-        name: "{{request.object.metadata.name}}"
+        name: "{{request.object.metadata.name}}-auth-config"
         data:
+          metadata:
+            labels:
+              created-by: kyverno
+              generated-for: "{{request.object.metadata.name}}-{{request.object,metadata.labels.team}}"
           spec:
             authentication:
               path: kubernetes
               role: policy-admin
-            type: kv
             path: <REPLACE>

@@ -1,0 +1,43 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: naas-auth-engine-role
+spec:
+  rules:
+    - name: naas-auth-engine-role
+      skipBackgroundRequests: true
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+              operations:
+                - CREATE
+              selector:
+                matchLabels:
+                  team: "?*"
+      generate:
+        synchronize: true
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: KubernetesAuthEngineRole
+        namespace: vault-admin
+        name: "{{request.object.metadata.name}}-secret-reader"
+        data:
+          metadata:
+            labels:
+              created-by: kyverno
+              generated-for: "{{request.object.metadata.name}}-{{request.object,metadata.labels.team}}"
+          spec:
+            authentication:
+              path: kubernetes
+              role: policy-admin
+            path: <REPLACE>
+            policies:
+              - "{{request.object.metadata.name}}-secret-reader"
+            targetServiceAccounts:
+              - default
+            targetNamespaces:
+              targetNamespaceSelector:
+                matchLabels:
+                  team: "{{request.object.metadata.labels.team}}"

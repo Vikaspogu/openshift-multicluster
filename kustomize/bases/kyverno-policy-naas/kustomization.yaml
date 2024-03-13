@@ -4,4 +4,9 @@ kind: Kustomization
 namespace: vault-admin
 resources:
   - ./namespace.yaml
-  - ./namespace-policy.yaml
+  - ./naas-secret-engine-mount.yaml
+  - ./naas-kube-auth-engine-mount.yaml
+  - ./naas-kube-auth-engine-config.yaml
+  - ./naas-secret-reader.yaml
+  - ./naas-auth-engine-role.yaml
+  - ./naas-cleanup.yaml

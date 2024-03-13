@@ -11,3 +11,35 @@ patches:
         value: pxm-acm/{{request.object.metadata.labels.team}}
     target:
       kind: ClusterPolicy
+      name: namespace-config-policy
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: pxm-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-kube-auth-engine-config
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: pxm-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-kube-auth-engine-mount
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: pxm-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-auth-engine-role
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/policy
+        value: |
+          path "/pxm-acm/{{request.object.metadata.labels.team}/*" {
+            capabilities = ["read"]
+          }
+    target:
+      kind: ClusterPolicy
+      name: naas-secret-reader
