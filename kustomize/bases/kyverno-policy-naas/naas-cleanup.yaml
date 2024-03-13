@@ -8,7 +8,7 @@ spec:
     - name: remove-unwanted-label
       match:
         any:
-          resources:
+          - resources:
             kinds:
               - Namespace
             operations:
@@ -30,12 +30,13 @@ spec:
   match:
     any:
       - resources:
-          kinds:
-            - SecretEngineMount
-            - KubernetesAuthEngineRole
-            - Policy
-            - AuthEngineMount
-            - KubernetesAuthEngineConfig
-          selector:
-            matchLabels:
-              cleanup: "true"
+        kinds:
+          - SecretEngineMount
+          - KubernetesAuthEngineRole
+          - Policy
+          - AuthEngineMount
+          - KubernetesAuthEngineConfig
+        selector:
+          matchLabels:
+            cleanup: "true"
+  schedule: "*/5 * * * *"
