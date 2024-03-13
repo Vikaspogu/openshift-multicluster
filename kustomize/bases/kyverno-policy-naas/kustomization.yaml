@@ -9,4 +9,4 @@ resources:
   - ./naas-kube-auth-engine-config.yaml
   - ./naas-secret-reader.yaml
   - ./naas-auth-engine-role.yaml
-  - ./naas-cleanup.yaml
+  # - ./naas-cleanup.yaml
