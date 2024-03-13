@@ -1,0 +1,92 @@
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Policy
+metadata:
+  name: team-a-secret-engine-admin
+  namespace: vault-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: policy-admin
+  policy: |
+    # query existing mounts
+    path "/sys/mounts" {
+      capabilities = [ "list", "read"]
+    }
+
+    # mount database,kv secret engines
+    path "/sys/mounts/pxm-acm/team-a-kubernetes/+" {
+      capabilities = [ "create", "read", "update", "delete"]
+      allowed_parameters = {
+        "type" = ["database","kv"]
+        "*"   = []
+      }
+    }
+
+    # tune database,kv secret engines
+    path "/sys/mounts/pxm-acm/team-a-kubernetes/+/tune" {
+      capabilities = [ "create", "read", "update", "delete"]
+    }
+
+    # configure database,kv secrets engines
+    path "/pxm-acm/team-a-kubernetes/+/config/+" {
+      capabilities = [ "create", "read", "update", "delete"]
+    }
+
+    # configure database,kv roles
+    path "/pxm-acm/team-a-kubernetes/+/roles/+" {
+      capabilities = [ "create", "read", "update", "delete"]
+    }
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: team-a-secret-engine-admin
+  namespace: vault-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: policy-admin
+  path: pxm-acm/team-a-kubernetes
+  policies:
+    - team-a-secret-engine-admin
+  targetServiceAccounts:
+    - default
+  targetNamespaces:
+    targetNamespaceSelector:
+      matchLabels:
+        team: team-a
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Policy
+metadata:
+  name: team-a-secret-reader
+  namespace: vault-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: policy-admin
+  policy: |
+    # Configure read secrets
+    path "/pxm-acm/team-a-kubernetes/*" {
+      capabilities = ["read"]
+    }
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: team-a-secret-reader
+  namespace: vault-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: policy-admin
+  path: pxm-acm/team-a-kubernetes
+  policies:
+    - team-a-secret-reader
+  targetServiceAccounts:
+    - default
+  targetNamespaces:
+    targetNamespaceSelector:
+      matchLabels:
+        team: team-a
