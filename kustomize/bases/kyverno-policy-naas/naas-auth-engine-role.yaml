@@ -22,7 +22,7 @@ spec:
         apiVersion: redhatcop.redhat.io/v1alpha1
         kind: KubernetesAuthEngineRole
         namespace: vault-admin
-        name: "{{request.object.metadata.name}}-secret-reader"
+        name: "{{request.object.metadata.name}}"
         data:
           metadata:
             labels:
