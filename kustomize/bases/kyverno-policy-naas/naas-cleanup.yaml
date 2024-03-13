@@ -16,7 +16,7 @@ spec:
             selector:
               matchLabels:
                 created-by: kyverno
-                generated-for: "{{request.object.metadata.name}}-{{request.object,metadata.labels.team}}"
+                generated-for: "{{request.object.metadata.name}}-{{request.object.metadata.labels.team}}"
       mutate:
         patchesJson6902: |-
           - path: "/metadata/labels/cleanup"
