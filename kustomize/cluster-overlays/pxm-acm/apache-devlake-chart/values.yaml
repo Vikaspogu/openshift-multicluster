@@ -5,3 +5,6 @@ lake:
   envs:
     REMOTE_PLUGIN_DIR: ""
     DISABLED_REMOTE_PLUGINS: "true"
+grafana:
+  initChownData:
+    enabled: false
