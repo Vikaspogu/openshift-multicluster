@@ -1,3 +1,4 @@
 lake:
   encryptionSecret:
     secretName: "devlake"
+    autoCreateSecret: false
