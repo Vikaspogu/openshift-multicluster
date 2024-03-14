@@ -5,6 +5,7 @@ namespace: apache-devlake
 resources:
   - ../../../bases/apache-devlake-chart/
   - ./external-secret.yaml
+  - ./route.yaml
 
 commonAnnotations:
   reloader.stakater.com/auto: "true"

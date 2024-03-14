@@ -1,0 +1,22 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: devlake-ui
+  namespace: apache-devlake
+  labels:
+    app.kubernetes.io/instance: apache-devlake-chart
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: devlake
+    app.kubernetes.io/version: v0.21.0-beta7
+    helm.sh/chart: devlake-0.21.0-beta7
+spec:
+  to:
+    kind: Service
+    name: devlake-ui
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    destinationCACertificate: ""
+  port:
+    targetPort: ui
