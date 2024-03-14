@@ -2,3 +2,8 @@ lake:
   encryptionSecret:
     secretName: "devlake"
     autoCreateSecret: false
+  envs:
+    - name: REMOTE_PLUGIN_DIR
+      value: ""
+    - name: DISABLED_REMOTE_PLUGINS
+      value: "true"
