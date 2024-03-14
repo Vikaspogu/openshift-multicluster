@@ -1,0 +1,3 @@
+lake:
+  encryptionSecret:
+    secretName: "devlake"
