@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: apache-devlake
 resources:
   - ../../../bases/apache-devlake-chart/
+  - ./rbac.yaml
   - ./external-secret.yaml
   - ./route.yaml
 
