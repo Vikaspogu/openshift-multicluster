@@ -6,6 +6,7 @@ lake:
     REMOTE_PLUGIN_DIR: ""
     DISABLED_REMOTE_PLUGINS: "true"
     LOGGING_DIR: "/tmp/logs"
+ui:
   basicAuth:
     enabled: true
     autoCreateSecret: false
