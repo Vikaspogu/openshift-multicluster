@@ -17,6 +17,5 @@ spec:
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
-    destinationCACertificate: ""
   port:
     targetPort: ui

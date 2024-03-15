@@ -20,3 +20,12 @@ helmCharts:
     repo: https://apache.github.io/incubator-devlake-helm-chart
     version: "0.21.0-beta8"
     valuesFile: values.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: devlake-grafana
