@@ -1,0 +1,7 @@
+openDora:
+  devlakeDbAddress: devlake-mysql:3306
+  devlakeDbUser: merico
+  devlakeDbPass: merico
+  devlakeDbName: lake
+imagePullSecrets:
+  - name: regcred

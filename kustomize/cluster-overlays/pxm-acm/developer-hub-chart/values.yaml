@@ -236,7 +236,7 @@ upstream:
   serviceAccount:
     create: true
     name: "developer-hub"
-  nameOverride: developer hub
+  nameOverride: developer-hub
   postgresql:
     auth:
       secretKeys:
