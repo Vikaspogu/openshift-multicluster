@@ -5,7 +5,12 @@ lake:
   envs:
     REMOTE_PLUGIN_DIR: ""
     DISABLED_REMOTE_PLUGINS: "true"
+    LOGGING_DIR: "/tmp/logs"
 grafana:
   initChownData:
     enabled: false
   securityContext: {}
+  admin:
+    existingSecret: "devlake"
+    userKey: admin-user
+    passwordKey: admin-password
