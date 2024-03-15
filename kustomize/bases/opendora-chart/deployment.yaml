@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: open-dora-open-dora-helm-chart
+  name: open-dora-helm-chart
   labels:
     helm.sh/chart: open-dora-helm-chart-0.3.1
     app.kubernetes.io/name: open-dora-helm-chart
