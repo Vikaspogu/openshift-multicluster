@@ -9,6 +9,8 @@ global:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
+      - package: "@devoteam-nl/open-dora-backstage-plugin@0.2.2"
+        integrity: "sha512-uM202sEE2b/nlGZSKUSk+IgPmHOGcxcynfa6I6kYtC3WmsHkYbTwfWYhVxOLiXcE6C9+4dB34Jah6ElB/Q/AAg=="
       - disabled: false
         package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
       - disabled: false
@@ -167,31 +169,31 @@ upstream:
       repository: rhdh/rhdh-hub-rhel9
       tag: 1.0-200
 
-    extraContainers:
-      - name: oauth-proxy
-        args:
-          - -provider=openshift
-          - -https-address=:8888
-          - -http-address=
-          - -email-domain=*
-          - -upstream=http://localhost:7007
-          - -tls-cert=/etc/tls/private/tls.crt
-          - -tls-key=/etc/tls/private/tls.key
-          - -cookie-secret="{{ default (randAlpha 32 | lower | b64enc) .Values.oauthProxy.cookieSecret }}"
-          - -openshift-service-account={{ include "common.names.fullname" . }}
-          - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-          - -skip-auth-regex=^/metrics
-          - -skip-provider-button
-          - -request-logging=true
-        image: registry.redhat.io/openshift4/ose-oauth-proxy:v4.14
-        imagePullPolicy: IfNotPresent
-        ports:
-          - name: oauth-proxy
-            containerPort: 8888
-            protocol: TCP
-        volumeMounts:
-          - mountPath: /etc/tls/private
-            name: backstage-tls
+    # extraContainers:
+    #   - name: oauth-proxy
+    #     args:
+    #       - -provider=openshift
+    #       - -https-address=:8888
+    #       - -http-address=
+    #       - -email-domain=*
+    #       - -upstream=http://localhost:7007
+    #       - -tls-cert=/etc/tls/private/tls.crt
+    #       - -tls-key=/etc/tls/private/tls.key
+    #       - -cookie-secret="{{ default (randAlpha 32 | lower | b64enc) .Values.oauthProxy.cookieSecret }}"
+    #       - -openshift-service-account={{ include "common.names.fullname" . }}
+    #       - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    #       - -skip-auth-regex=^/metrics
+    #       - -skip-provider-button
+    #       - -request-logging=true
+    #     image: registry.redhat.io/openshift4/ose-oauth-proxy:v4.14
+    #     imagePullPolicy: IfNotPresent
+    #     ports:
+    #       - name: oauth-proxy
+    #         containerPort: 8888
+    #         protocol: TCP
+    #     volumeMounts:
+    #       - mountPath: /etc/tls/private
+    #         name: backstage-tls
 
     initContainers:
       - command:
