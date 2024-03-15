@@ -1,5 +1,7 @@
 app:
   title: Red Hat Developer Hub
+open-dora:
+  apiBaseUrl: http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666
 argocd:
   appLocatorMethods:
     - instances:
