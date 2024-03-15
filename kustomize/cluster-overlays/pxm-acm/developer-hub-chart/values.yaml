@@ -70,15 +70,9 @@ route:
     enabled: true
     insecureEdgeTerminationPolicy: Redirect
     key: ""
-    termination: reencrypt
+    termination: edge
   wildcardPolicy: None
 upstream:
-  service:
-    annotations:
-      service.alpha.openshift.io/serving-cert-secret-name: backstage-tls
-    ports:
-      backend: 8888
-      targetPort: oauth-proxy
   backstage:
     appConfig:
       app:
@@ -136,13 +130,7 @@ upstream:
     extraVolumeMounts:
       - mountPath: /opt/app-root/src/dynamic-plugins-root
         name: dynamic-plugins-root
-      - mountPath: /tmp/fakepath
-        name: backstage-tls
     extraVolumes:
-      - name: backstage-tls
-        secret:
-          defaultMode: 420
-          secretName: backstage-tls
       - ephemeral:
           volumeClaimTemplate:
             spec:
@@ -245,14 +233,10 @@ upstream:
       timeoutSeconds: 2
   ingress:
     host: "{{ .Values.global.host }}"
-  oauthProxy:
-    cookieSecret: ""
   serviceAccount:
     create: true
     name: "developer-hub"
-    annotations:
-      serviceaccounts.openshift.io/oauth-redirecturi.backstage: "https://developer-hub-developer-hub.apps.pxm-acm.v3s.us/oauth/callback"
-  nameOverride: developer-hub
+  nameOverride: developer hub
   postgresql:
     auth:
       secretKeys:
