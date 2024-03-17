@@ -30,7 +30,6 @@ enabled:
   permission: false
   sonarqube: false
   techdocs: false
-  open-dora: true
 
 integrations:
   github:

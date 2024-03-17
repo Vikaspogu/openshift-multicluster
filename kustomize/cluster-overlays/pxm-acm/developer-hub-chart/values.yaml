@@ -9,15 +9,27 @@ global:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
-      - package: "@devoteam-nl/open-dora-backstage-plugin@0.2.2"
-        integrity: "sha512-uM202sEE2b/nlGZSKUSk+IgPmHOGcxcynfa6I6kYtC3WmsHkYbTwfWYhVxOLiXcE6C9+4dB34Jah6ElB/Q/AAg=="
+      - package: "@vikaspogu/developer-hub-open-dora@1.0.1"
+        disabled: false
+        integrity: "sha512-jAZat6lOiBxqSSe0PEM6edFuysPT54uafsYMAAs5H1f1lkCaLdT/4hKh3A+w1TUp97q8As84fzomLSpzYUWfrw=="
         pluginConfig:
           dynamicPlugins:
             frontend:
-              devoteam-nl.open-dora-backstage-plugin:
+              vikaspogu.developer-hub-open-dora:
                 dynamicRoutes:
                   - path: /open-dora
                     importName: OpenDoraPage
+                    menuItem:
+                      text: OpenDora
+                mountPoints:
+                  - mountPoint: entity.page.overview/cards
+                    importName: OpenDoraPage
+                    config:
+                      layout:
+                        gridColumnEnd:
+                          lg: "span 4"
+                          md: "span 6"
+                          xs: "span 12"
       - disabled: false
         package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
       - disabled: false
