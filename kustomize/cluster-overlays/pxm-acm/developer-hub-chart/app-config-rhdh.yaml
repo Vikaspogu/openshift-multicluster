@@ -1,7 +1,9 @@
 app:
   title: Red Hat Developer Hub
-  open-dora:
-    apiBaseUrl: http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666
+
+open-dora:
+  apiBaseUrl: "http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666"
+
 argocd:
   appLocatorMethods:
     - instances:
@@ -103,8 +105,6 @@ catalog:
           frequency: { minutes: 30 }
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
-    open-dora:
-      apiBaseUrl: http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666
     ocm:
       default:
         kubernetesPluginRef: pxm-acm
