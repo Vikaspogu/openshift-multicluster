@@ -11,6 +11,13 @@ global:
     plugins:
       - package: "@devoteam-nl/open-dora-backstage-plugin@0.2.2"
         integrity: "sha512-uM202sEE2b/nlGZSKUSk+IgPmHOGcxcynfa6I6kYtC3WmsHkYbTwfWYhVxOLiXcE6C9+4dB34Jah6ElB/Q/AAg=="
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              devoteam-nl.open-dora-backstage-plugin:
+                dynamicRoutes:
+                  - path: /open-dora
+                    importName: OpenDoraPage
       - disabled: false
         package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
       - disabled: false
