@@ -20,7 +20,7 @@ global:
                   - path: /open-dora
                     importName: OpenDoraPluginPage
                     menuItem:
-                      text: "Open Dora"
+                      text: "OpenDORA"
                       icon: open-dora-icon
                 mountPoints:
                   - mountPoint: entity.page.overview/cards
