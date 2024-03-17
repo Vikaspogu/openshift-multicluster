@@ -9,9 +9,9 @@ global:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
-      - package: "@vikaspogu/developer-hub-open-dora@1.0.1"
+      - package: "@vikaspogu/developer-hub-open-dora@1.0.2"
         disabled: false
-        integrity: "sha512-jAZat6lOiBxqSSe0PEM6edFuysPT54uafsYMAAs5H1f1lkCaLdT/4hKh3A+w1TUp97q8As84fzomLSpzYUWfrw=="
+        integrity: "sha512-KVjKe72Petvzxt+VZCDxiGoClyTKOA6XvorZ3hW6OOH2hkycW1mQOsSIVEZ4urOSlIRbx4VN1044/ABY/B+X/Q=="
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -21,7 +21,7 @@ global:
                     importName: OpenDoraPluginPage
                     menuItem:
                       text: "OpenDORA"
-                      icon: open-dora-icon
+                      icon: OpenDoraIcon
                 mountPoints:
                   - mountPoint: entity.page.overview/cards
                     importName: OpenDoraPluginPage
