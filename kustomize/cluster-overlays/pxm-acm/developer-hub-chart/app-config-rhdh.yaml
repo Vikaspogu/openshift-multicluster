@@ -103,6 +103,8 @@ catalog:
           frequency: { minutes: 30 }
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
+    open-dora:
+      apiBaseUrl: http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666
     ocm:
       default:
         kubernetesPluginRef: pxm-acm
