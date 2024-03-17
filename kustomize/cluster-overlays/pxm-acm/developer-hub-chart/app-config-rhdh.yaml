@@ -18,6 +18,13 @@ auth:
         clientId: ${GITHUB_APP_CLIENT_ID}
         clientSecret: ${GITHUB_APP_CLIENT_SECRET}
 
+dynamicPlugins:
+  frontend:
+    open-dora:
+      dynamicRoutes:
+        - path: /open-dora
+          module: CustomModule
+
 enabled:
   argocd: true
   github: true
