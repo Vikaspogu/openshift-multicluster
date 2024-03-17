@@ -18,12 +18,13 @@ global:
               vikaspogu.developer-hub-open-dora:
                 dynamicRoutes:
                   - path: /open-dora
-                    importName: OpenDoraPage
+                    importName: OpenDoraPluginPage
                     menuItem:
                       text: OpenDora
+                      icon: open-dora-icon
                 mountPoints:
                   - mountPoint: entity.page.overview/cards
-                    importName: OpenDoraPage
+                    importName: OpenDoraPluginPage
                     config:
                       layout:
                         gridColumnEnd:
