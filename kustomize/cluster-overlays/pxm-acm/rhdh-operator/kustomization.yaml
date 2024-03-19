@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/rhdh-operator/
+commonAnnotations:
+  argocd.argoproj.io/sync-options: Delete=false
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/channel
+        value: "fast"
+    target:
+      kind: Subscription
