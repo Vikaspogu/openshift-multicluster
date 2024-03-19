@@ -4,6 +4,4 @@ kind: OperatorGroup
 metadata:
   name: rhdh-operator
   namespace: rhdh-operator
-spec:
-  targetNamespaces:
-    - rhdh-operator
+spec: {}
