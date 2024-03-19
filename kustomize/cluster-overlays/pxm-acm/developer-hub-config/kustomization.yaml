@@ -11,6 +11,9 @@ resources:
   - ./rolebindings.yaml
   - ./sa-secret.yaml
 
+commonAnnotations:
+  reloader.stakater.com/auto: "true"
+
 configMapGenerator:
   - name: app-config-rhdh
     files:
