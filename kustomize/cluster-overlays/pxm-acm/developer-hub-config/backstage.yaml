@@ -12,14 +12,10 @@ spec:
         - name: app-config-rhdh
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
-      envs:
-        - name: KUBE_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: token
-              name: developer-hub-sa
       secrets:
         - name: rhdh-secrets
+        - key: token
+          name: developer-hub-sa
     extraFiles:
       mountPath: /opt/app-root/src
     replicas: 1
