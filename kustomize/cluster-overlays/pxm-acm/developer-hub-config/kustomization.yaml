@@ -21,5 +21,6 @@ configMapGenerator:
   - name: dynamic-plugins-rhdh
     files:
       - dynamic-plugins.yaml=./dynamic-plugins-rhdh.yaml
+
 generatorOptions:
   disableNameSuffixHash: true

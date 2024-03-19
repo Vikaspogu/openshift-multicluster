@@ -19,5 +19,6 @@ spec:
     replicas: 1
     route:
       enabled: true
+      host: developer-hub-developer-hub.apps.pxm-acm.v3s.us
   database:
     enableLocalDb: true
