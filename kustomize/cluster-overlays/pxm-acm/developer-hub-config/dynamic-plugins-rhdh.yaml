@@ -1,0 +1,70 @@
+includes:
+  - dynamic-plugins.default.yaml
+plugins:
+  - integrity: sha512-c43ijr75IVxRLJLIF43yoyZbMWuTcBgTm/6RBqrKoJmPkYzmMvkb5wDaphLGdkTse9g+fFVtVu0hKT155C52WA==
+    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.1"
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          vikaspogu.developer-hub-open-dora:
+            dynamicRoutes:
+              - importName: OpenDoraPluginPage
+                menuItem:
+                  icon: extensionIcon
+                  text: OpenDORA
+                path: /open-dora
+            mountPoints:
+              - config:
+                  layout:
+                    gridColumnEnd:
+                      lg: span 4
+                      md: span 6
+                      xs: span 12
+                importName: OpenDoraPluginPage
+                mountPoint: entity.page.overview/cards
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-security-insights
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-techdocs
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          janus-idp.backstage-plugin-tekton:
+            mountPoints:
+              - config:
+                  if:
+                    allOf:
+                      - isTektonCIAvailable
+                  layout:
+                    gridColumn: 1 / -1
+                    gridRowStart: 1
+                importName: TektonCI
+                mountPoint: entity.page.ci/cards
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
