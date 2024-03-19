@@ -80,7 +80,7 @@ kubernetes:
           name: pxm-acm
           authProvider: "serviceAccount"
           skipTLSVerify: true
-          serviceAccountToken: ${KUBE_TOKEN}
+          serviceAccountToken: ${token}
           dashboardApp: openshift
           dashboardUrl: https://console-openshift-console.apps.pxm-acm.v3s.us/
       customResources:
