@@ -1,8 +1,8 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: sha512-c43ijr75IVxRLJLIF43yoyZbMWuTcBgTm/6RBqrKoJmPkYzmMvkb5wDaphLGdkTse9g+fFVtVu0hKT155C52WA==
-    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.1"
+  - integrity: "sha512-FbUmASdXJuXJa4auR55NyuWnFzINDvIbnuxSj30yPo+awBnZRgB1XLSJBZGUfTHbISL4yo7F53I1rQ4s2/TWVQ=="
+    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.2"
     pluginConfig:
       dynamicPlugins:
         frontend:
