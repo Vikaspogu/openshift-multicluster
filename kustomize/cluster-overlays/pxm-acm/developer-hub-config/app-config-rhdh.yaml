@@ -8,6 +8,20 @@ backend:
   baseUrl: https://backstage-developer-hub-developer-hub.apps.pxm-acm.v3s.us
   cors:
     origin: https://backstage-developer-hub-developer-hub.apps.pxm-acm.v3s.us
+    credentials: true
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+  csp:
+    connect-src:
+      - "'self'"
+      - "http:"
+      - "https:"
+  reading:
+    allow:
+      - host: "*.apps.pxm-acm.v3s.us"
 
 open-dora:
   apiBaseUrl: "http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666"
@@ -19,6 +33,7 @@ argocd:
           token: ${ARGOCD_TOKEN}
           url: https://openshift-gitops-server-openshift-gitops.apps.pxm-acm.v3s.us
       type: config
+
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
