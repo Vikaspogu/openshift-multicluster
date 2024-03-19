@@ -15,7 +15,7 @@ spec:
       secrets:
         - name: rhdh-secrets
         - key: token
-          name: developer-hub-sa
+          name: developer-hub-ocm
     extraFiles:
       mountPath: /opt/app-root/src
     replicas: 1

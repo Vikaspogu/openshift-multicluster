@@ -9,7 +9,7 @@ resources:
   - ./externalsecret-pullsecret.yaml
   - https://raw.githubusercontent.com/janus-idp/backstage-plugins/main/plugins/tekton/manifests/clusterrole.yaml
   - ./rolebindings.yaml
-  - ./sa-secret.yaml
+  - ./ocm-rolebindings.yaml
 
 configMapGenerator:
   - name: app-config-rhdh

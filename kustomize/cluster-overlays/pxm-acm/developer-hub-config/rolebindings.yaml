@@ -1,42 +1,4 @@
 ---
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: backstage-ocm-plugin
-rules:
-  - apiGroups:
-      - cluster.open-cluster-management.io
-    resources:
-      - managedclusters
-    verbs:
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - internal.open-cluster-management.io
-    resources:
-      - managedclusterinfos
-    verbs:
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - tekton.dev
-    resources:
-      - pipelines
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - postgresql.cnpg.io
-    resources:
-      - cluster
-    verbs:
-      - get
-      - list
-      - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -45,19 +7,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-reader
-subjects:
-  - kind: ServiceAccount
-    name: developer-hub
-    namespace: developer-hub
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: developer-hub-ocm-plugin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: backstage-ocm-plugin
 subjects:
   - kind: ServiceAccount
     name: developer-hub
