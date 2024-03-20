@@ -10,9 +10,10 @@ plugins:
             dynamicRoutes:
               - importName: OpenDoraPluginPage
                 menuItem:
-                  icon: extensionIcon
                   text: OpenDORA
                 path: /open-dora
+                config:
+                  pollingIntervalMs: 5000
             mountPoints:
               - config:
                   layout:
