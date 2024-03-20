@@ -1,0 +1,35 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: naas-kube-auth-engine-config
+spec:
+  rules:
+    - name: naas-kube-auth-engine-config
+      skipBackgroundRequests: true
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+              operations:
+                - CREATE
+              selector:
+                matchLabels:
+                  team: "?*"
+      generate:
+        synchronize: true
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: KubernetesAuthEngineConfig
+        namespace: vault-admin
+        name: "{{request.object.metadata.name}}"
+        data:
+          metadata:
+            labels:
+              created-by: kyverno
+              generated-for: "{{request.object.metadata.name}}-{{request.object.metadata.labels.team}}"
+          spec:
+            authentication:
+              path: kubernetes
+              role: policy-admin
+            path: pxm-acm/{{request.object.metadata.labels.team}}

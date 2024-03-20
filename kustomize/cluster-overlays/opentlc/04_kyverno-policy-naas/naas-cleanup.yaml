@@ -1,0 +1,42 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: policy-remove-label
+spec:
+  rules:
+    - name: remove-unwanted-label
+      match:
+        any:
+          - resources:
+            kinds:
+              - Namespace
+            operations:
+              - DELETE
+            selector:
+              matchLabels:
+                created-by: kyverno
+                generated-for: "{{request.object.metadata.name}}-{{request.object.metadata.labels.team}}"
+      mutate:
+        patchesJson6902: |-
+          - path: "/metadata/labels/cleanup"
+            op: true
+---
+apiVersion: kyverno.io/v2beta1
+kind: ClusterCleanupPolicy
+metadata:
+  name: naas-cleanup-vault
+spec:
+  match:
+    any:
+      - resources:
+        kinds:
+          - SecretEngineMount
+          - KubernetesAuthEngineRole
+          - Policy
+          - AuthEngineMount
+          - KubernetesAuthEngineConfig
+        selector:
+          matchLabels:
+            cleanup: "true"
+  schedule: "*/5 * * * *"
