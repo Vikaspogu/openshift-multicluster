@@ -19,20 +19,20 @@ spec:
   template:
     metadata:
       name: 'team-alpha-{{.path.filename | splitList "-" | first }}'
-    labels:
-      team-alpha-argocd: team-alpha-{{.path.filename | splitList "-" | first }}
+      labels:
+        team-alpha-argocd: team-alpha-{{.path.filename | splitList "-" | first }}
     spec:
       destination:
-        server: 'https://kubernetes.default.svc'
+        server: "https://kubernetes.default.svc"
         namespace: team-alpha-shared
       project: default
       sources:
         - chart: hello-world
           helm:
             valueFiles:
-              - '$values/{{ .path.path }}/{{.path.filename}}'
-          repoURL: 'https://helm.github.io/examples'
+              - "$values/{{ .path.path }}/{{.path.filename}}"
+          repoURL: "https://helm.github.io/examples"
           targetRevision: 0.1.0
         - ref: values
-          repoURL: 'https://github.com/idp-team/team-a-gitops'
+          repoURL: "https://github.com/idp-team/team-a-gitops"
           targetRevision: main
