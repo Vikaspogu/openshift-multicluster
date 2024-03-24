@@ -15,9 +15,12 @@ spec:
         memory: 1024Mi
   applicationInstanceLabelKey: team-alpha-argocd
   applicationSet:
+    env:
+      - name: ARGOCD_APPLICATIONSET_CONTROLLER_NAMESPACES
+        value: team-alpha-shared
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 1Gi
       requests:
         cpu: 250m
@@ -37,10 +40,10 @@ spec:
         cpu: 250m
         memory: 128Mi
   rbac:
-    defaultPolicy: ''
+    defaultPolicy: ""
     policy: |
       g, system:cluster-admins, role:admin
-    scopes: '[groups]'
+    scopes: "[groups]"
   redis:
     resources:
       limits:
