@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: team-alpha-dev
-  labels:
-    argocd.argoproj.io/managed-by-cluster-argocd: team-alpha-argocd
