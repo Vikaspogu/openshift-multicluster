@@ -9,5 +9,5 @@ roleRef:
   name: cluster-admin
 subjects:
   - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller
+    name: team-alpha-argocd-applicationset-controller
     namespace: team-alpha-shared
