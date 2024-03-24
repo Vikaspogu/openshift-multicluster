@@ -15,6 +15,10 @@ spec:
         memory: 1024Mi
   applicationInstanceLabelKey: team-alpha-argocd
   applicationSet:
+    sourceNamespaces:
+      - team-alpha-shared
+    scmProviders:
+      - https://github.com
     env:
       - name: ARGOCD_APPLICATIONSET_CONTROLLER_NAMESPACES
         value: team-alpha-shared
