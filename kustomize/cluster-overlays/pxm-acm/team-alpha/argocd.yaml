@@ -6,6 +6,8 @@ metadata:
   namespace: team-alpha-shared
 spec:
   controller:
+    extraCommandArgs:
+      - --application-namespaces=team-alpha*
     resources:
       limits:
         cpu: 2000m
@@ -73,6 +75,8 @@ spec:
       - TaskRun
       - PipelineRun
   server:
+    extraCommandArgs:
+      - --application-namespaces=team-alpha*
     resources:
       limits:
         cpu: 500m
