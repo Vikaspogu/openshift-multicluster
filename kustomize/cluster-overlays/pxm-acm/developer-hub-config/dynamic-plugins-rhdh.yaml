@@ -11,7 +11,7 @@ plugins:
               - importName: OpenDoraPluginPage
                 menuItem:
                   text: OpenDORA
-                  icon: extensionIcon
+                  icon: ExtensionIcon
                 path: /open-dora
                 config:
                   pollingIntervalMs: 5000
