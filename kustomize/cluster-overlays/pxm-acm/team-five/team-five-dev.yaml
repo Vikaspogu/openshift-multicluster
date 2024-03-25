@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: team-five-dev
   labels:
-    argocd.argoproj.io/managed-by: team-five-gitops
+    argocd.argoproj.io/managed-by: team-five-shared
