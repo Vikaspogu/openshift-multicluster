@@ -5,6 +5,7 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
+  resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
     resource.compareoptions: |
@@ -32,6 +33,10 @@ spec:
       type: ""
   resourceIgnoreDifferences:
     resourceIdentifiers:
+      - customization:
+          jsonPointers:
+            - /data
+        kind: Secret
       - group: admissionregistration.k8s.io
         kind: MutatingWebhookConfiguration
         customization:

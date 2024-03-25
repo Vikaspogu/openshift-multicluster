@@ -24,7 +24,7 @@ backend:
       - host: "*.apps.pxm-acm.v3s.us"
 
 open-dora:
-  apiBaseUrl: "http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666"
+  apiBaseUrl: "https://open-dora-apache-devlake.apps.pxm-acm.v3s.us"
 
 argocd:
   appLocatorMethods:
