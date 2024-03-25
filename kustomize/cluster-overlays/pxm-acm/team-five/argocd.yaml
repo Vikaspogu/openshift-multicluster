@@ -9,9 +9,8 @@ spec:
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm
   sourceNamespaces:
     - team-five-dev
-
     - team-five-test
-controller:
+  controller:
     resources:
       limits:
         cpu: 2000m
@@ -23,7 +22,7 @@ controller:
   applicationSet:
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 1Gi
       requests:
         cpu: 250m
@@ -43,10 +42,10 @@ controller:
         cpu: 250m
         memory: 128Mi
   rbac:
-    defaultPolicy: ''
+    defaultPolicy: ""
     policy: |
       g, system:cluster-admins, role:admin
-    scopes: '[groups]'
+    scopes: "[groups]"
   redis:
     resources:
       limits:
