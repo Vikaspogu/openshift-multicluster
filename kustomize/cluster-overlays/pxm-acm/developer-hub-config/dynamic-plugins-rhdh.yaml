@@ -6,7 +6,7 @@ plugins:
     pluginConfig:
       dynamicPlugins:
         frontend:
-          vikaspogu.developer-hub-open-dora:
+          vikaspogu.rhdh-dynamic-plugin-opendora:
             dynamicRoutes:
               - importName: OpenDoraPluginPage
                 menuItem:
@@ -14,6 +14,15 @@ plugins:
                 path: /open-dora
                 config:
                   pollingIntervalMs: 5000
+            mountPoints:
+              - config:
+                  layout:
+                    gridColumnEnd:
+                      lg: span 4
+                      md: span 6
+                      xs: span 12
+                importName: OpenDoraPluginPage
+                mountPoint: entity.page.overview/cards
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
   - disabled: false
