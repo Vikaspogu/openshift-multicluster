@@ -20,7 +20,7 @@ spec:
     metadata:
       name: 'team-five-{{.path.filename | splitList "-" | first }}'
       labels:
-        team-five-argocd: team-five-{{.path.filename | splitList "-" | first }}
+        team-five-gitops: team-five-{{.path.filename | splitList "-" | first }}
     spec:
       destination:
         server: "https://kubernetes.default.svc"
