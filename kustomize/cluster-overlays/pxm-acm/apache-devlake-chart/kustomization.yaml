@@ -9,9 +9,6 @@ resources:
   - ./external-secret-regred.yaml
   - ../../../bases/opendora-chart/
 
-commonAnnotations:
-  reloader.stakater.com/auto: "true"
-
 generatorOptions:
   disableNameSuffixHash: true
 
