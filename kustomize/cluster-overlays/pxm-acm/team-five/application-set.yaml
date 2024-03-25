@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: team-five-application-set
+  namespace: team-five-shared
+  labels:
+    team-five-argocd: team-five-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/idp-team/team-a-gitops
+        revision: HEAD
+        files:
+          - path: "pxm-acm/team-five/*.yaml"
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  template:
+    metadata:
+      name: 'team-five-{{.path.filename | splitList "-" | first }}'
+    labels:
+      team-five-argocd: team-five-{{.path.filename | splitList "-" | first }}
+    spec:
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: team-five-{{.path.filename | splitList "-" | first }}
+      project: team-five
+      sources:
+        - chart: hello-world
+          helm:
+            valueFiles:
+              - '$values/{{ .path.path }}/{{.path.filename}}'
+          repoURL: 'https://helm.github.io/examples'
+          targetRevision: 0.1.0
+        - ref: values
+          repoURL: 'https://github.com/idp-team/team-a-gitops'
+          targetRevision: main
