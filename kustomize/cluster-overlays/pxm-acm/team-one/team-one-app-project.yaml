@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-one
+  namespace: team-one-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: team-one
+  sourceRepos:
+    - https://github.com/idp-team/team-a-gitops.git
+    - https://helm.github.io/examples
+  destinations:
+    - name: team-one-dev
+      namespace: team-one-dev
+      server: 'https://kubernetes.default.svc'
+    - name: team-one-test
+      namespace: team-one-test
+      server: 'https://kubernetes.default.svc'
+  orphanedResources:
+    warn: false
+  permitOnlyProjectScopedClusters: false
+  sourceNamespaces:
+    - team-one-dev
+    - team-one-test
