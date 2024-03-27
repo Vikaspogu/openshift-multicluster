@@ -113,10 +113,6 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/pgsql-cluster/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
       target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
       rules:
         - allow: [Template]
@@ -129,11 +125,11 @@ catalog:
     github:
       # the provider ID can be any camelCase string
       providerId:
-        organization: "vikaspogu" # string
+        organization: "(vikaspogu|idp-team)"
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
           branch: "main" # string
-          repository: "cluster-components" # Regex
+          repository: "*" # Regex
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
