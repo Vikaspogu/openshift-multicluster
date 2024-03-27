@@ -103,6 +103,9 @@ kubernetes:
 permission:
   enabled: true
   rbac:
+    admin:
+      superUsers:
+        - name: user:default/vikaspogu
     policies-csv-file: ./rbac-policy.csv
 
 catalog:
