@@ -103,7 +103,7 @@ kubernetes:
 permission:
   enabled: true
   rbac:
-    policies-csv-file: ./rbac/rbac-policy.csv
+    policies-csv-file: ./rbac-policy.csv
 
 catalog:
   rules:
