@@ -99,8 +99,12 @@ kubernetes:
         - apiVersion: v1
           group: postgresql.cnpg.io
           plural: cluster
+
 permission:
-  enabled: false
+  enabled: true
+  rbac:
+    policies-csv-file: ./rbac/rbac-policy.csv
+
 catalog:
   rules:
     - allow: [Component, System, API, Resource, Location, Template]

@@ -18,6 +18,8 @@ configMapGenerator:
   - name: dynamic-plugins-rhdh
     files:
       - dynamic-plugins.yaml=./dynamic-plugins-rhdh.yaml
-
+  - name: rbac-policy
+    files:
+      - rbac-policy.csv=./rbac-policy.csv
 generatorOptions:
   disableNameSuffixHash: true

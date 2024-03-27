@@ -10,6 +10,7 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
         - name: app-config-rhdh
+        - name: rbac-policy
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
       secrets:

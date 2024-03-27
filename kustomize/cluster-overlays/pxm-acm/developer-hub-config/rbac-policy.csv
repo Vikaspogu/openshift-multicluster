@@ -1,0 +1,2 @@
+p, role:default/guests, catalog-entity, read, allow
+g, user:default/guest, role:default/guests
