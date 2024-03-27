@@ -1,17 +1,20 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: "sha512-FbUmASdXJuXJa4auR55NyuWnFzINDvIbnuxSj30yPo+awBnZRgB1XLSJBZGUfTHbISL4yo7F53I1rQ4s2/TWVQ=="
-    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.2"
+  - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
+    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.3"
     pluginConfig:
       dynamicPlugins:
         frontend:
           vikaspogu.rhdh-dynamic-plugin-opendora:
+            appIcons:
+              - name: openDoraIcon
+                importName: OpenDoraIcon
             dynamicRoutes:
               - importName: OpenDoraPluginPage
                 menuItem:
                   text: OpenDORA
-                  icon: ExtensionIcon
+                  icon: openDoraIcon
                 path: /open-dora
                 config:
                   pollingIntervalMs: 5000
