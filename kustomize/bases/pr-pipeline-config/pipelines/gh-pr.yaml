@@ -62,7 +62,7 @@ spec:
     - name: yaml-lint
       params:
         - name: args
-          value: ["$(workspaces.shared-workspace.path)"]
+          value: ["$(workspaces.shared-workspace.path)/kustomize/"]
       runAfter:
         - fetch-repository
       taskRef:
