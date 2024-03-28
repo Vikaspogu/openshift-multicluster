@@ -10,4 +10,4 @@ spec:
     keep: 4
     resources:
       - pipelinerun
-    schedule: 0 1 * * *
+    schedule: 0 * * * *
