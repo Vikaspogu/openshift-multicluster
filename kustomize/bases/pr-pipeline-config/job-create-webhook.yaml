@@ -23,7 +23,7 @@ spec:
                   "active": true,
                   "events": ["push", "pull_request"],
                   "config": {
-                    "url": "https://your-webhook-url.com",
+                    "url": "https://gh-pr-ci-pipelines.apps.pxm-acm.v3s.us",
                     "content_type": "json"
                   }
                 }'

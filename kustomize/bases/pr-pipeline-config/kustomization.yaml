@@ -11,3 +11,4 @@ resources:
   - ./external-secret.yaml
   - ./event_listener.yaml
   - ./route.yaml
+  - ./job-create-webhook.yaml
