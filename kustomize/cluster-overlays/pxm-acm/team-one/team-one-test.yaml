@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: team-one-test
   labels:
-    argocd.argoproj.io/managed-by: team-one-gitops //namespace of argocd instance
+    argocd.argoproj.io/managed-by: team-one-gitops #namespace of argocd instance
