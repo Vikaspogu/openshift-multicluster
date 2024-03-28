@@ -44,5 +44,10 @@ spec:
             value: $(tt.params.git-repo-full-name)
         workspaces:
           - name: shared-workspace
-            persistentVolumeClaim:
-              claimName: shared-workspace
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 500Mi
