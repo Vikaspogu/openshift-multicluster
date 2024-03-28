@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: team-one-application-set
+  namespace: team-one-gitops
+  labels:
+    team-one-argocd: team-one-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/idp-team/team-a-gitops
+        revision: HEAD
+        files:
+          - path: "pxm-acm/team-one/*.yaml"
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  template:
+    metadata:
+      name: 'team-one-{{.path.filename | splitList "-" | first }}'
+      labels:
+        team-one-gitops: team-one-{{.path.filename | splitList "-" | first }}
+    spec:
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: team-one-{{.path.filename | splitList "-" | first }}
+      project: team-one
+      sources:
+        - path: deploy
+          helm:
+            valueFiles:
+              - '$values/{{ .path.path }}/{{.path.filename}}'
+          repoURL: 'https://github.com/idp-team/helm-charts'
+          targetRevision: 0.1.0
+        - ref: values
+          repoURL: 'https://github.com/idp-team/team-a-gitops'
+          targetRevision: main
