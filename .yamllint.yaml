@@ -5,8 +5,8 @@ yaml-files:
   - ".yamllint"
 
 ignore:
-  - helm/
-  - installer/
+  - helm/**
+  - installer/**
 
 rules:
   # 80 chars should be enough, but don't fail if a line is longer
