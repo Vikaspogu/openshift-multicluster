@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "team-one-gitops-argocd-reader"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-reader
+subjects:
+  - kind: ServiceAccount
+    name: team-one-gitops-argocd-application-controller
+    namespace: team-one-gitops
+  - kind: ServiceAccount
+    name: team-one-gitops-argocd-server
+    namespace: team-one-gitops
