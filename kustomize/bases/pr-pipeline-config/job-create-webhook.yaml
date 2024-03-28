@@ -27,7 +27,7 @@ spec:
                     "content_type": "json"
                   }
                 }'
-          image: curlimages/curl:latest
+          image: alpine:latest
           env:
             - name: TOKEN
               valueFrom:
