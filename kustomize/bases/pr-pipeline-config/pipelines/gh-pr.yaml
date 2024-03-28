@@ -62,14 +62,14 @@ spec:
     - name: yaml-lint
       params:
         - name: args
-          value: ["-c .yamllint.yaml ."]
+          value: ["$(workspaces.shared-workspace.path)"]
       runAfter:
         - fetch-repository
       taskRef:
         kind: Task
         name: yaml-lint
       workspaces:
-        - name: output
+        - name: shared-workspace
           workspace: shared-workspace
   # github-add-comment
   finally:
