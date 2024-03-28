@@ -23,7 +23,7 @@ spec:
       default: ["--help"]
   steps:
     - name: lint-yaml-files
-      image: docker.io/cytopia/yamllint:1@sha256:0e45685f8324a597d8112f131b4ae22c9fddffbba17374df8c65a673fa776711
+      image: docker.io/cytopia/yamllint:1@sha256:596fb19eb71e55ba5b2fa56d8c18a615ec82adc8d3bf2d73918cb78c8f3240fb
       workingDir: $(workspaces.shared-workspace.path)
       command:
         - yamllint
