@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: ci-pipelines
 resources:
   - ./namespace.yaml
+  - ./pvc.yaml
   - ./tasks/
   - ./pipelines/
   - ./trigger-bindings/
