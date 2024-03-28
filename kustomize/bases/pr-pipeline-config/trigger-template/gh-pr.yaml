@@ -1,0 +1,48 @@
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: gh-pr
+spec:
+  params:
+    - name: git-repo-url
+      description: The git repository url
+    - name: git-revision
+      description: The git revision
+      default: main
+    - name: git-repo-name
+      description: The name of the deployment to be created / patched
+    - name: pr-number
+      description: the pull request number
+    - name: pr-url
+      description: the pull request url
+    - name: head-sha
+      description: git commit SHA
+    - name: git-repo-full-name
+      description: The full name of the repository
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: gh-pr-pipeline-
+      spec:
+        serviceAccountName: pipeline
+        pipelineRef:
+          name: gh-pr-pipeline
+        params:
+          - name: pr-number
+            value: $(tt.params.pr-number)
+          - name: pr-url
+            value: $(tt.params.pr-url)
+          - name: git-url
+            value: $(tt.params.git-repo-url)
+          - name: git-revision
+            value: $(tt.params.git-revision)
+          - name: head-sha
+            value: $(tt.params.head-sha)
+          - name: git-repo-full-name
+            value: $(tt.params.git-repo-full-name)
+        workspaces:
+          - name: shared-workspace
+            persistentVolumeClaim:
+              claimName: shared-workspace

@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pr-pipeline-webhook-job
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  backoffLimit: 100
+  template:
+    spec:
+      containers:
+        - name: create-webhook
+          command:
+            - /bin/bash
+            - "-c"
+            - |
+              set -x
+              curl -X POST https://api.github.com/repos/vikaspogu/openshift-multicluster/hooks \
+                -H "Authorization: token $TOKEN" \
+                -H "Accept: application/vnd.github.v3+json" \
+                -d '{
+                  "name": "web",
+                  "active": true,
+                  "events": ["push", "pull_request"],
+                  "config": {
+                    "url": "https://your-webhook-url.com",
+                    "content_type": "json"
+                  }
+                }'
+          image: curlimages/curl:latest
+          env:
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: github
+                  key: token
+      restartPolicy: Never

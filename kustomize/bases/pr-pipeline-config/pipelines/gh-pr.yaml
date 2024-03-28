@@ -1,0 +1,89 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: gh-pr-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+  params:
+    - name: pr-number
+      type: string
+      description: pull request number
+    - name: git-url
+      type: string
+      description: url of the git repo for the code of deployment
+    - name: git-revision
+      type: string
+      description: revision to be used from repo of the code for deployment
+      default: main
+    - name: pr-url
+      type: string
+      description: url of the pull request
+    - name: head-sha
+      type: string
+      description: git commit SHA
+    - name: git-repo-full-name
+      type: string
+      description: The full name of the repository
+  tasks:
+    - name: set-status-pending
+      taskRef:
+        name: github-set-status
+      params:
+        - name: REPO_FULL_NAME
+          value: $(params.git-repo-full-name)
+        - name: SHA
+          value: $(params.head-sha)
+        - name: DESCRIPTION
+          value: Change the GitHub PR status to pending
+        - name: STATE
+          value: "pending"
+        - name: TARGET_URL
+          value: "https://console-openshift-console.apps.pxm-acm.v3s.us/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"
+    - name: fetch-repository
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: $(params.git-url)
+        - name: subdirectory
+          value: ""
+        - name: deleteExisting
+          value: "true"
+        - name: revision
+          value: $(params.git-revision)
+      runAfter:
+        - set-status-pending
+    - name: yaml-lint
+      params:
+        - name: args
+          value: ["-c .yamllint.yaml ."]
+      runAfter:
+        - fetch-repository
+      taskRef:
+        kind: Task
+        name: yaml-lint
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+  # github-add-comment
+  finally:
+    - name: github-set-status
+      taskRef:
+        name: github-set-status
+      params:
+        - name: REPO_FULL_NAME
+          value: $(params.git-repo-full-name)
+        - name: SHA
+          value: $(params.head-sha)
+        - name: DESCRIPTION
+          value: An update to GitHub about our pipeline status
+        - name: STATE
+          value: "$(tasks.status)"
+        - name: TARGET_URL
+          value: "https://console-openshift-console.apps.pxm-acm.v3s.us/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"
