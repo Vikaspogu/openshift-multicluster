@@ -62,7 +62,7 @@ spec:
     - name: yaml-lint
       params:
         - name: args
-          value: ["-c .yamllint.yaml ."]
+          value: ["-c .yamllint.yaml $(workspaces.source.path)"]
       runAfter:
         - fetch-repository
       taskRef:
