@@ -1,0 +1,13 @@
+apiVersion: operator.tekton.dev/v1alpha1
+kind: TektonConfig
+metadata:
+  name: config
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
+spec:
+  pruner:
+    disabled: false
+    keep: 4
+    resources:
+      - pipelinerun
+    schedule: 0 1 * * *
