@@ -11,10 +11,11 @@ spec:
       containers:
         - name: create-webhook
           command:
-            - /bin/bash
-            - "-c"
+            - sh
+          args:
+            - -ce
             - |
-              set -x
+              set -e
               curl -X POST https://api.github.com/repos/vikaspogu/openshift-multicluster/hooks \
                 -H "Authorization: token $TOKEN" \
                 -H "Accept: application/vnd.github.v3+json" \
@@ -27,7 +28,7 @@ spec:
                     "content_type": "json"
                   }
                 }'
-          image: alpine:latest
+          image: curlimages/curl:latest
           env:
             - name: TOKEN
               valueFrom:
