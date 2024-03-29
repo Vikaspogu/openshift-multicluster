@@ -124,8 +124,19 @@ catalog:
   providers:
     github:
       # the provider ID can be any camelCase string
-      providerId:
-        organization: "(vikaspogu|idp-team)"
+      personalRepoId:
+        organization: "vikaspogu"
+        catalogPath: "/**/catalog-info.yaml" # string
+        filters:
+          branch: "main" # string
+          repository: "(.*)" # Regex
+        schedule: # optional; same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 30 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+      idpOrgRepoId:
+        organization: "idp-team"
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
           branch: "main" # string
