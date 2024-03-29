@@ -124,7 +124,7 @@ catalog:
   providers:
     github:
       # the provider ID can be any camelCase string
-      personalRepoId:
+      personalRepoProviderId:
         organization: "vikaspogu"
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
@@ -135,7 +135,7 @@ catalog:
           frequency: { minutes: 30 }
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
-      idpOrgRepoId:
+      idpOrgRepoProviderId:
         organization: "idp-team"
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
