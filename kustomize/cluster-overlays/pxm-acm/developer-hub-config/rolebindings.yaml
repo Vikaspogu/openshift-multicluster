@@ -12,8 +12,8 @@ subjects:
     name: developer-hub
     namespace: developer-hub
   - kind: ServiceAccount
-    name: developer-hub
-    namespace: developer-hub-ocm
+    name: developer-hub-ocm
+    namespace: developer-hub
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
