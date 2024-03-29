@@ -3,6 +3,6 @@ apiVersion: apps/v1
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
-    reloader.stakater.com/auto: "true"
+    reloader.stakater.com/search: "true"
   name: backstage-developer-hub
   namespace: developer-hub

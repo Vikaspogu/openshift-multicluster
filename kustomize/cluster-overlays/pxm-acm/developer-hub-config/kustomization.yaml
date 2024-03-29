@@ -25,4 +25,4 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
-    reloader.stakater.com/auto: "true"
+    reloader.stakater.com/match: "true"
