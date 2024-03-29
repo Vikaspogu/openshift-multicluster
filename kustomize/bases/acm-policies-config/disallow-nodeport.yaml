@@ -7,7 +7,7 @@ spec:
   object-templates:
     - complianceType: mustnothave
       objectDefinition:
-        apiVersion: wgpolicyk8s.io/v1alpha1
+        apiVersion: wgpolicyk8s.io/v1alpha2
         kind: ClusterPolicyReport
         results:
           - rule: restrict-nodeport
