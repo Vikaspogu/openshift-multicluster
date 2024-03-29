@@ -129,9 +129,7 @@ catalog:
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
           branch: "main" # string
-          repository: "(.*)" # Regex
-          topic:
-            exclude: ["software-templates"]
+          repository: "^(?:(?!software-template).)*$" # Regex
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
@@ -139,16 +137,12 @@ catalog:
           timeout: { minutes: 3 }
       idpOrgRepoProviderId:
         organization: "idp-team"
-        catalogPath: "/**/catalog-info.yaml" # string
+        catalogPath: "/**/catalog-info.yaml"
         filters:
-          branch: "main" # string
-          repository: "(.*)" # Regex
-          topic:
-            exclude: ["software-templates"]
-        schedule: # optional; same options as in TaskScheduleDefinition
-          # supports cron, ISO duration, "human duration" as used in code
+          branch: "main"
+          repository: "^(?:(?!software-template).)*$"
+        schedule:
           frequency: { minutes: 30 }
-          # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
     ocm:
       default:
