@@ -14,3 +14,7 @@ policies:
     manifests:
       - path: configuration-policy.yaml
     remediationAction: enforce
+  - name: disallow-nodeport-policy
+    manifests:
+      - path: disallow-nodeport.yaml
+    remediationAction: enforce

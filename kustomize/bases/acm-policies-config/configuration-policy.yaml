@@ -10,8 +10,7 @@ spec:
         apiVersion: wgpolicyk8s.io/v1alpha1
         kind: ClusterPolicyReport
         results:
-          - status: fail
-            rule: require-mesh-annotation
+          - rule: require-mesh-annotation
             result: fail
     - complianceType: musthave
       objectDefinition:
