@@ -42,6 +42,6 @@ spec:
                     any:
                       - key: ["get", "list", "watch"]
                         operator: AnyIn
-                        value: "{{ request.object.rules[?resources.contains(@,'secrets')].verbs[] }}"
+                        value: "{{ `{{ request.object.rules[?resources.contains(@,'secrets')].verbs[] }}` }}"
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
