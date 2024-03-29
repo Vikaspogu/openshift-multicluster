@@ -124,7 +124,7 @@ catalog:
   providers:
     github:
       # the provider ID can be any camelCase string
-      personalRepoProviderId:
+      providerId:
         organization: "vikaspogu"
         catalogPath: "/**/catalog-info.yaml" # string
         filters:
