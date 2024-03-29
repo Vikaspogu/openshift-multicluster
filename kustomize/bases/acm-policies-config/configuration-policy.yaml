@@ -2,7 +2,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: ConfigurationPolicy
 metadata:
-  name: restrict-secret policy
+  name: restrict-secret-policy
 spec:
   object-templates:
     - complianceType: musthave
@@ -31,6 +31,10 @@ spec:
                       kinds:
                         - Role
                         - ClusterRole
+              exclude:
+                any:
+                  - clusterRoles:
+                      - cluster-admin
               validate:
                 message: "Requesting verbs `get`, `list`, or `watch` on Secrets is forbidden."
                 deny:
