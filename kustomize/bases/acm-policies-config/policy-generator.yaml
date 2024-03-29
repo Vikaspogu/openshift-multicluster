@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: restrict-secret-policy-generator
+policyDefaults:
+  namespace: open-cluster-management
+  severity: high
+  placement:
+    clusterSelectors:
+      cluster.open-cluster-management.io/clusterset: default
+policies:
+  - name: restrict-auth-policy
+    manifests:
+      - path: configuration-policy.yaml
+    remediationAction: enforce
