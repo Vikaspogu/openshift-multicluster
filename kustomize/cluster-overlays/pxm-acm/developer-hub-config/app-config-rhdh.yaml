@@ -27,6 +27,7 @@ open-dora:
   apiBaseUrl: "https://open-dora-apache-devlake.apps.pxm-acm.v3s.us"
 
 argocd:
+  namespacedApps: true
   appLocatorMethods:
     - instances:
         - name: main
