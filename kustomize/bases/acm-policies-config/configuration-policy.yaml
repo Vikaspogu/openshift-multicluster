@@ -5,6 +5,14 @@ metadata:
   name: restrict-secret-policy
 spec:
   object-templates:
+    - complianceType: mustnothave
+      objectDefinition:
+        apiVersion: wgpolicyk8s.io/v1alpha1
+        kind: ClusterPolicyReport
+        results:
+          - status: fail
+            rule: require-mesh-annotation
+            result: fail
     - complianceType: musthave
       objectDefinition:
         apiVersion: kyverno.io/v1
