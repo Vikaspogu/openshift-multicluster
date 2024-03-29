@@ -10,6 +10,7 @@ resources:
   - https://raw.githubusercontent.com/janus-idp/backstage-plugins/main/plugins/tekton/manifests/clusterrole.yaml
   - ./rolebindings.yaml
   - ./ocm-rolebindings.yaml
+  - ./deployment.yaml
 
 configMapGenerator:
   - name: app-config-rhdh
@@ -23,3 +24,5 @@ configMapGenerator:
       - rbac-policy.csv=./rbac-policy.csv
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    reloader.stakater.com/search: "true"
