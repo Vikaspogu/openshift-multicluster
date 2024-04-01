@@ -33,6 +33,9 @@ argocd:
         - name: main
           token: ${ARGOCD_TOKEN}
           url: https://openshift-gitops-server-openshift-gitops.apps.pxm-acm.v3s.us
+        - token: ${ARGOCD_TEAM_A_TOKEN}
+          name: team-a
+          url: https://team-a-gitops-server-team-a-gitops.apps.pxm-acm.v3s.us
       type: config
 
 auth:
