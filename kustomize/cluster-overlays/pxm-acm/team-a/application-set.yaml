@@ -20,7 +20,7 @@ spec:
     metadata:
       name: 'team-a-{{.path.filename | splitList "-" | first }}'
       labels:
-        team-a-gitops: app-uno-{{.path.filename | splitList "-" | first }}
+        team-a-gitops: app-uno
     spec:
       destination:
         server: "https://kubernetes.default.svc"
