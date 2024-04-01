@@ -7,6 +7,10 @@ metadata:
 spec:
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm
+  extraConfig:
+    accounts.admin: apiKey, login
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
   sourceNamespaces:
     - team-a-dev
     - team-a-test
