@@ -1,5 +1,5 @@
 location: insert-location-here
-openshiftVersion: 4.14.6
+openshiftVersion: 4.14.16
 inventoryName:
 workers: 0
 masters: 3
