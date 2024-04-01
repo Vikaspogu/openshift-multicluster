@@ -12,7 +12,7 @@ spec:
         repoURL: https://github.com/idp-team/team-a-gitops
         revision: HEAD
         files:
-          - path: "pxm-acm/team-a/*.yaml"
+          - path: "pxm-acm/app-uno/*.yaml"
   goTemplate: true
   goTemplateOptions:
     - missingkey=error
@@ -23,17 +23,17 @@ spec:
         team-a-gitops: app-uno-{{.path.filename | splitList "-" | first }}
     spec:
       destination:
-        server: 'https://kubernetes.default.svc'
+        server: "https://kubernetes.default.svc"
         namespace: team-a-{{.path.filename | splitList "-" | first }}
       project: team-a
       sources:
         - helm:
             releaseName: app-uno
             valueFiles:
-              - '$values/{{ .path.path }}/{{.path.filename}}'
+              - "$values/{{ .path.path }}/{{.path.filename}}"
           path: deploy
-          repoURL: 'https://github.com/idp-team/helm-charts'
+          repoURL: "https://github.com/idp-team/helm-charts"
           targetRevision: main
         - ref: values
-          repoURL: 'https://github.com/idp-team/team-a-gitops'
+          repoURL: "https://github.com/idp-team/team-a-gitops"
           targetRevision: main

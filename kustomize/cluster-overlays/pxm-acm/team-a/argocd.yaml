@@ -13,16 +13,16 @@ spec:
   controller:
     resources:
       limits:
-        cpu: 2000m
-        memory: 2048Mi
+        cpu: "2"
+        memory: 2Gi
       requests:
         cpu: 250m
-        memory: 1024Mi
+        memory: 1Gi
   applicationInstanceLabelKey: team-a-gitops
   applicationSet:
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 1Gi
       requests:
         cpu: 250m
@@ -42,10 +42,22 @@ spec:
         cpu: 250m
         memory: 128Mi
   rbac:
-    defaultPolicy: ''
+    defaultPolicy: ""
     policy: |
       g, system:cluster-admins, role:admin
-    scopes: '[groups]'
+      g, openshift-admins, role:admin
+    scopes: "[groups]"
+  sso:
+    dex:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+      openShiftOAuth: true
+    provider: dex
   redis:
     resources:
       limits:
@@ -57,8 +69,8 @@ spec:
   repo:
     resources:
       limits:
-        cpu: 1000m
-        memory: 1024Mi
+        cpu: "1"
+        memory: 1Gi
       requests:
         cpu: 250m
         memory: 256Mi
