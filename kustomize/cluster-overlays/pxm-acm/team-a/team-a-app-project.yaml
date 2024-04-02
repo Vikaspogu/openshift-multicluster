@@ -15,12 +15,8 @@ spec:
     - name: team-a-dev
       namespace: team-a-dev
       server: 'https://kubernetes.default.svc'
-    - name: team-a-test
-      namespace: team-a-test
-      server: 'https://kubernetes.default.svc'
   orphanedResources:
     warn: false
   permitOnlyProjectScopedClusters: false
   sourceNamespaces:
     - team-a-dev
-    - team-a-test

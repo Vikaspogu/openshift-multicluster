@@ -2,25 +2,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: app-uno-application-set
+  name: app-dos-application-set
   namespace: team-a-gitops
   labels:
-    team-a-argocd: app-uno-appset
+    team-a-argocd: app-dos-appset
 spec:
   generators:
     - git:
         repoURL: https://github.com/idp-team/team-a-gitops
         revision: HEAD
         files:
-          - path: "pxm-acm/app-uno/*.yaml"
+          - path: "pxm-acm/app-dos/*.yaml"
   goTemplate: true
   goTemplateOptions:
     - missingkey=error
   template:
     metadata:
-      name: 'app-uno-{{.path.filename | splitList "-" | first }}'
+      name: 'app-dos-{{.path.filename | splitList "-" | first }}'
       labels:
-        team-a-gitops: app-uno
+        team-a-gitops: app-dos
     spec:
       destination:
         server: 'https://kubernetes.default.svc'
@@ -28,7 +28,7 @@ spec:
       project: team-a
       sources:
         - helm:
-            releaseName: app-uno
+            releaseName: app-dos
             valueFiles:
               - '$values/{{ .path.path }}/{{.path.filename}}'
           path: deploy

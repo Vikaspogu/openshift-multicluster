@@ -13,7 +13,6 @@ spec:
       ignoreAggregatedRoles: true
   sourceNamespaces:
     - team-a-dev
-    - team-a-test
   controller:
     resources:
       limits:
