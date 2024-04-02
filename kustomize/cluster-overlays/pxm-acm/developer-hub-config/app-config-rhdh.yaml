@@ -30,7 +30,13 @@ argocd:
   namespacedApps: true
   username: developer-hub
   password: ${ARGOCD_DEV_HUB_PASSWORD}
-  appLocatorMethods: []
+  appLocatorMethods:
+    - instances:
+        - name: main
+          url: https://openshift-gitops-server-openshift-gitops.apps.pxm-acm.v3s.us
+        - name: team-a-gitops
+          url: https://team-a-gitops-server-team-a-gitops.apps.pxm-acm.v3s.us
+      type: config
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
