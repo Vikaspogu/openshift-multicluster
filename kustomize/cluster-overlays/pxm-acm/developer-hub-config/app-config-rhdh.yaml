@@ -28,15 +28,9 @@ open-dora:
 
 argocd:
   namespacedApps: true
-  appLocatorMethods:
-    - instances:
-        - name: main
-          token: ${ARGOCD_TOKEN}
-          url: https://openshift-gitops-server-openshift-gitops.apps.pxm-acm.v3s.us
-        - token: ${ARGOCD_TEAM_A_TOKEN}
-          name: team-a-gitops
-          url: https://team-a-gitops-server-team-a-gitops.apps.pxm-acm.v3s.us
-      type: config
+  username: developer-hub
+  password: ${ARGOCD_DEV_HUB_PASSWORD}
+  appLocatorMethods: []
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
