@@ -8,7 +8,7 @@ spec:
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm
   extraConfig:
-    accounts.admin: apiKey
+    accounts.developer-hub: apiKey, login
     resource.compareoptions: |
       ignoreAggregatedRoles: true
   sourceNamespaces:
@@ -50,6 +50,7 @@ spec:
     policy: |
       g, system:cluster-admins, role:admin
       g, openshift-admins, role:admin
+      g, developer-hub, role:readonly
     scopes: "[groups]"
   sso:
     dex:
