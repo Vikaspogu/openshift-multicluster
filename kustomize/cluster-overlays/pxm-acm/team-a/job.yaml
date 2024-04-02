@@ -26,7 +26,7 @@ spec:
                 then
                   DEV_HUB_PASSWORD=$(oc get secret developer-hub-user -o jsonpath="{.data.password}" | base64 -d)
                   echo "Login to argocd server"
-                  argocd login --plaintext --username admin --password "xcCknX23FEGS7oIuzpVlasUd8W1iODHN"  team-a-gitops-server
+                  argocd login --plaintext --username admin --password ${PASSWORD}  team-a-gitops-server
                   argocd account list
                   echo "Updating developer-hub user password"
                   argocd account update-password \
