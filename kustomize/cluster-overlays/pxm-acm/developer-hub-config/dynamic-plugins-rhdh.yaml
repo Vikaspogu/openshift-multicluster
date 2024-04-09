@@ -1,6 +1,8 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
+  - integrity: "sha512-dLtqBgZSqvpXzgrOaWbKjdr+OSyXZEZUFguMFTSj+nj1ZlAwbvZLfaLhhG3AjCKawRoZasIxl9WRiTfMJKSDNw=="
+    package: "@roadiehq/plugin-scaffolder-frontend-module-http-request-field@1.6.10"
   - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
     package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.3"
     pluginConfig:
