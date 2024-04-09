@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: kyverno
   annotations:
-    argocd.argoproj.io/sync-options: Delete=false
+    argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
     openshift.io/cluster-monitoring: "true"
