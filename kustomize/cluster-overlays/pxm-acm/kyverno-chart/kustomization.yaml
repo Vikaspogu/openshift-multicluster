@@ -6,6 +6,9 @@ resources:
   - ../../../bases/kyverno-chart/
   - https://github.com/kyverno/kyverno/releases/download/v1.11.0/install.yaml
 
+commonAnnotations:
+  argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
+
 patches:
   - patch: |-
       - op: replace
