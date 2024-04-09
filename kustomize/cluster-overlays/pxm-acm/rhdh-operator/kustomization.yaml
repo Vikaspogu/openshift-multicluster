@@ -10,6 +10,6 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/channel
-        value: "fast"
+        value: "fast-1.1"
     target:
       kind: Subscription
