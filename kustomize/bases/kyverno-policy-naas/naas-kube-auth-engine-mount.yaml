@@ -6,7 +6,6 @@ metadata:
 spec:
   rules:
     - name: naas-kube-auth-engine-mount
-      skipBackgroundRequests: true
       match:
         any:
           - resources:

@@ -6,7 +6,6 @@ metadata:
 spec:
   rules:
     - name: naas-auth-engine-role
-      skipBackgroundRequests: true
       match:
         any:
           - resources:
