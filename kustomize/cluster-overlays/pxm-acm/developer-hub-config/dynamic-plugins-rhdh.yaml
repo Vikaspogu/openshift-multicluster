@@ -1,8 +1,8 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: "sha512-5nJCNESGeVhAoxX19eVXkwUSYo/vFzBf5paNoKSXKsg0c6NR3oh84FqcRXNrdAYSUhe2RUcV8EQrInZYOtCdcw=="
-    package: "@vikaspogu/rhdh-http-request@0.0.2"
+  - integrity: "sha512-Akk0Iexxe7GTTFwz125oMq6UeT4CEehxV70/bfSDsyZ48S8JpEHBch/P3UGqpQp0HxsG5F4dCKZkX3q40WuHog=="
+    package: "@vikaspogu/rhdh-datetime@0.0.1"
   - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
     package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.3"
     pluginConfig:
