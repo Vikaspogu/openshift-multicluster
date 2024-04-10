@@ -1,10 +1,10 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: "sha512-wuG5mDDdBEBz5peTyW4fdoz2I9d9fN30O/qrZUg9fOA6OkinHfBpuzIidBWQeKINq+vCWYPxAT8s9CauuH744w=="
-    package: "@vikaspogu/rhdh-timesaver-common@0.0.1"
-  - integrity: "sha512-EM4jec3aKjrMHSBrOZDTBzlLFsVvKsgA+sBpZbmtnG2MC5xYy08bq0pibHHhLOjYSWouKS6Tu8t9oPa9vlX+TA=="
-    package: "@vikaspogu/rhdh-timesaver-backend@0.0.1"
+  - integrity: "sha512-BtVp+oLhzJHEyZW7ecOIRekBoucmTz6zr6xbDwwec4+sjiG5XTvBFsL81Z6E6h7WkX82u/RgQw6V4HC/6ocuHA=="
+    package: "@vikaspogu/rhdh-timesaver-common@0.0.2"
+  - integrity: "sha512-yoiqaxpSZHPnyyNJJPH5xKwBJdBkE3+xEu932IwaiBhtPwtzAWuiwVr0g/i/UTLm74bIx0aRBJPCuHjJOHw88g=="
+    package: "@vikaspogu/rhdh-timesaver-backend@0.0.2"
   - integrity: "sha512-oO1T6oTaupTH4IdqE1AZuJTZLa+fmjsclrrP3+icZpc6W/D5D8awkgRjUKkam7p+DXaaeBJ6dBfG2bivSMfTpw=="
     package: "@vikaspogu/rhdh-timesaver@0.0.2"
     pluginConfig:
