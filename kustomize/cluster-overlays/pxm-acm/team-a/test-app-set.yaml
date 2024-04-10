@@ -1,0 +1,39 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: test-application-set
+  namespace: team-a-gitops
+  labels:
+    team-a-argocd: test-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/idp-team/team-a-gitops
+        revision: HEAD
+        files:
+          - path: "pxm-acm/test/*.yaml"
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  template:
+    metadata:
+      name: 'test-{{.path.filename | splitList "-" | first }}'
+      labels:
+        team-a-gitops: test
+    spec:
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: team-a-{{.path.filename | splitList "-" | first }}
+      project: team-a
+      sources:
+        - helm:
+            releaseName: test
+            valueFiles:
+              - '$values/{{ .path.path }}/{{.path.filename}}'
+          path: deploy
+          repoURL: 'https://github.com/idp-team/helm-charts'
+          targetRevision: main
+        - ref: values
+          repoURL: 'https://github.com/idp-team/team-a-gitops'
+          targetRevision: main
