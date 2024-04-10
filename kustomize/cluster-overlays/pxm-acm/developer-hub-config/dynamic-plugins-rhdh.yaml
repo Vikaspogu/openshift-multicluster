@@ -1,6 +1,27 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
+  - integrity: "sha512-wuG5mDDdBEBz5peTyW4fdoz2I9d9fN30O/qrZUg9fOA6OkinHfBpuzIidBWQeKINq+vCWYPxAT8s9CauuH744w=="
+    package: "@vikaspogu/rhdh-timesaver-common@0.0.1"
+  - integrity: "sha512-EM4jec3aKjrMHSBrOZDTBzlLFsVvKsgA+sBpZbmtnG2MC5xYy08bq0pibHHhLOjYSWouKS6Tu8t9oPa9vlX+TA=="
+    package: "@vikaspogu/rhdh-timesaver-backend@0.0.1"
+  - integrity: "sha512-oO1T6oTaupTH4IdqE1AZuJTZLa+fmjsclrrP3+icZpc6W/D5D8awkgRjUKkam7p+DXaaeBJ6dBfG2bivSMfTpw=="
+    package: "@vikaspogu/rhdh-timesaver@0.0.2"
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          vikaspogu.rhdh-timesaver:
+            appIcons:
+              - name: timeSaverIcon
+                importName: TimeSaverIcon
+            dynamicRoutes:
+              - importName: TimeSaverPage
+                menuItem:
+                  text: TimeSaver
+                  icon: timeSaverIcon
+                path: /time-saver
+                config:
+                  pollingIntervalMs: 5000
   - integrity: "sha512-Akk0Iexxe7GTTFwz125oMq6UeT4CEehxV70/bfSDsyZ48S8JpEHBch/P3UGqpQp0HxsG5F4dCKZkX3q40WuHog=="
     package: "@vikaspogu/rhdh-datetime@0.0.1"
   - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
