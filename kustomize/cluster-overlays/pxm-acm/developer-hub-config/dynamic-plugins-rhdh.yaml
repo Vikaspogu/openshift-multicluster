@@ -22,8 +22,8 @@ plugins:
                 path: /time-saver
                 config:
                   pollingIntervalMs: 5000
-  - integrity: "sha512-BibtFrMLcn6pdmsukrMQgoXUMkXEk/6GPiUpIynqhSresQbQkjmxJQiqR/LvTKGHDgPKsIoR/VHfPEUH9ONx5g=="
-    package: "@vikaspogu/rhdh-datetime@0.0.2"
+  - integrity: "sha512-J4tas7N2LpRtfEzq3n7aGdi545KaedzXKGJ4cpTRmjkLz5o7L4qmNsK3X/w4gTw/dc2wETj2QNOZ8i/q8OXuPQ=="
+    package: "@vikaspogu/rhdh-datetime@0.0.3"
   - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
     package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.3"
     pluginConfig:
