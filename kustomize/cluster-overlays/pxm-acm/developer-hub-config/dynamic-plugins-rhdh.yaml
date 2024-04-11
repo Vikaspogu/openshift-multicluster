@@ -3,8 +3,8 @@ includes:
 plugins:
   - integrity: "sha512-BtVp+oLhzJHEyZW7ecOIRekBoucmTz6zr6xbDwwec4+sjiG5XTvBFsL81Z6E6h7WkX82u/RgQw6V4HC/6ocuHA=="
     package: "@vikaspogu/rhdh-timesaver-common@0.0.2"
-  - integrity: "sha512-rxK0ROp02FOyG/0C2FQbLVfWUh/E18Ja/whjXBKDB3884uzVltp3ODeJAqUVXI+lC9a9ZzpDU0ayZK/yCY4kjA=="
-    package: "@vikaspogu/rhdh-timesaver-backend@0.0.11"
+  - integrity: "sha512-gbuUNcyLnhIanxJlxTqeLhDSTeAWka17JYVrsDSDCZHXZvp27AYzINrIDAx7JZ204XhIB0oXHAvcD8HcjK7GMA=="
+    package: "@vikaspogu/rhdh-timesaver-backend@0.0.12"
   - integrity: "sha512-oO1T6oTaupTH4IdqE1AZuJTZLa+fmjsclrrP3+icZpc6W/D5D8awkgRjUKkam7p+DXaaeBJ6dBfG2bivSMfTpw=="
     package: "@vikaspogu/rhdh-timesaver@0.0.2"
     pluginConfig:
