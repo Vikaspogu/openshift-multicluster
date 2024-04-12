@@ -1,12 +1,10 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: "sha512-BtVp+oLhzJHEyZW7ecOIRekBoucmTz6zr6xbDwwec4+sjiG5XTvBFsL81Z6E6h7WkX82u/RgQw6V4HC/6ocuHA=="
-    package: "@vikaspogu/rhdh-timesaver-common@0.0.2"
-  - integrity: "sha512-i2U3svwKDYYowcd/Fhp0E5pNpk4msYHvs3bw5m4AmY4GNQoBRfl5Epxte+m0eTkGUfLfQ6saQrUfhpmUoaILYg=="
-    package: "@vikaspogu/rhdh-timesaver-backend@0.0.20"
-  - integrity: "sha512-oO1T6oTaupTH4IdqE1AZuJTZLa+fmjsclrrP3+icZpc6W/D5D8awkgRjUKkam7p+DXaaeBJ6dBfG2bivSMfTpw=="
-    package: "@vikaspogu/rhdh-timesaver@0.0.2"
+  - integrity: "sha512-1yLSs3MrOn1N5DP2l3+211hB8zj0XNi7E2jn9uFXgyAHNc5uSl/KsAaIiixgjfmx2qVq6uDt5E649E1U7jDTuQ=="
+    package: "@vikaspogu/dynamic-timesaver-backend@0.0.1"
+  - integrity: "sha512-jR3D3MRjf9jUuyKkpiyTVXmW63lbXFy9k5EnVl/XEZdqUha/Me9Gr69qSoOu7/LkCRdtRqWLr0nv7KzgP8rrvQ=="
+    package: "@vikaspogu/dynamic-timesaver@0.0.1"
     pluginConfig:
       dynamicPlugins:
         frontend:
@@ -22,14 +20,12 @@ plugins:
                 path: /time-saver
                 config:
                   pollingIntervalMs: 5000
-  - integrity: "sha512-J4tas7N2LpRtfEzq3n7aGdi545KaedzXKGJ4cpTRmjkLz5o7L4qmNsK3X/w4gTw/dc2wETj2QNOZ8i/q8OXuPQ=="
-    package: "@vikaspogu/rhdh-datetime@0.0.3"
-  - integrity: "sha512-ygPBeepiCBoS4c7+HauUfLLfwpWyUMq2G8iEP/1jC3hTNHyprJANXF3ROU7mUsEReEilIVN7kRFK2rjxAv2IPg=="
-    package: "@vikaspogu/rhdh-dynamic-plugin-opendora@0.0.3"
+  - integrity: "sha512-KPfZoOwSLvnMcIF7OvCk3OKf8Eh7lFoICWR5fuBAApfPRY7lR6Ibva1ZhUPGzelAYncUpN15UARBpos+OAY2zA=="
+    package: "@vikaspogu/dynamic-opendora@0.0.1"
     pluginConfig:
       dynamicPlugins:
         frontend:
-          vikaspogu.rhdh-dynamic-plugin-opendora:
+          vikaspogu.dynamic-opendora:
             appIcons:
               - name: openDoraIcon
                 importName: OpenDoraIcon
