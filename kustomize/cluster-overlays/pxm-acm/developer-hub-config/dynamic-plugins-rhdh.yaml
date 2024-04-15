@@ -22,8 +22,8 @@ plugins:
                 path: /time-saver
                 config:
                   pollingIntervalMs: 5000
-  - integrity: "sha512-KPfZoOwSLvnMcIF7OvCk3OKf8Eh7lFoICWR5fuBAApfPRY7lR6Ibva1ZhUPGzelAYncUpN15UARBpos+OAY2zA=="
-    package: "@vikaspogu/dynamic-opendora@0.0.1"
+  - integrity: "sha512-GkrIC/WvZmBQ0VY+WXESaMahGW9D5mnEi2PNH9DfjEPN1TMfi1eqV3LF4oisNx/S/xNkNTT3lJvL0vl5ttb88A=="
+    package: "@vikaspogu/dynamic-opendora@0.0.2"
     pluginConfig:
       dynamicPlugins:
         frontend:
