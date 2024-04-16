@@ -12,7 +12,7 @@ helmCharts:
     releaseName: reloader
     namespace: reloader
     repo: https://stakater.github.io/stakater-charts
-    version: "1.0.76"
+    version: "1.0.79"
     valuesInline:
       nameOverride: reloader
       fullnameOverride: reloader
