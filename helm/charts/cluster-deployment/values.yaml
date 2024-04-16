@@ -5,7 +5,7 @@ workers: 0
 masters: 3
 ingressVIP:
 apiVIP:
-holdInstallation:
+holdInstallation: false
 networking:
   clusterCidr: 10.128.0.0/14
   machineCidr:
@@ -17,4 +17,4 @@ agentLabelSelector:
   patch: agent-install.openshift.io/bmh
   deployment: {}
 hostNames:
-- host1
+  - host1
