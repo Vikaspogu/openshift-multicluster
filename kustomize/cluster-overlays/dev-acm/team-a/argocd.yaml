@@ -26,7 +26,7 @@ spec:
   applicationSet:
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 1Gi
       requests:
         cpu: 250m
@@ -46,12 +46,12 @@ spec:
         cpu: 250m
         memory: 128Mi
   rbac:
-    defaultPolicy: ''
+    defaultPolicy: ""
     policy: |
       g, system:cluster-admins, role:admin
       g, openshift-admins, role:admin
       g, developer-hub, role:readonly
-    scopes: '[groups]'
+    scopes: "[groups]"
   sso:
     dex:
       resources:

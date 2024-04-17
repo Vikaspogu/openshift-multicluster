@@ -124,5 +124,53 @@ helmCharts:
             volumeMounts:
               - name: vault-root-token
                 mountPath: /vault-root-token
-
+          - name: vault-admin-initializer
+            image: registry.connect.redhat.com/hashicorp/vault:1.14.0-ubi
+            env:
+              - name: VAULT_ADDR
+                value: http://vault:8200
+              - name: VAULT_CACERT
+                value: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+            command:
+              - /bin/bash
+              - -c
+              - |
+                while true; do
+                  sleep 5
+                  if [[ -f /vault-root-token/root_token ]]; then
+                    export VAULT_TOKEN=$(cat /vault-root-token/root_token)
+                    if [[ $(vault status | grep "Sealed" | grep "false") ]]; then
+                      if [[ ! $(vault policy list | grep vault-admin) ]]; then
+                        vault auth enable kubernetes
+                        vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc:443
+                        vault write auth/kubernetes/role/policy-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=1h
+                        cat << EOF | vault policy write vault-admin -
+                          path "/*" {
+                            capabilities = ["create", "read", "update", "delete", "list","sudo"]
+                          }
+                EOF
+                      else
+                        echo vault admin already configured, just updating kubernetes config
+                        vault write auth/kubernetes/config token_reviewer_jwt=@/var/run/secrets/kubernetes.io/serviceaccount/token kubernetes_host=https://kubernetes.default.svc:443 kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                        echo creating accessor configmap
+                        accessor=$(vault auth list -detailed | grep kubernetes | awk '{print $3}')
+                        if /usr/local/libexec/vault/kubectl get configmap kubeauth-accessor -n vault; then
+                          /usr/local/libexec/vault/kubectl patch configmap kubeauth-accessor -n vault -p '{"data":{"accessor": "'"${accessor}"'"}}'
+                        else
+                          /usr/local/libexec/vault/kubectl create configmap kubeauth-accessor -n vault --from-literal=accessor=${accessor}
+                        fi
+                        sleep 5
+                      fi
+                    else
+                      echo vault still sealed
+                    fi
+                  else
+                    echo root token not initialized yet
+                  fi
+                done
+            volumeMounts:
+              - name: vault-root-token
+                mountPath: /vault-root-token
+              - name: plugins
+                mountPath: /usr/local/libexec/vault
 patches: []

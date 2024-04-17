@@ -1,0 +1,160 @@
+app:
+  title: Red Hat Developer Hub
+  baseUrl: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+backend:
+  auth:
+    keys:
+      - secret: "${BACKEND_SECRET}"
+  baseUrl: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+  cors:
+    origin: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+    credentials: true
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+  csp:
+    connect-src:
+      - "'self'"
+      - "http:"
+      - "https:"
+  reading:
+    allow:
+      - host: "*.apps.pxm-acm.v3s.us"
+
+open-dora:
+  apiBaseUrl: "https://open-dora-apache-devlake.apps.pxm-acm.v3s.us"
+
+argocd:
+  namespacedApps: true
+  username: developer-hub
+  password: ${ARGOCD_DEV_HUB_PASSWORD}
+  appLocatorMethods:
+    - instances:
+        - name: main
+          url: https://openshift-gitops-server-openshift-gitops.apps.pxm-acm.v3s.us
+        - name: team-a-gitops
+          url: https://team-a-gitops-server-team-a-gitops.apps.pxm-acm.v3s.us
+      type: config
+
+auth:
+  # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: development
+  providers:
+    github:
+      development:
+        clientId: ${GITHUB_APP_CLIENT_ID}
+        clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+
+enabled:
+  argocd: true
+  github: true
+  kubernetes: true
+  ocm: true
+  githubOrg: false
+  gitlab: false
+  jenkins: false
+  keycloak: false
+  permission: false
+  sonarqube: false
+  techdocs: false
+
+integrations:
+  github:
+    - host: github.com
+      token: ${GH_TOKEN}
+proxy:
+  endpoints:
+    "/developer-hub":
+      target: https://raw.githubusercontent.com/
+      pathRewrite:
+        "^/api/proxy/developer-hub/tech-radar": /Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-config/config/tech-radar.json
+        "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/kustomize/cluster-overlays/pxm-acm/developer-hub-config/config/home-page.json
+      changeOrigin: true
+      secure: true
+
+kubernetes:
+  serviceLocatorMethod:
+    type: "multiTenant"
+  clusterLocatorMethods:
+    - type: "config"
+      clusters:
+        - url: https://api.pxm-acm.v3s.us:6443
+          name: pxm-acm
+          authProvider: "serviceAccount"
+          skipTLSVerify: true
+          serviceAccountToken: ${token}
+          dashboardApp: openshift
+          dashboardUrl: https://console-openshift-console.apps.pxm-acm.v3s.us/
+      customResources:
+        - apiVersion: v1beta1
+          group: tekton.dev
+          plural: pipelines
+        - apiVersion: v1beta1
+          group: tekton.dev
+          plural: pipelineruns
+        - apiVersion: v1beta1
+          group: tekton.dev
+          plural: taskruns
+        - apiVersion: v1
+          group: route.openshift.io
+          plural: routes
+        - apiVersion: v1
+          group: postgresql.cnpg.io
+          plural: cluster
+
+permission:
+  enabled: true
+  rbac:
+    admin:
+      superUsers:
+        - name: user:default/vikaspogu
+    policies-csv-file: ./rbac-policy.csv
+
+catalog:
+  rules:
+    - allow: [Component, System, API, Resource, Location, Template]
+  locations:
+    - type: url
+      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
+      rules:
+        - allow: [Template]
+    - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
+      type: url
+      rules:
+        - allow: [Group, User]
+
+  providers:
+    github:
+      # the provider ID can be any camelCase string
+      providerId:
+        organization: "vikaspogu"
+        catalogPath: "/**/catalog-info.yaml" # string
+        filters:
+          branch: "main" # string
+          repository: "^(?:(?!software-template).)*$" # Regex
+        schedule: # optional; same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 30 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+      idpOrgRepoProviderId:
+        organization: "idp-team"
+        catalogPath: "/**/catalog-info.yaml"
+        filters:
+          branch: "main"
+          repository: "^(?:(?!software-template).)*$"
+        schedule:
+          frequency: { minutes: 30 }
+          timeout: { minutes: 3 }
+    ocm:
+      default:
+        kubernetesPluginRef: pxm-acm
+        name: multiclusterhub
+        owner: group:ops
+        schedule:
+          frequency:
+            seconds: 10
+          timeout:
+            seconds: 60

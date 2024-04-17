@@ -1,7 +1,0 @@
-apiVersion: tower.ansible.com/v1alpha1
-kind: AnsibleWorkflow
-metadata:
-  name: openshift-create-sno-cluster
-spec:
-  connection_secret: aap-user-token
-  workflow_template_name: OpenShift - Create SNO Cluster

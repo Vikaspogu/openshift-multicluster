@@ -4,4 +4,4 @@ metadata:
   name: openshift-create-sno-cluster
 spec:
   connection_secret: aap-user-token
-  workflow_template_name: OpenShift - SNO Cluster
+  workflow_template_name: OpenShift - Create SNO Cluster
