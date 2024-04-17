@@ -1,13 +1,13 @@
 app:
   title: Red Hat Developer Hub
-  baseUrl: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.pxm-acm.v3s.us/
 backend:
   auth:
     keys:
       - secret: "${BACKEND_SECRET}"
-  baseUrl: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.pxm-acm.v3s.us/
   cors:
-    origin: https://developer-hub-developer-hub.apps.pxm-acm.v3s.us
+    origin: https://backstage-developer-hub-developer-hub.apps.pxm-acm.v3s.us/
     credentials: true
     methods:
       - GET
