@@ -58,7 +58,14 @@ enabled:
   keycloak: false
   permission: false
   sonarqube: false
-  techdocs: false
+  techdocs: true
+
+techdocs:
+  generator:
+    runIn: local
+  builder: local
+  publisher:
+    type: local
 
 integrations:
   github:
