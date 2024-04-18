@@ -51,7 +51,7 @@ enabled:
   argocd: true
   github: true
   kubernetes: true
-  ocm: true
+  ocm: false
   githubOrg: false
   gitlab: false
   jenkins: false
@@ -148,13 +148,3 @@ catalog:
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 3 }
-    ocm:
-      default:
-        kubernetesPluginRef: pxm-acm
-        name: multiclusterhub
-        owner: group:ops
-        schedule:
-          frequency:
-            seconds: 10
-          timeout:
-            seconds: 60
