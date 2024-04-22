@@ -375,7 +375,6 @@ spec:
         subPath: keys.txt
       - mountPath: /.config/helm
         name: helm-custom-config
-        subPath: helm
     resources:
       limits:
         cpu: "1"
