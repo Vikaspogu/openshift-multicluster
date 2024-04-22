@@ -320,10 +320,17 @@ spec:
           secretName: sops-age
     initContainers:
       - name: install-helm-multivalues-plugin
-        image: lachlanevenson/k8s-helm:v3.10.2
+        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
         command: [sh, -c]
         args:
-          - helm plugin install https://github.com/nico-ulbricht/helm-multivalues
+          - "helm plugin install https://github.com/nico-ulbricht/helm-multivalues"
+        env:
+          - name: HELM_CACHE_HOME
+            value: /.config/cache
+          - name: HELM_CONFIG_HOME
+            value: /.config/cache
+          - name: HELM_DATA_HOME
+            value: /.config/data
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
