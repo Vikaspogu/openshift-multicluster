@@ -5,6 +5,18 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
+  configManagementPlugins: |
+    - name: helm-multivalues
+      init:
+        command: [sh, -c, 'echo "Initializing..."']
+      generate:
+        command: [helm multivalues template $ARGOCD_APP_NAME -f $values-folder -f $values-files]
+      parameters:
+        static:
+            - name: values-files
+              collectionType: "string"
+            - name: values-folder
+              collectionType: "string"
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
@@ -307,6 +319,14 @@ spec:
         secret:
           secretName: sops-age
     initContainers:
+      - name: install-helm-multivalues-plugin
+        image: alpine:3.8
+        command: [sh, -c]
+        args:
+          - helm plugin install https://github.com/nico-ulbricht/helm-multivalues
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
       - name: install-custom-tools
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
