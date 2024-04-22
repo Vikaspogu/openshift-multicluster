@@ -311,11 +311,11 @@ spec:
       - name: SOPS_AGE_KEY_FILE
         value: /.config/sops/age/keys.txt
       - name: HELM_CACHE_HOME
-        value: /.config/cache
+        value: /.config/helm/cache
       - name: HELM_CONFIG_HOME
-        value: /.config/cache
+        value: /.config/helm/cache
       - name: HELM_DATA_HOME
-        value: /.config/data
+        value: /.config/helm/data
     volumes:
       - name: custom-tools
         emptyDir: {}
