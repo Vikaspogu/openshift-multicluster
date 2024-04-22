@@ -17,7 +17,7 @@ helmCharts:
     releaseName: devlake
     namespace: apache-devlake
     repo: https://apache.github.io/incubator-devlake-helm-chart
-    version: "0.21.0-beta9"
+    version: "0.21.0"
     valuesFile: values.yaml
 
 patches:
