@@ -321,6 +321,8 @@ spec:
         emptyDir: {}
       - name: policy-generator
         emptyDir: {}
+      - name: helm-custom-config
+        emptyDir: {}
       - name: sops-age
         secret:
           secretName: sops-age
@@ -332,14 +334,14 @@ spec:
           - "helm plugin install https://github.com/nico-ulbricht/helm-multivalues"
         env:
           - name: HELM_CACHE_HOME
-            value: /custom-tools/cache
+            value: /helm-custom-config/cache
           - name: HELM_CONFIG_HOME
-            value: /custom-tools/cache
+            value: /helm-custom-config/cache
           - name: HELM_DATA_HOME
-            value: /custom-tools/data
+            value: /helm-custom-config/data
         volumeMounts:
-          - mountPath: /custom-tools
-            name: custom-tools
+          - mountPath: /helm-custom-config
+            name: helm-custom-config
       - name: install-custom-tools
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
@@ -372,7 +374,7 @@ spec:
         name: sops-age
         subPath: keys.txt
       - mountPath: /.config/helm
-        name: custom-tools
+        name: helm-custom-config
         subPath: helm
     resources:
       limits:
