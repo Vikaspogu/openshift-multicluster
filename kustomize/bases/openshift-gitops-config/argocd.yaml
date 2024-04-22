@@ -310,6 +310,12 @@ spec:
         value: /.config
       - name: SOPS_AGE_KEY_FILE
         value: /.config/sops/age/keys.txt
+      - name: HELM_CACHE_HOME
+        value: /.config/cache
+      - name: HELM_CONFIG_HOME
+        value: /.config/cache
+      - name: HELM_DATA_HOME
+        value: /.config/data
     volumes:
       - name: custom-tools
         emptyDir: {}
@@ -326,14 +332,14 @@ spec:
           - "helm plugin install https://github.com/nico-ulbricht/helm-multivalues"
         env:
           - name: HELM_CACHE_HOME
-            value: /custom-tools/cache
+            value: /helm-custom-path/cache
           - name: HELM_CONFIG_HOME
-            value: /custom-tools/cache
+            value: /helm-custom-path/cache
           - name: HELM_DATA_HOME
-            value: /custom-tools/data
+            value: /helm-custom-path/data
         volumeMounts:
-          - mountPath: /custom-tools
-            name: custom-tools
+          - mountPath: /helm-custom-path
+            name: helm-custom-path
       - name: install-custom-tools
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
@@ -365,6 +371,8 @@ spec:
       - mountPath: /.config/sops/age/keys.txt
         name: sops-age
         subPath: keys.txt
+      - mountPath: /.config/helm
+        name: helm-custom-path
     resources:
       limits:
         cpu: "1"
