@@ -326,11 +326,11 @@ spec:
           - "helm plugin install https://github.com/nico-ulbricht/helm-multivalues"
         env:
           - name: HELM_CACHE_HOME
-            value: /.config/cache
+            value: /custom-tools/cache
           - name: HELM_CONFIG_HOME
-            value: /.config/cache
+            value: /custom-tools/cache
           - name: HELM_DATA_HOME
-            value: /.config/data
+            value: /custom-tools/data
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
