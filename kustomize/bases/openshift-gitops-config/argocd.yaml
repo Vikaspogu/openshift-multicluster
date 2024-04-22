@@ -320,7 +320,7 @@ spec:
           secretName: sops-age
     initContainers:
       - name: install-helm-multivalues-plugin
-        image: alpine:3.8
+        image: lachlanevenson/k8s-helm:v3.10.2
         command: [sh, -c]
         args:
           - helm plugin install https://github.com/nico-ulbricht/helm-multivalues
