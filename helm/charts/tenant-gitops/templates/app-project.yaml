@@ -1,0 +1,30 @@
+
+{{- range $key, $apps := .Values.apps}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{$key}}
+  namespace: {{$key}}-gitops
+  labels:
+    {{- include "tenant-gitops.labels" . | nindent 4 }}
+spec:
+  description: {{$key}}
+  sourceRepos:
+    - https://github.com/idp-team/team-a-gitops.git
+    - https://helm.github.io/examples
+    - https://github.com/idp-team/helm-charts
+  destinations:
+  {{- range $appKey,$appList := $apps }}
+    - name: {{ $appList.name }}
+      namespace: {{ $appList.namespace }}
+      server: "https://kubernetes.default.svc"
+  {{- end }}
+  orphanedResources:
+    warn: false
+  permitOnlyProjectScopedClusters: false
+  sourceNamespaces:
+  {{- range $appKey,$appList := $apps }}
+    - {{ $appList.namespace }}
+  {{- end }}
+{{- end }}
