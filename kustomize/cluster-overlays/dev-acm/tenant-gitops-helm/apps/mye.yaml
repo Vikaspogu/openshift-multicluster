@@ -1,0 +1,6 @@
+apps:
+  mye:
+    - name: test1
+      namespace: test-ns
+    - name: test2
+      namespace: test-ns2

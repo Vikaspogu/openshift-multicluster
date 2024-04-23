@@ -1,0 +1,6 @@
+apps:
+  health:
+    - name: health
+      namespace: health-ns
+    - name: health2
+      namespace: health-ns2

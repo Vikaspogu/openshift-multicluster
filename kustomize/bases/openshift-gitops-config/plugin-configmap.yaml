@@ -12,14 +12,6 @@ data:
       name: helm-multivalues-plugin
     spec:
       init:
-        command: [sh, -c, 'helm plugin list && echo $values-folder']
+        command: [sh, -c, 'helm plugin list']
       generate:
-        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME $chart_path -f $values_folder --values $values_files']
-      parameters:
-        static:
-          - name: values_files
-            collectionType: "string"
-          - name: values_folder
-            collectionType: "string"
-          - name: chart_path
-            collectionType: "string"
+        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME $ARGOCD_ENV_CHART_PATH -f $ARGOCD_ENV_VALUES_FOLDER --values $ARGOCD_ENV_VALUES_FILES']
