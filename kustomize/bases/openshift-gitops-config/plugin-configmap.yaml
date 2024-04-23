@@ -14,7 +14,7 @@ data:
       init:
         command: [sh, -c, 'helm plugin list']
       generate:
-        command: [helm multivalues template $ARGOCD_APP_NAME -f $ARGOCD_APP_SOURCE_PATH/$values-folder -f $ARGOCD_APP_SOURCE_PATH/$values-files]
+        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME -f $ARGOCD_APP_SOURCE_PATH/$values-folder -f $ARGOCD_APP_SOURCE_PATH/$values-files']
       parameters:
         static:
           - name: values-files
