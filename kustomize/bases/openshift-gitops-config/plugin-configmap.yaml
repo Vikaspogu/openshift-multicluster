@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-multivalues-plugin
+  namespace: openshift-gitops
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: helm-multivalues-plugin
+    spec:
+      init:
+        command: [sh, -c, 'echo "Initializing..."']
+      generate:
+        command: [helm multivalues template $ARGOCD_APP_NAME -f $values-folder -f $values-files]
+      parameters:
+        static:
+          - name: values-files
+            collectionType: "string"
+          - name: values-folder
+            collectionType: "string"

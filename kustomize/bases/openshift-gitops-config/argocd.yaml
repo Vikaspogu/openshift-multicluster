@@ -5,18 +5,6 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
-  configManagementPlugins: |
-    - name: helm-multivalues
-      init:
-        command: [sh, -c, 'echo "Initializing..."']
-      generate:
-        command: [helm multivalues template $ARGOCD_APP_NAME -f $values-folder -f $values-files]
-      parameters:
-        static:
-            - name: values-files
-              collectionType: "string"
-            - name: values-folder
-              collectionType: "string"
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
@@ -305,6 +293,36 @@ spec:
       g, openshift-admins, role:admin
     scopes: "[groups]"
   repo:
+    sidecarContainers:
+      - name: cmp
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: busybox
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: helm-multivalues-plugin
+    volumes:
+      - configMap:
+          name: helm-multivalues-plugin
+        name: helm-multivalues-plugin
+      - name: custom-tools
+        emptyDir: {}
+      - name: policy-generator
+        emptyDir: {}
+      - name: helm-custom-config
+        emptyDir: {}
+      - name: sops-age
+        secret:
+          secretName: sops-age
     env:
       - name: XDG_CONFIG_HOME
         value: /.config
@@ -316,16 +334,6 @@ spec:
         value: /.config/helm/cache
       - name: HELM_DATA_HOME
         value: /.config/helm/data
-    volumes:
-      - name: custom-tools
-        emptyDir: {}
-      - name: policy-generator
-        emptyDir: {}
-      - name: helm-custom-config
-        emptyDir: {}
-      - name: sops-age
-        secret:
-          secretName: sops-age
     initContainers:
       - name: install-helm-multivalues-plugin
         image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
