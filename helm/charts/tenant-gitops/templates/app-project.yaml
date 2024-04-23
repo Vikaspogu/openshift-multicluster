@@ -1,4 +1,4 @@
-
+{{- $releaseLabels := include "tenant-gitops.labels" . -}}
 {{- range $key, $apps := .Values.apps}}
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -7,7 +7,7 @@ metadata:
   name: {{$key}}
   namespace: {{$key}}-gitops
   labels:
-    {{- include "tenant-gitops.labels" . | nindent 4 }}
+    {{- $releaseLabels | nindent 4 }}
 spec:
   description: {{$key}}
   sourceRepos:
