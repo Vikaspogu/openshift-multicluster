@@ -14,10 +14,12 @@ data:
       init:
         command: [sh, -c, 'helm plugin list && echo $values-folder']
       generate:
-        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME -f $values-folder -f $values-files']
+        command: [sh, -c, 'helm multivalues template $chart-path $ARGOCD_APP_NAME -f $values-folder -f $values-files']
       parameters:
         static:
           - name: values-files
             collectionType: "string"
           - name: values-folder
+            collectionType: "string"
+          - name: chart-path
             collectionType: "string"
