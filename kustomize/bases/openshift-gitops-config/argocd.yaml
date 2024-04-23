@@ -294,9 +294,16 @@ spec:
     scopes: "[groups]"
   repo:
     sidecarContainers:
-      - name: cmp
+      - name: helm-multivalues-plugin
         command: [/var/run/argocd/argocd-cmp-server]
-        image: busybox
+        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
+        env:
+          - name: HELM_CACHE_HOME
+            value: /.config/helm/cache
+          - name: HELM_CONFIG_HOME
+            value: /.config/helm/cache
+          - name: HELM_DATA_HOME
+            value: /.config/helm/data
         volumeMounts:
           - mountPath: /var/run/argocd
             name: var-files
@@ -307,6 +314,8 @@ spec:
           - mountPath: /home/argocd/cmp-server/config/plugin.yaml
             subPath: plugin.yaml
             name: helm-multivalues-plugin
+          - mountPath: /.config/helm
+            name: helm-custom-config
     volumes:
       - configMap:
           name: helm-multivalues-plugin
