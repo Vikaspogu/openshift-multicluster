@@ -12,7 +12,7 @@ data:
       name: helm-multivalues-plugin
     spec:
       init:
-        command: [sh, -c, 'echo "Initializing..."']
+        command: [sh, -c, 'helm plugin list']
       generate:
         command: [helm multivalues template $ARGOCD_APP_NAME -f $ARGOCD_APP_SOURCE_PATH/$values-folder -f $ARGOCD_APP_SOURCE_PATH/$values-files]
       parameters:
