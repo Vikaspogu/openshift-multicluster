@@ -14,7 +14,7 @@ data:
       init:
         command: [sh, -c, 'echo "Initializing..."']
       generate:
-        command: [helm multivalues template $ARGOCD_APP_NAME -f $values-folder -f $values-files]
+        command: [helm multivalues template $ARGOCD_APP_NAME -f $ARGOCD_APP_SOURCE_PATH/$values-folder -f $ARGOCD_APP_SOURCE_PATH/$values-files]
       parameters:
         static:
           - name: values-files
