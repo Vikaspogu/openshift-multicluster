@@ -297,9 +297,6 @@ spec:
       - name: cmp
         command: [/var/run/argocd/argocd-cmp-server]
         image: busybox
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
         volumeMounts:
           - mountPath: /var/run/argocd
             name: var-files
