@@ -3,7 +3,7 @@ kind: ArgoCD
 apiVersion: argoproj.io/v1beta1
 metadata:
   name: {{ .Values.lob }}-gitops
-  namespace: {{ $gitopsNamespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "tenant-gitops.labels" . | nindent 4 }}
 spec:
