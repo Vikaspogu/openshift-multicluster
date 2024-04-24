@@ -1,6 +1,7 @@
 apps:
-  mye:
-    - name: test1
-      namespace: test-ns
-    - name: test2
-      namespace: test-ns2
+  mye-tool:
+    namespaces:
+      - mye-tool-ns1
+      - mye-tool-ns2
+    sourceRepos:
+      - https://helm.github.io/examples

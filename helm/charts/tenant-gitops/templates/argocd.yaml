@@ -15,8 +15,8 @@ spec:
       ignoreAggregatedRoles: true
   sourceNamespaces:
   {{- range $key, $apps := .Values.apps}}
-  {{- range $appKey,$appList := $apps }}
-    - {{ $appList.namespace }}
+  {{- range $namespace := $apps.namespaces }}
+    - {{ $namespace }}
   {{- end }}
   {{- end }}
   controller:

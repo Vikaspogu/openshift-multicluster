@@ -11,20 +11,20 @@ metadata:
 spec:
   description: {{$key}}
   sourceRepos:
-    - https://github.com/idp-team/team-a-gitops.git
-    - https://helm.github.io/examples
-    - https://github.com/idp-team/helm-charts
+    {{- with $apps.sourceRepos }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   destinations:
-  {{- range $appKey,$appList := $apps }}
-    - name: {{ $appList.name }}
-      namespace: {{ $appList.namespace }}
+  {{- range $index,$namespace := $apps.namespaces }}
+    - name: {{ $namespace }}
+      namespace: {{ $namespace }}
       server: "https://kubernetes.default.svc"
   {{- end }}
   orphanedResources:
     warn: false
   permitOnlyProjectScopedClusters: false
   sourceNamespaces:
-  {{- range $appKey,$appList := $apps }}
-    - {{ $appList.namespace }}
+  {{- range $namespace := $apps.namespaces }}
+    - {{ $namespace }}
   {{- end }}
 {{- end }}
