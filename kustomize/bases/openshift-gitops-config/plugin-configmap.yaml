@@ -14,4 +14,4 @@ data:
       init:
         command: [sh, -c, 'helm plugin list']
       generate:
-        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME $ARGOCD_ENV_CHART_PATH --values $ARGOCD_ENV_VALUES_FILES -f $ARGOCD_ENV_VALUES_FOLDER']
+        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME $ARGOCD_ENV_CHART_PATH --values $ARGOCD_ENV_VALUES_FILE -f $ARGOCD_ENV_VALUES_FOLDER']
