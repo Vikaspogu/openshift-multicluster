@@ -18,11 +18,11 @@ spec:
       name: helm-multivalues-plugin
       env:
         - name: CHART_PATH
-          values: helm/charts/tenant-gitops
+          value: helm/charts/tenant-gitops
         - name: VALUES_FOLDER
-          values: kustomize/cluster-overlays/dev-acm/tenant-gitops-helm/apps
+          value: kustomize/cluster-overlays/dev-acm/tenant-gitops-helm/apps
         - name: VALUES_FILE
-          values: kustomize/cluster-overlays/dev-acm/tenant-gitops-helm/values.yaml
+          value: kustomize/cluster-overlays/dev-acm/tenant-gitops-helm/values.yaml
   syncPolicy:
     retry:
       backoff:
