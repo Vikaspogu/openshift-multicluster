@@ -8,5 +8,5 @@ spec:
   channel: <REPLACE>
   installPlanApproval: Automatic
   name: external-dns-operator
-  source: external-dns-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
