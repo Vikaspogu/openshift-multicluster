@@ -2,13 +2,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../../../bases/openshift-pipelines-operator/
-  # - ./tekton-config.yaml
+  - ../../../bases/cert-manager-operator/
 
 patches:
   - patch: |-
       - op: replace
         path: /spec/channel
-        value: latest
+        value: stable-v1
     target:
       kind: Subscription

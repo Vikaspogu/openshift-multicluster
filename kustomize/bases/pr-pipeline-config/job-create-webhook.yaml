@@ -24,7 +24,7 @@ spec:
                   "active": true,
                   "events": ["push", "pull_request"],
                   "config": {
-                    "url": "https://gh-pr-ci-pipelines.apps.pxm-acm.v3s.us",
+                    "url": "https://gh-pr-ci-pipelines.apps.dev-acm.v3socp.boo",
                     "content_type": "json"
                   }
                 }'

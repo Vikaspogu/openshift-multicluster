@@ -30,9 +30,9 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 - Generate ISO
 
   ```bash
-  rm -rf installer/pxm-acm #remove older cluster if any
-  cp -r installer/cluster-config installer/pxm-acm #copy cluster config files
-  ./openshift-install agent create image --dir installer/pxm-acm #create image
+  rm -rf installer/dev-acm #remove older cluster if any
+  cp -r installer/cluster installer/dev-acm #copy cluster config files
+  ./openshift-install agent create image --dir installer/dev-acm #create image
   ```
 
 - Upload ISO to proxmox from GUI
@@ -40,8 +40,8 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 - Start VMs and wait for the cluster installation to finish
 
   ```bash
-  export KUBECONFIG=installer/pxm-acm/auth/kubeconfig
-  ./openshift-install agent wait-for install-complete --dir installer/pxm-acm --log-level=debug
+  export KUBECONFIG=installer/dev-acm/auth/kubeconfig
+  ./openshift-install agent wait-for install-complete --dir installer/dev-acm --log-level=debug
   ```
 
 #### Automation
@@ -56,7 +56,7 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 oc apply -k kustomize/bases/openshift-gitops-operator
 cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin
 oc apply -k kustomize/bases/openshift-gitops-config -n openshift-gitops
-kustomize build kustomize/cluster-overlays/pxm-acm/argo-application --enable-alpha-plugins --load-restrictor LoadRestrictionsNone | oc apply -f-
+kustomize build kustomize/cluster-overlays/dev-acm/argo-application --enable-alpha-plugins --load-restrictor LoadRestrictionsNone | oc apply -f-
 ```
 
 ### Folder Layout
@@ -76,7 +76,7 @@ This Git repository contains the following directories (_kustomizatons_) under [
 ### Deploy Developer Hub
 
 ```bash
-helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/pxm-acm/developer-hub-chart/values.yaml -n=developer-hub --kube-insecure-skip-tls-verify
+helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/dev-acm/developer-hub-chart/values.yaml -n=developer-hub --kube-insecure-skip-tls-verify
 ```
 
 ## 🔍 Features

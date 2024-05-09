@@ -23,5 +23,6 @@ spec:
     replicas: 1
     route:
       enabled: true
+      host: developer-hub-developer-hub.apps.dev-acm.v3socp.boo
   database:
     enableLocalDb: true

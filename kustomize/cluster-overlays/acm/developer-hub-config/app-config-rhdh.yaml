@@ -51,21 +51,14 @@ enabled:
   argocd: true
   github: true
   kubernetes: true
-  ocm: false
+  ocm: true
   githubOrg: false
   gitlab: false
   jenkins: false
   keycloak: false
   permission: false
   sonarqube: false
-  techdocs: true
-
-techdocs:
-  generator:
-    runIn: local
-  builder: local
-  publisher:
-    type: local
+  techdocs: false
 
 integrations:
   github:
@@ -155,3 +148,13 @@ catalog:
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 3 }
+    ocm:
+      default:
+        kubernetesPluginRef: dev-acm
+        name: multiclusterhub
+        owner: group:ops
+        schedule:
+          frequency:
+            seconds: 10
+          timeout:
+            seconds: 60

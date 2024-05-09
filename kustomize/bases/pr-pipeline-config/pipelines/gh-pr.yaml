@@ -40,7 +40,7 @@ spec:
         - name: STATE
           value: "pending"
         - name: TARGET_URL
-          value: "https://console-openshift-console.apps.pxm-acm.v3s.us/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"
+          value: "https://console-openshift-console.apps.dev-acm.v3socp.boo/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"
     - name: fetch-repository
       taskRef:
         name: git-clone
@@ -86,4 +86,4 @@ spec:
         - name: STATE
           value: "$(tasks.status)"
         - name: TARGET_URL
-          value: "https://console-openshift-console.apps.pxm-acm.v3s.us/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"
+          value: "https://console-openshift-console.apps.dev-acm.v3socp.boo/k8s/ns/ci-pipelines/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)"

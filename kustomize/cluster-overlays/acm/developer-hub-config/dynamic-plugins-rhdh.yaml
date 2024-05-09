@@ -22,6 +22,23 @@ plugins:
                 path: /time-saver
                 config:
                   pollingIntervalMs: 5000
+  - integrity: "sha512-GkrIC/WvZmBQ0VY+WXESaMahGW9D5mnEi2PNH9DfjEPN1TMfi1eqV3LF4oisNx/S/xNkNTT3lJvL0vl5ttb88A=="
+    package: "@vikaspogu/dynamic-opendora@0.0.2"
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          vikaspogu.dynamic-opendora:
+            appIcons:
+              - name: openDoraIcon
+                importName: OpenDoraIcon
+            dynamicRoutes:
+              - importName: OpenDoraPluginPage
+                menuItem:
+                  text: OpenDORA
+                  icon: openDoraIcon
+                path: /open-dora
+                config:
+                  pollingIntervalMs: 5000
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
   - disabled: false
@@ -38,6 +55,10 @@ plugins:
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
   - disabled: false
