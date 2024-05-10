@@ -13,3 +13,19 @@ helmCharts:
     version: "1.10.0"
     valuesInline:
       securityContextCrossplane: {}
+
+patches:
+  - target:
+      kind: Deployment
+      name: crossplane
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/initContainers/0/securityContext
+        value: {}
+  - target:
+      kind: Deployment
+      name: crossplane-rbac-manager
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/initContainers/0/securityContext
+        value: {}
