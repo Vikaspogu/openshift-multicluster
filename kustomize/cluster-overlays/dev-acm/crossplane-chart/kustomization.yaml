@@ -22,10 +22,16 @@ patches:
       - op: replace
         path: /spec/template/spec/initContainers/0/securityContext
         value: {}
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
   - target:
       kind: Deployment
       name: crossplane-rbac-manager
     patch: |-
       - op: replace
         path: /spec/template/spec/initContainers/0/securityContext
+        value: {}
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
         value: {}
