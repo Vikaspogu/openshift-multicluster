@@ -9,6 +9,6 @@ patches:
       - op: replace
         path: /spec/storage/deviceClasses/0/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
         value:
-          - openshift-1
+          - ocp-acm-1
     target:
       kind: LVMCluster
