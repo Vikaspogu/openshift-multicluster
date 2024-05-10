@@ -14,7 +14,8 @@ helmCharts:
     valuesInline:
       securityContextCrossplane: {}
       provider:
-        packages: "{xpkg.upbound.io/upbound/provider-azure-management:v1.1.0}"
+        packages:
+          - "xpkg.upbound.io/upbound/provider-azure-management:v1.1.0"
 
 patches:
   - target:
