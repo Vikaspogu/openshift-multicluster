@@ -16,6 +16,7 @@ helmCharts:
       provider:
         packages:
           - "xpkg.upbound.io/upbound/provider-azure-management:v1.1.0"
+          - "xpkg.upbound.io/upbound/provider-azure-network:v1.1.0"
 
 patches:
   - target:
