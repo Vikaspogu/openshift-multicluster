@@ -19,4 +19,8 @@ cloudflared:
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress.svc.cluster.local
+    - hostname: "openshift-gitops-server-openshift-gitops.apps.dev-acm.v3socp.boo"
+      originRequest:
+        noTLSVerify: true
+      service: https://router-internal-default.openshift-ingress.svc.cluster.local
     - service: http_status:404
