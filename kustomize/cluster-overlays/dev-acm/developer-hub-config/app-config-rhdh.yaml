@@ -127,6 +127,10 @@ catalog:
       target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
       rules:
         - allow: [Template]
+    - type: url
+      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/pcf-to-ocp/template.yaml
+      rules:
+        - allow: [Template]
     - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
       type: url
       rules:
