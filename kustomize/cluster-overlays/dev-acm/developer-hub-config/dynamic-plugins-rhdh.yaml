@@ -1,7 +1,7 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - integrity: "sha512-tYn32hEX7yiyynVgXPJU+ThTryFLD5/Ptj92NqErXGI/L5JRTwkD6DNEmnVE9Ma/derAN+OdQKrdNZNidANF5g=="
+  - integrity: "sha512-MKdseThFuljYrM6jhwCMmxpgq89yZOHiVx53iGfGBvLAj9IrXuo4SO+1ZNopBQ4lDXfRDKtzamA3nVb7L5AP5g=="
     package: https://preseed.vpogu.duckdns.org/vikaspogu-custom-utils-backend-dynamic-0.0.3.tgz
   - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
     package: https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
