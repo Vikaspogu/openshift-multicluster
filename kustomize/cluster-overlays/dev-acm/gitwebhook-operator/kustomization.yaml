@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../../bases/gitwebhook-operator/
+
+helmCharts:
+  - name: gitwebhook-operator
+    releaseName: gitwebhook-operator
+    namespace: gitwebhook-operator
+    repo: https://redhat-cop.github.io/gitwebhook-operator
+    version: 0.1.2
