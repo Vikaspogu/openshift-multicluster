@@ -70,7 +70,12 @@ techdocs:
 integrations:
   github:
     - host: github.com
-      token: ${GH_TOKEN}
+      apps:
+        - appId: ${AUTH_ORG_APP_ID}
+          clientId: ${AUTH_ORG_CLIENT_ID}
+          clientSecret: ${AUTH_ORG_CLIENT_SECRET}
+          privateKey: ${AUTH_ORG1_PRIVATE_KEY}
+          webhookSecret: ${AUTH_ORG_WEBHOOK_SECRET}
 proxy:
   endpoints:
     "/developer-hub":
@@ -125,10 +130,6 @@ catalog:
   locations:
     - type: url
       target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/pcf-to-ocp/template.yaml
       rules:
         - allow: [Template]
     - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
