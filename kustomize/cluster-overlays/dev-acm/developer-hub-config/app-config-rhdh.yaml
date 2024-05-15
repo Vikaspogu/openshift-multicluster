@@ -137,6 +137,14 @@ catalog:
         - allow: [Group, User]
 
   providers:
+    githubOrg:
+      id: production
+      githubUrl: https://github.com
+      orgs: ["idp-team", "devhub-showcase"]
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
     github:
       # the provider ID can be any camelCase string
       providerId:
