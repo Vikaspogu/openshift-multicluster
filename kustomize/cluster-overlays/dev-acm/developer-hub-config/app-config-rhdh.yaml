@@ -52,20 +52,13 @@ enabled:
   github: true
   kubernetes: true
   ocm: false
-  githubOrg: false
+  githubOrg: true
   gitlab: false
   jenkins: false
   keycloak: false
   permission: false
   sonarqube: false
   techdocs: true
-
-techdocs:
-  generator:
-    runIn: local
-  builder: local
-  publisher:
-    type: local
 
 integrations:
   github:
@@ -74,8 +67,10 @@ integrations:
         - appId: ${AUTH_ORG_APP_ID}
           clientId: ${AUTH_ORG_CLIENT_ID}
           clientSecret: ${AUTH_ORG_CLIENT_SECRET}
-          privateKey: ${AUTH_ORG1_PRIVATE_KEY}
+          privateKey: |
+            ${AUTH_ORG1_PRIVATE_KEY}
           webhookSecret: ${AUTH_ORG_WEBHOOK_SECRET}
+          webhookUrl: ${AUTH_ORG_WEBHOOK_URL}
 proxy:
   endpoints:
     "/developer-hub":
