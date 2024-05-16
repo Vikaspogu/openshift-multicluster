@@ -63,6 +63,8 @@ enabled:
 integrations:
   github:
     - host: github.com
+      token: ${GH_TOKEN}
+    - host: github.com
       apps:
         - appId: ${AUTH_ORG_APP_ID}
           clientId: ${AUTH_ORG_CLIENT_ID}
