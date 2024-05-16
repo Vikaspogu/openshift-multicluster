@@ -1,0 +1,41 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: thor-application-set
+  namespace: avengers-gitops
+  labels:
+    avengers-argocd: thor-appset
+spec:
+  generators:
+    - git:
+        repoURL: 
+        revision: HEAD
+        files:
+          - path: "dev-acm/avengers/thor/*.yaml"
+          - path: "dev-acm/avengers/thor/prod*.yaml"
+            exclude: true
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  template:
+    metadata:
+      name: 'thor-{{.path.filename | splitList "-" | first }}'
+      labels:
+        avengers-gitops: thor
+    spec:
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: avengers-{{.path.filename | splitList "-" | first }}
+      project: avengers
+      sources:
+        - helm:
+            releaseName: thor
+            valueFiles:
+              - "$values/{{ .path.path }}/{{.path.filename}}"
+          path: deploy
+          repoURL: "https://github.com/idp-team/helm-charts"
+          targetRevision: main
+        - ref: values
+          repoURL: 
+          targetRevision: main

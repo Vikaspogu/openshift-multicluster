@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: avengers
+  namespace: avengers-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: avengers
+  sourceRepos:
+    - https://github.com/idp-team/team-a-gitops.git
+    - https://helm.github.io/examples
+    - https://github.com/idp-team/helm-charts
+  destinations:
+    - name: avengers-dev
+      namespace: avengers-dev
+      server: 'https://kubernetes.default.svc'
+    - name: avengers-test
+      namespace: avengers-test
+      server: 'https://kubernetes.default.svc'
+  orphanedResources:
+    warn: false
+  permitOnlyProjectScopedClusters: false
+  sourceNamespaces:
+    - avengers-dev
+    - avengers-test
