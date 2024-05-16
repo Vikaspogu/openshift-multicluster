@@ -64,15 +64,7 @@ integrations:
   github:
     - host: github.com
       token: ${GH_TOKEN}
-    - host: github.com
-      apps:
-        - appId: ${AUTH_ORG_APP_ID}
-          clientId: ${AUTH_ORG_CLIENT_ID}
-          clientSecret: ${AUTH_ORG_CLIENT_SECRET}
-          privateKey: |
-            ${AUTH_ORG1_PRIVATE_KEY}
-          webhookSecret: ${AUTH_ORG_WEBHOOK_SECRET}
-          webhookUrl: ${AUTH_ORG_WEBHOOK_URL}
+
 proxy:
   endpoints:
     "/developer-hub":
@@ -145,18 +137,18 @@ catalog:
         timeout: { minutes: 50 }
     github:
       # the provider ID can be any camelCase string
-      # providerId:
-      #   organization: "vikaspogu"
-      #   catalogPath: "/**/catalog-info.yaml" # string
-      #   filters:
-      #     branch: "main" # string
-      #     repository: "^(?:(?!software-template).)*$" # Regex
-      #   schedule: # optional; same options as in TaskScheduleDefinition
-      #     # supports cron, ISO duration, "human duration" as used in code
-      #     frequency: { minutes: 30 }
-      #     # supports ISO duration, "human duration" as used in code
-      #     timeout: { minutes: 3 }
       providerId:
+        organization: "vikaspogu"
+        catalogPath: "/**/catalog-info.yaml" # string
+        filters:
+          branch: "main" # string
+          repository: "^(?:(?!software-template).)*$" # Regex
+        schedule: # optional; same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 30 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+      orgDevHubShowcaseProviderId:
         organization: "devhub-showcase"
         catalogPath: "/**/catalog-info.yaml"
         filters:
