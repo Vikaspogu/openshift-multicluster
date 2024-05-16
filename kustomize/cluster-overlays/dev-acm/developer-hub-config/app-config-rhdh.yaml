@@ -146,25 +146,25 @@ catalog:
         initialDelay: { seconds: 30 }
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
-    # github:
-    #   # the provider ID can be any camelCase string
-    #   providerId:
-    #     organization: "vikaspogu"
-    #     catalogPath: "/**/catalog-info.yaml" # string
-    #     filters:
-    #       branch: "main" # string
-    #       repository: "^(?:(?!software-template).)*$" # Regex
-    #     schedule: # optional; same options as in TaskScheduleDefinition
-    #       # supports cron, ISO duration, "human duration" as used in code
-    #       frequency: { minutes: 30 }
-    #       # supports ISO duration, "human duration" as used in code
-    #       timeout: { minutes: 3 }
-    #   idpOrgRepoProviderId:
-    #     organization: "idp-team"
-    #     catalogPath: "/**/catalog-info.yaml"
-    #     filters:
-    #       branch: "main"
-    #       repository: "^(?:(?!software-template).)*$"
-    #     schedule:
-    #       frequency: { minutes: 30 }
-    #       timeout: { minutes: 3 }
+    github:
+      # the provider ID can be any camelCase string
+      # providerId:
+      #   organization: "vikaspogu"
+      #   catalogPath: "/**/catalog-info.yaml" # string
+      #   filters:
+      #     branch: "main" # string
+      #     repository: "^(?:(?!software-template).)*$" # Regex
+      #   schedule: # optional; same options as in TaskScheduleDefinition
+      #     # supports cron, ISO duration, "human duration" as used in code
+      #     frequency: { minutes: 30 }
+      #     # supports ISO duration, "human duration" as used in code
+      #     timeout: { minutes: 3 }
+      providerId:
+        organization: "devhub-showcase"
+        catalogPath: "/**/catalog-info.yaml"
+        filters:
+          branch: "main"
+          repository: "^(?:(?!software-template).)*$"
+        schedule:
+          frequency: { minutes: 30 }
+          timeout: { minutes: 3 }
