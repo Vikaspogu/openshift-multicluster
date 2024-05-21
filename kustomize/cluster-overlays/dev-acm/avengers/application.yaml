@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: thor-app
-  namespace: avengers-gitops
+  namespace: openshift-gitops
   labels:
     type: config
 spec:
