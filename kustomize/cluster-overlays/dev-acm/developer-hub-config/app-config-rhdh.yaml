@@ -39,7 +39,6 @@ argocd:
       type: config
 
 auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
     github:
@@ -136,17 +135,13 @@ catalog:
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
     github:
-      # the provider ID can be any camelCase string
       providerId:
         organization: "vikaspogu"
-        catalogPath: "/**/catalog-info.yaml" # string
+        catalogPath: "/**/catalog-info.yaml"
         filters:
-          branch: "main" # string
-          repository: "^(?:(?!software-template).)*$" # Regex
-        schedule: # optional; same options as in TaskScheduleDefinition
-          # supports cron, ISO duration, "human duration" as used in code
+          branch: "main"
+          repository: "^(?:(?!software-template).)*$"
           frequency: { minutes: 30 }
-          # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
       orgDevHubShowcaseProviderId:
         organization: "devhub-showcase"

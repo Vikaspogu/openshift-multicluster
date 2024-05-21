@@ -1,6 +1,6 @@
 apiVersion: v2
-name: tenant-gitops
-description: A Helm chart for Kubernetes
+name: project-onboarding
+description: A Helm chart for Onboarding Application in OpenShift using DevHub Templates
 
 # A chart can be either an 'application' or a 'library' chart.
 #

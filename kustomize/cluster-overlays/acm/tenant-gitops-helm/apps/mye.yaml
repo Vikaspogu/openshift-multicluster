@@ -1,7 +1,0 @@
-apps:
-  mye-tool:
-    namespaces:
-      - mye-tool-ns1
-      - mye-tool-ns2
-    sourceRepos:
-      - https://helm.github.io/examples

@@ -1,0 +1,45 @@
+{{- $releaseLabels := include "project-onboarding.labels" . -}}
+{{- $values := .Values -}}
+{{- range $key, $apps := .Values.apps}}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ $key }}-application-set
+  namespace: {{ $values.namespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+    {{ $values.domain }}-gitops: {{$key}}
+spec:
+  generators:
+    - git:
+        repoURL: {{$apps.tenantGitops.repo}}
+        revision: HEAD
+        files:
+          - path: "{{$apps.tenantGitops.path}}/deploy/*.yaml"
+          - path: "{{$apps.tenantGitops.path}}/deploy/*prod.yaml"
+            exclude: true
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  template:
+    metadata:
+      name: {{ $key }}
+      labels:
+        {{ $values.domain }}-gitops: {{$key}}
+    spec:
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: '{{`{{ .path.filename | splitList "-" | first }}` }}'
+      project: {{ $key }}
+      sources:
+        - helm:
+            releaseName: {{$key}}
+            valueFiles:
+              - "$values/{{`{{ .path.path }}/{{.path.filename}}`}}"
+          path: deploy
+          repoURL: "{{$apps.helmChartRepo}}"
+          targetRevision: main
+        - ref: values
+          repoURL: {{$apps.tenantGitops.repo}}
+          targetRevision: main
+{{- end }}

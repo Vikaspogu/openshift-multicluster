@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "tenant-gitops.name" -}}
+{{- define "project-onboarding.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "tenant-gitops.fullname" -}}
+{{- define "project-onboarding.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "tenant-gitops.chart" -}}
+{{- define "project-onboarding.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "tenant-gitops.labels" -}}
-helm.sh/chart: {{ include "tenant-gitops.chart" . }}
-{{ include "tenant-gitops.selectorLabels" . }}
+{{- define "project-onboarding.labels" -}}
+helm.sh/chart: {{ include "project-onboarding.chart" . }}
+{{ include "project-onboarding.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "tenant-gitops.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "tenant-gitops.name" . }}
+{{- define "project-onboarding.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "project-onboarding.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "tenant-gitops.serviceAccountName" -}}
+{{- define "project-onboarding.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "tenant-gitops.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "project-onboarding.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -1,9 +1,0 @@
-apps:
-  health:
-    namespaces:
-      - health-ns1
-      - health-ns2
-    sourceRepos:
-      - https://helm.github.io/examples
-      - https://github.com/idp-team/team-a-gitops.git
-      - https://github.com/idp-team/helm-charts
