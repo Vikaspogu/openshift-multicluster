@@ -8,7 +8,7 @@ metadata:
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
-    {{ $values.domain }}-gitops: {{$key}}
+    {{ $values.teamName }}-gitops: {{$key}}
 spec:
   generators:
     - git:
@@ -25,7 +25,7 @@ spec:
     metadata:
       name: {{ $key }}-{{`{{ .path.filename | splitList "-" | first }}` }}
       labels:
-        {{ $values.domain }}-gitops: {{$key}}
+        {{ $values.teamName }}-gitops: {{$key}}
     spec:
       destination:
         server: "https://kubernetes.default.svc"
