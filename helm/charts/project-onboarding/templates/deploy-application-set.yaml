@@ -29,7 +29,7 @@ spec:
     spec:
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: '{{`{{ .path.filename | splitList "-" | first }}` }}'
+        namespace: '{{ $values.namespace | splitList "-" | first }}-{{`{{ .path.filename | splitList "-" | first }}` }}'
       project: {{ $key }}
       sources:
         - helm:
