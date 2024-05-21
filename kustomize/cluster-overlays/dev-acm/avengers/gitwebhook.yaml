@@ -11,10 +11,8 @@ spec:
   ownerType: user
   repositoryName: basic-springboot-app
   webhookURL: https://avengers-avengers-gitops.apps.dev-acm.v3socp.boo
-  insecureSSL: false
   webhookSecret:
     name: webhook-secret
   events:
     - push
-  contentType: json
   active: true
