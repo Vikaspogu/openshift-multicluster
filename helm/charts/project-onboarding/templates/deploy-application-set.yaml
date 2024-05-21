@@ -16,8 +16,8 @@ spec:
         revision: HEAD
         files:
           - path: "{{$apps.tenantGitops.path}}/deploy/*.yaml"
-          - path: "{{$apps.tenantGitops.path}}/deploy/*prod.yaml"
-            exclude: true
+          - exclude: true
+            path: "{{$apps.tenantGitops.path}}/deploy/*prod.yaml"
   goTemplate: true
   goTemplateOptions:
     - missingkey=error

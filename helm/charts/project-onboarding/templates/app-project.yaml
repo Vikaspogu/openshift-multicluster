@@ -18,6 +18,9 @@ spec:
     - {{$apps.tenantGitops.repo}}
     - {{$apps.helmChartRepo}}
   destinations:
+    - name: {{ $gitopsNamespace }}
+      namespace: {{ $gitopsNamespace }}
+      server: "https://kubernetes.default.svc"
   {{- range $index,$namespace := $apps.namespaces }}
     - name: {{ $namespace }}
       namespace: {{ $namespace }}
