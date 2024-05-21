@@ -23,7 +23,7 @@ spec:
     - missingkey=error
   template:
     metadata:
-      name: {{ $key }}
+      name: {{ $key }}-{{`{{ .path.filename | splitList "-" | first }}` }}
       labels:
         {{ $values.domain }}-gitops: {{$key}}
     spec:
