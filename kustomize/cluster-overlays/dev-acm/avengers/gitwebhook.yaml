@@ -7,14 +7,14 @@ spec:
   gitHub:
     gitServerCredentials:
       name: github-pat
-  applicationRepoOwner: devhub-showcase
+  repositoryOwner: devhub-showcase
   ownerType: user
-  applicationRepoName: basic-springboot-app
+  repositoryName: basic-springboot-app
   webhookURL: https://avengers-avengers-gitops.apps.dev-acm.v3socp.boo
   insecureSSL: false
   webhookSecret:
     name: webhook-secret
   events:
-    - push  
+    - push
   contentType: json
-  active: true  
+  active: true
