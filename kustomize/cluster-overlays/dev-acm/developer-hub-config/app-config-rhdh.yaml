@@ -141,6 +141,7 @@ catalog:
         filters:
           branch: "main"
           repository: "^(?:(?!software-template).)*$"
+        schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 3 }
       orgDevHubShowcaseProviderId:
