@@ -1,0 +1,10 @@
+apps:
+  :
+    namespaces:
+      - avengers-
+    sourceRepos:
+      - https://github.com/devhub-showcase/basic-springboot-app
+    tenantGitops:
+      repo: https://github.com//.git
+      path: dev-acm
+    helmChartRepo: https://github.com/devhub-showcase/helm-charts
