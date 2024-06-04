@@ -4,7 +4,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ $key }}-build-app
+  name: {{ $key }}-build
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}

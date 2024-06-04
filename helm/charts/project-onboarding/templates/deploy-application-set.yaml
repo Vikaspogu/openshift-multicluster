@@ -4,7 +4,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ $key }}-application-set
+  name: {{ $key }}-deploy-app-set
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
