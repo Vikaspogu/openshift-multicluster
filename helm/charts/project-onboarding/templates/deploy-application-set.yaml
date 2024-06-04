@@ -8,7 +8,7 @@ metadata:
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
-    {{ $values.teamName }}-gitops: {{$key}}
+    {{ $values.team }}-gitops: {{$key}}
 spec:
   generators:
     - git:
