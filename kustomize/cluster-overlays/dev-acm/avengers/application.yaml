@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: thor-project-onboarding
+  namespace: openshift-gitops
+  labels:
+    type: config
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: .
+    repoURL: "https://github.com/Vikaspogu/openshift-multicluster.git"
+    targetRevision: main
+    plugin:
+      name: helm-multivalues-plugin
+      env:
+        - name: CHART_PATH
+          value: helm/charts/project-onboarding
+        - name: VALUES_FOLDER
+          value: kustomize/cluster-overlays/dev-acm/avengers/project-onboarding-values/apps
+        - name: VALUES_FILE
+          value: kustomize/cluster-overlays/dev-acm/avengers/project-onboarding-values/values.yaml
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - SkipDryRunOnMissingResource=true
+      - Validate=false
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=true
+      - Prune=true

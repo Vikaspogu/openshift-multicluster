@@ -1,0 +1,18 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: GitWebhook
+metadata:
+  name: gitwebhook-avengers-basic-springboot-app
+  namespace: gitwebhook-operator
+spec:
+  gitHub:
+    gitServerCredentials:
+      name: github-pat
+  repositoryOwner: devhub-showcase
+  ownerType: user
+  repositoryName: basic-springboot-app
+  webhookURL: https://avengers-avengers-gitops.apps.dev-acm.v3socp.boo
+  webhookSecret:
+    name: webhook-secret
+  events:
+    - push
+  active: true
