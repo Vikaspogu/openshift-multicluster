@@ -24,17 +24,23 @@ spec:
                 PASSWORD=$(oc get secret avengers-gitops-cluster -o jsonpath="{.data.admin\.password}" | base64 -d)
                 if kubectl get secret avengers-gitops-cluster >/dev/null;
                 then
-                  DEV_HUB_PASSWORD=$(oc get secret developer-hub-user -o jsonpath="{.data.password}" | base64 -d)
-                  echo "Login to argocd server"
-                  argocd login --plaintext --username admin --password ${PASSWORD}  avengers-gitops-server
-                  argocd account list
-                  echo "Updating developer-hub user password"
-                  argocd account update-password \
-                    --account developer-hub \
-                    --current-password ${PASSWORD} \
-                    --new-password ${DEV_HUB_PASSWORD}
+                  if oc get secret developer-hub-user >/dev/null;
+                  then
+                    DEV_HUB_PASSWORD=$(oc get secret developer-hub-user -o jsonpath="{.data.password}" | base64 -d)
+                    echo "Login to argocd server"
+                    argocd login --plaintext --username admin --password ${PASSWORD}  avengers-gitops-server
+                    argocd account list
+                    echo "Updating developer-hub user password"
+                    argocd account update-password \
+                      --account developer-hub \
+                      --current-password ${PASSWORD} \
+                      --new-password ${DEV_HUB_PASSWORD}
+                  else
+                    echo "Could not retrieve developer-hub-user password"
+                    exit 1
+                  fi
                 else
-                  echo "Could not retrieve developer-hub-user password"
+                  echo "Could not retrieve avengers-gitops-cluster password"
                   exit 1
                 fi
               else
