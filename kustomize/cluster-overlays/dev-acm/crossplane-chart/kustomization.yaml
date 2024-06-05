@@ -13,8 +13,6 @@ helmCharts:
     version: "1.16.0"
     valuesInline:
       securityContextCrossplane: {}
-      args:
-        - --enable-deployment-runtime-configs=false
       provider:
         packages:
           - "xpkg.upbound.io/upbound/provider-azure-management:v1.1.0"
