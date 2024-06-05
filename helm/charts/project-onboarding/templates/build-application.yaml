@@ -19,7 +19,7 @@ spec:
         releaseName: {{$key}}
         valueFiles:
           - "$values"
-      path: build-pipeline
+      path: charts/build-pipeline
       repoURL: "{{$apps.helmChartRepo}}"
       targetRevision: main
     - ref: values
