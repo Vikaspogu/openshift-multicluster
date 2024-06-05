@@ -1,6 +1,7 @@
 {{- $releaseLabels := include "project-onboarding.labels" . -}}
 {{- $values := .Values -}}
 {{- range $key, $apps := .Values.apps}}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
