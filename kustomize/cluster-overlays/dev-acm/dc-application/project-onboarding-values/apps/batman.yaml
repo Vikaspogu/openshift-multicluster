@@ -1,0 +1,11 @@
+apps:
+  batman:
+    namespaces:
+    - dc-dev
+    - dc-test
+    sourceRepos:
+      - https://github.com/devhub-showcase/basic-springboot-app
+    tenantGitops:
+      repo: https://github.com/devhub-showcase/tenant-gitops.git
+      path: dev-acm/dc/batman
+    helmChartRepo: https://github.com/devhub-showcase/helm-charts
