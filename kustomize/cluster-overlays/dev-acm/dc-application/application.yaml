@@ -20,9 +20,9 @@ spec:
         - name: CHART_PATH
           value: helm/charts/project-onboarding
         - name: VALUES_FOLDER
-          value: kustomize/cluster-overlays/dev-acm/dc/project-onboarding-values/apps
+          value: kustomize/cluster-overlays/dev-acm/dc-application/project-onboarding-values/apps
         - name: VALUES_FILE
-          value: kustomize/cluster-overlays/dev-acm/dc/project-onboarding-values/values.yaml
+          value: kustomize/cluster-overlays/dev-acm/dc-application/project-onboarding-values/values.yaml
   syncPolicy:
     automated: {}
     syncOptions:
