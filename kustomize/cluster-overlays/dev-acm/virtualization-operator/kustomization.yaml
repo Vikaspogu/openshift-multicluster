@@ -9,5 +9,14 @@ patches:
       - op: replace
         path: /spec/channel
         value: stable
+      - op: replace
+        path: /spec/config
+        value:
+          env:
+            - name: KVM_EMULATION
+              value: "true"
+          selector:
+            matchLabels:
+              name: hyperconverged-cluster-operator
     target:
       kind: Subscription
