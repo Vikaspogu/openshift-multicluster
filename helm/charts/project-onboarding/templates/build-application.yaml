@@ -18,12 +18,11 @@ spec:
     - helm:
         releaseName: {{$key}}
         valueFiles:
-          - "$values"
+          - $values/{{$apps.tenantGitops.path}}/build/build-values.yaml
       path: charts/build-pipeline
       repoURL: "{{$apps.helmChartRepo}}"
       targetRevision: main
     - ref: values
-      path: "{{$apps.tenantGitops.path}}/build/build-values.yaml"
       repoURL: {{$apps.tenantGitops.repo}}
       targetRevision: main
 {{- end }}
