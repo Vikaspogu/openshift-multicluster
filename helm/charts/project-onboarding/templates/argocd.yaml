@@ -1,3 +1,12 @@
+{{- $namespaces := list -}}
+{{- range $key, $apps := .Values.apps}}
+{{- range $appNamespace := $apps.namespaces }}
+{{- if has $appNamespace $namespaces -}}
+{{- else -}}
+{{ $namespaces = append $namespaces $appNamespace }}
+{{- end }}
+{{- end }}
+{{- end }}
 ---
 kind: ArgoCD
 apiVersion: argoproj.io/v1beta1
@@ -14,10 +23,8 @@ spec:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
   sourceNamespaces:
-  {{- range $key, $apps := .Values.apps}}
-  {{- range $namespace := $apps.namespaces }}
+  {{- range $namespace := $namespaces}}
     - {{ $namespace }}
-  {{- end }}
   {{- end }}
   controller:
     resources:
