@@ -41,4 +41,12 @@ spec:
         - ref: values
           repoURL: {{$apps.tenantGitops.repo}}
           targetRevision: main
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - SkipDryRunOnMissingResource=true
+          - Validate=false
+          - ApplyOutOfSyncOnly=true
+          - RespectIgnoreDifferences=true
+          - Prune=true
 {{- end }}
