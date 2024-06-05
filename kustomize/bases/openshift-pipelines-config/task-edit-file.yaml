@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  annotations:
+    tekton.dev/pipelines.minVersion: 0.12.1
+  name: edit-file
+  labels:
+    app.kubernetes.io/version: 0.1.0
+spec:
+  description: >-
+    This task will update the image tag in the values file for the app's corresponding environment.
+  params:
+    - name: app_name
+      type: string
+    - name: app_env
+      type: string
+    - name: image_tag
+      type: string
+    - name: sha_hash
+      type: string
+
+  results:
+    - description: returns exit status of command
+      name: exit_status
+
+  workspaces:
+    - name: output
+      description: workspace onto which the file is updated
+
+  steps:
+    - name: edit-file
+      image: alpine:edge
+      workingDir: $(workspaces.output.path)
+      script: |
+        #!/bin/sh
+
+        cd $(params.app_name)/
+
+        ls
+
+        sed -ie 's|^  sha_hash:.*|  sha_hash: "$(params.sha_hash)"|' $(params.app_env).yaml
+
+        sed -ie 's|^  tag:.*|  tag: "$(params.image_tag)"|' $(params.app_env).yaml
+
+        cat $(params.app_env).yaml
+
+        echo $?
