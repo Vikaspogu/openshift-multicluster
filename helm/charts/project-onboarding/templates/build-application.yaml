@@ -23,7 +23,7 @@ spec:
       repoURL: "{{$apps.helmChartRepo}}"
       targetRevision: main
     - ref: values
-      path: "{{$apps.tenantGitops.path}}/build/{{$key}}-values.yaml"
+      path: "{{$apps.tenantGitops.path}}/build/build-values.yaml"
       repoURL: {{$apps.tenantGitops.repo}}
       targetRevision: main
 {{- end }}

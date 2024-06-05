@@ -34,7 +34,7 @@ spec:
             releaseName: {{$key}}
             valueFiles:
               - "$values/{{`{{ .path.path }}/{{.path.filename}}`}}"
-          path: deploy
+          path: charts/deploy
           repoURL: "{{$apps.helmChartRepo}}"
           targetRevision: main
         - ref: values
