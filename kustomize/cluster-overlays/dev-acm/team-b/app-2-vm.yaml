@@ -26,7 +26,7 @@ spec:
           resources:
             requests:
               storage: "30Gi"
-  running: false
+  running: true
   template:
     metadata:
       annotations:
