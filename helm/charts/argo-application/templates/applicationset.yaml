@@ -47,6 +47,7 @@ spec:
                 - placement
                 - application
                 - policy
+                - app
         - matchExpressions:
             - key: type
               operator: In
