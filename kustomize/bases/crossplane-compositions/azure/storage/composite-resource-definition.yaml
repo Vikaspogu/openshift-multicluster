@@ -1,0 +1,42 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xstoragesazure.crossplane.jonashackt.io
+spec:
+  group: crossplane.jonashackt.io
+  names:
+    kind: XStorageAzure
+    plural: xstoragesazure
+  claimNames:
+    kind: StorageAzure
+    plural: storagesazure
+
+  defaultCompositionRef:
+    name: storageazure-composition
+
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      # See https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    location:
+                      type: string
+                    resourceGroupName:
+                      type: string
+                    storageAccountName:
+                      type: string
+                  required:
+                    - location
+                    - resourceGroupName
+                    - storageAccountName
