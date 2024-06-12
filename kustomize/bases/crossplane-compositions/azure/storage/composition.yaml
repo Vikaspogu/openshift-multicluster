@@ -4,14 +4,12 @@ kind: Composition
 metadata:
   name: storageazure-composition
   labels:
-    crossplane.io/xrd: xstoragesazure.crossplane.jonashackt.io
+    crossplane.io/xrd: xstoragesazure.crossplane.vpogu.com
     provider: azure
 spec:
   compositeTypeRef:
-    apiVersion: crossplane.jonashackt.io/v1alpha1
+    apiVersion: crossplane.vpogu.com/v1alpha1
     kind: XStorageAzure
-
-  writeConnectionSecretsToNamespace: crossplane-system
 
   resources:
     - name: storageaccount
@@ -32,6 +30,10 @@ spec:
           toFieldPath: spec.forProvider.resourceGroupName
         - fromFieldPath: spec.parameters.location
           toFieldPath: spec.forProvider.location
+        - fromFieldPath: spec.parameters.storageAccountName
+          toFieldPath: spec.writeConnectionSecretToRef.name
+        - fromFieldPath: spec.claimRef.namespace
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
 
     - name: resourcegroup
       base:
