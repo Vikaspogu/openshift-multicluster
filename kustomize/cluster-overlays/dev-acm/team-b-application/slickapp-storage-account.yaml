@@ -1,5 +1,5 @@
 ---
-apiVersion: crossplane.jonashackt.io/v1alpha1
+apiVersion: crossplane.vpogu.com/v1alpha1
 kind: StorageAzure
 metadata:
   namespace: team-b
