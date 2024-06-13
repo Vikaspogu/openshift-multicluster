@@ -34,7 +34,7 @@ spec:
               role: vault-admin
             path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.labels.team}}/{{request.object.metadata.name}}"
             policies:
-              - "{{request.object.metadata.name}}-secret-reader"
+              - "{{request.object.metadata.name}}"
             targetServiceAccounts:
               - default
             targetNamespaces:
