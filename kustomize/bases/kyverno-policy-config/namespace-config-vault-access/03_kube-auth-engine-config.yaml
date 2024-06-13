@@ -32,4 +32,4 @@ spec:
             authentication:
               path: kubernetes
               role: vault-admin
-            path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.name}}"
+            path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.labels.team }"

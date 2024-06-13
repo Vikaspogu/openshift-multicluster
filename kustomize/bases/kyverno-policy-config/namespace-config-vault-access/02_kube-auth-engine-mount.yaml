@@ -33,4 +33,4 @@ spec:
               path: kubernetes
               role: vault-admin
             type: kubernetes
-            path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.name}}"
+            path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.labels.team}}"
