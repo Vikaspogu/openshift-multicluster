@@ -1,0 +1,6 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../bases/kyverno-policy-config/namespace.yaml
+  - ../../../bases/kyverno-policy-config/namespace-config-vault-access/

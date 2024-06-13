@@ -2,10 +2,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: naas-secret-reader
+  name: kube-auth-engine-config
 spec:
   rules:
-    - name: naas-secret-reader
+    - name: kube-auth-engine-config
       match:
         any:
           - resources:
@@ -19,7 +19,7 @@ spec:
       generate:
         synchronize: true
         apiVersion: redhatcop.redhat.io/v1alpha1
-        kind: Policy
+        kind: KubernetesAuthEngineConfig
         namespace: vault-admin
         name: "{{request.object.metadata.name}}"
         data:
@@ -30,8 +30,5 @@ spec:
           spec:
             authentication:
               path: kubernetes
-              role: policy-admin
-            policy: |
-              path "/dev-acm/team-a-kubernetes/*" {
-                capabilities = ["read"]
-              }
+              role: vault-admin
+            path: "{{request.object.metadata.labels.cluster}}/{{request.object.metadata.name}}"
