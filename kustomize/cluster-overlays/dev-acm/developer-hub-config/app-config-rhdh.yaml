@@ -116,20 +116,20 @@ catalog:
   rules:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
+    # - type: url
+    #   target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
+    #   rules:
+    #     - allow: [Template]
+    # - type: url
+    #   target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/provision-vm/template.yaml
+    #   rules:
+    #     - allow: [Template]
+    # - type: url
+    #   target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/namespace-access/template.yaml
+    #   rules:
+    #     - allow: [Template]
     - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/application-onboarding/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/provision-vm/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/namespace-access/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/azure-storage/template.yaml
+      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/**/template.yaml
       rules:
         - allow: [Template]
     - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
