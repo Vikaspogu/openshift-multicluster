@@ -8,3 +8,4 @@ resources:
   - ./03_kube-auth-engine-config.yaml
   - ./04_policy-secret-reader.yaml
   - ./05_auth-engine-role.yaml
+  - ./06_external-secret-store.yaml
