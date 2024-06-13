@@ -143,7 +143,7 @@ helmCharts:
                       if [[ ! $(vault policy list | grep vault-admin) ]]; then
                         vault auth enable kubernetes
                         vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc:443
-                        vault write auth/kubernetes/role/policy-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=1h
+                        vault write auth/kubernetes/role/vault-admin bound_service_account_names=default bound_service_account_namespaces=vault-admin policies=vault-admin ttl=1h
                         cat << EOF | vault policy write vault-admin -
                           path "/*" {
                             capabilities = ["create", "read", "update", "delete", "list","sudo"]
