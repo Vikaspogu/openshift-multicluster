@@ -16,6 +16,7 @@ spec:
               selector:
                 matchLabels:
                   team: "?*"
+                  cluster: "?*"
       generate:
         synchronize: true
         apiVersion: redhatcop.redhat.io/v1alpha1
