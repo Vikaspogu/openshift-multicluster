@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: avengers
-  labels:
-    cluster: dev-acm
-    team: superheros
-    argocd.argoproj.io/managed-by: openshift-gitops
