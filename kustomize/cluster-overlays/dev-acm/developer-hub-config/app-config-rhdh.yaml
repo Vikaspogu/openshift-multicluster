@@ -15,13 +15,23 @@ backend:
       - PUT
       - DELETE
   csp:
-    connect-src:
-      - "'self'"
-      - "http:"
-      - "https:"
+    frame-ancestors: ["http://localhost:3000", "http://localhost:7007"]
+    script-src: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+    script-src-elem: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+    connect-src: ["'self'", "http:", "https:", "data:"]
   reading:
     allow:
       - host: "*.apps.dev-acm.v3socp.boo"
+orchestrator:
+  sonataFlowService:
+    baseUrl: http://localhost
+    port: 8899
+    autoStart: true
+    workflowsSource:
+      gitRepositoryUrl: https://github.com/parodos-dev/backstage-orchestrator-workflows
+      localPath: /tmp/orchestrator/repository
+  dataIndexService:
+    url: http://localhost:8899
 
 open-dora:
   apiBaseUrl: "https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo"
