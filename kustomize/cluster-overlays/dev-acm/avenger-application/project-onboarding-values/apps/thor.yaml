@@ -1,0 +1,10 @@
+apps:
+  thor:
+    namespaces:
+    - avenger-dev
+    sourceRepos:
+      - https://github.com/devhub-showcase/basic-springboot-app
+    tenantGitops:
+      repo: https://github.com/devhub-showcase/tenant-gitops.git
+      path: dev-acm/avenger/thor
+    helmChartRepo: https://github.com/devhub-showcase/helm-charts
