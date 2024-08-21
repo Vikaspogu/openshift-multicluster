@@ -59,7 +59,7 @@ applications:
   acs-central-configuration:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
@@ -68,7 +68,7 @@ applications:
   cert-manager-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
@@ -77,7 +77,7 @@ applications:
   cert-manager-application:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "25"
     destination:
       namespace: open-cluster-management
     source:
@@ -86,7 +86,7 @@ applications:
   cluster-rbac-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
@@ -95,7 +95,7 @@ applications:
   developer-hub-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
     source:
@@ -104,7 +104,7 @@ applications:
   external-secret-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "10"
     destination:
       namespace: open-cluster-management
     source:
@@ -131,7 +131,7 @@ applications:
   gitwebhook-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
+      argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
     source:
@@ -140,7 +140,7 @@ applications:
   ldap-sync-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
@@ -158,7 +158,7 @@ applications:
   lvm-storage:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "10"
     destination:
       namespace: open-cluster-management
     source:
@@ -167,7 +167,7 @@ applications:
   oauth-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
@@ -194,7 +194,7 @@ applications:
   openshift-gitops-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
     source:
