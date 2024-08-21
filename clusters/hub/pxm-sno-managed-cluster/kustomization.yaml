@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: pxm-sno
 resources:
-  - ../../../components/aap-config/
+  - ../../../../components/aap-config/
   - ./sno-workflow.yaml
 
 helmGlobals:
