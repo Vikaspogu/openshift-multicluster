@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../components/acs-central-configuration
+
+commonAnnotations:
+  argocd.argoproj.io/sync-options: Delete=false
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - central-stackrox.apps.dev-acm.v3socp.boo
+    target:
+      kind: Certificate
+      name: central-default-tls-cert

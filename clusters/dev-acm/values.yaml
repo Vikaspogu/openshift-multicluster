@@ -1,0 +1,210 @@
+default:
+  app:
+    enabled: true
+    enableAutoSync: true
+    autoSyncPrune: false
+    project: cluster-config
+    labels:
+      app-source: cluster-hub
+      repo: cluster-config
+    destination:
+      namespace: openshift-gitops
+      server: https://kubernetes.default.svc
+    source:
+      repoURL: https://github.com/Vikaspogu/openshift-multicluster.git
+      targetRevision: HEAD
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=false
+    syncPolicyRetry:
+      limit: -1 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 10m # the maximum amount of time allowed for the backoff strategy
+
+applications:
+  acm-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/acm-operator
+
+  acm-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-config
+
+  acs-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acs-operator
+
+  acs-central-configuration:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/acs-central-configuration
+
+  cert-manager-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/cert-manager-config
+
+  cert-manager-application:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/cert-manager-application
+
+  cluster-rbac-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/cluster-rbac-config
+
+  developer-hub-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/developer-hub-config
+
+  external-secret-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/external-secret-config
+
+  external-secrets-chart:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/external-secrets-chart
+
+  gitwebhook-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/gitwebhook-operator
+
+  gitwebhook-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/gitwebhook-config
+
+  ldap-sync-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/ldap-sync-config
+
+  lvm-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/lvm-operator
+
+  lvm-storage:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/lvm-storage
+
+  oauth-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/oauth-config
+
+  onepassword-connect-chart:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/onepassword-connect-chart
+
+  openshift-gitops-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/openshift-gitops-operator
+
+  openshift-gitops-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: clusters/dev-acm/overlays/openshift-gitops-config
+
+  rhdh-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/rhdh-operator

@@ -1,0 +1,34 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../components/cert-manager-application/
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - api.dev-acm.v3socp.boo
+    target:
+      kind: Certificate
+      name: openshift-api
+  - patch: |-
+      - op: replace
+        path: /spec/servingCerts/namedCertificates/0/names
+        value:
+          - api.dev-acm.v3socp.boo
+    target:
+      kind: APIServer
+      name: cluster
+  - patch: |-
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - '*.apps.dev-acm.v3socp.boo'
+      - op: replace
+        path: /spec/commonName
+        value: '*.apps.dev-acm.v3socp.boo'
+    target:
+      kind: Certificate
+      name: openshift-wildcard

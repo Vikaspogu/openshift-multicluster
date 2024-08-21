@@ -1,0 +1,14 @@
+default:
+  project:
+
+  app:
+    enableAutoSync: null
+    autoSyncPrune: true
+    destination:
+      namespace: null
+      server: null
+    project: null
+    source:
+      path: null
+      repoURL: null
+      targetRevision: HEAD

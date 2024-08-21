@@ -1,0 +1,46 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../components/kyverno-policy-naas/
+  - ./developer-hub-secret-sync-policy.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: dev-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: namespace-config-policy
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: dev-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-kube-auth-engine-config
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: dev-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-kube-auth-engine-mount
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/path
+        value: dev-acm/{{request.object.metadata.labels.team}}
+    target:
+      kind: ClusterPolicy
+      name: naas-auth-engine-role
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/generate/data/spec/policy
+        value: |
+          path "/dev-acm/{{request.object.metadata.labels.team}}/*" {
+            capabilities = ["read"]
+          }
+    target:
+      kind: ClusterPolicy
+      name: naas-secret-reader
