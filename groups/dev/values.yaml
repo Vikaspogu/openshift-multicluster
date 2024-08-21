@@ -11,7 +11,7 @@ default:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
     source:
-      repoURL: https://github.com/raffaelespazzoli/gitops-std-repo.git
+      repoURL: https://github.com/Vikaspogu/openshift-multicluster.git
       targetRevision: HEAD
     syncOptions:
       - ApplyOutOfSyncOnly=true
