@@ -6,6 +6,7 @@ metadata:
 rendezvousIP: 10.30.30.100
 hosts:
   - hostname: master-0 #51200 Memory # 12CPUs
+    role: master
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:11
@@ -32,6 +33,7 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: master-1
+    role: master
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:22
@@ -58,6 +60,7 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: master-2
+    role: master
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:33
@@ -84,6 +87,7 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: worker-0
+    role: worker
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:44
@@ -110,6 +114,7 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: worker-1
+    role: worker
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:55
