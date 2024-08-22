@@ -5,4 +5,4 @@ resources:
   - ./argocd.yaml
   - ./cluster-rolebinding.yaml
   - ./plugin-configmap.yaml
-  - ./root-application.yaml
+  # - ./root-application.yaml
