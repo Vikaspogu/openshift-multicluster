@@ -19,7 +19,7 @@ _... managed by ArgoCD_ :robot:
 
 ## :wave: Overview
 
-Welcome to my OpenShift multi cluster Infrastructure as code repository
+Welcome to my OpenShift multi cluster Infrastructure as code repository. This repository follows standards from [gitops-standards-repo-template](https://github.com/redhat-cop/gitops-standards-repo-template.git)
 
 ### Installing OpenShift cluster with Agent-based Installer
 
@@ -48,37 +48,6 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository
 
 [Playbooks](https://github.com/Vikaspogu/aap-playbooks) to automate manual steps described above
 
-### GitOps
-
-[OpenShift GitOps Operator](https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html) watches my [cluster](./kustomize/cluster-overlays/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
-
-```bash
-oc apply -k kustomize/bases/openshift-gitops-operator
-cat ~/.config/sops/age/keys.txt | oc create secret generic sops-age -n openshift-gitops --from-file=keys.txt=/dev/stdin
-oc apply -k kustomize/bases/openshift-gitops-config -n openshift-gitops
-kustomize build kustomize/cluster-overlays/dev-acm/argo-application --enable-alpha-plugins --load-restrictor LoadRestrictionsNone | oc apply -f-
-```
-
-### Folder Layout
-
-This Git repository contains the following directories (_kustomizatons_) under [cluster](./cluster/).
-
-```sh
-📁 helm                     # helm charts folder
-├─📁 charts
-├ └─ 📁 <CHART-NAME>        # custom helm charts
-📁 kustomize                # openshift cluster defined as code
-├─📁 bases                  # bases contains resources that applies to all clusters
-└─📁 cluster-overlays       # Contains all the clusters managed by the repo
-  └─ 📁 <CLUSTER-NAME>      # Contains applications to deploy on cluster, using helm/charts or kustomize/bases as resources
-```
-
-### Deploy Developer Hub
-
-```bash
-helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub -f kustomize/cluster-overlays/dev-acm/developer-hub-chart/values.yaml -n=developer-hub --kube-insecure-skip-tls-verify
-```
-
 ## 🔍 Features
 
 - [x] ArgoCD with SOPS plugin
@@ -87,8 +56,6 @@ helm upgrade --install developer-hub openshift-helm-charts/redhat-developer-hub 
 - [x] Multi cluster management
 - [x] Kyverno
 - [x] Renovate bot
-
-## :hammer: TODO
 
 ## Resources
 

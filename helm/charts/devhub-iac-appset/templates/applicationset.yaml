@@ -1,0 +1,41 @@
+{{- $releaseLabels := include "devhub-iac-appset.labels" . -}}
+{{- $values := .Values -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: devhub-{{ $values.git.path | splitList "/" | last }}-appset
+  namespace: openshift-gitops
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+spec:
+  generators:
+    - git:
+        repoURL: {{ $values.git.url }}
+        revision: {{ $values.git.revision }}
+        directories:
+          - path: {{ required "A valid git repository path is required!" $values.git.path }}/*
+  goTemplate: true
+  template:
+    metadata:
+      name: '{{ `{{.path.basename}}` }}'
+      labels:
+        type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
+    spec:
+      destination:
+        server: "https://kubernetes.default.svc"
+      project: default
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - SkipDryRunOnMissingResource=true
+          - Validate=false
+          - ApplyOutOfSyncOnly=true
+          - RespectIgnoreDifferences=true
+          - Prune=true
+      source:
+        path: "{{`{{.path.path}}`}}"
+        repoURL: {{ $values.git.url }}
+        targetRevision: {{ $values.git.revision }}
