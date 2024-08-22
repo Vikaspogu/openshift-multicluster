@@ -2,7 +2,7 @@
 replicaCount: 0
 image:
   repository: docker.io/cloudflare/cloudflared
-  tag: "2024.8.2"
+  tag: "2024.8.3"
 cloudflared:
   tunnelID: "76cace65-155d-4719-9b29-4bfb94f5c013"
   existingSecret: cloudflared
