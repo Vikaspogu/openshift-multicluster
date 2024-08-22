@@ -6,7 +6,6 @@ resources:
 
 commonAnnotations:
   argocd.argoproj.io/sync-options: Delete=false
-  argocd.argoproj.io/compare-options: IgnoreExtraneous
 
 helmCharts:
   - name: reloader
@@ -28,3 +27,16 @@ patches:
       - op: replace
         path: /spec/template/spec/securityContext
         value: {}
+      - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: GOMAXPROCS
+            valueFrom:
+              resourceFieldRef:
+                divisor: '0'
+                resource: limits.cpu
+          - name: GOMEMLIMIT
+            valueFrom:
+              resourceFieldRef:
+                divisor: '0'
+                resource: limits.memory
