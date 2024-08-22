@@ -6,6 +6,7 @@ resources:
 
 commonAnnotations:
   argocd.argoproj.io/sync-options: Delete=false
+  argocd.argoproj.io/compare-options: IgnoreExtraneous
 
 helmCharts:
   - name: reloader
