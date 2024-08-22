@@ -47,24 +47,6 @@ applications:
     source:
       path: components/acm-config
 
-  acs-operator:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: rhacs-operator
-    source:
-      path: components/acs-operator
-
-  acs-central-configuration:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: stackrox
-    source:
-      path: clusters/dev-acm/overlays/acs-central-configuration
-
   cert-manager-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
@@ -202,3 +184,21 @@ applications:
       namespace: rhdh-operator
     source:
       path: components/rhdh-operator
+
+  virtualization-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-cnv
+    source:
+      path: clusters/dev-acm/overlays/virtualization-operator
+
+  virtualization-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-cnv
+    source:
+      path: components/virtualization-config
