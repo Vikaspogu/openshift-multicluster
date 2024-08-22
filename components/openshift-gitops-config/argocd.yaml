@@ -440,6 +440,7 @@ spec:
   repo:
     sidecarContainers:
       - name: helm-multivalues-plugin
+        resources: {}
         command: [/var/run/argocd/argocd-cmp-server]
         image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
         env:
@@ -487,6 +488,7 @@ spec:
         value: /.config/helm/data
     initContainers:
       - name: install-helm-multivalues-plugin
+        resources: {}
         image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
         command: [sh, -c]
         args:
@@ -502,6 +504,7 @@ spec:
           - mountPath: /helm-custom-config
             name: helm-custom-config
       - name: install-custom-tools
+        resources: {}
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
         args:
@@ -510,6 +513,7 @@ spec:
           - mountPath: /custom-tools
             name: custom-tools
       - name: policy-generator-install
+        resources: {}
         args:
           - -c
           - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
