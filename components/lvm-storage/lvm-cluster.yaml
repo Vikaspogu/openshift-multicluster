@@ -8,8 +8,10 @@ spec:
   storage:
     deviceClasses:
       - default: true
+        fstype: xfs
         name: vg1
         thinPoolConfig:
+          chunkSizeCalculationPolicy: Static
           name: thin-pool-1
           sizePercent: 90
           overprovisionRatio: 10
