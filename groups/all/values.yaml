@@ -30,7 +30,7 @@ projects:
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:
-      - https://github.com/raffaelespazzoli/gitops-std-repo
+      - https://github.com/Vikaspogu/openshift-multicluster.git
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
