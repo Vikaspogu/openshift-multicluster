@@ -104,7 +104,7 @@ applications:
     destination:
       namespace: external-secrets
     source:
-      path: components/external-secret-config
+      path: components/external-secrets-config
 
   external-secrets-chart:
     annotations:
