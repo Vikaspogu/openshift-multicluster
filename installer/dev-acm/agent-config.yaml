@@ -5,8 +5,7 @@ metadata:
   name: dev-acm
 rendezvousIP: 10.30.30.100
 hosts:
-  - hostname: master-0 #51200 Memory # 12CPUs
-    role: master
+  - hostname: master-0
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:11
@@ -33,7 +32,6 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: master-1
-    role: master
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:22
@@ -60,7 +58,6 @@ hosts:
             next-hop-interface: ens18
             table-id: 254
   - hostname: master-2
-    role: master
     interfaces:
       - name: ens18
         macAddress: 52:50:56:11:22:33
@@ -74,60 +71,6 @@ hosts:
             enabled: true
             address:
               - ip: 10.30.30.102
-                prefix-length: 23
-            dhcp: false
-      dns-resolver:
-        config:
-          server:
-            - 10.30.0.1
-      routes:
-        config:
-          - destination: 0.0.0.0/0
-            next-hop-address: 10.30.30.1
-            next-hop-interface: ens18
-            table-id: 254
-  - hostname: worker-0
-    role: worker
-    interfaces:
-      - name: ens18
-        macAddress: 52:50:56:11:22:44
-    networkConfig:
-      interfaces:
-        - name: ens18
-          type: ethernet
-          state: up
-          mac-address: 52:50:56:11:22:44
-          ipv4:
-            enabled: true
-            address:
-              - ip: 10.30.30.103
-                prefix-length: 23
-            dhcp: false
-      dns-resolver:
-        config:
-          server:
-            - 10.30.0.1
-      routes:
-        config:
-          - destination: 0.0.0.0/0
-            next-hop-address: 10.30.30.1
-            next-hop-interface: ens18
-            table-id: 254
-  - hostname: worker-1
-    role: worker
-    interfaces:
-      - name: ens18
-        macAddress: 52:50:56:11:22:55
-    networkConfig:
-      interfaces:
-        - name: ens18
-          type: ethernet
-          state: up
-          mac-address: 52:50:56:11:22:55
-          ipv4:
-            enabled: true
-            address:
-              - ip: 10.30.30.104
                 prefix-length: 23
             dhcp: false
       dns-resolver:
