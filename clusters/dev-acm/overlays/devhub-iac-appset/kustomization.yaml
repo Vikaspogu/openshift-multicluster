@@ -12,4 +12,4 @@ helmCharts:
       git:
         url: https://github.com/Vikaspogu/openshift-home-cluster.git
         revision: main
-        path: clusters/dev-acm/devhub-automation-iac
+        path: clusters/dev-acm/devhub-automation-iac/*
