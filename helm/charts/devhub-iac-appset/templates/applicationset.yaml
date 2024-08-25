@@ -1,10 +1,11 @@
 {{- $releaseLabels := include "devhub-iac-appset.labels" . -}}
 {{- $values := .Values -}}
+{{ $path := split "/" $values.git.path }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: devhub-{{ $values.git.path | splitList "/" | last }}-appset
+  name: devhub-{{ $path._1 }}-appset
   namespace: openshift-gitops
   labels:
     {{- $releaseLabels | nindent 4 }}
