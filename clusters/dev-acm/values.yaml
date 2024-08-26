@@ -70,6 +70,13 @@ applications:
     source:
       path: clusters/dev-acm/overlays/cluster-rbac-config
 
+  devspaces-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    source:
+      path: components/devspaces-operator
+
   developer-hub-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
