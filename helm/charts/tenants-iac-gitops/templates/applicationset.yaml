@@ -1,4 +1,4 @@
-{{- $releaseLabels := include "devhub-iac-appset.labels" . -}}
+{{- $releaseLabels := include "tenants-iac-gitops.labels" . -}}
 {{- $values := .Values -}}
 {{ $path := split "/" $values.git.path }}
 ---
