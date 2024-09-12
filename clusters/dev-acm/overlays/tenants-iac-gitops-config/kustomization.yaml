@@ -12,4 +12,4 @@ helmCharts:
       git:
         url: https://github.com/devhub-showcase/tenants-iac-gitops.git
         revision: main
-        path: clusters/dev-acm/
+        path: clusters/dev-acm
