@@ -4,9 +4,6 @@ kind: Kustomization
 
 namespace: stackrox
 
-commonAnnotations:
-  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-
 resources:
   - namespace.yaml
   - central-default-tls-cert.yaml

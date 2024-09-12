@@ -86,12 +86,12 @@ applications:
     source:
       path: clusters/dev-acm/overlays/developer-hub-config
 
-  devhub-iac-appset:
+  tenants-iac-gitops-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "55"
     source:
-      path: clusters/dev-acm/overlays/devhub-iac-appset
+      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
 
   external-secret-config:
     annotations:
