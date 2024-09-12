@@ -216,3 +216,12 @@ applications:
       namespace: openshift-cnv
     source:
       path: components/virtualization-config
+
+  reflector:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: reflector
+    source:
+      path: components/reflector
