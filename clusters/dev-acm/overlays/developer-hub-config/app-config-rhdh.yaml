@@ -34,9 +34,6 @@ orchestrator:
   dataIndexService:
     url: http://localhost:8899
 
-open-dora:
-  apiBaseUrl: "https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo"
-
 argocd:
   namespacedApps: true
   username: developer-hub
@@ -128,10 +125,10 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: url
-      target: https://github.com/Vikaspogu/software-templates/blob/main/scaffolder-templates/**/template.yaml
+      target: https://github.com/devhub-showcase/software-templates/blob/main/scaffolder-templates/**/template.yaml
       rules:
         - allow: [Template]
-    - target: https://github.com/Vikaspogu/software-templates/blob/main/org.yaml
+    - target: https://github.com/devhub-showcase/software-templates/blob/main/org.yaml
       type: url
       rules:
         - allow: [Group, User]
