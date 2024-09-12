@@ -6,7 +6,7 @@ helmGlobals:
   chartHome: ../../../../helm/charts/
 
 helmCharts:
-  - name: tenants-iac-gitops-config
+  - name: tenants-iac-gitops
     namespace: openshift-gitops
     valuesInline:
       git:
