@@ -12,6 +12,6 @@ data:
       name: helm-multivalues-plugin
     spec:
       init:
-        command: [sh, -c, 'if [ -n $ARGOCD_ENV_CHART_REPO_URL ]; then rm -rf /.config/helm/custom-charts && git clone $ARGOCD_ENV_CHART_REPO_URL /.config/helm/custom-charts; fi']
+        command: [sh, -c, 'helm plugin list']
       generate:
-        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME  /.config/helm/custom-charts/$ARGOCD_ENV_CHART_PATH --values $ARGOCD_ENV_VALUES_FILE -f $ARGOCD_ENV_VALUES_FOLDER']
+        command: [sh, -c, 'helm multivalues template $ARGOCD_APP_NAME $ARGOCD_ENV_CHART_PATH --values $ARGOCD_ENV_VALUES_FILE -f $ARGOCD_ENV_VALUES_FOLDER']
