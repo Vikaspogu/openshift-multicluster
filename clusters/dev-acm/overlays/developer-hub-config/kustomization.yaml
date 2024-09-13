@@ -8,6 +8,7 @@ resources:
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
   - ./externalsecret-devhub-read.yaml
+  - ./externalsecret-pullsecret-quay.yaml
   - https://raw.githubusercontent.com/janus-idp/backstage-plugins/main/plugins/tekton/manifests/clusterrole.yaml
   - ./rolebindings.yaml
   - ./ocm-rolebindings.yaml
