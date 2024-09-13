@@ -6,4 +6,5 @@ resources:
   - ./task-buildah.yaml
   - ./task-cosign.yaml
   - ./task-edit-file.yaml
+  - ./task-kaniko.yaml
   - ./task-open-pr.yaml
