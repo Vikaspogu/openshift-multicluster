@@ -22,6 +22,7 @@ spec:
   results:
     - description: The email from the certificate common name in JSON format
       name: email
+      type: string
   workspaces:
     - name: source
   steps:
