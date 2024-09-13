@@ -31,3 +31,11 @@ applications:
       namespace: openshift-operators
     source:
       path: components/openshift-pipelines-operator
+  openshift-pipelines-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-operators
+    source:
+      path: components/openshift-pipelines-config
