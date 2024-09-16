@@ -5,9 +5,15 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
 spec:
+  pipeline:
+    performance:
+      disable-ha: false
+      buckets: 5
+      replicas: 3
   pruner:
     disabled: false
     keep: 4
     resources:
+      - taskrun
       - pipelinerun
     schedule: 0 * * * *
