@@ -12,7 +12,7 @@ spec:
   params:
     - name: app_name
       type: string
-    - name: app_env
+    - name: values_file_name
       type: string
     - name: image_tag
       type: string
@@ -40,10 +40,10 @@ spec:
 
         ls
 
-        sed -ie 's|^  sha_hash:.*|  sha_hash: "$(params.sha_hash)"|' $(params.app_env).yaml
+        sed -ie 's|^  sha_hash:.*|  sha_hash: "$(params.sha_hash)"|' $(params.values_file_name)
 
-        sed -ie 's|^  tag:.*|  tag: "$(params.image_tag)"|' $(params.app_env).yaml
+        sed -ie 's|^  tag:.*|  tag: "$(params.image_tag)"|' $(params.values_file_name)
 
-        cat $(params.app_env).yaml
+        cat $(params.values_file_name).yaml
 
         echo $?
