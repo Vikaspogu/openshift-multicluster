@@ -10,24 +10,19 @@ spec:
   description: >-
     This task will update the image tag in the values file for the app's corresponding environment.
   params:
-    - name: repo_name
+    - name: helm-deploy-values
       type: string
-    - name: helm_deploy_values
+    - name: image-tag
       type: string
-    - name: image_tag
+    - name: sha-hash
       type: string
-    - name: sha_hash
-      type: string
-
   results:
     - description: returns exit status of command
-      name: exit_status
+      name: exit-status
       type: string
-
   workspaces:
     - name: output
       description: workspace onto which the file is updated
-
   steps:
     - name: edit-file
       resources: {}
@@ -35,7 +30,7 @@ spec:
       workingDir: $(workspaces.output.path)
       script: |
         #!/bin/sh
-        sed -ie 's|^  sha_hash:.*|  sha_hash: "$(params.sha_hash)"|' $(params.helm_deploy_values)
-        sed -ie 's|^  tag:.*|  tag: "$(params.image_tag)"|' $(params.helm_deploy_values)
-        cat $(params.helm_deploy_values)
+        sed -ie 's|^  sha-hash:.*|  sha-hash: "$(params.sha-hash)"|' $(params.helm-deploy-values)
+        sed -ie 's|^  tag:.*|  tag: "$(params.image-tag)"|' $(params.helm-deploy-values)
+        cat $(params.helm-deploy-values)
         echo $?
