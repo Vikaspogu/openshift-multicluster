@@ -19,9 +19,9 @@ spec:
   goTemplate: true
   template:
     metadata:
-      name: '{{ `{{.path.basename}}` }}'
+      name: '{{ `{{index .path.segments 2}}-{{.path.basename}}` }}'
       labels:
-        type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
+        type: '{{`{{index .path.segments 2}}-{{ .path.basename | splitList "-" | last }}`}}'
     spec:
       destination:
         server: "https://kubernetes.default.svc"
