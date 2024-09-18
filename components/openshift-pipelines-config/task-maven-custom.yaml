@@ -141,12 +141,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: SONAR_URL
-              name: $(params.SONAR_SECRET_NAME)
+              name: $(params.SONAR-SECRET-NAME)
         - name: SONAR_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               key: SONAR_AUTH_TOKEN
-              name: $(params.SONAR_SECRET_NAME)
+              name: $(params.SONAR-SECRET-NAME)
       image: $(params.MAVEN_IMAGE)
       name: mvn-goals
       resources: {}
