@@ -64,7 +64,7 @@ enabled:
   jenkins: false
   keycloak: false
   permission: false
-  sonarqube: false
+  sonarqube: true
   techdocs: true
 
 integrations:
@@ -81,6 +81,11 @@ proxy:
         "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/home-page.json
       changeOrigin: true
       secure: true
+
+    "/sonarqube":
+      target: ${SONARQUBE_URL}/api
+      allowedMethods: ["GET"]
+      auth: ${SONARQUBE_TOKEN}
 
 kubernetes:
   serviceLocatorMethod:
