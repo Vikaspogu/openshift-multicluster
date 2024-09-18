@@ -66,3 +66,9 @@ plugins:
     package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
   - disabled: false
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-sonarqube
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-sonarqube-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-scaffolder-backend-module-sonarqube-dynamic
