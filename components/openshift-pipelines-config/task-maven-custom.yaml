@@ -54,6 +54,9 @@ spec:
       description: The context directory within the repository for sources on which we want to execute maven goals.
       name: CONTEXT_DIR
       type: string
+    - name: SONAR_SECRET_NAME
+      type: string
+      description: Sonarqube Auth Token and URL
   steps:
     - env:
         - name: HOME
@@ -141,12 +144,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: SONAR_URL
-              name: $(params.SONAR-SECRET-NAME)
+              name: $(params.SONAR_SECRET_NAME)
         - name: SONAR_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               key: SONAR_AUTH_TOKEN
-              name: $(params.SONAR-SECRET-NAME)
+              name: $(params.SONAR_SECRET_NAME)
       image: $(params.MAVEN_IMAGE)
       name: mvn-goals
       resources: {}
