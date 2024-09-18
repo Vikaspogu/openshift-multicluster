@@ -57,6 +57,7 @@ spec:
     - name: SONAR_SECRET_NAME
       type: string
       description: Sonarqube Auth Token and URL
+      default: ""
   steps:
     - env:
         - name: HOME
