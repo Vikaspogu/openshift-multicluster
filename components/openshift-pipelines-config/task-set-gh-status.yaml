@@ -1,6 +1,6 @@
 ---
 apiVersion: tekton.dev/v1beta1
-kind: Task
+kind: ClusterTask
 metadata:
   name: github-set-status
   labels:
@@ -124,7 +124,7 @@ spec:
         import json
         import os
         import sys
-        import http.client
+        import requests
 
         if os.getenv("STATE") == "Succeeded" or os.getenv("STATE") == "Completed":
             os.environ['STATE'] = "success"
@@ -156,19 +156,18 @@ spec:
         else:
           conn = http.client.HTTPSConnection("$(params.GITHUB_HOST_URL)")
 
-        conn.request(
-            "POST",
+        response = requests.post(
             status_url,
-            body=json.dumps(data),
+            json=data,
             headers={
                 "User-Agent": "TektonCD, the peaceful cat",
                 "Authorization": authHeader,
                 "Accept": "application/vnd.github.v3+json ",
             })
         resp = conn.getresponse()
-        if not str(resp.status).startswith("2"):
-            print("Error: %d" % (resp.status))
-            print(resp.read())
+        if not str(response.status_code).startswith("2"):
+            print(f"Error: {response.status_code}")
+            print(response.text)
             sys.exit(1)
         else:
             print("GitHub status '{state}' has been set on {repo}#{sha} ".format(
