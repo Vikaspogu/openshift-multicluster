@@ -75,7 +75,7 @@ spec:
       description: |
         Image providing the python binary which this task uses.
       type: string
-      default: python:3.10.1-alpine3.15
+      default: registry.access.redhat.com/ubi9/python-312@sha256:d8e5c0e8324c696fec3f0341250b2f7a060a5e1d478b4970a457ebb55657999c
     - name: SHEBANG
       description: |
         Python path. Depends on the image.
