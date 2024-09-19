@@ -80,7 +80,7 @@ spec:
       description: |
         Python path. Depends on the image.
       type: string
-      default: /usr/bin/env python
+      default: /usr/bin/env python3.11
   volumes:
     - name: githubtoken
       secret:
