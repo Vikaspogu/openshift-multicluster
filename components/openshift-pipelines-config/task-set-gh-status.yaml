@@ -87,6 +87,7 @@ spec:
         secretName: $(params.GITHUB_TOKEN_SECRET_NAME)
   steps:
     - name: set-status
+      resources: {}
       volumeMounts:
         - name: githubtoken
           mountPath: /etc/github-set-status
