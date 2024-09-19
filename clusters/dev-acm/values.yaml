@@ -90,6 +90,7 @@ applications:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "55"
+    autoSyncPrune: true
     source:
       path: clusters/dev-acm/overlays/tenants-iac-gitops-config
 
