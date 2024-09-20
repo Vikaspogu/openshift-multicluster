@@ -75,12 +75,12 @@ spec:
       description: |
         Image providing the python binary which this task uses.
       type: string
-      default: registry.access.redhat.com/ubi8/python-311@sha256:d8fadd2fb3752e207ce546ffb0610fe8cb1bd04d3fbf671db4dfda661e650f61
+      default: vikaspogu/python-requests:1.0.0
     - name: SHEBANG
       description: |
         Python path. Depends on the image.
       type: string
-      default: /usr/bin/env python3.11
+      default: /usr/bin/env python
   volumes:
     - name: githubtoken
       secret:
