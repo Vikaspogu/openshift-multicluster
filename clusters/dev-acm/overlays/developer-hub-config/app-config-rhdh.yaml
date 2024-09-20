@@ -23,6 +23,9 @@ backend:
     allow:
       - host: "*.apps.dev-acm.v3socp.boo"
 
+open-dora:
+  apiBaseUrl: http://open-dora-helm-chart.apache-devlake:10666
+
 orchestrator:
   sonataFlowService:
     baseUrl: http://localhost

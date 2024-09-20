@@ -5,6 +5,8 @@ plugins:
     package: https://preseed.vpogu.duckdns.org/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
   - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
     package: https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
+  - integrity: "sha512-0j9HI4x+g+rPlzfjX4NSZvsme8NHzmmYFfMWMX2wc28SvOvLnJbH8mP3FS4PI23hEj036mhtqh1x+QxgXBbg6A=="
+    package: https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-opendora-0.0.2.tgz
   - integrity: "sha512-FekJ7hvUTMCEdtSImvUZ269rcLzJTw2HtaEflthksYbxvx9/G8Qqx4CCQ/+FNK/VnWdSnmxONYNKkJI1oTGj0w=="
     package: "https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
     pluginConfig:
