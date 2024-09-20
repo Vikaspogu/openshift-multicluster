@@ -155,7 +155,7 @@ spec:
         github_host_url = os.getenv("GITHUB_HOST_URL")
 
         response = requests.post(
-            github_host_url + status_url,
+            "https://" + github_host_url + status_url,
             json=data,
             headers={
                 "User-Agent": "TektonCD, the peaceful cat",
