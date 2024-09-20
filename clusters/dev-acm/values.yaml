@@ -244,3 +244,21 @@ applications:
       namespace: crossplane-system
     source:
       path: components/crossplane-chart
+
+  apache-devlake-chart:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: apache-devlake
+    source:
+      path: components/apache-devlake-chart
+
+  opendora-chart:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: apache-devlake
+    source:
+      path: components/opendora-chart
