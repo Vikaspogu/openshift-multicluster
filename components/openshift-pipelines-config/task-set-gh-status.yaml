@@ -151,14 +151,11 @@ spec:
 
         authHeader = os.getenv("AUTH_TYPE") + " " + github_token
 
-        # This is for our fake github server
-        if "$(params.GITHUB_HOST_URL)".startswith("http://"):
-          conn = http.client.HTTPConnection("$(params.GITHUB_HOST_URL)".replace("http://", ""))
-        else:
-          conn = http.client.HTTPSConnection("$(params.GITHUB_HOST_URL)")
+        # Determine the GitHub URL
+        github_host_url = os.getenv("GITHUB_HOST_URL")
 
         response = requests.post(
-            status_url,
+            github_host_url + status_url,
             json=data,
             headers={
                 "User-Agent": "TektonCD, the peaceful cat",
