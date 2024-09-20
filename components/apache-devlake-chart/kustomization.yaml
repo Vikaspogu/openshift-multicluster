@@ -47,3 +47,21 @@ patches:
     target:
       kind: Deployment
       name: devlake-grafana
+  - patch: |-
+      - op: replace
+        path: /spec/volumeClaimTemplates
+        value:
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: devlake-mysql-data
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 50Gi
+              volumeMode: Filesystem
+    target:
+      kind: StatefulSet
+      name: devlake-mysql
