@@ -162,7 +162,7 @@ spec:
                 "Authorization": authHeader,
                 "Accept": "application/vnd.github.v3+json ",
             })
-        resp = conn.getresponse()
+
         if not str(response.status_code).startswith("2"):
             print(f"Error: {response.status_code}")
             print(response.text)
