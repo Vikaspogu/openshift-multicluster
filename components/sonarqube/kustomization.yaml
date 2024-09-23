@@ -10,7 +10,7 @@ helmCharts:
     releaseName: sonarqube
     namespace: sonarqube
     repo: https://SonarSource.github.io/helm-chart-sonarqube
-    version: "10.7.0"
+    version: "10.6.0"
     valuesInline:
       deploymentType: "Deployment"
       OpenShift:
