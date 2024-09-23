@@ -4,22 +4,4 @@ kind: Kustomization
 namespace: sonarqube
 resources:
   - ./namespace.yaml
-
-helmCharts:
-  - name: sonarqube
-    releaseName: sonarqube
-    namespace: sonarqube
-    repo: https://SonarSource.github.io/helm-chart-sonarqube
-    version: "10.6.0"
-    valuesInline:
-      deploymentType: "Deployment"
-      OpenShift:
-        enabled: true
-        createSCC: false
-      postgresql:
-        securityContext:
-          enabled: false
-        containerSecurityContext:
-          enabled: false
-      route:
-        enabled: true
+  - https://github.com/redhat-cop/gitops-catalog/sonarqube8/base?ref=main
