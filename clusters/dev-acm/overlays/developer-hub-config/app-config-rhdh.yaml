@@ -24,7 +24,7 @@ backend:
       - host: "*.apps.dev-acm.v3socp.boo"
 
 open-dora:
-  apiBaseUrl: http://open-dora-helm-chart.apache-devlake.svc.cluster.local:10666
+  apiBaseUrl: https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo
 
 orchestrator:
   sonataFlowService:
