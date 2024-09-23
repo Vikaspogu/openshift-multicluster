@@ -5,3 +5,12 @@ namespace: sonarqube
 resources:
   - ./namespace.yaml
   - https://github.com/redhat-cop/gitops-catalog/sonarqube8/base?ref=main
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: 4Gi
+    target:
+      kind: Deployment
+      name: sonarqube
