@@ -29,7 +29,7 @@ spec:
             - containerPort: 9000
               protocol: TCP
           env:
-            - name: SONAR_JDBC_URL
+            - name: SONAR_JDBC_URI
               valueFrom:
                 secretKeyRef:
                   key: uri
