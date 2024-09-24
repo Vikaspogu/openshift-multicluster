@@ -11,6 +11,9 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/resources/limits/memory
         value: 4Gi
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: sonarqube:10.6-community
     target:
       kind: Deployment
       name: sonarqube
