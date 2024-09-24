@@ -1,0 +1,95 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube
+  labels:
+    app: sonarqube
+    app.kubernetes.io/component: sonarqube
+    app.kubernetes.io/instance: sonarqube
+    app.kubernetes.io/name: sonarqube
+    app.kubernetes.io/part-of: sonarqube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube
+      name: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+        name: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          imagePullPolicy: Always
+          image: docker.io/sonarqube
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          env:
+            - name: SONAR_JDBC_URL
+              valueFrom:
+                secretKeyRef:
+                  key: uri
+                  name: cicd-tools-pgsql-app
+            - name: SONAR_JDBC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: cicd-tools-pgsql-app
+            - name: SONAR_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: cicd-tools-pgsql-app
+          volumeMounts:
+            - mountPath: /opt/sq/temp
+              name: sonarqube-temp
+            - mountPath: /opt/sq/conf
+              name: sonarqube-conf
+            - mountPath: /opt/sq/data
+              name: sonarqube-data
+            - mountPath: /opt/sq/extensions
+              name: sonarqube-extensions
+            - mountPath: /opt/sq/logs
+              name: sonarqube-logs
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: "1"
+              memory: 4Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+      volumes:
+        - name: sonarqube-temp
+          emptyDir: {}
+        - name: sonarqube-conf
+          emptyDir: {}
+        - name: sonarqube-data
+          emptyDir: {}
+        - name: sonarqube-extensions
+          emptyDir: {}
+        - name: sonarqube-logs
+          emptyDir: {}
