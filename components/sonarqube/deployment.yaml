@@ -81,12 +81,12 @@ spec:
           emptyDir: {}
         - name: sonarqube-logs
           emptyDir: {}
-  volumeClaimTemplates:
-    - metadata:
-        name: sonarqube-data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
+    volumeClaimTemplates:
+      - metadata:
+          name: sonarqube-data
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
