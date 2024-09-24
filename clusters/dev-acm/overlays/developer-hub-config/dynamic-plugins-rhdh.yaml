@@ -96,6 +96,4 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-github-issues
   - disabled: false
-    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insight
-  - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
