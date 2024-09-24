@@ -26,6 +26,9 @@ backend:
 open-dora:
   apiBaseUrl: https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo
 
+sonarQube:
+  baseUrl: https://sonarqube-cicd-tools.apps.dev-acm.v3socp.boo
+
 orchestrator:
   sonataFlowService:
     baseUrl: http://localhost
@@ -86,7 +89,7 @@ proxy:
       secure: true
 
     "/sonarqube":
-      target: ${SONARQUBE_URL}/api
+      target: https://sonarqube-cicd-tools.apps.dev-acm.v3socp.boo/api
       allowedMethods: ["GET"]
       auth: ${SONARQUBE_TOKEN}
 
