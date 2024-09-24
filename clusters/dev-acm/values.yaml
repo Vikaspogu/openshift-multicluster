@@ -236,6 +236,15 @@ applications:
     source:
       path: components/reflector
 
+  sonarqube:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: sonarqube
+    source:
+      path: components/sonarqube
+
   crossplane-chart:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous

@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: sonarqube
 resources:
   - ./namespace.yaml
-  - https://github.com/redhat-cop/gitops-catalog/sonarqube8/base?ref=main
+  - https://github.com/redhat-cop/gitops-catalog/sonarqube8/overlays/plugins?ref=main
 
 patches:
   - patch: |-
