@@ -34,16 +34,6 @@ spec:
                 secretKeyRef:
                   key: uri
                   name: cicd-tools-pgsql-app
-            - name: SONAR_JDBC_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: username
-                  name: cicd-tools-pgsql-app
-            - name: SONAR_JDBC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: password
-                  name: cicd-tools-pgsql-app
           volumeMounts:
             - mountPath: /opt/sq/temp
               name: sonarqube-temp
@@ -87,9 +77,16 @@ spec:
           emptyDir: {}
         - name: sonarqube-conf
           emptyDir: {}
-        - name: sonarqube-data
-          emptyDir: {}
         - name: sonarqube-extensions
           emptyDir: {}
         - name: sonarqube-logs
           emptyDir: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: sonarqube-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
