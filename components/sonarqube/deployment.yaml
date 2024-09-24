@@ -77,16 +77,10 @@ spec:
           emptyDir: {}
         - name: sonarqube-conf
           emptyDir: {}
+        - name: sonarqube-data
+          persistentVolumeClaim:
+            claimName: sonarqube-data
         - name: sonarqube-extensions
           emptyDir: {}
         - name: sonarqube-logs
           emptyDir: {}
-    volumeClaimTemplates:
-      - metadata:
-          name: sonarqube-data
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi

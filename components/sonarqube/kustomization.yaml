@@ -5,6 +5,7 @@ namespace: cicd-tools
 resources:
   - ./namespace.yaml
   - ./pgsql-cluster.yaml
+  - ./pvc.yaml
   - ./deployment.yaml
   - ./service.yaml
   - ./route.yaml
