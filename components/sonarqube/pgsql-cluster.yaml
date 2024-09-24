@@ -1,0 +1,13 @@
+kind: Cluster
+apiVersion: postgresql.cnpg.io/v1
+metadata:
+  name: cicd-tools-pgsql
+  namespace: cicd-tools
+spec:
+  instances: 1
+  logLevel: info
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 1Gi
+  walStorage:
+    size: 1Gi

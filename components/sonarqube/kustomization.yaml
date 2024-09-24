@@ -1,25 +1,25 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: sonarqube
+namespace: cicd-tools
 resources:
   - ./namespace.yaml
-
-helmCharts:
-  - name: sonarqube
-    releaseName: sonarqube
-    namespace: sonarqube
-    repo: https://SonarSource.github.io/helm-chart-sonarqube
-    version: "10.6.0"
-    valuesInline:
-      deploymentType: "Deployment"
-      OpenShift:
-        enabled: true
-        createSCC: false
-      postgresql:
-        securityContext:
-          enabled: false
-        containerSecurityContext:
-          enabled: false
-      route:
-        enabled: true
+  - ./pgsql-cluster.yaml
+# helmCharts:
+#   - name: sonarqube
+#     releaseName: sonarqube
+#     namespace: sonarqube
+#     repo: https://SonarSource.github.io/helm-chart-sonarqube
+#     version: "10.6.0"
+#     valuesInline:
+#       deploymentType: "Deployment"
+#       OpenShift:
+#         enabled: true
+#         createSCC: false
+#       postgresql:
+#         securityContext:
+#           enabled: false
+#         containerSecurityContext:
+#           enabled: false
+#       route:
+#         enabled: true
