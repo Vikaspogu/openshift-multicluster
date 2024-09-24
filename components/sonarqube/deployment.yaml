@@ -29,10 +29,17 @@ spec:
             - containerPort: 9000
               protocol: TCP
           env:
-            - name: SONAR_JDBC_URI
+            - name: SONAR_JDBC_URL
+              value: jdbc:postgresql://cicd-tools-pgsql-rw.cicd-tools:5432/app
+            - name: SONAR_JDBC_USERNAME
               valueFrom:
                 secretKeyRef:
-                  key: uri
+                  key: username
+                  name: cicd-tools-pgsql-app
+            - name: SONAR_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
                   name: cicd-tools-pgsql-app
           volumeMounts:
             - mountPath: /opt/sq/temp
