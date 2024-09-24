@@ -4,16 +4,22 @@ kind: Kustomization
 namespace: sonarqube
 resources:
   - ./namespace.yaml
-  - https://github.com/redhat-cop/gitops-catalog/sonarqube8/overlays/plugins?ref=main
 
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/resources/limits/memory
-        value: 4Gi
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: sonarqube:10.6-community
-    target:
-      kind: Deployment
-      name: sonarqube
+helmCharts:
+  - name: sonarqube
+    releaseName: sonarqube
+    namespace: sonarqube
+    repo: https://SonarSource.github.io/helm-chart-sonarqube
+    version: "10.6.0"
+    valuesInline:
+      deploymentType: "Deployment"
+      OpenShift:
+        enabled: true
+        createSCC: false
+      postgresql:
+        securityContext:
+          enabled: false
+        containerSecurityContext:
+          enabled: false
+      route:
+        enabled: true
