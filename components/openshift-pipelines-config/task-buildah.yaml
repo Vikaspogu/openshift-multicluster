@@ -80,8 +80,10 @@ spec:
   results:
     - name: IMAGE_DIGEST
       description: Digest of the image just built.
+      type: string
     - name: IMAGE_URL
       description: Image repository where the built image would be pushed to
+      type: string
   steps:
     - name: build-and-push
       resources: {}
