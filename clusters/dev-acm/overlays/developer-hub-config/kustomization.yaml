@@ -12,6 +12,7 @@ resources:
   - https://raw.githubusercontent.com/janus-idp/backstage-plugins/main/plugins/tekton/manifests/clusterrole.yaml
   - ./rolebindings.yaml
   - ./ocm-rolebindings.yaml
+  - ./console-link.yaml
 
 configMapGenerator:
   - name: app-config-rhdh
