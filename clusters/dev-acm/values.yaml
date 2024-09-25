@@ -280,3 +280,10 @@ applications:
       namespace: cloudnative-pg
     source:
       path: components/cloudnative-pg-operator
+
+  image-registry-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    source:
+      path: components/image-registry-config
