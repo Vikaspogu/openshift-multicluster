@@ -1,8 +1,8 @@
 ---
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: ClusterTask
 metadata:
-  name: buildah-update
+  name: buildah-ssl
   labels:
     app.kubernetes.io/version: "0.8"
   annotations:
@@ -123,9 +123,7 @@ spec:
         - name: varlibcontainers
           mountPath: /var/lib/containers
       securityContext:
-        capabilities:
-          add:
-            - SETFCAP
+        privileged: true
   volumes:
     - name: varlibcontainers
       emptyDir: {}

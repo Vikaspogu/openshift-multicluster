@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./tekton-config.yaml
   - ./task-maven-custom.yaml
-  - ./task-kaniko.yaml
+  - ./task-buildah.yaml
   - ./task-open-pr.yaml
   - ./task-set-gh-status.yaml
