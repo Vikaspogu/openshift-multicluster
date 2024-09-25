@@ -25,27 +25,35 @@ spec:
   params:
     - name: IMAGE
       description: Reference of the image buildah will produce.
+      type: string
     - name: BUILDER_IMAGE
       description: The location of the buildah builder image.
       default: quay.io/buildah/stable:v1
+      type: string
     - name: STORAGE_DRIVER
       description: Set buildah storage driver
       default: overlay
+      type: string
     - name: DOCKERFILE
       description: Path to the Dockerfile to build.
       default: ./Dockerfile
+      type: string
     - name: CONTEXT
       description: Path to the directory to use as context.
       default: .
+      type: string
     - name: TLSVERIFY
       description: Verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
       default: "true"
+      type: string
     - name: FORMAT
       description: The format of the built container, oci or docker
       default: "oci"
+      type: string
     - name: BUILD_EXTRA_ARGS
       description: Extra parameters passed for the build command when building images. WARNING - must be sanitized to avoid command injection
       default: ""
+      type: string
     - name: PUSH_EXTRA_ARGS
       description: Extra parameters passed for the push command when pushing images. WARNING - must be sanitized to avoid command injection
       type: string
@@ -53,6 +61,7 @@ spec:
     - name: SKIP_PUSH
       description: Skip pushing the built image
       default: "false"
+      type: string
     - name: BUILD_ARGS
       description: Dockerfile build arguments, array of key=value
       type: array
@@ -75,6 +84,7 @@ spec:
       description: Image repository where the built image would be pushed to
   steps:
     - name: build-and-push
+      resources: {}
       image: $(params.BUILDER_IMAGE)
       workingDir: $(workspaces.source.path)
       env:
