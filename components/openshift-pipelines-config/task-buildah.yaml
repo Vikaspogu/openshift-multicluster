@@ -28,7 +28,7 @@ spec:
       type: string
     - name: BUILDER_IMAGE
       description: The location of the buildah builder image.
-      default: quay.io/buildah/stable:v1
+      default: "registry.redhat.io/rhel8/buildah:8.10@sha256:5c7cd7c9a3d49e8905fc98693f6da605aeafae36bde5622dc78e12f31db3cd59"
       type: string
     - name: STORAGE_DRIVER
       description: Set buildah storage driver
