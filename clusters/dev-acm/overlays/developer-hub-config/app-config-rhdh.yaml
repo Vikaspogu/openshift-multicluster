@@ -145,6 +145,13 @@ catalog:
         - allow: [Group, User]
 
   providers:
+    aap:
+      dev:
+        baseUrl: ${AAP_URL}
+        authorization: "Bearer ${AAP_AUTH_TOKEN}"
+        schedule:
+          frequency: { minutes: 1 }
+          timeout: { minutes: 1 }
     githubOrg:
       id: production
       githubUrl: https://github.com
