@@ -46,7 +46,7 @@ argocd:
     - instances:
         - name: team-alpha-cicd
           url: https://team-alpha-cicd-server-team-alpha-cicd.apps.dev-acm.v3socp.boo
-          username: developer-hub
+          username: admin
           password: ${ARGOCD_DEV_HUB_PASSWORD}
       type: config
 
