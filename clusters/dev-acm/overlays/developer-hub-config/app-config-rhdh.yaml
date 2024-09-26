@@ -48,7 +48,7 @@ argocd:
     - instances:
         - name: main
           url: https://openshift-gitops-server-openshift-gitops.apps.dev-acm.v3socp.boo
-        - name: team-uno-gitops
+        - name: team-alpha-cicd
           url: https://team-alpha-cicd-server-team-alpha-cicd.apps.dev-acm.v3socp.boo
       type: config
 
