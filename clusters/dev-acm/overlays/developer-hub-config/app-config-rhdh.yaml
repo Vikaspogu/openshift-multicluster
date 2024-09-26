@@ -42,14 +42,12 @@ orchestrator:
 
 argocd:
   namespacedApps: true
-  username: developer-hub
-  password: ${ARGOCD_DEV_HUB_PASSWORD}
   appLocatorMethods:
     - instances:
-        - name: main
-          url: https://openshift-gitops-server-openshift-gitops.apps.dev-acm.v3socp.boo
         - name: team-alpha-cicd
           url: https://team-alpha-cicd-server-team-alpha-cicd.apps.dev-acm.v3socp.boo
+          username: developer-hub
+          password: ${ARGOCD_DEV_HUB_PASSWORD}
       type: config
 
 auth:
