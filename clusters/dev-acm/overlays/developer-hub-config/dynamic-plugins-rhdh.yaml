@@ -2,10 +2,12 @@ includes:
   - dynamic-plugins.default.yaml
 plugins:
   - integrity: "sha512-fn6R8FFYSEjdfinApnSwvQumxIy2k2xVhl8dM4bFAkl00fmpfvURUyy2qfeDqQUzd0kOgid+eNuyhRx00zzGBg=="
+    disabled: true
     package: https://preseed.vpogu.duckdns.org/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
   - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
     package: https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
   - integrity: "sha512-GkrIC/WvZmBQ0VY+WXESaMahGW9D5mnEi2PNH9DfjEPN1TMfi1eqV3LF4oisNx/S/xNkNTT3lJvL0vl5ttb88A=="
+    disabled: true
     package: "@vikaspogu/dynamic-opendora@0.0.2"
     pluginConfig:
       dynamicPlugins:
@@ -77,11 +79,11 @@ plugins:
                     gridRowStart: 1
                 importName: TektonCI
                 mountPoint: entity.page.ci/cards
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-sonarqube
@@ -91,7 +93,7 @@ plugins:
     package: ./dynamic-plugins/dist/janus-idp-backstage-scaffolder-backend-module-sonarqube-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-github-actions
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-github-issues
