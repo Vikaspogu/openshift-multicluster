@@ -24,12 +24,12 @@ plugins:
                 path: /open-dora
                 config:
                   pollingIntervalMs: 5000
-  - integrity: sha512-aSNJhF3h7zKhIeycgkrqK12+NOeQMwIIs0tOf/IFa0hXWHielBHgnWX5hUgtSs5EnjSWI/6WWd2jFpUktg4A+w==
-    package: "https://preseed.vpogu.duckdns.org/plugin-redhat-argocd-1.0.0.tgz"
+  - integrity: sha512-lcIHCghWpP1GI2nj8NVYMVuPeObCJJo80b2+kiQhrtqWcxQHlHgJ7bu1FNDikbM7BaCvKKLW0BOrcjEiQetOBw==
+    package: "https://preseed.vpogu.duckdns.org/vikaspogu-plugin-redhat-argocd-1.1.0.tgz"
     pluginConfig:
       dynamicPlugins:
         frontend:
-          backstage-community.plugin-redhat-argocd:
+          vikaspogu.plugin-redhat-argocd:
             mountPoints:
               - mountPoint: entity.page.overview/cards
                 importName: ArgocdDeploymentSummary
