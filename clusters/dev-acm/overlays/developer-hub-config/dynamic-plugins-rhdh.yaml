@@ -55,8 +55,10 @@ plugins:
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
-  - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-argocd
-    disabled: false
+  - disabled: true
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-argocd
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
   - disabled: false

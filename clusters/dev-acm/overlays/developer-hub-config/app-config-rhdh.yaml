@@ -42,12 +42,12 @@ orchestrator:
 
 argocd:
   namespacedApps: true
+  username: developer-hub
+  password: ${ARGOCD_DEV_HUB_PASSWORD}
   appLocatorMethods:
     - instances:
         - name: team-alpha-cicd
           url: https://team-alpha-cicd-server-team-alpha-cicd.apps.dev-acm.v3socp.boo
-          username: admin
-          password: ${ARGOCD_DEV_HUB_PASSWORD}
       type: config
 
 auth:
@@ -57,19 +57,6 @@ auth:
       development:
         clientId: ${GITHUB_APP_CLIENT_ID}
         clientSecret: ${GITHUB_APP_CLIENT_SECRET}
-
-enabled:
-  argocd: true
-  github: true
-  kubernetes: true
-  ocm: false
-  githubOrg: true
-  gitlab: false
-  jenkins: false
-  keycloak: false
-  permission: false
-  sonarqube: true
-  techdocs: true
 
 integrations:
   github:
@@ -122,7 +109,7 @@ kubernetes:
           plural: cluster
 
 permission:
-  enabled: true
+  enabled: false
   rbac:
     admin:
       superUsers:
@@ -153,22 +140,13 @@ catalog:
     githubOrg:
       id: production
       githubUrl: https://github.com
-      orgs: ["idp-team", "devhub-showcase"]
+      orgs: ["devhub-showcase"]
       schedule:
         initialDelay: { seconds: 30 }
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
     github:
       providerId:
-        organization: "vikaspogu"
-        catalogPath: "/**/catalog-info.yaml"
-        filters:
-          branch: "main"
-          repository: "^(?:(?!software-template).)*$"
-        schedule:
-          frequency: { minutes: 30 }
-          timeout: { minutes: 3 }
-      orgDevHubShowcaseProviderId:
         organization: "devhub-showcase"
         catalogPath: "/**/catalog-info.yaml"
         filters:
