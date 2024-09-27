@@ -25,7 +25,7 @@ backend:
 
 ansible:
   creatorService:
-    baseUrl: 127.0.0.1
+    baseUrl: ansible-dev-tools-rhel8-svc.developer-hub.svc.cluster.local
     port: "8000"
   devSpaces:
     baseUrl: https://devspaces.apps.dev-acm.v3socp.boo/

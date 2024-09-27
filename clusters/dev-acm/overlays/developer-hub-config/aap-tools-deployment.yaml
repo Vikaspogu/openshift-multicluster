@@ -29,7 +29,7 @@ metadata:
   name: ansible-dev-tools-rhel8-svc
 spec:
   ports:
-    - name: http-8081
+    - name: http-8000
       port: 8000
       protocol: TCP
       targetPort: 8000
