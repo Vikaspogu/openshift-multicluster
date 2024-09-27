@@ -16,6 +16,16 @@ spec:
         - name: rhdh-secrets
         - key: token
           name: developer-hub-ocm
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: >-
+          registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
     extraFiles:
       mountPath: /opt/app-root/src
       configMaps:

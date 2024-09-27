@@ -23,6 +23,16 @@ backend:
     allow:
       - host: "*.apps.dev-acm.v3socp.boo"
 
+ansible:
+  creatorService:
+    baseUrl: 127.0.0.1
+    port: "8000"
+  devSpaces:
+    baseUrl: https://devspaces.apps.dev-acm.v3socp.boo/
+  rhaap:
+    baseUrl: ${AAP_URL}
+    token: ${AAP_AUTH_TOKEN}
+
 open-dora:
   apiBaseUrl: https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo
 
@@ -128,15 +138,12 @@ catalog:
       type: url
       rules:
         - allow: [Group, User]
+    - type: url
+      target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+      rules:
+        - allow: [Template]
 
   providers:
-    aap:
-      dev:
-        baseUrl: ${AAP_URL}
-        authorization: "Bearer ${AAP_AUTH_TOKEN}"
-        schedule:
-          frequency: { minutes: 1 }
-          timeout: { minutes: 1 }
     githubOrg:
       id: production
       githubUrl: https://github.com
