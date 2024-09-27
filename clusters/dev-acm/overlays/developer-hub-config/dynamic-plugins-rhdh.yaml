@@ -119,3 +119,9 @@ plugins:
     package: ./dynamic-plugins/dist/backstage-plugin-github-issues
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+  - disabled: false
+    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
