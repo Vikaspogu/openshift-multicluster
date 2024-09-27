@@ -120,7 +120,7 @@ kubernetes:
           plural: cluster
 
 permission:
-  enabled: false
+  enabled: true
   rbac:
     admin:
       superUsers:
@@ -145,6 +145,8 @@ catalog:
         - allow: [Template]
 
   providers:
+    ocm:
+      default: dev-acm
     githubOrg:
       id: production
       githubUrl: https://github.com
