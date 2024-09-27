@@ -24,31 +24,6 @@ plugins:
                 path: /open-dora
                 config:
                   pollingIntervalMs: 5000
-  - integrity: sha512-lcIHCghWpP1GI2nj8NVYMVuPeObCJJo80b2+kiQhrtqWcxQHlHgJ7bu1FNDikbM7BaCvKKLW0BOrcjEiQetOBw==
-    package: "https://preseed.vpogu.duckdns.org/vikaspogu-plugin-redhat-argocd-1.1.0.tgz"
-    pluginConfig:
-      dynamicPlugins:
-        frontend:
-          vikaspogu.plugin-redhat-argocd:
-            mountPoints:
-              - mountPoint: entity.page.overview/cards
-                importName: ArgocdDeploymentSummary
-                config:
-                  layout:
-                    gridColumnEnd:
-                      lg: "span 8"
-                      xs: "span 12"
-                  if:
-                    allOf:
-                      - isArgocdAvailable
-              - mountPoint: entity.page.cd/cards
-                importName: ArgocdDeploymentLifecycle
-                config:
-                  layout:
-                    gridColumn: "1 / -1"
-                  if:
-                    allOf:
-                      - isArgocdConfigured
   - integrity: "sha512-FekJ7hvUTMCEdtSImvUZ269rcLzJTw2HtaEflthksYbxvx9/G8Qqx4CCQ/+FNK/VnWdSnmxONYNKkJI1oTGj0w=="
     package: "https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
     pluginConfig:
