@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ansible-dev-tools-rhel8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ansible-dev-tools-rhel8
+  template:
+    metadata:
+      labels:
+        app: ansible-dev-tools-rhel8
+    spec:
+      containers:
+        - name: ansible-dev-tools-rhel8
+          command:
+            - adt
+            - server
+          image: registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ansible-dev-tools-rhel8-svc
+spec:
+  ports:
+    - name: http-8081
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: ansible-dev-tools-rhel8

@@ -13,6 +13,7 @@ resources:
   - ./rolebindings.yaml
   - ./ocm-rolebindings.yaml
   - ./console-link.yaml
+  - ./aap-tools-deployment.yaml
 
 configMapGenerator:
   - name: app-config-rhdh
