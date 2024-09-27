@@ -32,6 +32,7 @@ ansible:
   rhaap:
     baseUrl: ${AAP_URL}
     token: ${AAP_AUTH_TOKEN}
+    checkSSL: false
 
 open-dora:
   apiBaseUrl: https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo
