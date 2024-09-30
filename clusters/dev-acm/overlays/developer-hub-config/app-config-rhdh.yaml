@@ -146,7 +146,8 @@ catalog:
 
   providers:
     ocm:
-      default: dev-acm
+      env:
+        kubernetesPluginRef: dev-acm
     githubOrg:
       id: production
       githubUrl: https://github.com
