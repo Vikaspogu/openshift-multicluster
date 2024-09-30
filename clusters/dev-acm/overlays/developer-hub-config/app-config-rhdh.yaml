@@ -146,7 +146,8 @@ catalog:
 
   providers:
     ocm:
-      env:
+      default:
+        name: multiclusterhub
         kubernetesPluginRef: dev-acm
     githubOrg:
       id: production
