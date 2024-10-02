@@ -4,3 +4,35 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./scc.yaml
+
+helmCharts:
+  - name: external-secrets
+    releaseName: external-secrets
+    namespace: external-secrets
+    repo: https://charts.external-secrets.io
+    version: 0.10.4
+    valuesInline:
+      installCRDs: true
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets-cert-controller
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/securityContext
+        value: {}
+    target:
+      kind: Deployment
+      name: external-secrets-webhook
