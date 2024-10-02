@@ -1,86 +1,172 @@
 {
-  enabled: true,
-  timezone: "America/Chicago",
-  semanticCommits: "enabled",
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:recommended",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeBranch",
+  ],
   dependencyDashboard: true,
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
-  commitBody: "Signed-off-by: Vikas Pogu <vikaspogu@users.noreply.github.com>",
-  suppressNotifications: ["prIgnoreNotification"],
+  suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
   rebaseWhen: "conflicted",
+  schedule: ["every weekend"],
+  ignorePaths: ["**/*.sops.*", "helm/**", "installer/**"],
+  "helm-values": {
+    fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
+  },
+  kubernetes: {
+    fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
+  },
+  kustomize: {
+    fileMatch: ["(^|/)kustomization\\.ya?ml(?:\\.j2)?$"],
+  },
+  pip_requirements: {
+    fileMatch: ["(^|/)[\\w-]*requirements(-\\w+)?\\.(txt|pip)(?:\\.j2)?$"],
+  },
+  // commit message topics
   commitMessageTopic: "{{depName}}",
   commitMessageExtra: "to {{newVersion}}",
   commitMessageSuffix: "",
-  assignees: ["@vikaspogu"],
-  ignorePaths: ["**/archive/**"],
-  "helm-values": {
-    fileMatch: ["cluster/.+\\.ya?ml$"],
-  },
-  helmv3: {
-    fileMatch: ["charts/.+/Chart\\.ya?ml$"],
-  },
-  regexManagers: [
+  // package rules
+  packageRules: [
+    // automerge
     {
-      fileMatch: ["cluster/.+\\.yaml$"],
-      matchStrings: [
-        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
-      ],
-      datasourceTemplate: "helm",
+      description: ["Auto merge Github Actions"],
+      matchManagers: ["github-actions"],
+      automerge: true,
+      automergeType: "branch",
+      ignoreTests: true,
+      matchUpdateTypes: ["minor", "patch"],
+    },
+    // commit message topics
+    {
+      matchDatasources: ["helm"],
+      commitMessageTopic: "chart {{depName}}",
+    },
+    {
+      matchDatasources: ["docker"],
+      commitMessageTopic: "image {{depName}}",
+    },
+    // commit messages
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(container)!: ",
+    },
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      semanticCommitScope: "container",
+    },
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      semanticCommitScope: "container",
+    },
+    {
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["digest"],
+      semanticCommitType: "chore",
+      semanticCommitScope: "container",
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(helm)!: ",
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      semanticCommitScope: "helm",
+    },
+    {
+      matchDatasources: ["helm"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      semanticCommitScope: "helm",
+    },
+    {
+      matchDatasources: ["github-releases", "github-tags"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(github-release)!: ",
+    },
+    {
+      matchDatasources: ["github-releases", "github-tags"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      semanticCommitScope: "github-release",
+    },
+    {
+      matchDatasources: ["github-releases", "github-tags"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      semanticCommitScope: "github-release",
+    },
+    {
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["major"],
+      commitMessagePrefix: "feat(github-action)!: ",
+    },
+    {
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor"],
+      semanticCommitType: "feat",
+      semanticCommitScope: "github-action",
+    },
+    {
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["patch"],
+      semanticCommitType: "fix",
+      semanticCommitScope: "github-action",
+    },
+    // labels
+    {
+      matchUpdateTypes: ["major"],
+      labels: ["type/major"],
+    },
+    {
+      matchUpdateTypes: ["minor"],
+      labels: ["type/minor"],
+    },
+    {
+      matchUpdateTypes: ["patch"],
+      labels: ["type/patch"],
+    },
+    {
+      matchDatasources: ["docker"],
+      addLabels: ["renovate/container"],
+    },
+    {
+      matchDatasources: ["helm"],
+      addLabels: ["renovate/helm"],
+    },
+    {
+      matchDatasources: ["github-releases", "github-tags"],
+      addLabels: ["renovate/github-release"],
+    },
+    {
+      matchManagers: ["github-actions"],
+      addLabels: ["renovate/github-action"],
     },
   ],
-  packageRules: [
-    // Setup datasources
+  // custom managers
+  customManagers: [
     {
-      datasources: ["helm"],
-      commitMessageTopic: "Helm chart {{depName}}",
-      separateMinorPatch: true,
-      ignoreDeprecated: true,
-    },
-    {
-      matchDatasources: ["docker"],
-      enabled: true,
-      matchUpdateTypes: ["major", "minor", "patch"],
-    },
-    {
-      matchDatasources: ["docker"],
-      semanticCommitScope: "images",
-      separateMinorPatch: true,
-    },
-    // add labels according to package and update types
-    {
-      matchDatasources: ["docker"],
-      matchUpdateTypes: ["major"],
-      commitMessagePrefix: "feat(images)!: ",
-      labels: ["renovate/image", "dep/major"],
-    },
-    {
-      matchDatasources: ["docker"],
-      matchUpdateTypes: ["minor"],
-      semanticCommitType: "feat",
-      labels: ["renovate/image", "dep/minor"],
-    },
-    {
-      matchDatasources: ["docker"],
-      matchUpdateTypes: ["patch"],
-      semanticCommitType: "fix",
-      labels: ["renovate/image", "dep/patch"],
-    },
-    {
-      matchDatasources: ["helm"],
-      matchUpdateTypes: ["major"],
-      commitMessagePrefix: "feat(charts)!: ",
-      labels: ["renovate/helm", "dep/major"],
-    },
-    {
-      matchDatasources: ["helm"],
-      matchUpdateTypes: ["minor"],
-      semanticCommitType: "feat",
-      labels: ["renovate/helm", "dep/minor"],
-    },
-    {
-      matchDatasources: ["helm"],
-      matchUpdateTypes: ["patch"],
-      semanticCommitType: "fix",
-      labels: ["renovate/helm", "dep/patch"],
+      customType: "regex",
+      description: ["Process custom dependencies"],
+      fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
+      matchStrings: [
+        // # renovate: datasource=helm depName=cilium repository=https://helm.cilium.io
+        // version: 1.15.1
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+: (&\\S+\\s)?(?<currentValue>\\S+)",
+      ],
+      datasourceTemplate: "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
     },
   ],
 }

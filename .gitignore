@@ -4,7 +4,7 @@
 .DS_Store
 Thumbs.db
 # k8s
-kube*
+kubeconfig
 # vscode-sops
 .decrypted~*.yaml
 .config.env

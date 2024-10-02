@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: homelab-inventory
 
 helmGlobals:
-  chartHome: ../../../../helm/charts
+  chartHome: ../../../helm/charts/
 
 helmCharts:
   - name: infra-env
