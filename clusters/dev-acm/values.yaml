@@ -36,7 +36,7 @@ applications:
     destination:
       namespace: open-cluster-management
     source:
-      path: clusters/dev-acm/overlays/acm-operator
+      path: components/acm-operator
 
   acm-config:
     annotations:
@@ -110,7 +110,7 @@ applications:
     destination:
       namespace: external-secrets
     source:
-      path: clusters/dev-acm/overlays/external-secrets-chart
+      path: components/external-secrets-chart
 
   gitwebhook-operator:
     annotations:
@@ -146,7 +146,7 @@ applications:
     destination:
       namespace: openshift-storage
     source:
-      path: clusters/dev-acm/overlays/lvm-operator
+      path: components/lvm-operator
 
   lvm-storage:
     annotations:
@@ -198,7 +198,7 @@ applications:
     destination:
       namespace: openshift-gitops
     source:
-      path: clusters/dev-acm/overlays/devspaces-config
+      path: components/devspaces-config
 
   rhdh-operator:
     annotations:
@@ -216,7 +216,7 @@ applications:
     destination:
       namespace: openshift-cnv
     source:
-      path: clusters/dev-acm/overlays/virtualization-operator
+      path: components/virtualization-operator
 
   virtualization-config:
     annotations:

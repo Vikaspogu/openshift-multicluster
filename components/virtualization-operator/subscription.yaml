@@ -5,8 +5,15 @@ metadata:
   name: kubevirt-hyperconverged
   namespace: openshift-cnv
 spec:
-  channel: <REPLACE>
+  channel: stable
   installPlanApproval: Automatic
   name: kubevirt-hyperconverged
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  config:
+    env:
+      - name: KVM_EMULATION
+        value: "true"
+    selector:
+      matchLabels:
+        name: hyperconverged-cluster-operator
