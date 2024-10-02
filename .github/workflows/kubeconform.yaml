@@ -23,6 +23,13 @@ jobs:
       - name: Setup Workflow Tools
         run: brew install fluxcd/tap/flux kubeconform kustomize
 
+      - name: Setup policy generator
+        run: |
+          mkdir -p ${HOME}/.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+          wget https://github.com/open-cluster-management-io/policy-generator-plugin/releases/download/v1.15.0/linux-amd64-PolicyGenerator
+          chmod  +x linux-amd64-PolicyGenerator
+          mv linux-amd64-PolicyGenerator ${HOME}/.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+
       - name: Run kubeconform
         shell: bash
         run: bash ./scripts/kubeconform.sh ${{ env.KUBERNETES_DIR }}
