@@ -287,3 +287,12 @@ applications:
       argocd.argoproj.io/sync-wave: "5"
     source:
       path: components/image-registry-config
+
+  pxm-sno-infraenv-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "45"
+    destination:
+      namespace: homelab-inventory
+    source:
+      path: clusters/dev-acm/overlays/pxm-sno-infraenv
