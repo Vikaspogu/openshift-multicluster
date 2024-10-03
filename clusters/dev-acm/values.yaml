@@ -288,6 +288,15 @@ applications:
     source:
       path: components/image-registry-config
 
+  agent-service-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: multicluster-engine
+    source:
+      path: components/agent-service-config
+
   pxm-sno-infraenv-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
