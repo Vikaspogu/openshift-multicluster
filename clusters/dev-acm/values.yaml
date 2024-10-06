@@ -305,3 +305,12 @@ applications:
       namespace: homelab-inventory
     source:
       path: clusters/dev-acm/overlays/pxm-sno-infraenv
+
+  metallb-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: metallb
+    source:
+      path: components/metallb-operator
