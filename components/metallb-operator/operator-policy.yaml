@@ -18,6 +18,7 @@ spec:
   severity: critical
   upgradeApproval: Automatic
   subscription:
-    channel: stable
+    channel: "stable"
     name: metallb-operator
-    namespace: metallb
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
