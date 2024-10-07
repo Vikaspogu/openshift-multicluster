@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../../components/cert-manager-config/
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/acme/solvers/0/selector/dnsZones
+        value:
+          - "v3socp.boo"
+    target:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+  - patch: |-
+      - op: replace
+        path: /spec/acme/solvers/0/selector/dnsZones
+        value:
+          - "v3socp.boo"
+    target:
+      kind: ClusterIssuer
+      name: letsencrypt-staging

@@ -29,6 +29,22 @@ default:
         maxDuration: 10m # the maximum amount of time allowed for the backoff strategy
 
 applications:
+  cert-manager-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: cert-manager
+    source:
+      path: clusters/sno-hcp/overlays/cert-manager-config
+
+  cert-manager-application:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: clusters/sno-hcp/overlays/cert-manager-application
+
   cluster-rbac-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
