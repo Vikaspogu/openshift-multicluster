@@ -157,14 +157,14 @@ applications:
     source:
       path: clusters/dev-acm/overlays/lvm-storage
 
-  openenbs:
+  openebs:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
-      namespace: openenbs
+      namespace: openebs
     source:
-      path: components/openenbs
+      path: components/openebs
 
   oauth-config:
     annotations:
