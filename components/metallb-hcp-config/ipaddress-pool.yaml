@@ -1,0 +1,11 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ingress-public-ip
+  namespace: metallb
+spec:
+  protocol: layer2
+  autoAssign: false
+  addresses:
+    - <REPLACE>

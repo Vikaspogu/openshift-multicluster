@@ -87,3 +87,17 @@ applications:
       namespace: reflector
     source:
       path: components/reflector
+
+  metallb-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "10"
+    source:
+      path: components/metallb-config
+
+  metallb-addresspool-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    source:
+      path: clusters/sno-hcp/overlays/metallb-addresspool-config
