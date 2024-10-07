@@ -3,6 +3,8 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
   name: argocd-root-application
+placementBindingDefaults:
+  name: binding-policy-openshift-plus-clusters
 policyDefaults:
   namespace: open-cluster-management
   remediationAction: enforce

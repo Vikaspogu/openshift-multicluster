@@ -3,6 +3,8 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
   name: install-gitops-operator
+placementBindingDefaults:
+  name: binding-policy-openshift-plus-clusters
 policyDefaults:
   namespace: open-cluster-management
   remediationAction: enforce
