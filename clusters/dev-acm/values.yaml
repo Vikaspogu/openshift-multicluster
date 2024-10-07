@@ -198,7 +198,7 @@ applications:
     destination:
       namespace: openshift-gitops
     source:
-      path: clusters/dev-acm/overlays/acm-policies-config/gitops-config/manifests
+      path: clusters/dev-acm/overlays/openshift-gitops-config
 
   devspaces-config:
     annotations:
