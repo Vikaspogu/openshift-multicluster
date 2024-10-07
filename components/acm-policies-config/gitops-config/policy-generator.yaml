@@ -2,7 +2,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: argocd-root-application
+  name: gitops-config
 policyDefaults:
   namespace: open-cluster-management
   remediationAction: enforce
@@ -10,7 +10,10 @@ policyDefaults:
   placement:
     placementRulePath: placement-rule.yaml
 policies:
-  - name: argocd-root-application-policy
+  - name: gitops-config-policy
     manifests:
+      - path: manifests/argocd.yaml
+      - path: manifests/cluster-rolebinding.yaml
+      - path: manifests/plugin-configmap.yaml
       - path: root-application.yaml
     remediationAction: enforce

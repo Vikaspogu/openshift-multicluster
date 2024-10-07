@@ -2,7 +2,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: argocd-root-application-placement
+  name: gitops-config-placement
   namespace: open-cluster-management
 spec:
   clusterSelector:

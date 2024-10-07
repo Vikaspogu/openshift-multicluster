@@ -198,7 +198,7 @@ applications:
     destination:
       namespace: openshift-gitops
     source:
-      path: clusters/dev-acm/overlays/openshift-gitops-config
+      path: clusters/dev-acm/overlays/acm-policies-config/gitops-config/manifests
 
   devspaces-config:
     annotations:
@@ -333,14 +333,14 @@ applications:
     source:
       path: components/acm-policies-config/gitops-operator
 
-  acm-policy-argocd-root-application:
+  acm-policy-gitops-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
     source:
-      path: components/acm-policies-config/argocd-root-application
+      path: components/acm-policies-config/gitops-config
 
   acm-policy-sops-auth-policy:
     annotations:
