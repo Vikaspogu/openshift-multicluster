@@ -14,7 +14,6 @@ spec:
       - "text/html"
       - "text/css; charset=utf-8"
       - "application/json"
-  replicas: 3
   tuningOptions:
     maxConnections: 7500
     threadCount: 8
