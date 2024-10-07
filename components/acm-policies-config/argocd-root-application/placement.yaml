@@ -2,7 +2,7 @@
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
-  name: placement-gitops-operator
+  name: placement-argocd-root-application
   namespace: open-cluster-management
 spec:
   predicates:

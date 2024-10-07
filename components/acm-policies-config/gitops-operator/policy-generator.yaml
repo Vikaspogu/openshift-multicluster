@@ -4,13 +4,13 @@ kind: PolicyGenerator
 metadata:
   name: install-gitops-operator
 placementBindingDefaults:
-  name: binding-policy-openshift-plus-clusters
+  name: binding-policy-placement-gitops-operator
 policyDefaults:
   namespace: open-cluster-management
   remediationAction: enforce
   consolidateManifests: false
   policySets:
-    - openshift-plus-clusters
+    - placement-gitops-operator
 policies:
   - name: install-gitops-operator-policy
     manifests:
@@ -22,6 +22,6 @@ policySets:
       that install the OpenShift Platform Plus products using best practices
       that allow them to work well together. This policy set is focused on
       the components that install to every managed cluster.
-    name: openshift-plus-clusters
+    name: placement-gitops-operator
     placement:
       placementPath: placement.yaml
