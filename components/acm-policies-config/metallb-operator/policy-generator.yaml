@@ -14,5 +14,6 @@ policies:
   - name: install-metallb-operator-policy
     manifests:
       - path: namespace.yaml
-      - path: operator-policy.yaml
+      - path: operator-group.yaml
+      - path: subscription.yaml
     remediationAction: enforce
