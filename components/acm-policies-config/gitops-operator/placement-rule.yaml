@@ -5,7 +5,6 @@ metadata:
   name: gitops-operator-placement
   namespace: open-cluster-management
 spec:
-  # This will go to all managed clusters
-  clusterConditions:
-    - status: "True"
-      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - { key: name, operator: NotIn, values: ["local-cluster"] }
