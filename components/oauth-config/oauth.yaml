@@ -18,8 +18,8 @@ spec:
             - cn
           preferredUsername:
             - uid
-        bindDN: <REPLACE>
+        bindDN: uid=admin,ou=people,dc=home,dc=arpa
         bindPassword:
           name: ldap-secret
         insecure: true
-        url: <REPLACE>
+        url: ldap://10.30.30.157/dc=home,dc=arpa

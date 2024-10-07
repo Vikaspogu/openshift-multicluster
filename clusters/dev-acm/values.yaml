@@ -68,7 +68,7 @@ applications:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     source:
-      path: clusters/dev-acm/overlays/cluster-rbac-config
+      path: components/cluster-rbac-config
 
   devspaces-operator:
     annotations:
@@ -162,7 +162,7 @@ applications:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     source:
-      path: clusters/dev-acm/overlays/oauth-config
+      path: components/oauth-config
 
   onepassword-connect-chart:
     annotations:
@@ -313,4 +313,22 @@ applications:
     destination:
       namespace: metallb
     source:
-      path: components/metallb-operator
+      path: components/acm-policies-config/metallb-operator
+
+  acm-policy-gitops-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-policies-config/gitops-operator
+
+  acm-policy-argocd-root-application:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-policies-config/argocd-root-application
