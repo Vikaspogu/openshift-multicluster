@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: https://github.com/Vikaspogu/openshift-multicluster.git
     targetRevision: HEAD
-    path: "clusters/{{ fromClusterClaim name }}"
+    path: clusters/{{ fromClusterClaim "name" }}
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-gitops
