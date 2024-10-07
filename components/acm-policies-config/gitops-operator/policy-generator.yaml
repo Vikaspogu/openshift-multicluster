@@ -8,7 +8,7 @@ policyDefaults:
   remediationAction: enforce
   consolidateManifests: false
   policySets:
-    - openshift-plus-hub
+    - openshift-plus-clusters
 policies:
   - name: install-gitops-operator-policy
     manifests:
