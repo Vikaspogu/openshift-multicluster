@@ -157,6 +157,15 @@ applications:
     source:
       path: clusters/dev-acm/overlays/lvm-storage
 
+  openenbs:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openenbs
+    source:
+      path: components/openenbs
+
   oauth-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
@@ -332,3 +341,12 @@ applications:
       namespace: open-cluster-management
     source:
       path: components/acm-policies-config/argocd-root-application
+
+  acm-policy-sops-auth-policy:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-policies-config/sops-auth-policy
