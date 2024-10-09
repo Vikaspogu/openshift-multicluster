@@ -7,7 +7,7 @@ metadata:
 spec:
   storage:
     deviceClasses:
-      - default: true
+      - default: false
         fstype: xfs
         name: vg1
         thinPoolConfig:

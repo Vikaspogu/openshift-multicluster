@@ -1,0 +1,42 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmGlobals:
+  chartHome: ../../../../helm/charts/
+
+helmCharts:
+  - name: hcp-cluster-deployment
+    releaseName: sno-hcp
+    namespace: sno-hcp
+    valuesInline:
+      clusterName: sno-hcp
+      baseDomain: v3socp.boo
+      openshiftVersion: 4.16.15
+      automaticHostBinding: true
+      sshKeyPub: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEmAVZWnLeKQkHVuD5U0L2JOacFNBhn9m4tMXqN3/hUMRKSs9LvVkReFCSdOE0jmEZAEbLfExIbEzMhvYDcSJvXpHtHFYzlXADRL6IjqCv7XcuP6Ps/HQlRHmU57Y7OakB98Sv6LqyxPLq+gzVltXvwjjVZQU/ETqTdoe2tGTwFHRedzVATN/9YREMaSwY3XyP33g+lQiyztRDiLDq9fmw9PJ513E/EObuZ3J0iCcJYpGRlngm6Nqc7525mUIo5zsDcGaLh9STl1OXaeLQaNCcHrXazv1J9awrDpM/WyTDT0btVmZil7X2p7xyCGTxxW2WP9+f49Nq38S0uU3o8MYtbN/1Ok+3QsS2MtwmONy3cpOpoOZreUgU6mw4mqxVxd240ALd1aXqEXJr728fMFRrKu9xqqde4VWYJcaqOAT3AIm6jBdpZ1UXepxp/qoVDw5AXvfdjCs5/x3sPIGv8mZ7l0ElbK0nzZhUNI4VL8Fl2olooRCi4PdMk2U1+3eQHDc= vikaspogu@vpogu-mac
+      nodePort:
+        ip: 10.30.30.102
+        port: 31350
+      inventoryName: homelab-inventory
+      additionalConfiguration:
+        oauth:
+          identityProviders:
+            - name: ldap-idp
+              mappingMethod: claim
+              type: LDAP
+              ldap:
+                attributes:
+                  id:
+                    - dn
+                  email:
+                    - mail
+                  name:
+                    - cn
+                  preferredUsername:
+                    - uid
+                bindDN: uid=admin,ou=people,dc=home,dc=arpa
+                bindPassword:
+                  name: ldap-secret
+                insecure: true
+                url: ldap://10.30.30.157/dc=home,dc=arpa

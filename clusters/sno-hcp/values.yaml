@@ -70,22 +70,6 @@ applications:
     source:
       path: components/external-secrets-chart
 
-  ldap-sync-config:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: ldap-sync
-    source:
-      path: components/ldap-sync-config
-
-  oauth-config:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
-    source:
-      path: components/oauth-config
-
   onepassword-connect-chart:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
@@ -107,13 +91,13 @@ applications:
   metallb-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "10"
+      argocd.argoproj.io/sync-wave: "5"
     source:
       path: components/metallb-config
 
   metallb-addresspool-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
+      argocd.argoproj.io/sync-wave: "5"
     source:
       path: clusters/sno-hcp/overlays/metallb-addresspool-config

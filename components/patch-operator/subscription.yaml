@@ -5,7 +5,7 @@ metadata:
   name: patch-operator
   namespace: patch-operator
 spec:
-  channel: <REPLACE>
+  channel: alpha
   installPlanApproval: Automatic
   name: patch-operator
   source: community-operators
