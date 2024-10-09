@@ -1,0 +1,20 @@
+apiVersion: hypershift.openshift.io/v1beta1
+kind: NodePool
+metadata:
+  name: 'nodepool-{{ .Values.clusterName }}'
+  namespace: {{ .Values.clusterName }}
+  labels:
+    {{- include "hcp-cluster-deployment.labels" . | nindent 4 }}
+spec:
+  clusterName: {{ .Values.clusterName }}
+  replicas: 1
+  management:
+    autoRepair: false
+    upgradeType: InPlace
+  platform:
+    type: Agent
+    agent:
+      agentLabelSelector:
+        matchLabels: {}
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:{{ .Values.openshiftVersion }}-multi

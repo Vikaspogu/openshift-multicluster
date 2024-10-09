@@ -25,6 +25,7 @@ provision/kubeadmin-password
 tls.*
 /helm/charts/**/charts
 /**/**/charts
+!/helm/**/charts
 openshift-install*
 installer/pxm*
 archived/

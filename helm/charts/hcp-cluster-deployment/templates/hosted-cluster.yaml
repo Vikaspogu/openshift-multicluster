@@ -1,0 +1,69 @@
+apiVersion: hypershift.openshift.io/v1beta1
+kind: HostedCluster
+metadata:
+  name: {{ .Values.clusterName }}
+  namespace: {{ .Values.clusterName }}
+  labels:
+    {{- include "hcp-cluster-deployment.labels" . | nindent 4 }}
+spec:
+  controllerAvailabilityPolicy: SingleReplica
+  dns:
+    baseDomain: {{ .Values.baseDomain }}
+  etcd:
+    managed:
+      storage:
+        persistentVolume:
+          size: 8Gi
+        type: PersistentVolume
+    managementType: Managed
+  fips: false
+  infraID: {{ .Values.clusterName }}
+  infrastructureAvailabilityPolicy: SingleReplica
+  issuerURL: https://kubernetes.default.svc
+  networking:
+    clusterNetwork:
+    - cidr: 10.132.0.0/14
+    networkType: OVNKubernetes
+    serviceNetwork:
+    - cidr: 172.31.0.0/16
+  olmCatalogPlacement: management
+  configuration:
+    {{- with .Values.additionalConfiguration }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    apiServer:
+      servingCerts:
+        namedCertificates:
+        - names:
+          - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.dev-acm.{{ .Values.baseDomain }}
+          servingCertificate:
+            name: oauth-cert
+  platform:
+    agent:
+      agentNamespace: {{ .Values.inventoryName }}
+    type: Agent
+  pullSecret:
+    name: pullsecret-cluster-{{ .Values.clusterName }}
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:{{ .Values.openshiftVersion }}-multi
+  services:
+  - service: APIServer
+    servicePublishingStrategy:
+      nodePort:
+        address: {{ .Values.nodePort.ip }}
+        port: {{ .Values.nodePort.port }}
+      type: NodePort
+  - service: OAuthServer
+    servicePublishingStrategy:
+      type: Route
+  - service: OIDC
+    servicePublishingStrategy:
+      type: Route
+  - service: Konnectivity
+    servicePublishingStrategy:
+      type: Route
+  - service: Ignition
+    servicePublishingStrategy:
+      type: Route
+  sshKey:
+    name: sshkey-cluster-{{ .Values.clusterName }}

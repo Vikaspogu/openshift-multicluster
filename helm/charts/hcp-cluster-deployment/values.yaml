@@ -1,0 +1,10 @@
+clusterName:
+baseDomain:
+openshiftVersion: 4.16.15
+automaticHostBinding: true
+sshKeyPub:
+nodePort:
+  ip:
+  port:
+inventoryName:
+additionalConfiguration: {}
