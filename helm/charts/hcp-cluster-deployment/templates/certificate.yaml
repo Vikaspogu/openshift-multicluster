@@ -9,7 +9,7 @@ metadata:
 spec:
   secretName: oauth-cert
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
     - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.dev-acm.{{ .Values.baseDomain }}
