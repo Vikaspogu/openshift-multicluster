@@ -1,0 +1,12 @@
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: system:openshift:scc:privileged
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:privileged
+subjects:
+  - kind: ServiceAccount
+    name: openebs-maya-operator
+    namespace: openebs

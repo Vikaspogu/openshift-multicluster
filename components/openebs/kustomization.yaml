@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: openebs
 resources:
   - ./namespace.yaml
+  - ./rbac.yaml
+  - ./scc.yaml
 helmCharts:
   - name: openebs
     releaseName: openebs
