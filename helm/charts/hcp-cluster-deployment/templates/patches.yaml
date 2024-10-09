@@ -27,6 +27,6 @@ spec:
           approved: true
           clusterDeploymentName:
             name: {{ .Values.clusterName }}
-            namespace: {{ .Values.clusterName }}
+            namespace: {{ .Values.clusterName }}-{{ .Values.clusterName }}
       patchType: application/merge-patch+json
 {{ end }}
