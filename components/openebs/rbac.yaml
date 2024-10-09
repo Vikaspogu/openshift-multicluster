@@ -10,3 +10,17 @@ subjects:
   - kind: ServiceAccount
     name: openebs-maya-operator
     namespace: openebs
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: system:openshift:scc:privileged
+  namespace: openebs
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:privileged
+subjects:
+  - kind: ServiceAccount
+    name: openebs-localpv-provisioner
+    namespace: openebs

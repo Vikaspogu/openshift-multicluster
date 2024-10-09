@@ -126,7 +126,7 @@ applications:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "25"
     destination:
-      namespace: openshift-storage
+      namespace: patch-operator
     source:
       path: components/patch-operator
 
