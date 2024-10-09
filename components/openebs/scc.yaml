@@ -1,6 +1,0 @@
-allowHostDirVolumePlugin: true
-kind: SecurityContextConstraints
-metadata:
-  name: restricted
-  annotations:
-    argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
