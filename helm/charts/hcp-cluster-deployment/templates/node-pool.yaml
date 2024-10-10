@@ -18,9 +18,6 @@ spec:
     agent:
       agentLabelSelector:
         matchLabels:
-          - key: infraenvs.agent-install.openshift.io
-            operator: In
-            values:
-              - {{ .Values.inventoryName }}
+          infraenvs.agent-install.openshift.io: {{ .Values.inventoryName }}
   release:
     image: quay.io/openshift-release-dev/ocp-release:{{ .Values.openshiftVersion }}-multi
