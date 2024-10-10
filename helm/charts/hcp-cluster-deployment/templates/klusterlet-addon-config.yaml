@@ -3,6 +3,8 @@ kind: KlusterletAddonConfig
 metadata:
   name: {{ .Values.clusterName }}
   namespace: {{ .Values.clusterName }}
+  annotations:
+    argocd.argoproj.io/sync-wave: '35'
   labels:
     {{- include "hcp-cluster-deployment.labels" . | nindent 4 }}
 spec:

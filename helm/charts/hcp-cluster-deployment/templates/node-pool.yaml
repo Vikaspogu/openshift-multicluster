@@ -3,6 +3,8 @@ kind: NodePool
 metadata:
   name: 'nodepool-{{ .Values.clusterName }}'
   namespace: {{ .Values.clusterName }}
+  annotations:
+    argocd.argoproj.io/sync-wave: '35'
   labels:
     {{- include "hcp-cluster-deployment.labels" . | nindent 4 }}
 spec:
@@ -15,6 +17,10 @@ spec:
     type: Agent
     agent:
       agentLabelSelector:
-        matchLabels: {}
+        matchLabels:
+         - key: infraenvs.agent-install.openshift.io
+          operator: In
+          values:
+            - {{ .Values.inventoryName }}
   release:
     image: quay.io/openshift-release-dev/ocp-release:{{ .Values.openshiftVersion }}-multi

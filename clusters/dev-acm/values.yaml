@@ -261,13 +261,6 @@ applications:
     source:
       path: clusters/dev-acm/overlays/homelab-inventory-infraenv
 
-  sno-hcp-cluster:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "45"
-    source:
-      path: clusters/dev-acm/overlays/sno-hcp-cluster
-
   metallb-operator:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
