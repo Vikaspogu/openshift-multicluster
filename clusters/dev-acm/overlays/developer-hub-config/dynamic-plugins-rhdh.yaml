@@ -74,7 +74,7 @@ plugins:
                 config:
                   pollingIntervalMs: 5000
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+    package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-security-insights
   - disabled: false
@@ -113,7 +113,7 @@ plugins:
     package: ./dynamic-plugins/dist/janus-idp-backstage-scaffolder-backend-module-sonarqube-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
-  - disabled: true
+  - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-github-actions
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-github-issues
