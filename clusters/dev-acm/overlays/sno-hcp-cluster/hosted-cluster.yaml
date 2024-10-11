@@ -1,0 +1,37 @@
+---
+apiVersion: hypershift.openshift.io/v1beta1
+kind: HostedCluster
+metadata:
+  name: sno-hcp
+  namespace: sno-hcp
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+spec:
+  configuration:
+    oauth:
+      identityProviders:
+        - name: ldap-idp
+          mappingMethod: claim
+          type: LDAP
+          ldap:
+            attributes:
+              id:
+                - dn
+              email:
+                - mail
+              name:
+                - cn
+              preferredUsername:
+                - uid
+            bindDN: uid=admin,ou=people,dc=home,dc=arpa
+            bindPassword:
+              name: ldap-secret
+            insecure: true
+            url: ldap://10.30.30.157/dc=home,dc=arpa
+    apiServer:
+      servingCerts:
+        namedCertificates:
+          - names:
+              - oauth-sno-hcp-sno-hcp.apps.dev-acm.v3socp.boo
+            servingCertificate:
+              name: oauth-cert
