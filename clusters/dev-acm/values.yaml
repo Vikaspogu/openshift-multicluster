@@ -305,12 +305,3 @@ applications:
       namespace: open-cluster-management
     source:
       path: components/acm-policies-config/sops-auth-policy
-
-  mysql-operator:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: mysql-operator
-    source:
-      path: components/mysql-operator
