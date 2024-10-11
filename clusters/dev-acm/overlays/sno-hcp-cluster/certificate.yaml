@@ -7,7 +7,7 @@ metadata:
 spec:
   secretName: oauth-cert
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - oauth-sno-hcp-sno-hcp.apps.dev-acm.v3socp.boo
