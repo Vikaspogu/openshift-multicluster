@@ -48,9 +48,18 @@ applications:
   cluster-rbac-config:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "15"
+      argocd.argoproj.io/sync-wave: "25"
     source:
       path: components/cluster-rbac-config
+
+  ldap-sync-config:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: ldap-sync
+    source:
+      path: components/ldap-sync-config
 
   external-secret-config:
     annotations:
