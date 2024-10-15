@@ -5,4 +5,3 @@ resources:
   - ./namespace.yaml
   - ./checluster.yaml
   - ./external-secret.yaml
-  - ./configmap.yaml

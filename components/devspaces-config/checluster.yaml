@@ -34,7 +34,9 @@ spec:
     startTimeoutSeconds: 300
     storage:
       pvcStrategy: per-user
-  gitServices: {}
+  gitServices:
+    github:
+      - secretName: github-oauth-config
   networking:
     auth:
       gateway:
