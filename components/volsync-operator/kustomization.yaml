@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: operators-installer
+    releaseName: volsync-operator
+    namespace: volsync-operator
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: stable
+          installPlanApproval: Manual
+          name: volsync-product
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+          csv: volsync-product.v0.10.1
+      operatorGroups:
+        - createNamespace: true
