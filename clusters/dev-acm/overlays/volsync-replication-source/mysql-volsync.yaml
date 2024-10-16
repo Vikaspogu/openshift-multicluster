@@ -1,0 +1,47 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mysql-restic
+  namespace: mysql
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-connect
+  target:
+    name: mysql-restic-secret
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        RESTIC_REPOSITORY: '{{ .REPOSITORY_TEMPLATE }}/mysql'
+        RESTIC_PASSWORD: '{{ .RESTIC_PASSWORD }}'
+        AWS_ACCESS_KEY_ID: '{{ .access_key }}'
+        AWS_SECRET_ACCESS_KEY: '{{ .secret_key }}'
+  dataFrom:
+    - extract:
+        key: minio
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: mysql
+  namespace: mysql
+spec:
+  sourcePVC: mysql-config
+  trigger:
+    schedule: "* 13 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 5
+    repository: mysql-restic-secret
+    cacheCapacity: 5Gi
+    volumeSnapshotClassName: lvms-vg1
+    storageClassName: lvms-vg1
+    moverSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+    retain:
+      daily: 5
+      within: 3d

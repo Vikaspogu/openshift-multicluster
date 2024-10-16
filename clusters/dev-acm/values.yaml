@@ -31,7 +31,6 @@ default:
 applications:
   acm-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: open-cluster-management
@@ -40,7 +39,6 @@ applications:
 
   acm-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: open-cluster-management
@@ -49,7 +47,6 @@ applications:
 
   cert-manager-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: cert-manager
@@ -58,28 +55,24 @@ applications:
 
   cert-manager-application:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "25"
     source:
       path: clusters/dev-acm/overlays/cert-manager-application
 
   cluster-rbac-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     source:
       path: components/cluster-rbac-config
 
   devspaces-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     source:
       path: components/devspaces-operator
 
   developer-hub-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: developer-hub
@@ -88,7 +81,6 @@ applications:
 
   tenants-iac-gitops-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "55"
     autoSyncPrune: true
     source:
@@ -96,7 +88,6 @@ applications:
 
   external-secret-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "10"
     destination:
       namespace: external-secrets
@@ -105,7 +96,6 @@ applications:
 
   external-secrets-chart:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: external-secrets
@@ -114,7 +104,6 @@ applications:
 
   ldap-sync-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: ldap-sync
@@ -123,7 +112,6 @@ applications:
 
   patch-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "25"
     destination:
       namespace: patch-operator
@@ -132,7 +120,6 @@ applications:
 
   openebs:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: openebs
@@ -141,14 +128,12 @@ applications:
 
   oauth-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     source:
       path: components/oauth-config
 
   onepassword-connect-chart:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: external-secrets
@@ -157,7 +142,6 @@ applications:
 
   openshift-gitops-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: openshift-gitops
@@ -166,7 +150,6 @@ applications:
 
   openshift-gitops-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: openshift-gitops
@@ -175,7 +158,6 @@ applications:
 
   devspaces-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: openshift-gitops
@@ -184,7 +166,6 @@ applications:
 
   rhdh-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: rhdh-operator
@@ -193,7 +174,6 @@ applications:
 
   reflector:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: reflector
@@ -202,7 +182,6 @@ applications:
 
   sonarqube:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "15"
     destination:
       namespace: cicd-tools
@@ -211,7 +190,6 @@ applications:
 
   apache-devlake-chart:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: apache-devlake
@@ -220,7 +198,6 @@ applications:
 
   opendora-chart:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: apache-devlake
@@ -229,7 +206,6 @@ applications:
 
   cloudnative-pg-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: cloudnative-pg
@@ -238,14 +214,12 @@ applications:
 
   image-registry-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "25"
     source:
       path: components/image-registry-config
 
   agent-service-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "25"
     destination:
       namespace: multicluster-engine
@@ -254,7 +228,6 @@ applications:
 
   homelab-inventory-infraenv:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: homelab-inventory
@@ -263,7 +236,6 @@ applications:
 
   sno-hcp-cluster:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "55"
     destination:
       namespace: sno-hcp
@@ -272,7 +244,6 @@ applications:
 
   metallb-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: metallb
@@ -281,7 +252,6 @@ applications:
 
   acm-policy-gitops-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
@@ -290,7 +260,6 @@ applications:
 
   acm-policy-gitops-config:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
@@ -299,7 +268,6 @@ applications:
 
   acm-policy-sops-auth-policy:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: open-cluster-management
@@ -308,7 +276,6 @@ applications:
 
   volsync-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: volsync-operator
@@ -317,9 +284,22 @@ applications:
 
   lvm-operator:
     annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
       argocd.argoproj.io/sync-wave: "5"
     destination:
       namespace: openshift-storage
     source:
       path: components/lvm-operator
+
+  lvm-storage:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-storage
+
+  volsync-replication-source:
+    annotations:
+      argocd.argoproj.io/sync-wave: "55"
+    source:
+      path: clusters/dev-acm/overlays/volsync-replication-source

@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "devspaces-images",
+			"path": "/projects/devspaces-images"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"redhat.vscode-yaml",
+			"mhutchie.git-graph",
+            "eamodio.gitlens",
+			"streetsidesoftware.code-spell-checker"
+		]
+	},
+	"settings": {
+		"workbench.colorTheme": "Tomorrow Night Blue",
+		"workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
+		"workbench.preferredLightColorTheme": "Quiet Light",
+		"editor.wordWrap": "on",
+		"files.autoSave": "off"
+	}
+}

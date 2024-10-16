@@ -7,18 +7,10 @@ metadata:
 spec:
   storage:
     deviceClasses:
-      - default: false
-        fstype: xfs
+      - fstype: xfs
         name: vg1
         thinPoolConfig:
           chunkSizeCalculationPolicy: Static
           name: thin-pool-1
-          sizePercent: 90
           overprovisionRatio: 10
-        nodeSelector:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - <REPLACE>
+          sizePercent: 90
