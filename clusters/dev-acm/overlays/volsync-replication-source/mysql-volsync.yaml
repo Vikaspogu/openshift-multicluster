@@ -41,10 +41,6 @@ spec:
     cacheCapacity: 5Gi
     volumeSnapshotClassName: lvms-vg1
     storageClassName: lvms-vg1
-    moverSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
     retain:
       daily: 5
       within: 3d
