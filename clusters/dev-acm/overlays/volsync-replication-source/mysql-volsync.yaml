@@ -14,7 +14,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: '{{ .REPOSITORY_TEMPLATE }}/mysql'
+        RESTIC_REPOSITORY: 's3:{{ .S3_URL }}/restic-repo/mysql'
         RESTIC_PASSWORD: '{{ .RESTIC_PASSWORD }}'
         AWS_ACCESS_KEY_ID: '{{ .access_key }}'
         AWS_SECRET_ACCESS_KEY: '{{ .secret_key }}'
