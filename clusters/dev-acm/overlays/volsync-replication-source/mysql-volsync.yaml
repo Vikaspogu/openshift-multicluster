@@ -20,6 +20,9 @@ spec:
         AWS_SECRET_ACCESS_KEY: '{{ .secret_key }}'
   dataFrom:
     - extract:
+        conversionStrategy: Default
+        decodingStrategy: None
+        metadataPolicy: None
         key: minio
 ---
 apiVersion: volsync.backube/v1alpha1
