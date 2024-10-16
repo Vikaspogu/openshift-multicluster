@@ -2,7 +2,7 @@
 apiVersion: lvm.topolvm.io/v1alpha1
 kind: LVMCluster
 metadata:
-  name: lvm-cluster
+  name: lvmcluster
   namespace: openshift-storage
 spec:
   storage:
