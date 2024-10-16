@@ -314,3 +314,12 @@ applications:
       namespace: volsync-operator
     source:
       path: components/volsync-operator
+
+  lvm-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-operator
