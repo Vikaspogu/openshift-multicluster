@@ -3,7 +3,7 @@ engines:
     lvm:
       enabled: false
     zfs:
-      enabled: true
+      enabled: false
   replicated:
     mayastor:
       enabled: false
@@ -11,17 +11,7 @@ openebs-crds:
   csi:
     volumeSnapshots:
       enabled: false
-zfs-localpv:
-  enabled: true
-  crds:
-    zfsLocalPv:
-      enabled: false
-    csi:
-      volumeSnapshots:
-        enabled: true
 localpv-provisioner:
-  rbac:
-    create: true
   localpv:
     image:
       registry: quay.io/
