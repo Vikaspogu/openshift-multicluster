@@ -31,9 +31,9 @@ metadata:
   name: mysql
   namespace: mysql
 spec:
-  sourcePVC: mysql-config
+  sourcePVC: mysql
   trigger:
-    schedule: "* 13 * * *"
+    schedule: "20 13 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 5
