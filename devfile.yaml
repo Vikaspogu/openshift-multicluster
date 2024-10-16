@@ -6,7 +6,7 @@ metadata:
 components:
   - name: dev-tools
     container:
-      image: quay.io/rhn_gps_vpogu/devspaces-fedora-tooling:fedora40
+      image: quay.io/rhn_gps_vpogu/devspaces-fedora-tooling:1.0.0
       memoryLimit: 4Gi
       mountSources: true
       env:

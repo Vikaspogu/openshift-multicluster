@@ -4,15 +4,15 @@
 			"path": "."
 		},
 		{
-			"name": "devspaces-images",
-			"path": "/projects/devspaces-images"
+			"name": "openshift-multicluster",
+			"path": "/projects/openshift-multicluster"
 		}
 	],
 	"extensions": {
 		"recommendations": [
 			"redhat.vscode-yaml",
 			"mhutchie.git-graph",
-            "eamodio.gitlens",
+			"eamodio.gitlens",
 			"streetsidesoftware.code-spell-checker"
 		]
 	},
