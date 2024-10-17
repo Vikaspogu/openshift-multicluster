@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: operators-installer
+    releaseName: kubernetes-image-puller
+    namespace: kubernetes-image-puller
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: stable
+          installPlanApproval: Manual
+          name: kubernetes-image-puller
+          source: community-operators
+          sourceNamespace: openshift-marketplace
+          csv: kubernetes-image-puller.v1.1.0
+      operatorGroups:
+        - createNamespace: true
