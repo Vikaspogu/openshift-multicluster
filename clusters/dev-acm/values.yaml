@@ -304,10 +304,10 @@ applications:
     source:
       path: clusters/dev-acm/overlays/volsync-replication-source
 
-  kubernetes-image-puller:
+  kubernetes-imagepuller-operator:
     annotations:
       argocd.argoproj.io/sync-wave: "5"
     destination:
-      namespace: kubernetes-image-puller
+      namespace: kubernetes-imagepuller-operator
     source:
-      path: components/kubernetes-image-puller
+      path: components/kubernetes-imagepuller-operator

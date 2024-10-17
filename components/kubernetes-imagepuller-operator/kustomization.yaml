@@ -4,17 +4,17 @@ kind: Kustomization
 
 helmCharts:
   - name: operators-installer
-    releaseName: kubernetes-image-puller
-    namespace: kubernetes-image-puller
+    releaseName: kubernetes-imagepuller-operator
+    namespace: kubernetes-imagepuller-operator
     repo: https://redhat-cop.github.io/helm-charts
     version: "3.0.1"
     valuesInline:
       operators:
         - channel: stable
           installPlanApproval: Manual
-          name: kubernetes-image-puller
+          name: kubernetes-imagepuller-operator
           source: community-operators
           sourceNamespace: openshift-marketplace
-          csv: kubernetes-image-puller.v1.1.0
+          csv: kubernetes-imagepuller-operator.v1.1.0
       operatorGroups:
         - createNamespace: true
