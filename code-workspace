@@ -22,6 +22,6 @@
 		"workbench.preferredLightColorTheme": "Quiet Light",
 		"editor.wordWrap": "on",
 		"files.autoSave": "off",
-		"editor.fontFamily": "'FiraMono Nerd Font Mono'"
+		"editor.fontFamily": "'Fira Code'"
 	}
 }
