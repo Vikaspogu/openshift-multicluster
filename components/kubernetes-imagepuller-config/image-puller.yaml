@@ -1,0 +1,7 @@
+apiVersion: che.eclipse.org/v1alpha1
+kind: KubernetesImagePuller
+metadata:
+  name: k8s-image-puller-images
+  namespace: kubernetes-imagepuller-operator
+spec:
+  images: udi-rhel8=registry.redhat.io/devspaces/udi-rhel8:3.16;idea-rhel8=registry.redhat.io/devspaces/idea-rhel8:3.16;code-rhel8=registry.redhat.io/devspaces/code-rhel8:3.16

@@ -311,3 +311,11 @@ applications:
       namespace: kubernetes-imagepuller-operator
     source:
       path: components/kubernetes-imagepuller-operator
+
+  kubernetes-imagepuller-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: kubernetes-imagepuller-operator
+    source:
+      path: components/kubernetes-imagepuller-config
