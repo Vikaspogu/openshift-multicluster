@@ -13,14 +13,20 @@
 			"redhat.vscode-yaml",
 			"mhutchie.git-graph",
 			"eamodio.gitlens",
-			"streetsidesoftware.code-spell-checker"
+			"catppuccin.catppuccin-vsc"
 		]
 	},
 	"settings": {
-		"workbench.colorTheme": "Tomorrow Night Blue",
-		"workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
-		"workbench.preferredLightColorTheme": "Quiet Light",
+		"workbench.colorTheme": "Catppuccin Frappé",
+		"editor.fontFamily": "'CaskaydiaCove Nerd Font'",
+		"editor.tabSize": 2,
 		"editor.wordWrap": "on",
-		"files.autoSave": "off"
+		"files.autoSave": "off",
+		"editor.semanticHighlighting.enabled": true,
+		"terminal.integrated.minimumContrastRatio": 1,
+		"window.titleBarStyle": "custom",
+		"gopls": {
+			"ui.semanticTokens": true
+		}
 	}
 }
