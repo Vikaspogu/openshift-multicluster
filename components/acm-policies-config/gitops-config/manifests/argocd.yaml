@@ -12,6 +12,23 @@ spec:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
   server:
+    initContainers:
+      - env:
+          - name: EXTENSION_URL
+            value: 'https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.6/extension.tar'
+        image: 'quay.io/argoprojlabs/argocd-extension-installer:v0.0.8'
+        name: rollout-extension
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - mountPath: /tmp/extensions/
+            name: extensions
+    volumeMounts:
+      - mountPath: /tmp/extensions/
+        name: extensions
+    volumes:
+      - emptyDir: {}
+        name: extensions
     autoscale:
       enabled: false
     grpc:
