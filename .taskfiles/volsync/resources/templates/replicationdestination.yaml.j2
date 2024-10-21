@@ -8,11 +8,10 @@ spec:
   trigger:
     manual: restore-once
   restic:
-    repository: {{ ENV.APP }}-volsync-secret
+    repository: {{ ENV.APP }}-restic-secret
     destinationPVC: {{ ENV.CLAIM }}
     copyMethod: Direct
     storageClassName: {{ ENV.CLASS_NAME }}
-    accessModes: {{ ENV.ACCESS_MODES }}
     {% if ENV.RESTORE_AS_OF | default(None) %}
     {#
     On bootstrap set `restoreAsOf` to the time the old cluster was destroyed.
@@ -28,7 +27,3 @@ spec:
     #}
     previous: {{ ENV.PREVIOUS }}
     {% endif %}
-    moverSecurityContext:
-      runAsUser: {{ ENV.PUID }}
-      runAsGroup: {{ ENV.PGID }}
-      fsGroup: {{ ENV.PGID }}

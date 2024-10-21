@@ -119,7 +119,6 @@ tasks:
   restore:
     desc: Restore a PVC for an application
     summary: |-
-      CLUSTER: Cluster to run command against (required)
       NS: Namespace the PVC is in (default: default)
       APP: Application to restore (required)
       PREVIOUS: Previous number of snapshots to restore (default: 2)
@@ -136,17 +135,11 @@ tasks:
         sh: "{{.VOLSYNC_RESOURCES_DIR}}/scripts/which-controller.sh {{.APP}} {{.NS}}"
       CLAIM:
         sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.sourcePVC}"
-      ACCESS_MODES:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.accessModes}"
       CLASS_NAME:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.sourcePVC}"
-      PUID:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsUser}"
-      PGID:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsGroup}"
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.storageClassName}"
     env: *vars
     requires:
-      vars: [CLUSTER, APP]
+      vars: [APP]
     preconditions:
       - test -f {{.VOLSYNC_RESOURCES_DIR}}/scripts/which-controller.sh
 
@@ -154,8 +147,6 @@ tasks:
   .suspend:
     internal: true
     cmds:
-      - flux --namespace flux-system suspend kustomization {{.APP}}
-      - flux --namespace {{.NS}} suspend helmrelease {{.APP}}
       - kubectl --namespace {{.NS}} scale {{.CONTROLLER}} --replicas 0
       - kubectl --namespace {{.NS}} wait pod --for delete --selector="app.kubernetes.io/name={{.APP}}" --timeout=2m
     env: *vars
@@ -183,7 +174,6 @@ tasks:
       - >
         minijinja-cli --env --trim-blocks --lstrip-blocks --autoescape=none {{.VOLSYNC_RESOURCES_DIR}}/templates/replicationdestination.yaml.j2
         | kubectl apply --server-side --filename -
-      - bash {{.VOLSYNC_RESOURCES_DIR}}/scripts/wait-for-job.sh volsync-dst-{{.APP}} {{.NS}}
       - kubectl --namespace {{.NS}} wait job/volsync-dst-{{.APP}} --for condition=complete --timeout=120m
       - kubectl --namespace {{.NS}} delete replicationdestination volsync-dst-{{.APP}}
     env: *vars
@@ -195,6 +185,5 @@ tasks:
   .resume:
     internal: true
     cmds:
-      - flux --namespace {{.NS}} resume helmrelease {{.APP}}
-      - flux --namespace flux-system resume kustomization {{.APP}}
+      - kubectl --namespace {{.NS}} scale {{.CONTROLLER}} --replicas 1
     env: *vars
