@@ -1,0 +1,19 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: ConfigurationPolicy
+metadata:
+  name: configmap-copy-policy
+spec:
+  object-templates-raw: |
+    {{- range (lookup "v1" "Namespace" "" "" "app.kubernetes.io/name=team-onboarding").items }}
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: configmap-copy
+          namespace: {{ .metadata.name }}
+        data: '{{ copyConfigMapData "default" "configmap-original" }}'
+      {{- end }}
+  remediationAction: enforce
+  pruneObjectBehavior: DeleteAll

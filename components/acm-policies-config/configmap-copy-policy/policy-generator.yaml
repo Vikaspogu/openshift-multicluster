@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: configmap-copy-policy-generator
+policyDefaults:
+  namespace: openshift-gitops
+  severity: high
+  placement:
+    clusterSelectors:
+      cluster.open-cluster-management.io/clusterset: default
+policies:
+  - name: configmap-copy-policy
+    manifests:
+      - path: configuration-policy.yaml
+    remediationAction: enforce
