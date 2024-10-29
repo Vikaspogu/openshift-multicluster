@@ -5,7 +5,7 @@ image:
   tag: "2022.8.2"
 cloudflared:
   tunnelID: "b98edfb1-3d2d-4955-b053-5eeff8bd9786"
-  existingSecret: cloudflare-tunnel-credentials
+  existingSecret: cloudflared
   ingress:
     - hostname: "console-openshift-console.apps.dev-acm.v3socp.boo"
       originRequest:
