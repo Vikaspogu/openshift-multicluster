@@ -4,4 +4,4 @@ kind: Repository
 metadata:
   name: openshift-multicluster
 spec:
-  url: "https://github.com/Vikaspogu/openshift-multicluster.git"
+  url: "https://github.com/Vikaspogu/openshift-multicluster"
