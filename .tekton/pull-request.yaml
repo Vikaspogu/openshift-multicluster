@@ -45,7 +45,7 @@ spec:
           - fetch-repository
         workspaces:
           - name: source
-            workspace: source
+            workspace: shared-workspace
   workspaces:
     - name: source
       volumeClaimTemplate:
