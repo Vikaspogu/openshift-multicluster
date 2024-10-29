@@ -3,5 +3,6 @@ apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
 kind: Repository
 metadata:
   name: openshift-multicluster
+  namespace: cicd-tools
 spec:
   url: "https://github.com/Vikaspogu/openshift-multicluster"
