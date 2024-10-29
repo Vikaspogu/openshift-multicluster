@@ -7,7 +7,7 @@ cloudflared:
   tunnelID: "76cace65-155d-4719-9b29-4bfb94f5c013"
   existingSecret: cloudflared
   ingress:
-    - hostname: "console-openshift-console.apps.dev-acm.v3socp.boo"
+    - hostname: "pipelines-as-code-controller-openshift-pipelines.apps.dev-acm.v3socp.boo"
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress.svc.cluster.local
