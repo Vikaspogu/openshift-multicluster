@@ -56,6 +56,7 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository. This re
 - [x] Multi cluster management
 - [x] Kyverno
 - [x] Renovate bot
+- [x] OpenShift Pipeline as Code 
 
 ## Resources
 
