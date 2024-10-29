@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - namespace.yaml
+  - ./external-secret.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
