@@ -1,14 +1,14 @@
 ---
-replicaCount: 3
+replicaCount: 1
 image:
   repository: raspbernetes/cloudflared
-  tag: "2022.8.2"
+  tag: "2024.10.1"
 cloudflared:
-  tunnelID: "b98edfb1-3d2d-4955-b053-5eeff8bd9786"
+  tunnelID: "76cace65-155d-4719-9b29-4bfb94f5c013"
   existingSecret: cloudflared
   ingress:
     - hostname: "console-openshift-console.apps.dev-acm.v3socp.boo"
       originRequest:
         noTLSVerify: true
-      service: https://router-internal-default.openshift-ingress
+      service: https://router-internal-default.openshift-ingress.svc.cluster.local
     - service: http_status:404
