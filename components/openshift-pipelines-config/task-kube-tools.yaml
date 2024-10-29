@@ -5,7 +5,7 @@ metadata:
   name: kube-tools
   labels:
     app.kubernetes.io/version: "1.0.0"
-    tools: "curl,make,tar,git,yq,helm,kubectl,kubeconform,kustomize"
+    tools: "curl-make-tar-git-yq-helm-kubectl-kubeconform-kustomize"
   annotations:
     tekton.dev/pipelines.minVersion: "0.50.0"
     tekton.dev/platforms: "linux/amd64,linux/s390x,linux/ppc64le,linux/arm64"
