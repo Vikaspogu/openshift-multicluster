@@ -44,8 +44,8 @@ spec:
         runAfter:
           - fetch-repository
         workspaces:
-          - name: source
-            workspace: shared-workspace
+          - name: shared-workspace
+            workspace: source
   workspaces:
     - name: source
       volumeClaimTemplate:
