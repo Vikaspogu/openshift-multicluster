@@ -23,6 +23,7 @@ spec:
   steps:
     - name: kube-tools
       image: quay.io/thegeeklab/kube-tools:latest
+      resources: {}
       workingDir: $(workspaces.shared-workspace.path)
       script: |
         #!/bin/sh
