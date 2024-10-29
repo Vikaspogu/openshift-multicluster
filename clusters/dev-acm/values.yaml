@@ -319,11 +319,3 @@ applications:
       namespace: kubernetes-imagepuller-operator
     source:
       path: components/kubernetes-imagepuller-config
-
-  cloudflared:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: networking
-    source:
-      path: components/cloudflared
