@@ -1,0 +1,33 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: kube-tools
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+    tools: "curl,make,tar,git,yq,helm,kubectl,kubeconform,kustomize"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.50.0"
+    tekton.dev/platforms: "linux/amd64,linux/s390x,linux/ppc64le,linux/arm64"
+    tekton.dev/displayName: "kube tools"
+spec:
+  description: Custom Kubernetes toolkit container based on Alpine
+  workspaces:
+    - name: shared-workspace
+      description: A workspace that contains the fetched git repository.
+  params:
+    - name: CLUSTER_DIR
+      type: string
+      description: directory for the cluster resources
+      default: "./"
+  steps:
+    - name: kube-tools
+      image: quay.io/thegeeklab/kube-tools:latest
+      workingDir: $(workspaces.shared-workspace.path)
+      script: |
+        #!/bin/sh
+        mkdir -p ${HOME}/.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+        wget https://github.com/open-cluster-management-io/policy-generator-plugin/releases/download/v1.15.0/linux-amd64-PolicyGenerator
+        chmod  +x linux-amd64-PolicyGenerator
+        mv linux-amd64-PolicyGenerator ${HOME}/.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+        ./scripts/kubeconform.sh ${{ env.CLUSTER_DIR }}
