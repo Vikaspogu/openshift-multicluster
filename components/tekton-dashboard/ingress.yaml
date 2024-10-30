@@ -3,13 +3,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tekton-dashboard
-  namespace: tekton-dashboard
+  annotations:
+    route.openshift.io/termination: "edge"
 spec:
   rules:
     - host: tekton-dashboard.apps.dev-acm.v3socp.boo
       http:
         paths:
-          - path: /tekton(/|$)(.*)
+          - path: /tekton
             pathType: Prefix
             backend:
               service:
