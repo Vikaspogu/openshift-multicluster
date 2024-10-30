@@ -10,8 +10,7 @@ spec:
     - host: tekton-dashboard.apps.dev-acm.v3socp.boo
       http:
         paths:
-          - path: /tekton
-            pathType: Prefix
+          - pathType: ImplementationSpecific
             backend:
               service:
                 name: tekton-dashboard
