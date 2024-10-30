@@ -54,6 +54,7 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository. This re
 - [x] Secret Management using External secrets and 1Password
 - [x] Cert manager for API and Wildcard certificate
 - [x] Multi cluster management
+- [x] OpenShift Pipeline as Code 
 - [x] Kyverno
 - [x] Renovate bot
 
