@@ -31,4 +31,4 @@ spec:
         wget https://github.com/open-cluster-management-io/policy-generator-plugin/releases/download/v1.15.0/linux-amd64-PolicyGenerator
         chmod  +x linux-amd64-PolicyGenerator
         mv linux-amd64-PolicyGenerator ${HOME}/.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-        ./scripts/kubeconform.sh ${{ env.CLUSTER_DIR }}
+        ./scripts/kubeconform.sh $(params.CLUSTER_DIR)
