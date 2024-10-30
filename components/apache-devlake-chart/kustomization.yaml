@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./external-secret.yaml
-  - ./route.yaml
+  - ./ingress.yaml
   - ./external-secret-regred.yaml
 
 generatorOptions:

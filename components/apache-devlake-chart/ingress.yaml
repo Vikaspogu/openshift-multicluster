@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devlake-ui
+  namespace: apache-devlake
+  annotations:
+    route.openshift.io/termination: "edge"
+  labels:
+    app.kubernetes.io/instance: apache-devlake-chart
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: devlake
+    app.kubernetes.io/version: v0.21.0-beta7
+    helm.sh/chart: devlake-0.21.0-beta7
+spec:
+  rules:
+    - host: devlake-ui-apache-devlake.apps.dev-acm.v3socp.boo
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: devlake-ui
+                port:
+                  name: ui

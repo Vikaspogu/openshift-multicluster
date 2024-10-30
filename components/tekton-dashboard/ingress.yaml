@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-dashboard
+spec:
+  rules:
+    - host: tekton-dashboard.apps.dev-acm.v3socp.boo
+      http:
+        paths:
+          - path: /tekton(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tekton-dashboard
+                port:
+                  number: 9097

@@ -6,4 +6,4 @@ resources:
   - ./service-account.yaml
   - ./service.yaml
   - ./deployment.yaml
-  - ./route.yaml
+  - ./ingress.yaml

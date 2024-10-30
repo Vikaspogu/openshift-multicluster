@@ -327,3 +327,11 @@ applications:
       namespace: networking
     source:
       path: components/cloudflared
+
+  tekton-dashboard:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: tekton-dashboard
+    source:
+      path: components/tekton-dashboard

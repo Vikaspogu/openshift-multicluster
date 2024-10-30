@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    route.openshift.io/termination: "edge"
+    name: sonarqube
+spec:
+  rules:
+    - host: sonarqube-cicd-tools.apps.dev-acm.v3socp.boo
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonarqube
+                port:
+                  name: 9000-tcp
