@@ -6,3 +6,11 @@ metadata:
   namespace: cicd-tools
 spec:
   url: "https://github.com/Vikaspogu/openshift-multicluster"
+---
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: httpd-demo
+  namespace: cicd-tools
+spec:
+  url: "https://github.com/Vikaspogu/httpd-demo"
