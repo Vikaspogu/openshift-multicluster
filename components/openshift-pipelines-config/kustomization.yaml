@@ -10,4 +10,3 @@ resources:
   - ./task-open-pr.yaml
   - ./task-set-gh-status.yaml
   - ./task-kube-tools.yaml
-  - ./repository.yaml

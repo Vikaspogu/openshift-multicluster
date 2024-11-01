@@ -1,0 +1,18 @@
+{{- $releaseLabels := include "pac-repository.labels" . -}}
+{{- range $key, $val := .Values.repositories }}
+{{- $repoName := ( splitList "/" $val.url | last | replace ".git" "")}}
+---
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: {{ $repoName }}
+  namespace: {{ $val.pacNamespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+spec:
+  url: {{ $val.url }}
+  {{- with $val.additionalSettings }}
+  settings:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

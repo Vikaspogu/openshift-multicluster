@@ -1,0 +1,9 @@
+repositories: {}
+  # - url: https://github.com/Vikaspogu/httpd-demo
+  #   pacNamespace: cicd-tools
+  #   additionalSettings:
+  #     github_app_token_scope_repos:
+  #       - "owner/project"
+  #       - "owner1/project1"
+  #   appNamespaces:
+  #     - dummy

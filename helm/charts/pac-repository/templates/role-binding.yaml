@@ -1,0 +1,21 @@
+{{- $releaseLabels := include "pac-repository.labels" . -}}
+{{- range $key, $val := .Values.repositories }}
+{{- range $appNamespace := $val.appNamespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $appNamespace }}-pipeline-edit
+  namespace: {{ $appNamespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: {{ $val.pacNamespace }}
+{{- end }}
+{{- end }}
