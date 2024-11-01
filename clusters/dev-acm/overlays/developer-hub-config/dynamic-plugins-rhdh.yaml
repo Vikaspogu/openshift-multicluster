@@ -3,7 +3,7 @@ includes:
 plugins:
   - disabled: false
     integrity: sha512-D2FSw+UZXXQQdQSLyNI0e5NUvTgMwidh3OBZRm4AMODzeAffL/mf5ZNnkVgtAUexTkkjZoVG6kRYzZ1NKiODIQ==
-    package: "https://preseed.vpogu.duckdns.org/ansible-plugin-backstage-rhaap-1.0.0.tgz"
+    package: "https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-1.0.0.tgz"
     pluginConfig:
       dynamicPlugins:
         frontend:
@@ -20,7 +20,7 @@ plugins:
   - disabled: false
     integrity: sha512-myeuYBzGVXgLT3uCFiT39/rAw5R6tS6GlJdchxoa+DxQ8I1ytPP45ZL/6bNs+UBsivnGcHJCOWcsR8J1aQe3kw==
     package: >-
-      https://preseed.vpogu.duckdns.org/ansible-plugin-scaffolder-backend-module-backstage-rhaap-1.0.0.tgz
+      https://static.vikaspogu.com/ansible-plugin-scaffolder-backend-module-backstage-rhaap-1.0.0.tgz
     pluginConfig:
       dynamicPlugins:
         backend:
@@ -28,36 +28,18 @@ plugins:
   - disabled: false
     integrity: sha512-1E/PNbQ1yW0XpV87kaMobOoSCyxXe1KG5FsO+3UqzmHHLPTHuKGjjfTukIz51EQMzPSUES3tY3uryKAIe03OqQ==
     package: >-
-      https://preseed.vpogu.duckdns.org/ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
+      https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
     pluginConfig:
       dynamicPlugins:
         backend:
           ansible.plugin-backstage-rhaap-backend: null
   - integrity: "sha512-fn6R8FFYSEjdfinApnSwvQumxIy2k2xVhl8dM4bFAkl00fmpfvURUyy2qfeDqQUzd0kOgid+eNuyhRx00zzGBg=="
     disabled: true
-    package: https://preseed.vpogu.duckdns.org/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
+    package: https://static.vikaspogu.com/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
   - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
-    package: https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
-  - integrity: "sha512-GkrIC/WvZmBQ0VY+WXESaMahGW9D5mnEi2PNH9DfjEPN1TMfi1eqV3LF4oisNx/S/xNkNTT3lJvL0vl5ttb88A=="
-    disabled: true
-    package: "@vikaspogu/dynamic-opendora@0.0.2"
-    pluginConfig:
-      dynamicPlugins:
-        frontend:
-          vikaspogu.dynamic-opendora:
-            appIcons:
-              - name: openDoraIcon
-                importName: OpenDoraIcon
-            dynamicRoutes:
-              - importName: OpenDoraPluginPage
-                menuItem:
-                  text: OpenDORA
-                  icon: openDoraIcon
-                path: /open-dora
-                config:
-                  pollingIntervalMs: 5000
+    package: https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
   - integrity: "sha512-FekJ7hvUTMCEdtSImvUZ269rcLzJTw2HtaEflthksYbxvx9/G8Qqx4CCQ/+FNK/VnWdSnmxONYNKkJI1oTGj0w=="
-    package: "https://preseed.vpogu.duckdns.org/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
+    package: "https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
     pluginConfig:
       dynamicPlugins:
         frontend:
