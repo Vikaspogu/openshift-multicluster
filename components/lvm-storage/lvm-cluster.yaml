@@ -8,6 +8,7 @@ spec:
   storage:
     deviceClasses:
       - fstype: xfs
+        default: true
         name: vg1
         thinPoolConfig:
           chunkSizeCalculationPolicy: Static
