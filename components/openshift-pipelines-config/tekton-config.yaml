@@ -5,6 +5,11 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
 spec:
+  platforms:
+    openshift:
+      pipelinesAsCode:
+        settings:
+          secret-github-app-token-scoped: "false"
   pipeline:
     performance:
       disable-ha: false
@@ -12,7 +17,7 @@ spec:
       replicas: 3
   pruner:
     disabled: false
-    keep: 4
+    keep: 5
     resources:
       - taskrun
       - pipelinerun
