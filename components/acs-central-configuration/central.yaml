@@ -20,11 +20,11 @@ spec:
       persistence:
         persistentVolumeClaim:
           claimName: central-db
-          storageClassName: openebs-hostpath
+          storageClassName: lvms-vg1
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
-        storageClassName: openebs-hostpath
+        storageClassName: lvms-vg1
   egress:
     connectivityPolicy: Online
   scanner:

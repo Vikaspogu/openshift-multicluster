@@ -34,7 +34,7 @@ helmCharts:
           tls:
             termination: edge
         dataStorage:
-          storageClass: openebs-hostpath
+          storageClass: lvms-vg1
 
         volumes:
           - name: plugins
