@@ -1,0 +1,40 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: helm-uninstall
+  labels:
+    app.kubernetes.io/version: "0.3"
+    operator.tekton.dev/provider-type: self
+spec:
+  description: These tasks will uninstall helm chart into your Kubernetes / OpenShift Cluster using Helm
+  params:
+    - description: The directory in source that contains the helm chart
+      name: charts_dir
+      type: string
+    - default: v1.0.0
+      description: The helm release version in semantic versioning format
+      name: release_version
+      type: string
+    - default: helm-release
+      description: The helm release name
+      name: release_name
+      type: string
+    - default: ""
+      description: The helm release namespace
+      name: release_namespace
+      type: string
+    - default: "docker.io/lachlanevenson/k8s-helm@sha256:5c792f29950b388de24e7448d378881f68b3df73a7b30769a6aa861061fd08ae"
+      description: helm image to be used
+      name: helm_image
+      type: string
+  steps:
+    - image: $(params.helm_image)
+      name: uninstall
+      resources: {}
+      script: |
+        echo current installed helm releases
+        helm list --namespace "$(params.release_namespace)"
+
+        echo uninstalling helm chart...
+        helm uninstall --namespace "$(params.release_namespace)" "$(params.release_name)"
