@@ -1,0 +1,12 @@
+{{- $releaseLabels := include "pac-repository.labels" . -}}
+{{- range $key, $val := .Values.repositories }}
+{{- range $appNamespace := $val.appNamespaces }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $appNamespace }}
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
+    {{- $releaseLabels | nindent 4 }}
+{{- end }}
+{{- end }}
