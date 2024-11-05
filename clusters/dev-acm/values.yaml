@@ -79,13 +79,6 @@ applications:
     source:
       path: clusters/dev-acm/overlays/developer-hub-config
 
-  tenants-iac-gitops-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "55"
-    autoSyncPrune: true
-    source:
-      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
-
   external-secret-config:
     annotations:
       argocd.argoproj.io/sync-wave: "10"
@@ -117,14 +110,6 @@ applications:
       namespace: patch-operator
     source:
       path: components/patch-operator
-
-  openebs:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: openebs
-    source:
-      path: components/openebs
 
   oauth-config:
     annotations:
@@ -187,22 +172,6 @@ applications:
       namespace: cicd-tools
     source:
       path: components/sonarqube
-
-  apache-devlake-chart:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: apache-devlake
-    source:
-      path: components/apache-devlake-chart
-
-  opendora-chart:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: apache-devlake
-    source:
-      path: components/opendora-chart
 
   cloudnative-pg-operator:
     annotations:
