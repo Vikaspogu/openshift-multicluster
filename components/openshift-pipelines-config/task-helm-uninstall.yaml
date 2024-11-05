@@ -9,9 +9,6 @@ metadata:
 spec:
   description: These tasks will uninstall helm chart into your Kubernetes / OpenShift Cluster using Helm
   params:
-    - description: The directory in source that contains the helm chart
-      name: charts_dir
-      type: string
     - default: v1.0.0
       description: The helm release version in semantic versioning format
       name: release_version
