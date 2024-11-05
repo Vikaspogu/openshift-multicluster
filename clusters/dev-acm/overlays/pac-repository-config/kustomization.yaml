@@ -10,14 +10,9 @@ helmCharts:
     namespace: openshift-gitops
     valuesInline:
       repositories:
-        - url: https://github.com/devhub-showcase/shared-helm-charts
-          pacNamespace: cicd-tools
         - url: https://github.com/Vikaspogu/openshift-multicluster
           pacNamespace: cicd-tools
         - url: https://github.com/Vikaspogu/httpd-demo
           pacNamespace: cicd-tools
-          additionalSettings:
-            github_app_token_scope_repos:
-              - "devhub-showcase/shared-helm-charts"
           appNamespaces:
             - demo-application
