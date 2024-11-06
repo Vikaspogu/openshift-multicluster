@@ -15,8 +15,8 @@ spec:
     initContainers:
       - env:
           - name: EXTENSION_URL
-            value: 'https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.6/extension.tar'
-        image: 'quay.io/argoprojlabs/argocd-extension-installer:v0.0.8'
+            value: "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.6/extension.tar"
+        image: "quay.io/argoprojlabs/argocd-extension-installer:v0.0.8"
         name: rollout-extension
         securityContext:
           allowPrivilegeEscalation: false
@@ -73,7 +73,7 @@ spec:
         if obj.status.lastEvaluatedGeneration ~= obj.metadata.generation then
           hs.status = "Progressing"
           hs.message = "Waiting for the status to be updated"
-          return hs  
+          return hs
         end
         if obj.status.compliant == "Compliant" then
           hs.status = "Healthy"
@@ -96,7 +96,7 @@ spec:
         end
         hs.status = "Progressing"
         hs.message = "Waiting for compliance"
-        return hs 
+        return hs
     - group: policy.open-cluster-management.io
       kind: OperatorPolicy
       check: |
@@ -109,7 +109,7 @@ spec:
         if obj.status.observedGeneration ~= nil and obj.status.observedGeneration ~= obj.metadata.generation then
           hs.status = "Progressing"
           hs.message = "Waiting for the status to be updated"
-          return hs  
+          return hs
         end
         for i, condition in ipairs(obj.status.conditions) do
           if condition.type == "Compliant" then
@@ -592,6 +592,9 @@ spec:
     policy: |
       g, system:cluster-admins, role:admin
       g, openshift-admins, role:admin
+      p, role:image-updater, applications, get, */*, allow
+      p, role:image-updater, applications, update, */*, allow
+      g, image-updater, role:image-updater
     scopes: "[groups]"
   repo:
     sidecarContainers:
