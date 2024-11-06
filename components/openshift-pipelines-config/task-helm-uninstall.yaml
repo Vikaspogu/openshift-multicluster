@@ -9,6 +9,10 @@ metadata:
 spec:
   description: These tasks will uninstall helm chart into your Kubernetes / OpenShift Cluster using Helm
   params:
+    - name: commit_message
+      type: string
+      default: ""
+      description: commit message after pr merge
     - default: v1.0.0
       description: The helm release version in semantic versioning format
       name: release_version
@@ -32,6 +36,6 @@ spec:
       script: |
         echo current installed helm releases
         helm list --namespace "$(params.release_namespace)"
-
+        pr_number=$(echo $(params.commit_message) | sed 's/.*#//; s/[^0-9]//g')
         echo uninstalling helm chart...
-        helm uninstall --namespace "$(params.release_namespace)" "$(params.release_name)"
+        helm uninstall --namespace "$(params.release_namespace)" "$(params.release_name)-$pr_number"
