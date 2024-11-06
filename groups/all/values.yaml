@@ -31,7 +31,7 @@ projects:
     namespace: openshift-gitops
     sourceRepos:
       - https://github.com/Vikaspogu/openshift-multicluster.git
-      - https://github.com/devhub-showcase/shared-helm-charts"
+      - https://github.com/devhub-showcase/shared-helm-charts.git
       - https://github.com/Vikaspogu/httpd-demo.git
     destinations: |
       - namespace: '*'
