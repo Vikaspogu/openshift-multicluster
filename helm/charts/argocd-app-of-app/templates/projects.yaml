@@ -4,6 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: {{ $key }}
+  namespace: {{ $val.namespace }}
 {{- if $val.labels  }}
   labels:
 {{- with $val.labels }}
