@@ -304,3 +304,11 @@ applications:
       argocd.argoproj.io/sync-wave: "25"
     source:
       path: clusters/dev-acm/overlays/pac-repository-config
+
+  argocd-image-updater:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-image-updater
