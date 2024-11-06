@@ -2,5 +2,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: openshift-gitops
-resources:
-  - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml
+
+helmCharts:
+  - name: argocd-image-updater
+    releaseName: argocd-image-updater
+    namespace: openshift-gitops
+    repo: https://argoproj.github.io/argo-helm
+    version: "0.11.1"
+    valuesInline:
+      image:
+        tag: "v0.15.0"
