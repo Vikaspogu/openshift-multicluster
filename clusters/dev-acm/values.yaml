@@ -312,3 +312,28 @@ applications:
       namespace: openshift-gitops
     source:
       path: components/argocd-image-updater
+
+  httpd-demo:
+    annotations:
+      argocd-image-updater.argoproj.io/image-list: main=quay.io/rhn_gps_vpogu/httpd-demo:test
+      argocd-image-updater.argoproj.io/main.update-strategy: newest-build
+      argocd-image-updater.argoproj.io/write-back-method: git:secret:openshift-gitops/git-creds
+      argocd-image-updater.argoproj.io/git-branch: main
+      argocd-image-updater.argoproj.io/git-repository: https://github.com/Vikaspogu/httpd-demo.git
+      argocd-image-updater.argoproj.io/write-back-target: "helmvalues:../../.helm/values.yaml"
+      argocd-image-updater.argoproj.io/main.helm.image-tag: image.tag
+      argocd-image-updater.argoproj.io/main.helm.image-name: image.repository
+      argocd-image-updater.argoproj.io/force-update: "true"
+    destination:
+      namespace: demo-application
+    sources:
+      - helm:
+          releaseName: httpd-demo
+          valueFiles:
+            - "$values/.helm/values.yaml"
+        path: charts/deploy
+        repoURL: "https://github.com/devhub-showcase/shared-helm-charts"
+        targetRevision: main
+      - ref: values
+        repoURL: https://github.com/Vikaspogu/httpd-demo.git
+        targetRevision: main

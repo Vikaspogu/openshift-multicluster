@@ -54,10 +54,17 @@ spec:
       {{- end }}
     {{- end}}
 {{- end }}
+{{- if $val.sources }}
+  {{- with $val.sources }}
+  sources:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+{{- else }}
   source:
     path: {{ tpl $val.source.path $ }}
     repoURL: {{ $val.source.repoURL | default $.Values.default.app.source.repoURL | required (printf "No source.repoURL specified for %s" $key ) }}
     targetRevision: {{ $val.source.targetRevision | default $.Values.default.app.source.targetRevision | required (printf "No source.targetRevision specified for %s" $key ) }}
+{{- end }}
 {{- if ($val.source | default dict ).extraSourceFields }}
 {{ tpl $val.source.extraSourceFields $ | indent 4 }}
 {{- else if $.Values.default.app.source.extraSourceFields }}
