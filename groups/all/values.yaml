@@ -33,6 +33,7 @@ projects:
       - https://github.com/Vikaspogu/openshift-multicluster.git
       - https://github.com/devhub-showcase/shared-helm-charts.git
       - https://github.com/Vikaspogu/httpd-demo.git
+      - https://github.com/Vikaspogu/httpd-gitops.git
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
