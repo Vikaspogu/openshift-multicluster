@@ -11,6 +11,7 @@ spec:
         settings:
           secret-github-app-token-scoped: "false"
   pipeline:
+    enable-cel-in-whenexpression: true
     performance:
       disable-ha: false
       buckets: 5
