@@ -235,13 +235,13 @@ applications:
     source:
       path: components/acm-policies-config/sops-auth-policy
 
-  acm-policy-configmap-copy-policy:
-    annotations:
-      argocd.argoproj.io/sync-wave: "35"
-    destination:
-      namespace: open-cluster-management
-    source:
-      path: components/acm-policies-config/configmap-copy-policy
+  # acm-policy-configmap-copy-policy:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "35"
+  #   destination:
+  #     namespace: open-cluster-management
+  #   source:
+  #     path: components/acm-policies-config/configmap-copy-policy
 
   volsync-operator:
     annotations:
