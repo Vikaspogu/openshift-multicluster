@@ -58,7 +58,7 @@ argocd:
   appLocatorMethods:
     - instances:
         - name: team-alpha-cicd
-          url: https://team-alpha-cicd-server-team-alpha-cicd.apps.dev-acm.v3socp.boo
+          url: https://team-a-cicd-server-team-a-cicd.apps.dev-acm.v3socp.boo
       type: config
 
 auth:
@@ -168,5 +168,5 @@ catalog:
             minutes: 3
     githubOrg:
       id: production
-      githubUrl: "github.com"
+      githubUrl: "github"
       orgs: ["devhub-showcase"]
