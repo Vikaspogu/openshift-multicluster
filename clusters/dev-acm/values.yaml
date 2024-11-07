@@ -337,3 +337,10 @@ applications:
       - ref: values
         repoURL: https://github.com/Vikaspogu/httpd-gitops.git
         targetRevision: main
+
+  tenants-iac-gitops-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "55"
+    autoSyncPrune: true
+    source:
+      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
