@@ -72,7 +72,14 @@ auth:
 integrations:
   github:
     - host: github.com
-      token: ${GH_TOKEN}
+      apps:
+        - appId: ${AUTH_ORG_APP_ID}
+          clientId: ${AUTH_ORG_CLIENT_ID}
+          clientSecret: ${AUTH_ORG_CLIENT_SECRET}
+          webhookUrl: ${GITHUB_APP_WEBHOOK_URL}
+          webhookSecret: ${GITHUB_APP_WEBHOOK_SECRET}
+          privateKey: |
+            ${AUTH_ORG1_PRIVATE_KEY}
 
 proxy:
   endpoints:
@@ -149,21 +156,17 @@ catalog:
       default:
         name: multiclusterhub
         kubernetesPluginRef: dev-acm
-    githubOrg:
-      id: production
-      githubUrl: https://github.com
-      orgs: ["devhub-showcase"]
-      schedule:
-        initialDelay: { seconds: 30 }
-        frequency: { hours: 1 }
-        timeout: { minutes: 50 }
     github:
       providerId:
         organization: "devhub-showcase"
-        catalogPath: "/**/catalog-info.yaml"
-        filters:
-          branch: "main"
-          repository: "^(?:(?!software-template).)*$"
         schedule:
-          frequency: { minutes: 30 }
-          timeout: { minutes: 3 }
+          frequency:
+            minutes: 30
+          initialDelay:
+            seconds: 15
+          timeout:
+            minutes: 3
+    githubOrg:
+      id: production
+      githubUrl: "github.com"
+      orgs: ["devhub-showcase"]
