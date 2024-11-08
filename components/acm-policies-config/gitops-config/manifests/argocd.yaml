@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-gitops
 spec:
   notifications:
-    enabled: false
+    enabled: true
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
