@@ -5,3 +5,4 @@ resources:
   - ./argocd.yaml
   - ./cluster-rolebinding.yaml
   - ./plugin-configmap.yaml
+  - ./setenv-cmp-plugin.yaml

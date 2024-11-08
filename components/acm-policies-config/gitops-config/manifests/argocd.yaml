@@ -623,10 +623,30 @@ spec:
             name: helm-multivalues-plugin
           - mountPath: /.config/helm
             name: helm-custom-config
+      - name: setenv-cmp-plugin
+        resources: {}
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
+        env:
+          - name: KUSTOMIZE_PLUGIN_HOME
+            value: /etc/kustomize/plugin
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: setenv-cmp-plugin
     volumes:
       - configMap:
           name: helm-multivalues-plugin
         name: helm-multivalues-plugin
+      - configMap:
+          name: setenv-cmp-plugin
+        name: setenv-cmp-plugin
       - name: custom-tools
         emptyDir: {}
       - name: policy-generator
