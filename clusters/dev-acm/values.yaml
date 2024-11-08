@@ -1,7 +1,7 @@
 default:
   app:
     annotations:
-      notifications.argoproj.io/subscribe.app-deployed.github: ""
+      notifications.argoproj.io/subscribe.github-app-deployed.github: ""
     enabled: true
     enableAutoSync: true
     autoSyncPrune: false

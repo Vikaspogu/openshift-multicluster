@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: openshift-gitops
 resources:
   - ./externalsecrets.yaml
-  - ./config-map.yaml
+  - ./notification-configuration.yaml

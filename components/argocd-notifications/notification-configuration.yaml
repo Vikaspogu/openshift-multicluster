@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: NotificationsConfiguration
+metadata:
+  name: default-notifications-configuration
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+spec:
+  Subscriptions: |
+    subscriptions: |
+      # subscription for on-sync-status-unknown trigger notifications
+      - recipients:
+        - github
+        triggers:
+        - on-sync-status-unknown
+      # subscription restricted to applications with matching labels only
+      - recipients:
+        - github
+        selector: test=true
+        triggers:
+        - on-sync-status-unknown
+  Services:
+    service.pushover: |
+      token: $pushover-token
+    service.github: |
+      appID: $appID
+      installationID: $installationID
+      privateKey: $github-privateKey
+  templates:
+    template.github-app-deployed: |
+      message: |
+        Application {{.app.metadata.name}} is now running new version of deployments manifests.
+      github:
+        repoURLPath: "{{.app.spec.source.repoURL}}"
+        revisionPath: "{{.app.status.operationState.syncResult.revision}}"
+        status:
+          state: success
+          label: "continuous-delivery/{{.app.metadata.name}}"
+          targetURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
+        deployment:
+          state: success
+          environment: production
+          environmentURL: "https://{{.app.metadata.name}}.example.com"
+          logURL: "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
+          requiredContexts: []
+          autoMerge: true
+          transientEnvironment: false
+          reference: v1.0.0
+        pullRequestComment:
+          content: |
+            Application {{.app.metadata.name}} is now running new version of deployments manifests.
+            See more here: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true
+  triggers:
+    trigger.github-on-deployed: |-
+      - description: Application is synced and healthy. Triggered once per commit.
+        oncePer: app.status.operationState.syncResult.revision
+        send:
+        - github-app-deployed
+        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status
+            == 'Healthy'
