@@ -313,6 +313,14 @@ applications:
     source:
       path: components/argocd-image-updater
 
+  argocd-rollout:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-rollout
+
   httpd-demo:
     annotations:
       argocd-image-updater.argoproj.io/image-list: main=quay.io/rhn_gps_vpogu/httpd-demo:test
