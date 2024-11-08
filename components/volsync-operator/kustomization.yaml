@@ -15,6 +15,6 @@ helmCharts:
           name: volsync-product
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: volsync-product.v0.10.1
+          csv: volsync-product.v0.10.1-0.1730236570.p
       operatorGroups:
         - createNamespace: true
