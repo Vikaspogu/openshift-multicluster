@@ -9,15 +9,10 @@ spec:
     subscriptions: |
       # subscription for on-sync-status-unknown trigger notifications
       - recipients:
-        - github
+        - github:""
         triggers:
         - on-sync-status-unknown
-      # subscription restricted to applications with matching labels only
-      - recipients:
-        - github
-        selector: test=true
-        triggers:
-        - on-sync-status-unknown
+        - github-on-deployed
   services:
     service.pushover: |
       token: $pushover-token
