@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
 spec:
-  Subscriptions: |
+  subscriptions:
     subscriptions: |
       # subscription for on-sync-status-unknown trigger notifications
       - recipients:
@@ -18,7 +18,7 @@ spec:
         selector: test=true
         triggers:
         - on-sync-status-unknown
-  Services:
+  services:
     service.pushover: |
       token: $pushover-token
     service.github: |
