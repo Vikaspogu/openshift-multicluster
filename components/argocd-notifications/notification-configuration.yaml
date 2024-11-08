@@ -13,7 +13,7 @@ spec:
       installationID: $installationID
       privateKey: $github-privateKey
   templates:
-    template.github-app-deployed: |
+    template.app-deployed: |
       message: |
         Application {{.app.metadata.name}} is now running new version of deployments manifests.
       github:
@@ -36,11 +36,3 @@ spec:
           content: |
             Application {{.app.metadata.name}} is now running new version of deployments manifests.
             See more here: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true
-  triggers:
-    trigger.github-on-deployed: |-
-      - description: Application is synced and healthy. Triggered once per commit.
-        oncePer: app.status.operationState.syncResult.revision
-        send:
-        - github-app-deployed
-        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status
-            == 'Healthy'
