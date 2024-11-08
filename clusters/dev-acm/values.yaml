@@ -1,7 +1,7 @@
 default:
   app:
     annotations:
-      notifications.argoproj.io/subscribe.github-app-deployed.github: ""
+      notifications.argoproj.io/subscribe.github-app-deployed.github: "cluster-config"
     enabled: true
     enableAutoSync: true
     autoSyncPrune: false
