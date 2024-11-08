@@ -7,6 +7,7 @@ metadata:
 spec:
   notifications:
     enabled: true
+    logLevel: debug
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
