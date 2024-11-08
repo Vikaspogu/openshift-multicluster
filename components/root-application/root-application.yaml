@@ -16,7 +16,14 @@ spec:
     repoURL: REPLACE # Can point to either a Helm chart repo or a git repo.
     targetRevision: HEAD # For Helm, this refers to the chart version.
     path: REPLACE # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
-
+  plugin:
+    name: setenv-cmp-plugin
+    env:
+      - name: PUSHOVER_USER_KEY
+        valueFrom:
+          secretKeyRef:
+            name: argocd-root-secret
+            key: PUSHOVER_USER_KEY
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-gitops

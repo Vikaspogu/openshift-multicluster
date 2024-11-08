@@ -1,6 +1,6 @@
 ---
 creation_rules:
-  - path_regex: kustomize/.*\.ya?ml
+  - path_regex: components/.*\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     age: >-
       age1ulfhs490lug3kres5qm5kfdmpqmcrwsfsc03eln0s3xffndnrcwq5u86tt
