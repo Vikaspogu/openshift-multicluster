@@ -25,8 +25,8 @@ default:
 projects:
   cluster-config:
     annotations:
-      notifications.argoproj.io/subscribe.on-sync-failed.slack: cluster-gitops
-      notifications.argoproj.io/subscribe.on-health-degraded.slack: cluster-gitops
+      notifications.argoproj.io/subscribe.on-sync-failed.github: cluster-gitops
+      notifications.argoproj.io/subscribe.on-health-degraded.github: cluster-gitops
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:

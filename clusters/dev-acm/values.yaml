@@ -340,6 +340,7 @@ applications:
       argocd-image-updater.argoproj.io/main.helm.image-tag: image.tag
       argocd-image-updater.argoproj.io/main.helm.image-name: image.repository
       argocd-image-updater.argoproj.io/force-update: "true"
+      notifications.argoproj.io/subscribe.on-sync-succeeded.github: cluster-gitops
     destination:
       namespace: demo-application
     sources:
