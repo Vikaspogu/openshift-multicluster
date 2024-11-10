@@ -1,4 +1,4 @@
-repositories: {}
+repositories: []
   # - url: https://github.com/Vikaspogu/httpd-demo
   #   pacNamespace: cicd-tools
   #   additionalSettings:
