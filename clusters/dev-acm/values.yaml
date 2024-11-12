@@ -331,6 +331,7 @@ applications:
 
   httpd-demo:
     annotations:
+      argocd.argoproj.io/sync-wave: "75"
       argocd-image-updater.argoproj.io/image-list: main=quay.io/rhn_gps_vpogu/httpd-demo:test
       argocd-image-updater.argoproj.io/main.update-strategy: newest-build
       argocd-image-updater.argoproj.io/write-back-method: git:secret:openshift-gitops/git-creds
