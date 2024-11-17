@@ -329,6 +329,14 @@ applications:
     source:
       path: components/argocd-notifications
 
+  alertmanager-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "20"
+    destination:
+      namespace: openshift-monitoring
+    source:
+      path: components/alertmanager-config
+
   httpd-demo:
     annotations:
       argocd.argoproj.io/sync-wave: "75"
