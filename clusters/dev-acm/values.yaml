@@ -337,6 +337,14 @@ applications:
     source:
       path: components/alertmanager-config
 
+  image-pull-secret-sa:
+    annotations:
+      argocd.argoproj.io/sync-wave: "75"
+    destination:
+      namespace: openshift-monitoring
+    source:
+      path: clusters/dev-acm/overlays/image-pull-secret-sa
+
   httpd-demo:
     annotations:
       argocd.argoproj.io/sync-wave: "75"
