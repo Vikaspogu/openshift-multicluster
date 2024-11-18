@@ -29,6 +29,9 @@ default:
         maxDuration: 10m # the maximum amount of time allowed for the backoff strategy
 
 applications:
+  ###########################################
+  ## Operators go first with sync wave of "5"
+  ###########################################
   acm-operator:
     annotations:
       argocd.argoproj.io/sync-wave: "5"
@@ -37,55 +40,11 @@ applications:
     source:
       path: components/acm-operator
 
-  acm-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: open-cluster-management
-    source:
-      path: components/acm-config
-
-  cert-manager-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: cert-manager
-    source:
-      path: clusters/dev-acm/overlays/cert-manager-config
-
-  cert-manager-application:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    source:
-      path: clusters/dev-acm/overlays/cert-manager-application
-
-  cluster-rbac-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    source:
-      path: components/cluster-rbac-config
-
   devspaces-operator:
     annotations:
       argocd.argoproj.io/sync-wave: "5"
     source:
       path: components/devspaces-operator
-
-  developer-hub-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "35"
-    destination:
-      namespace: developer-hub
-    source:
-      path: clusters/dev-acm/overlays/developer-hub-config
-
-  external-secret-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "10"
-    destination:
-      namespace: external-secrets
-    source:
-      path: components/external-secrets-config
 
   external-secrets-chart:
     annotations:
@@ -94,28 +53,6 @@ applications:
       namespace: external-secrets
     source:
       path: components/external-secrets-chart
-
-  ldap-sync-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: ldap-sync
-    source:
-      path: components/ldap-sync-config
-
-  patch-operator:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: patch-operator
-    source:
-      path: components/patch-operator
-
-  oauth-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    source:
-      path: components/oauth-config
 
   onepassword-connect-chart:
     annotations:
@@ -133,22 +70,6 @@ applications:
     source:
       path: components/openshift-gitops-operator
 
-  openshift-gitops-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: clusters/dev-acm/overlays/openshift-gitops-config
-
-  devspaces-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/devspaces-config
-
   rhdh-operator:
     annotations:
       argocd.argoproj.io/sync-wave: "5"
@@ -165,6 +86,112 @@ applications:
     source:
       path: components/reflector
 
+  cloudnative-pg-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: cloudnative-pg
+    source:
+      path: components/cloudnative-pg-operator
+
+  volsync-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: volsync-operator
+    source:
+      path: components/volsync-operator
+
+  lvm-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-operator
+
+  kubernetes-imagepuller-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: kubernetes-imagepuller-operator
+    source:
+      path: components/kubernetes-imagepuller-operator
+
+  #######################################
+  ## configuration with sync wave of "10"
+  #######################################
+  external-secret-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: external-secrets
+    source:
+      path: components/external-secrets-config
+
+  lvm-storage:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-storage
+
+  #######################################
+  ## configuration with sync wave of "15"
+  #######################################
+  acm-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-config
+
+  cert-manager-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: cert-manager
+    source:
+      path: clusters/dev-acm/overlays/cert-manager-config
+
+  cluster-rbac-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    source:
+      path: components/cluster-rbac-config
+
+  ldap-sync-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: ldap-sync
+    source:
+      path: components/ldap-sync-config
+
+  oauth-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    source:
+      path: components/oauth-config
+
+  openshift-gitops-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: clusters/dev-acm/overlays/openshift-gitops-config
+
+  devspaces-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/devspaces-config
+
   sonarqube:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
@@ -173,13 +200,73 @@ applications:
     source:
       path: components/sonarqube
 
-  cloudnative-pg-operator:
+  kubernetes-imagepuller-config:
     annotations:
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "15"
     destination:
-      namespace: cloudnative-pg
+      namespace: kubernetes-imagepuller-operator
     source:
-      path: components/cloudnative-pg-operator
+      path: components/kubernetes-imagepuller-config
+
+  argocd-image-updater:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-image-updater
+
+  argocd-rollout:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-rollout
+
+  argocd-notifications:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-notifications
+
+  #######################################
+  ## configuration with sync wave of "20"
+  #######################################
+  alertmanager-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "20"
+    destination:
+      namespace: openshift-monitoring
+    source:
+      path: components/alertmanager-config
+
+  #######################################
+  ## configuration with sync wave of "25"
+  #######################################
+  cloudflared:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: networking
+    source:
+      path: components/cloudflared
+
+  tekton-dashboard:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: tekton-dashboard
+    source:
+      path: components/tekton-dashboard
+
+  pac-repository-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: clusters/dev-acm/overlays/pac-repository-config
 
   image-registry-config:
     annotations:
@@ -194,6 +281,31 @@ applications:
       namespace: multicluster-engine
     source:
       path: components/agent-service-config
+
+  cert-manager-application:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: clusters/dev-acm/overlays/cert-manager-application
+
+  patch-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: patch-operator
+    source:
+      path: components/patch-operator
+
+  #######################################
+  ## configuration with sync wave of "35"
+  #######################################
+  developer-hub-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: developer-hub
+    source:
+      path: clusters/dev-acm/overlays/developer-hub-config
 
   homelab-inventory-infraenv:
     annotations:
@@ -243,100 +355,19 @@ applications:
     source:
       path: components/acm-policies-config/sops-auth-policy
 
-  volsync-operator:
+  #######################################
+  ## configuration with sync wave of "55"
+  #######################################
+  tenants-iac-gitops-config:
     annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: volsync-operator
+      argocd.argoproj.io/sync-wave: "55"
+    autoSyncPrune: true
     source:
-      path: components/volsync-operator
+      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
 
-  lvm-operator:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: openshift-storage
-    source:
-      path: components/lvm-operator
-
-  lvm-storage:
-    annotations:
-      argocd.argoproj.io/sync-wave: "10"
-    destination:
-      namespace: openshift-storage
-    source:
-      path: components/lvm-storage
-
-  kubernetes-imagepuller-operator:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: kubernetes-imagepuller-operator
-    source:
-      path: components/kubernetes-imagepuller-operator
-
-  kubernetes-imagepuller-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: kubernetes-imagepuller-operator
-    source:
-      path: components/kubernetes-imagepuller-config
-
-  cloudflared:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: networking
-    source:
-      path: components/cloudflared
-
-  tekton-dashboard:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: tekton-dashboard
-    source:
-      path: components/tekton-dashboard
-
-  pac-repository-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    source:
-      path: clusters/dev-acm/overlays/pac-repository-config
-
-  argocd-image-updater:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-image-updater
-
-  argocd-rollout:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-rollout
-
-  argocd-notifications:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-notifications
-
-  alertmanager-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "20"
-    destination:
-      namespace: openshift-monitoring
-    source:
-      path: components/alertmanager-config
-
+  #######################################
+  ## configuration with sync wave of "75"
+  #######################################
   # image-pull-secret-sa:
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "75"
@@ -376,10 +407,3 @@ applications:
   #     - ref: values
   #       repoURL: https://github.com/Vikaspogu/httpd-gitops.git
   #       targetRevision: main
-
-  tenants-iac-gitops-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "55"
-    autoSyncPrune: true
-    source:
-      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
