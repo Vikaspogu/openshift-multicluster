@@ -2,7 +2,7 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: default
-  namespace: demo-application
+  namespace: team-a-cicd
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
 imagePullSecrets:
