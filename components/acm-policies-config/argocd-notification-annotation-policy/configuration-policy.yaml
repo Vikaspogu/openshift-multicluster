@@ -11,6 +11,8 @@ spec:
         apiVersion: argoproj.io/v1alpha1
         kind: Application
         metadata:
+          name: {{ .metadata.name }}
+          namespace: {{ .metadata.namespace }}
           annotations:
             notifications.argoproj.io/subscribe.on-sync-succeeded.pushover: '{{ fromSecret "openshift-gitops" "argocd-notifications-secret" "pushover-user" | base64dec }}'
       {{- end }}
