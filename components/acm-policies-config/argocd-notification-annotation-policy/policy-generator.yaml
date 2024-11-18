@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: argocd-notification-annotation-policy-generator
+policyDefaults:
+  namespace: openshift-gitops
+  severity: high
+  placement:
+    clusterSelectors:
+      cluster.open-cluster-management.io/clusterset: default
+policies:
+  - name: argocd-notification-annotation-policy
+    manifests:
+      - path: configuration-policy.yaml
+    remediationAction: enforce

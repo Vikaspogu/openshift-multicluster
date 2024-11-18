@@ -1,0 +1,18 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: ConfigurationPolicy
+metadata:
+  name: argocd-notification-annotation-policy
+spec:
+  object-templates-raw: |
+    {{- range (lookup "argoproj.io/v1alpha1" "Application" "" "" "").items }}
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          annotations:
+            notifications.argoproj.io/subscribe.on-sync-succeeded.pushover: '{{ (lookup "v1" "Secret" "openshift-gitops" "argocd-notifications-secret").data.pushover-user | base64dec | toLiteral }}'
+      {{- end }}
+  remediationAction: enforce
+  pruneObjectBehavior: DeleteAll
