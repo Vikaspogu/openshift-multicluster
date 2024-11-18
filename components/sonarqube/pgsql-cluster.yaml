@@ -5,6 +5,7 @@ metadata:
   namespace: cicd-tools
 spec:
   instances: 1
+  enablePDB: false
   logLevel: info
   primaryUpdateStrategy: unsupervised
   storage:
