@@ -35,6 +35,10 @@ spec:
 {{- else }}
   project: {{ $val.project | default $.Values.default.app.project | required (printf "No project specified for %s" $key ) }}
 {{- end }}
+  {{- with $val.ignoreDifferences }}
+  ignoreDifferences:
+{{ toYaml . | indent 2 }}
+  {{- end }}
 {{- if (hasKey $val "enableAutoSync" | ternary $val.enableAutoSync $.Values.default.app.enableAutoSync) }}
   syncPolicy:
     automated:

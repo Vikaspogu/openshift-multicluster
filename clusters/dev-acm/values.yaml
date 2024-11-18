@@ -344,6 +344,12 @@ applications:
       namespace: openshift-monitoring
     source:
       path: clusters/dev-acm/overlays/image-pull-secret-sa
+    ignoreDifferences:
+      - group: ""
+        kind: "ServiceAccount"
+        name: default
+        jsonPointers:
+          - /imagePullSecrets
 
   httpd-demo:
     annotations:
