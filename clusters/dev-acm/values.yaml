@@ -2,7 +2,7 @@ default:
   app:
     enabled: true
     enableAutoSync: true
-    autoSyncPrune: false
+    autoSyncPrune: true
     project: cluster-config
     labels:
       app-source: cluster-dev-acm
@@ -193,7 +193,6 @@ applications:
       path: components/devspaces-config
 
   # sonarqube:
-  #   autoSyncPrune: true
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "15"
   #   destination:
@@ -256,7 +255,6 @@ applications:
       path: components/cloudflared
 
   # tekton-dashboard:
-  #   autoSyncPrune: true
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "25"
   #   destination:
