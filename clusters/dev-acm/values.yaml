@@ -192,13 +192,13 @@ applications:
     source:
       path: components/devspaces-config
 
-  sonarqube:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: cicd-tools
-    source:
-      path: components/sonarqube
+  # sonarqube:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: cicd-tools
+  #   source:
+  #     path: components/sonarqube
 
   kubernetes-imagepuller-config:
     annotations:
@@ -254,13 +254,13 @@ applications:
     source:
       path: components/cloudflared
 
-  tekton-dashboard:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: tekton-dashboard
-    source:
-      path: components/tekton-dashboard
+  # tekton-dashboard:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "25"
+  #   destination:
+  #     namespace: tekton-dashboard
+  #   source:
+  #     path: components/tekton-dashboard
 
   pac-repository-config:
     annotations:

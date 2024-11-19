@@ -35,7 +35,10 @@ spec:
       resources: {}
       script: |
         echo current installed helm releases
-        helm list --namespace "$(params.release_namespace)"
-        pr_number=$(echo $(params.commit_message) | sed 's/.*#//; s/[^0-9]//g')
-        echo uninstalling helm chart...
-        helm uninstall --namespace "$(params.release_namespace)" "$(params.release_name)-$pr_number"
+        # Get the list of Helm releases older than 24 hours
+        RELEASES=$(helm ls --namespace $(params.release_namespace) --time-format "%Y-%m-%dT%H:%M:%S" -o json | jq -r '.[] | select(.updated < (now - 86400 | todate)) | .name')
+        # Loop through the releases and delete them
+        for RELEASE in $RELEASES; do
+          echo "Deleting Helm release: $RELEASE"
+          helm uninstall --namespace "$(params.release_namespace)" "$(params.release_name)-$pr_number"
+        done
