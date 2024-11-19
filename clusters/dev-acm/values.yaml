@@ -288,13 +288,13 @@ applications:
     source:
       path: clusters/dev-acm/overlays/cert-manager-application
 
-  patch-operator:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: patch-operator
-    source:
-      path: components/patch-operator
+  # patch-operator:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "25"
+  #   destination:
+  #     namespace: patch-operator
+  #   source:
+  #     path: components/patch-operator
 
   #######################################
   ## configuration with sync wave of "35"
