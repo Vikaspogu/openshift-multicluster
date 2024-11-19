@@ -232,6 +232,14 @@ applications:
     source:
       path: components/argocd-notifications
 
+  argocd-webhook:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-webhook
+
   #######################################
   ## configuration with sync wave of "20"
   #######################################
