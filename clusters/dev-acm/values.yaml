@@ -264,11 +264,11 @@ applications:
   #   source:
   #     path: components/tekton-dashboard
 
-  pac-repository-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    source:
-      path: clusters/dev-acm/overlays/pac-repository-config
+  # pac-repository-config:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "25"
+  #   source:
+  #     path: clusters/dev-acm/overlays/pac-repository-config
 
   image-registry-config:
     annotations:
