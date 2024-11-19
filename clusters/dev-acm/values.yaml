@@ -193,9 +193,9 @@ applications:
       path: components/devspaces-config
 
   sonarqube:
+    autoSyncPrune: true
     annotations:
       argocd.argoproj.io/sync-wave: "15"
-      argocd.argoproj.io/sync-options: Prune=false
     destination:
       namespace: cicd-tools
     source:
@@ -256,9 +256,9 @@ applications:
       path: components/cloudflared
 
   tekton-dashboard:
+    autoSyncPrune: true
     annotations:
       argocd.argoproj.io/sync-wave: "25"
-      argocd.argoproj.io/sync-options: Prune=false
     destination:
       namespace: tekton-dashboard
     source:
