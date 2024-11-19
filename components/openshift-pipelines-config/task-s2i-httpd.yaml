@@ -1,13 +1,13 @@
 apiVersion: tekton.dev/v1beta1
-kind: ClusterTask
+kind: Task
 metadata:
   annotations:
     tekton.dev/displayName: s2i httpd
-    tekton.dev/pipelines.minVersion: '0.19'
-    tekton.dev/tags: 's2i, httpd, workspace'
+    tekton.dev/pipelines.minVersion: "0.19"
+    tekton.dev/tags: "s2i, httpd, workspace"
   name: s2i-httpd-1-16-0
   labels:
-    app.kubernetes.io/version: '0.1'
+    app.kubernetes.io/version: "0.1"
 spec:
   description: s2i-httpd task clones a Git repository and builds and pushes a container image using S2I and a HTTPD builder image.
   params:
@@ -19,18 +19,18 @@ spec:
       description: The location of the path to run s2i from.
       name: PATH_CONTEXT
       type: string
-    - default: 'true'
+    - default: "true"
       description: Verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
       name: TLSVERIFY
       type: string
     - description: Location of the repo where image has to be pushed
       name: IMAGE
       type: string
-    - default: 'registry.redhat.io/rhel8/buildah@sha256:5c7cd7c9a3d49e8905fc98693f6da605aeafae36bde5622dc78e12f31db3cd59'
+    - default: "registry.redhat.io/rhel8/buildah@sha256:5c7cd7c9a3d49e8905fc98693f6da605aeafae36bde5622dc78e12f31db3cd59"
       description: The location of the buildah builder image.
       name: BUILDER_IMAGE
       type: string
-    - default: 'false'
+    - default: "false"
       description: Skip pushing the built image
       name: SKIP_PUSH
       type: string
@@ -44,11 +44,11 @@ spec:
       type: string
   steps:
     - args:
-        - '$(params.ENV_VARS[*])'
+        - "$(params.ENV_VARS[*])"
       env:
         - name: HOME
           value: /tekton/home
-      image: 'registry.redhat.io/source-to-image/source-to-image-rhel8@sha256:6a6025914296a62fdf2092c3a40011bd9b966a6806b094d51eec5e1bd5026ef4'
+      image: "registry.redhat.io/source-to-image/source-to-image-rhel8@sha256:6a6025914296a62fdf2092c3a40011bd9b966a6806b094d51eec5e1bd5026ef4"
       name: generate
       resources: {}
       script: |

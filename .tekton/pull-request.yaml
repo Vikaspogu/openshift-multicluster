@@ -25,8 +25,14 @@ spec:
     tasks:
       - name: fetch-repository
         taskRef:
-          name: git-clone
-          kind: ClusterTask
+          resolver: cluster
+          params:
+            - name: name
+              value: git-clone
+            - name: namespace
+              value: openshift-pipelines
+            - name: kind
+              value: task
         workspaces:
           - name: output
             workspace: source
@@ -39,8 +45,14 @@ spec:
             value: $(params.revision)
       - name: kube-conform
         taskRef:
-          name: kube-tools
-          kind: ClusterTask
+          resolver: cluster
+          params:
+            - name: name
+              value: kube-tools
+            - name: namespace
+              value: openshift-pipelines
+            - name: kind
+              value: task
         runAfter:
           - fetch-repository
         workspaces:

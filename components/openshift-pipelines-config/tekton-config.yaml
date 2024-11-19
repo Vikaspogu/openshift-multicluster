@@ -11,6 +11,9 @@ spec:
         settings:
           secret-github-app-token-scoped: "false"
   pipeline:
+    cluster-resolver-config:
+      default-kind: task
+      default-namespace: openshift-pipelines
     enable-cel-in-whenexpression: true
     performance:
       disable-ha: false
