@@ -192,14 +192,14 @@ applications:
     source:
       path: components/devspaces-config
 
-  sonarqube:
-    autoSyncPrune: true
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: cicd-tools
-    source:
-      path: components/sonarqube
+  # sonarqube:
+  #   autoSyncPrune: true
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: cicd-tools
+  #   source:
+  #     path: components/sonarqube
 
   kubernetes-imagepuller-config:
     annotations:
