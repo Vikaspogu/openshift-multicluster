@@ -255,14 +255,14 @@ applications:
     source:
       path: components/cloudflared
 
-  tekton-dashboard:
-    autoSyncPrune: true
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: tekton-dashboard
-    source:
-      path: components/tekton-dashboard
+  # tekton-dashboard:
+  #   autoSyncPrune: true
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "25"
+  #   destination:
+  #     namespace: tekton-dashboard
+  #   source:
+  #     path: components/tekton-dashboard
 
   pac-repository-config:
     annotations:
