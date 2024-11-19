@@ -8,6 +8,8 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    reloader.stakater.com/match: "true"
 
 helmCharts:
   - name: cloudflared
