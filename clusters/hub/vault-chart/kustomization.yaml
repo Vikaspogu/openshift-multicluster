@@ -10,7 +10,7 @@ helmCharts:
     releaseName: vault
     namespace: hashicorp
     repo: https://helm.releases.hashicorp.com
-    version: 0.29.0
+    version: 0.29.1
     valuesInline:
       global:
         openshift: true
