@@ -13,5 +13,6 @@ policies:
   - name: install-gitops-operator-policy
     manifests:
       - path: namespace.yaml
+      - path: operatorgroup.yaml
       - path: subscription.yaml
     remediationAction: enforce
