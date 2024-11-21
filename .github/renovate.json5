@@ -12,7 +12,6 @@
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
   suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
   rebaseWhen: "conflicted",
-  schedule: ["every weekend"],
   ignorePaths: ["**/*.sops.*", "helm/**", "installer/**"],
   "helm-values": {
     fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
