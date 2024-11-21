@@ -60,6 +60,5 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository. This re
 
 ## Resources
 
-- [Eth issue](https://forum.proxmox.com/threads/e1000e-unexpected-adapter-resets.89459/)
-- [Proxmox helper scripts](https://tteck.github.io/Proxmox/)
+- [Proxmox helper scripts]([https://tteck.github.io/Proxmox/](https://community-scripts.github.io/ProxmoxVE/))
 - [GitOps Catalog by RedHat COP](https://github.com/redhat-cop/gitops-catalog)
