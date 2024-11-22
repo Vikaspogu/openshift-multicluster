@@ -290,6 +290,14 @@ applications:
     source:
       path: components/image-registry-config
 
+  log-forwarder-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: openshift-logging
+    source:
+      path: components/log-forwarder-config
+
   agent-service-config:
     annotations:
       argocd.argoproj.io/sync-wave: "25"
