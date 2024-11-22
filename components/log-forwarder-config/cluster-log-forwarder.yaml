@@ -20,7 +20,7 @@ spec:
     - name: loki
       type: "loki"
       loki:
-        url: http://10.30.30.160:3100
+        url: http://10.30.30.160:80
   pipelines:
     - name: application-logs
       inputRefs:
