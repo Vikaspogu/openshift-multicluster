@@ -5,7 +5,7 @@ namespace: openshift-pipelines
 resources:
   - ./tekton-config.yaml
   - ./externalsecret.yaml
-  - ./task-s2i-httpd.yaml
+  - ./task-s2i.yaml
   - ./task-kube-tools.yaml
   - ./task-helm-uninstall.yaml
   - ./task-rhacs-image-scan.yaml

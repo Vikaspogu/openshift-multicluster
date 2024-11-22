@@ -5,11 +5,11 @@ metadata:
     tekton.dev/displayName: s2i httpd
     tekton.dev/pipelines.minVersion: "0.19"
     tekton.dev/tags: "s2i, httpd, workspace"
-  name: s2i-httpd-1-16-0
+  name: s2i-1-16-0
   labels:
     app.kubernetes.io/version: "0.1"
 spec:
-  description: s2i-httpd task clones a Git repository and builds and pushes a container image using S2I and a HTTPD builder image.
+  description: s2i task clones a Git repository and builds and pushes a container image using S2I and a HTTPD builder image.
   params:
     - default: latest
       description: The tag of httpd imagestream for httpd version
@@ -38,6 +38,10 @@ spec:
       description: Environment variables to set during _build-time_.
       name: ENV_VARS
       type: array
+    - default: ""
+      description: Environment variables to set during _run-time_.
+      name: RUNTIME
+      type: string
   results:
     - description: Digest of the image just built.
       name: IMAGE_DIGEST
@@ -59,7 +63,7 @@ spec:
             echo "$var" >> /env-vars/env-file
         done
 
-        s2i build $(params.PATH_CONTEXT) image-registry.openshift-image-registry.svc:5000/openshift/httpd:$(params.VERSION) \
+        s2i build $(params.PATH_CONTEXT) image-registry.openshift-image-registry.svc:5000/openshift/$(params.RUNTIME):$(params.VERSION) \
         --as-dockerfile /gen-source/Dockerfile.gen --environment-file /env-vars/env-file
       volumeMounts:
         - mountPath: /gen-source
