@@ -5,6 +5,8 @@ metadata:
   name: loki-forwarder
   namespace: openshift-logging
 spec:
+  serviceAccount:
+    name: cluster-logging-operator
   filters:
     - name: drop-filter
       type: drop
