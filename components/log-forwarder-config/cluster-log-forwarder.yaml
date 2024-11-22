@@ -14,8 +14,6 @@ spec:
         - test:
             - field: .level
               matches: debug
-            - field: .level
-              matches: info
   outputs:
     - name: loki
       type: "loki"
