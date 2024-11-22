@@ -40,6 +40,14 @@ applications:
     source:
       path: components/acm-operator
 
+  acs-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: rhacs-operator
+    source:
+      path: components/acs-operator
+
   devspaces-operator:
     annotations:
       argocd.argoproj.io/sync-wave: "5"
