@@ -12,10 +12,8 @@ spec:
       type: drop
       drop:
         - test:
-            - field: .message
-              notMatches: "(?i)critical|error"
             - field: .level
-              matches: "info|warning"
+              matches: "info|debug"
   outputs:
     - name: loki
       type: "loki"
