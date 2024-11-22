@@ -21,8 +21,16 @@ spec:
       type: "loki"
       loki:
         url: http://10.30.30.160:80
+        tuning:
+          compression: gzip
+          deliveryMode: AtLeastOnce
+          maxRetryDuration: 20
+          maxWrite: 10M
+          minRetryDuration: 5
   pipelines:
-    - name: application-logs
+    - name: logs
+      filterRefs:
+        - drop-filter
       inputRefs:
         - application
         - infrastructure
