@@ -118,6 +118,14 @@ applications:
     source:
       path: components/kubernetes-imagepuller-operator
 
+  openshift-logging-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-logging
+    source:
+      path: components/openshift-logging-operator
+
   #######################################
   ## configuration with sync wave of "10"
   #######################################
