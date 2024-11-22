@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-logging
 spec:
   serviceAccount:
-    name: cluster-logging-operator
+    name: logging-admin
   filters:
     - name: drop-filter
       type: drop

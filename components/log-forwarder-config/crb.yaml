@@ -1,13 +1,25 @@
 ---
-apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: logging-rolebinding
+  name: logging-admin-application-logs-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cluster-logging-operator
+  name: collect-application-logs
 subjects:
   - kind: ServiceAccount
-    name: cluster-logging-operator
+    name: logging-admin
+    namespace: openshift-logging
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: logging-admin-infra-logs-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: collect-infrastructure-logs
+subjects:
+  - kind: ServiceAccount
+    name: logging-admin
     namespace: openshift-logging
