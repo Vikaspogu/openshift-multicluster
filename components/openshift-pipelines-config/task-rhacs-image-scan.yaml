@@ -26,6 +26,7 @@ spec:
     - name: rox_image
       description: Image providing the roxctl tool.
       default: quay.io/stackrox-io/roxctl:4.4.2
+      type: string
     - name: image
       type: string
       description: |
@@ -113,6 +114,7 @@ spec:
           value: $(params.output_file)
         - name: ROX_ERROR_FILE
           value: $(params.error_file)
+      computeResources: {}
       args:
         - image
         - scan
