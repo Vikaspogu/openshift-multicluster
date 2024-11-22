@@ -8,12 +8,14 @@ spec:
   serviceAccount:
     name: logging-admin
   filters:
-    - name: drop-filter
+    - name: important-logs
       type: drop
       drop:
         - test:
+            - field: .message
+              notMatches: "(?i)critical|error"
             - field: .level
-              matches: debug
+              matches: "info|warning"
   outputs:
     - name: loki
       type: "loki"
@@ -28,7 +30,7 @@ spec:
   pipelines:
     - name: logs
       filterRefs:
-        - drop-filter
+        - important-logs
       inputRefs:
         - application
         - infrastructure
