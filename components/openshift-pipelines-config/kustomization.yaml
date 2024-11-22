@@ -9,4 +9,3 @@ resources:
   - ./task-kube-tools.yaml
   - ./task-helm-uninstall.yaml
   - ./task-rhacs-image-scan.yaml
-  - ./task-rhacs-m2m-authenticate.yaml
