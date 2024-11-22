@@ -256,6 +256,14 @@ applications:
     source:
       path: components/argocd-webhook
 
+  acs-central-configuration:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: stackrox
+    source:
+      path: clusters/dev-acm/overlays/acs-central-configuration
+
   #######################################
   ## configuration with sync wave of "20"
   #######################################
