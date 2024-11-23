@@ -60,7 +60,7 @@ spec:
         The path must be prefixed with "/rox-api-token-auth".
         Example "/rox-api-token-auth/rox_api_token"
       type: string
-      default: ""
+      default: "/rox-api-token-auth/rox_api_token"
     - name: output_file
       type: string
       description: |
