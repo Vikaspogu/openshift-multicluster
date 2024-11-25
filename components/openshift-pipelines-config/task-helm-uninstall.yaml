@@ -13,7 +13,7 @@ spec:
       description: The helm release namespace
       name: release_namespace
       type: string
-    - default: "docker.io/lachlanevenson/k8s-helm@sha256:5c792f29950b388de24e7448d378881f68b3df73a7b30769a6aa861061fd08ae"
+    - default: "quay.io/fairwinds/helm-release-pruner@sha256:c58d5fb70089d01ceda361a623aeb06b476576fc27bcc67dbb93a1701fba9a5f"
       description: helm image to be used
       name: helm_image
       type: string
@@ -24,7 +24,7 @@ spec:
       script: |
         echo current installed helm releases
         # Get the list of Helm releases older than 24 hours
-        RELEASES=$(helm ls --filter "*pull-request*" --namespace $(params.release_namespace) --time-format "%Y-%m-%dT%H:%M:%S" -o json | jq -r '.[] | select(.updated < (now - 86400 | todate)) | .name')
+        RELEASES=$(helm ls --filter ".*pull-request.*" --namespace $(params.release_namespace) -o json | jq -r '.[] | select(.updated > (now - 86400 | todate)) | .name')
         # Loop through the releases and delete them
         for RELEASE in $RELEASES; do
           echo "Deleting Helm release: $RELEASE"

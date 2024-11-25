@@ -37,7 +37,7 @@ spec:
       description: The values file to be used
       name: values_file
       type: string
-    - default: "docker.io/lachlanevenson/k8s-helm@sha256:5c792f29950b388de24e7448d378881f68b3df73a7b30769a6aa861061fd08ae"
+    - default: "chainguard/helm:sha256-7015eb69f34df05a07e2e46ed3389f9c9c0df949a83dda8e6903ebfd8da41ccf.sig"
       description: helm image to be used
       name: helm_image
       type: string
