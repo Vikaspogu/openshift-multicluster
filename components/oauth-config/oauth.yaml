@@ -20,6 +20,22 @@ spec:
             - uid
         bindDN: uid=admin,ou=people,dc=home,dc=arpa
         bindPassword:
-          name: ldap-secret
+          name: oauth-secret
         insecure: true
         url: ldap://10.30.30.157/dc=home,dc=arpa
+    - mappingMethod: claim
+      name: authentik
+      openID:
+        claims:
+          email:
+            - email
+          name:
+            - name
+          preferredUsername:
+            - username
+        clientID: V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ
+        clientSecret:
+          name: oauth-secret
+        extraScopes: []
+        issuer: "https://id.vikaspogu.com/application/o/openshift"
+      type: OpenID
