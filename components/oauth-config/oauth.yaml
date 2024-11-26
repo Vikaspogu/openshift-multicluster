@@ -26,9 +26,11 @@ spec:
     - mappingMethod: claim
       name: authentik
       openID:
+        extraScopes:
+          - groups
+        extraAuthorizeParameters:
+          include_granted_scopes: "true"
         claims:
-          groups:
-            - groups
           email:
             - email
           name:
@@ -38,6 +40,5 @@ spec:
         clientID: V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ
         clientSecret:
           name: oauth-secret
-        extraScopes: []
         issuer: "https://id.vikaspogu.com/application/o/openshift"
       type: OpenID
