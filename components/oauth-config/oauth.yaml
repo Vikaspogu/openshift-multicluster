@@ -27,6 +27,8 @@ spec:
       name: authentik
       openID:
         claims:
+          groups:
+            - groups
           email:
             - email
           name:
