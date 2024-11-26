@@ -32,7 +32,7 @@ spec:
           name:
             - name
           preferredUsername:
-            - username
+            - preferred_username
         clientID: V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ
         clientSecret:
           name: oauth-secret
