@@ -27,10 +27,13 @@ spec:
       name: authentik
       openID:
         extraScopes:
-          - groups
+          - email
+          - profile
         extraAuthorizeParameters:
           include_granted_scopes: "true"
         claims:
+          groups:
+            - groups
           email:
             - email
           name:
