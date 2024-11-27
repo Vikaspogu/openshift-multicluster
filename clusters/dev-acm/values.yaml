@@ -178,13 +178,13 @@ applications:
     source:
       path: components/cluster-rbac-config
 
-  ldap-sync-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: ldap-sync
-    source:
-      path: components/ldap-sync-config
+  # ldap-sync-config:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: ldap-sync
+  #   source:
+  #     path: components/ldap-sync-config
 
   oauth-config:
     annotations:
