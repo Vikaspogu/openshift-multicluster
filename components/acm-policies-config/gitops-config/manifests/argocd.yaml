@@ -594,7 +594,7 @@ spec:
   rbac:
     policy: |
       g, system:cluster-admins, role:admin
-      g, openshift-admins, role:admin
+      g, admins, role:admin
       p, role:image-updater, applications, get, */*, allow
       p, role:image-updater, applications, update, */*, allow
       g, image-updater, role:image-updater
