@@ -11,6 +11,7 @@ spec:
         settings:
           secret-github-app-token-scoped: "false"
   pipeline:
+    default-timeout-minutes: 60
     cluster-resolver-config:
       default-kind: task
       default-namespace: openshift-pipelines
