@@ -272,6 +272,14 @@ applications:
     source:
       path: clusters/dev-acm/overlays/acs-central-configuration
 
+  web-terminal-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: web-terminal-operator
+    source:
+      path: components/web-terminal-config
+
   #######################################
   ## configuration with sync wave of "20"
   #######################################
