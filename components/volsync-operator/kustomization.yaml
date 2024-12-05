@@ -10,7 +10,7 @@ helmCharts:
     version: "3.0.1"
     valuesInline:
       operators:
-        - channel: stable
+        - channel: fast
           installPlanApproval: Manual
           name: web-terminal
           source: redhat-operators
