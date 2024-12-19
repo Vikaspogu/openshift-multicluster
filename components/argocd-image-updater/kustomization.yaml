@@ -8,7 +8,7 @@ helmCharts:
     releaseName: argocd-image-updater
     namespace: openshift-gitops
     repo: https://argoproj.github.io/argo-helm
-    version: "0.11.2"
+    version: "0.11.3"
     valuesInline:
       image:
         tag: "v0.15.0"
