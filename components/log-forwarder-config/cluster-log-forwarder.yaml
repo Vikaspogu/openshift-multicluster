@@ -13,7 +13,7 @@ spec:
       drop:
         - test:
             - field: .level
-              matches: "default|debug|notice"
+              matches: "notice" #"default|debug|notice"
   outputs:
     - name: loki
       type: "loki"
