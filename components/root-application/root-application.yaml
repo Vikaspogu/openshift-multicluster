@@ -29,7 +29,7 @@ spec:
       - Validate=false # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
       - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
       - PrunePropagationPolicy=foreground # Supported policies are background, foreground and orphan.
-      - Prune=false
+      - Prune=true
       - RespectIgnoreDifferences=true # When syncing changes, respect fields ignored by the ignoreDifferences configuration
 
     # The retry feature is available since v1.7

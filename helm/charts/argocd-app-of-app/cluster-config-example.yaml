@@ -6,7 +6,7 @@ default:
       label: test
     enabled: true
     enableAutoSync: true
-    autoSyncPrune: false
+    autoSyncPrune: true
     project: cluster-config
     destination:
       namespace: openshift-gitops

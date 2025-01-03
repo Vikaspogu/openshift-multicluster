@@ -2,7 +2,7 @@ default:
   app:
     enabled: true
     enableAutoSync: true
-    autoSyncPrune: false
+    autoSyncPrune: true
     project: cluster-config
     labels:
       app-source: group-all

@@ -29,7 +29,7 @@ spec:
       - Validate=false
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
-      - Prune=false
+      - Prune=true
       - RespectIgnoreDifferences=true
     retry:
       limit: 5
