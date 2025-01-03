@@ -3,8 +3,11 @@ app:
   baseUrl: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
 backend:
   auth:
-    keys:
-      - secret: "${BACKEND_SECRET}"
+    externalAccess:
+      - type: legacy
+        options:
+          subject: legacy-default-config
+          secret: "${BACKEND_SECRET}"
   baseUrl: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
   cors:
     origin: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
@@ -51,6 +54,9 @@ orchestrator:
   dataIndexService:
     url: http://localhost:8899
 
+techRadar:
+  url: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/refs/heads/main/clusters/dev-acm/overlays/developer-hub-config/config/tech-radar.json
+
 argocd:
   namespacedApps: true
   username: developer-hub
@@ -84,14 +90,6 @@ integrations:
 
 proxy:
   endpoints:
-    "/developer-hub":
-      target: https://raw.githubusercontent.com/
-      pathRewrite:
-        "^/api/proxy/developer-hub/tech-radar": /Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/tech-radar.json
-        "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/home-page.json
-      changeOrigin: true
-      secure: true
-
     "/sonarqube":
       target: https://sonarqube-cicd-tools.apps.dev-acm.v3socp.boo/api
       allowedMethods: ["GET"]
