@@ -1,7 +1,7 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - disabled: false
+  - disabled: true
     integrity: sha512-D2FSw+UZXXQQdQSLyNI0e5NUvTgMwidh3OBZRm4AMODzeAffL/mf5ZNnkVgtAUexTkkjZoVG6kRYzZ1NKiODIQ==
     package: "https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-1.0.0.tgz"
     pluginConfig:
@@ -17,7 +17,7 @@ plugins:
                   icon: AnsibleLogo
                   text: Ansible
                 path: /ansible
-  - disabled: false
+  - disabled: true
     integrity: sha512-myeuYBzGVXgLT3uCFiT39/rAw5R6tS6GlJdchxoa+DxQ8I1ytPP45ZL/6bNs+UBsivnGcHJCOWcsR8J1aQe3kw==
     package: >-
       https://static.vikaspogu.com/ansible-plugin-scaffolder-backend-module-backstage-rhaap-1.0.0.tgz
@@ -25,7 +25,7 @@ plugins:
       dynamicPlugins:
         backend:
           ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
-  - disabled: false
+  - disabled: true
     integrity: sha512-1E/PNbQ1yW0XpV87kaMobOoSCyxXe1KG5FsO+3UqzmHHLPTHuKGjjfTukIz51EQMzPSUES3tY3uryKAIe03OqQ==
     package: >-
       https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
@@ -55,59 +55,59 @@ plugins:
                 path: /time-saver
                 config:
                   pollingIntervalMs: 5000
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-security-insights
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
   - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
   - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-argocd
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs
   - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
   - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
   - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-sonarqube
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-sonarqube-backend-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-scaffolder-backend-module-sonarqube-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-github-actions
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-plugin-github-issues
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
-  - disabled: false
+  - disabled: true
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
