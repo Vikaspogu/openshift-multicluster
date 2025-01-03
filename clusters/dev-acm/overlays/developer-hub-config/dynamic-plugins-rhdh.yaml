@@ -64,15 +64,15 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
+    package: ./dynamic-plugins/dist/backstage-community-plugin-topology
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-argocd
-  - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-utils-dynamic
   - disabled: false
@@ -80,17 +80,15 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
+    package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
+    package: ./dynamic-plugins/dist/backstage-community-plugin-quay
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
+    package: ./dynamic-plugins/dist/backstage-community-plugin-tech-radar-backend-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-sonarqube
+    package: ./dynamic-plugins/dist/backstage-community-plugin-sonarqube
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-sonarqube-backend-dynamic
-  - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-scaffolder-backend-module-sonarqube-dynamic
+    package: ./dynamic-plugins/dist/backstage-community-plugin-sonarqube-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
   - disabled: false
@@ -100,11 +98,11 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+    package: ./dynamic-plugins/dist/backstage-community-plugin-ocm-backend-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+    package: ./dynamic-plugins/dist/backstage-community-plugin-ocm
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
+    package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
   - disabled: false

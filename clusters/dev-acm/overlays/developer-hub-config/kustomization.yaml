@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: developer-hub
 resources:
   - ./namespace.yaml
+  - ./dynamic-plugin-pvc.yaml
   - ./backstage.yaml
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
