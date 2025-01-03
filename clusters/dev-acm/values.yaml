@@ -414,12 +414,12 @@ applications:
   #######################################
   ## configuration with sync wave of "55"
   #######################################
-  tenants-iac-gitops-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "55"
-    autoSyncPrune: true
-    source:
-      path: clusters/dev-acm/overlays/tenants-iac-gitops-config
+  # tenants-iac-gitops-config:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "55"
+  #   autoSyncPrune: true
+  #   source:
+  #     path: clusters/dev-acm/overlays/tenants-iac-gitops-config
 
   #######################################
   ## configuration with sync wave of "75"
