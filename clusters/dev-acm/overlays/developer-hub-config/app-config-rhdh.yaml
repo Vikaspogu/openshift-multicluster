@@ -93,6 +93,7 @@ proxy:
     "/developer-hub":
       target: https://raw.githubusercontent.com/
       pathRewrite:
+        "^/api/proxy/developer-hub/learning-paths": "/Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/learning-paths.json"
         "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/home-page.json
       changeOrigin: true
       secure: true

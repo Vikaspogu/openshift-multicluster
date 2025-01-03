@@ -1,0 +1,25 @@
+[
+  {
+    "paths": 20,
+    "hours": 7,
+    "minutes": 40,
+    "description": "This hands on experience will introduce you to developing on OpenShift. Learn how to access OpenShift from the command line, deploy an existing Spring application, and scale up your application to handle increased web traffic.",
+    "label": "Deploy a Spring application on OpenShift",
+    "url": "https://developers.redhat.com/learn/openshift/deploy-spring-application-openshift"
+  },
+  {
+    "paths": 5,
+    "hours": 2,
+    "description": "Use GitOps and OpenShift Pipelines to implement Kubernetes-native CI/CD, automate and manage app deployment.\r\nDeveloped by Christian Hernandez, Natale Vinto, and Dewan Ahmed",
+    "label": "Develop with GitOps",
+    "url": "https://developers.redhat.com/learn/openshift/develop-gitops"
+  },
+  {
+    "paths": 19,
+    "hours": 4,
+    "minutes": 15,
+    "description": "Everyone likes a camp romance. Argo Cd and Tekton are a match made in Kubernetes heaven. See what makes them tick!",
+    "label": "From DevOps to GitOps",
+    "url": "https://developers.redhat.com/devnation/devops-gitops"
+  }
+]
