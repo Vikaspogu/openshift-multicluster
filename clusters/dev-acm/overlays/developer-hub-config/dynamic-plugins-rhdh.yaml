@@ -90,20 +90,18 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-sonarqube-backend-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+    package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-github-actions
+    package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-github-issues
+    package: ./dynamic-plugins/dist/backstage-community-plugin-github-issues
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-ocm-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-ocm
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
-  - disabled: false
-    package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
-  - disabled: false
-    package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
