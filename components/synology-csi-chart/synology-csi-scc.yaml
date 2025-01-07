@@ -22,8 +22,8 @@ seLinuxContext:
 supplementalGroups:
   type: RunAsAny
 users:
-  - system:serviceaccount:synology-csi:csi-controller-sa
-  - system:serviceaccount:synology-csi:csi-node-sa
-  - system:serviceaccount:synology-csi:csi-snapshotter-sa
+  - system:serviceaccount:synology-csi:synology-csi-controller
+  - system:serviceaccount:synology-csi:synology-csi-node
+  - system:serviceaccount:synology-csi:synology-csi-snapshotter
 volumes:
   - "*"
