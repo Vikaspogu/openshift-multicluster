@@ -20,9 +20,23 @@ helmCharts:
         name: synology-csi-secret
       installCSIDriver: true
       storageClasses:
-        iscsi:
+        iscsi-delete:
           parameters:
             fsType: "btrfs"
             location: "/volume1"
             formatOptions: "--nodiscard"
             protocol: iscsi
+        iscsi-retain:
+          parameters:
+            fsType: "btrfs"
+            location: "/volume1"
+            formatOptions: "--nodiscard"
+            protocol: iscsi
+        nfs-delete:
+          disabled: true
+        nfs-retain:
+          disabled: true
+        smb-delete:
+          disabled: true
+        smb-retain:
+          disabled: true
