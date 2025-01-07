@@ -21,11 +21,7 @@ helmCharts:
       installCSIDriver: true
       storageClasses:
         iscsi-delete:
-          parameters:
-            fsType: "btrfs"
-            location: "/volume1"
-            formatOptions: "--nodiscard"
-            protocol: iscsi
+          disabled: true
         iscsi-retain:
           parameters:
             fsType: "btrfs"
