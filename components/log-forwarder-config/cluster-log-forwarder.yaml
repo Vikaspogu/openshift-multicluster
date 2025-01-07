@@ -7,13 +7,13 @@ metadata:
 spec:
   serviceAccount:
     name: logging-admin
-  filters:
-    - name: important-logs
-      type: drop
-      drop:
-        - test:
-            - field: .level
-              matches: "notice" #"default|debug|notice"
+  # filters:
+  #   - name: important-logs
+  #     type: drop
+  #     drop:
+  #       - test:
+  #           - field: .level
+  #             matches: "notice" #"default|debug|notice"
   outputs:
     - name: loki
       type: "loki"
@@ -27,8 +27,8 @@ spec:
           minRetryDuration: 5
   pipelines:
     - name: logs
-      filterRefs:
-        - important-logs
+      # filterRefs:
+      #   - important-logs
       inputRefs:
         - application
         - infrastructure
