@@ -161,6 +161,14 @@ applications:
     source:
       path: components/lvm-storage
 
+  synology-csi-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: synology-csi
+    source:
+      path: components/synology-csi-chart
+
   #######################################
   ## configuration with sync wave of "15"
   #######################################
