@@ -25,6 +25,3 @@ helmCharts:
             location: "/volume1"
             formatOptions: "--nodiscard"
             protocol: iscsi
-      volumeSnapshotClasses:
-        synology-snapshotclass:
-          deletionPolicy: Delete
