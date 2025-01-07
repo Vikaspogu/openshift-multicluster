@@ -11,7 +11,7 @@ helmCharts:
     releaseName: synology-csi
     namespace: synology-csi
     repo: https://christian-schlichtherle.github.io/synology-csi-chart
-    version: "0.9.10"
+    version: "0.10.1"
     valuesInline:
       clientInfoSecret:
         create: false
