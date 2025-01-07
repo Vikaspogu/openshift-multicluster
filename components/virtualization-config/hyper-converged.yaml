@@ -6,4 +6,6 @@ metadata:
     deployOVS: "false"
   name: kubevirt-hyperconverged
   namespace: openshift-cnv
-spec: {}
+spec:
+  featureGates:
+    enableCommonBootImageImport: false
