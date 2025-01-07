@@ -3,7 +3,7 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: synology-csi-iscsi-delete
   annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
+    storageclass.kubevirt.io/is-default-virt-class: "true"
 provisioner: csi.san.synology.com
 parameters:
   formatOptions: "--nodiscard"
