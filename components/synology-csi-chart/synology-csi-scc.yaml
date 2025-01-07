@@ -1,0 +1,29 @@
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: synology-csi-scc
+allowHostDirVolumePlugin: true
+allowHostNetwork: true
+allowPrivilegedContainer: true
+allowedCapabilities:
+  - "SYS_ADMIN"
+defaultAddCapabilities: []
+fsGroup:
+  type: RunAsAny
+groups: []
+priority:
+readOnlyRootFilesystem: false
+requiredDropCapabilities: []
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:synology-csi:csi-controller-sa
+  - system:serviceaccount:synology-csi:csi-node-sa
+  - system:serviceaccount:synology-csi:csi-snapshotter-sa
+volumes:
+  - "*"

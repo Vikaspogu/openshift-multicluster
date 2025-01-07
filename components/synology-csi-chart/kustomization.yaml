@@ -5,6 +5,7 @@ namespace: synology-csi
 resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
+  - ./synology-csi-scc.yaml
 
 helmCharts:
   - name: synology-csi
