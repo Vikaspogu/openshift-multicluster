@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   - ./externalsecret.yaml
   - ./synology-csi-scc.yaml
+  - ./volume-snapshot-class.yaml
 
 helmCharts:
   - name: synology-csi
