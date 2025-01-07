@@ -24,11 +24,7 @@ helmCharts:
         iscsi-delete:
           disabled: true
         iscsi-retain:
-          parameters:
-            fsType: "btrfs"
-            location: "/volume1"
-            formatOptions: "--nodiscard"
-            protocol: iscsi
+          disabled: true
         nfs-delete:
           disabled: true
         nfs-retain:
