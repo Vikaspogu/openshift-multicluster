@@ -296,6 +296,14 @@ applications:
     source:
       path: components/web-terminal-config
 
+  virtualization-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-cnv
+    source:
+      path: components/virtualization-config
+
   #######################################
   ## configuration with sync wave of "20"
   #######################################
