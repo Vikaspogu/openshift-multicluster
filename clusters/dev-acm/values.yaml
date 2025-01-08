@@ -158,6 +158,14 @@ applications:
     source:
       path: components/openshift-nmstate
 
+  metallb-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: metallb-system
+    source:
+      path: components/metallb-operator
+
   #######################################
   ## configuration with sync wave of "10"
   #######################################
@@ -311,6 +319,14 @@ applications:
       namespace: openshift-cnv
     source:
       path: components/virtualization-config
+
+  openshift-nmstate-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate-config
 
   #######################################
   ## configuration with sync wave of "20"
