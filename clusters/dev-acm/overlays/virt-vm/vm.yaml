@@ -44,13 +44,13 @@ spec:
               qemuGuestAgent: {}
             source:
               secret:
-                secretName: vm-creds
+                secretName: vm-ssh-creds
         - sshPublicKey:
             propagationMethod:
               noCloud: {}
             source:
               secret:
-                secretName: "vm-creds"
+                secretName: "vm-user-creds"
       architecture: "amd64"
       domain:
         cpu:
