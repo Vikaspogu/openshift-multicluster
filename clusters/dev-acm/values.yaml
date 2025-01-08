@@ -150,6 +150,14 @@ applications:
     source:
       path: components/virtualization-operator
 
+  openshift-nmstate:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate
+
   #######################################
   ## configuration with sync wave of "10"
   #######################################

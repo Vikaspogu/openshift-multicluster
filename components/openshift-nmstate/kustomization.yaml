@@ -1,0 +1,22 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./namespace.yaml
+
+helmCharts:
+  - name: operators-installer
+    releaseName: openshift-nmstate
+    namespace: openshift-nmstate
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: stable
+          installPlanApproval: Automatic
+          name: kubernetes-nmstate-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+      operatorGroups:
+        - createNamespace: false
+          targetOwnNamespace: true
