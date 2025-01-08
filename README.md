@@ -1,25 +1,14 @@
 <!-- markdownlint-disable MD041 -->
-<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="144px" height="144px"/>
 
-# OpenShift Multi-cluster IaC
+<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="45" height="45"/><h1>&nbsp;&nbsp;Multi-Cluster OpenShift Management with ArgoCD</h1>
 
-_... managed by ArgoCD_ :robot:
-
-<br/>
-<br/>
-<br/>
-
-<div align="center">
-
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled?logo=pre-commit&logoColor=white&style=for-the-badge&color=brightgreen)](https://github.com/pre-commit/pre-commit)
-
-</div>
+_... managed by ArgoCD_ <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-logo.png" align="center" width="40px" height="40px"/>
 
 ---
 
 ## :wave: Overview
 
-Welcome to my OpenShift multi cluster Infrastructure as code repository. This repository follows standards from [gitops-standards-repo-template](https://github.com/redhat-cop/gitops-standards-repo-template.git)
+This repository provides the necessary files and instructions to manage multiple OpenShift clusters using ArgoCD and GitOps principles. This setup allows for consistent, repeatable, and automated configuration of your OpenShift environments. This repository follows standards from [gitops-standards-repo-template](https://github.com/redhat-cop/gitops-standards-repo-template.git)
 
 ### Installing OpenShift cluster with Agent-based Installer
 
@@ -54,11 +43,10 @@ Welcome to my OpenShift multi cluster Infrastructure as code repository. This re
 - [x] Secret Management using External secrets and 1Password
 - [x] Cert manager for API and Wildcard certificate
 - [x] Multi cluster management
-- [x] OpenShift Pipeline as Code 
+- [x] OpenShift Pipeline as Code
 - [x] Kyverno
 - [x] Renovate bot
 
 ## Resources
 
-- [Proxmox helper scripts]([https://tteck.github.io/Proxmox/](https://community-scripts.github.io/ProxmoxVE/))
 - [GitOps Catalog by RedHat COP](https://github.com/redhat-cop/gitops-catalog)
