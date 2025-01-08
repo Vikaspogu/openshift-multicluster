@@ -5,4 +5,4 @@ metadata:
   name: pool1-l2-advertisement
 spec:
   ipAddressPools:
-    - name: pool-1
+    - pool-1
