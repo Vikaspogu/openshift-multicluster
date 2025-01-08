@@ -4,6 +4,6 @@ kind: IPAddressPool
 metadata:
   name: pool-1
 spec:
-  autoAssign: false
+  autoAssign: true
   addresses:
     - 10.30.30.190-10.30.30.194
