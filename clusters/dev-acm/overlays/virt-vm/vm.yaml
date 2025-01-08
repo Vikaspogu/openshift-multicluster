@@ -66,7 +66,8 @@ spec:
                 bus: "virtio"
               name: "cloudinitdisk"
           interfaces:
-            - masquerade: {}
+            - macAddress: 02:ee:15:00:00:0b
+              masquerade: {}
               model: "virtio"
               name: "default"
           networkInterfaceMultiqueue: true
