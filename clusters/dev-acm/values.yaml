@@ -480,6 +480,15 @@ applications:
   #######################################
   ## configuration with sync wave of "75"
   #######################################
+  virt-vm:
+    annotations:
+      argocd.argoproj.io/sync-wave: "75"
+    autoSyncPrune: true
+    destination:
+      namespace: team-a-vm
+    source:
+      path: clusters/dev-acm/overlays/virt-vm
+
   # image-pull-secret-sa:
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "75"
