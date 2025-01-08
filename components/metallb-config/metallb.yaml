@@ -3,4 +3,13 @@ apiVersion: metallb.io/v1beta1
 kind: MetalLB
 metadata:
   name: metallb
-  namespace: metallb
+spec:
+  logLevel: debug
+  controllerConfig:
+    resources:
+      limits:
+        cpu: "200m"
+  speakerConfig:
+    resources:
+      limits:
+        cpu: "300m"

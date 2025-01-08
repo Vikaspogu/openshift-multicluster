@@ -328,6 +328,14 @@ applications:
     source:
       path: components/openshift-nmstate-config
 
+  metallb-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: metallb-system
+    source:
+      path: components/metallb-config
+
   #######################################
   ## configuration with sync wave of "20"
   #######################################
