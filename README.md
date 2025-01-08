@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 
-<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="45" height="45"/><h1>&nbsp;&nbsp;Multi-Cluster OpenShift Management with ArgoCD</h1>
+<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="45" height="47"/><h1>&nbsp;&nbsp;Multi-Cluster OpenShift Management with ArgoCD</h1>
 
 _... managed by ArgoCD_ <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-logo.png" align="center" width="40px" height="40px"/>
 
