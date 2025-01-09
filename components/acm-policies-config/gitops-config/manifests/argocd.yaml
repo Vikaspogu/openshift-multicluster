@@ -601,6 +601,17 @@ spec:
     scopes: "[groups]"
   repo:
     sidecarContainers:
+      - name: lovely-plugin
+        resources: {}
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: ghcr.io/crumbhole/lovely:1.2.0
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
       - name: helm-multivalues-plugin
         resources: {}
         command: [/var/run/argocd/argocd-cmp-server]
