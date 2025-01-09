@@ -1,0 +1,37 @@
+applications:
+  metallb-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: metallb-system
+    source:
+      path: components/metallb-operator
+  metallb-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: metallb-system
+    source:
+      path: components/metallb-config
+  metallb-l2-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: metallb-system
+    source:
+      path: components/metallb-l2-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                   - patch: |-
+                      - op: replace
+                        path: /spec/addresses
+                        value:
+                          - 10.30.30.190-10.30.30.194
+                    target:
+                      kind: IPAddressPool

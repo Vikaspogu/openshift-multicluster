@@ -1,0 +1,9 @@
+applications:
+  reloader-chart:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: reloader
+    source:
+      path: groups/all/overlays/reloader-chart

@@ -41,21 +41,4 @@ projects:
       - group: '*'
         kind: '*'
 
-applications:
-  cert-manager-operator:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: cert-manager
-    source:
-      path: groups/all/overlays/cert-manager-operator
-
-  reloader-chart:
-    annotations:
-      argocd.argoproj.io/compare-options: IgnoreExtraneous
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: reloader
-    source:
-      path: groups/all/overlays/reloader-chart
+applications: {}

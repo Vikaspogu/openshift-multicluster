@@ -1,0 +1,15 @@
+applications:
+  openshift-nmstate:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate
+  openshift-nmstate-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate-config

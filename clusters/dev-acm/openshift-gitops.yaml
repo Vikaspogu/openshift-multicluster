@@ -1,0 +1,40 @@
+applications:
+  openshift-gitops-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/openshift-gitops-operator
+
+  argocd-image-updater:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-image-updater
+
+  argocd-rollout:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-rollout
+
+  argocd-notifications:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-notifications
+
+  argocd-webhook:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-webhook

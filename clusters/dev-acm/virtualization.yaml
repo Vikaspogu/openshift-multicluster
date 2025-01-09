@@ -1,0 +1,15 @@
+applications:
+  virtualization-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-cnv
+    source:
+      path: components/virtualization-operator
+  virtualization-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-cnv
+    source:
+      path: components/virtualization-config

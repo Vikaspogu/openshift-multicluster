@@ -1,0 +1,8 @@
+applications:
+  volsync-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: volsync-operator
+    source:
+      path: components/volsync-operator

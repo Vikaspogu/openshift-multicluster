@@ -1,0 +1,8 @@
+applications:
+  synology-csi-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: synology-csi
+    source:
+      path: components/synology-csi-chart

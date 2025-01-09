@@ -1,0 +1,38 @@
+applications:
+  acs-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: rhacs-operator
+    source:
+      path: components/acs-operator
+  acs-central-configuration:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: stackrox
+    source:
+      path: components/acs-central-configuration
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - central-stackrox.apps.dev-acm.v3socp.boo
+                    target:
+                      kind: Certificate
+                      name: central-default-tls-cert
+                  - patch: |-
+                      - op: replace
+                        path: /spec/applicationMenu/href
+                        value:
+                          - https://central-stackrox.apps.dev-acm.v3socp.boo/
+                    target:
+                      kind: ConsoleLink

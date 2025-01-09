@@ -1,0 +1,15 @@
+applications:
+  web-terminal-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: web-terminal-operator
+    source:
+      path: components/web-terminal-operator
+  web-terminal-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: web-terminal-operator
+    source:
+      path: components/web-terminal-config

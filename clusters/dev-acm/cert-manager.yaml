@@ -1,0 +1,80 @@
+applications:
+  cert-manager-operator:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: cert-manager
+    source:
+      path: components/cert-manager-operator
+  cert-manager-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: cert-manager
+    source:
+      path: components/cert-manager-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/acme/solvers/0/selector/dnsZones
+                        value:
+                          - "v3socp.boo"
+                    target:
+                      kind: ClusterIssuer
+                      name: letsencrypt-prod
+                  - patch: |-
+                      - op: replace
+                        path: /spec/acme/solvers/0/selector/dnsZones
+                        value:
+                          - "v3socp.boo"
+                    target:
+                      kind: ClusterIssuer
+                      name: letsencrypt-staging
+  cert-manager-application:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: components/cert-manager-application
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - api.dev-acm.v3socp.boo
+                    target:
+                      kind: Certificate
+                      name: openshift-api
+                  - patch: |-
+                      - op: replace
+                        path: /spec/servingCerts/namedCertificates/0/names
+                        value:
+                          - api.dev-acm.v3socp.boo
+                    target:
+                      kind: APIServer
+                      name: cluster
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - '*.apps.dev-acm.v3socp.boo'
+                      - op: replace
+                        path: /spec/commonName
+                        value: '*.apps.dev-acm.v3socp.boo'
+                    target:
+                      kind: Certificate
+                      name: openshift-wildcard
