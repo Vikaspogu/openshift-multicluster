@@ -211,6 +211,30 @@ applications:
       namespace: cert-manager
     source:
       path: clusters/dev-acm/overlays/cert-manager-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/acme/solvers/0/selector/dnsZones
+                        value:
+                          - "v3socp.boo"
+                    target:
+                      kind: ClusterIssuer
+                      name: letsencrypt-prod
+                  - patch: |-
+                      - op: replace
+                        path: /spec/acme/solvers/0/selector/dnsZones
+                        value:
+                          - "v3socp.boo"
+                    target:
+                      kind: ClusterIssuer
+                      name: letsencrypt-staging
 
   cluster-rbac-config:
     annotations:
@@ -231,14 +255,6 @@ applications:
       argocd.argoproj.io/sync-wave: "15"
     source:
       path: components/oauth-config
-
-  openshift-gitops-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: clusters/dev-acm/overlays/openshift-gitops-config
 
   devspaces-config:
     annotations:
@@ -303,6 +319,29 @@ applications:
       namespace: stackrox
     source:
       path: clusters/dev-acm/overlays/acs-central-configuration
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - central-stackrox.apps.dev-acm.v3socp.boo
+                    target:
+                      kind: Certificate
+                      name: central-default-tls-cert
+                  - patch: |-
+                      - op: replace
+                        path: /spec/applicationMenu/href
+                        value:
+                          - https://central-stackrox.apps.dev-acm.v3socp.boo/
+                    target:
+                      kind: ConsoleLink
 
   web-terminal-config:
     annotations:
@@ -366,12 +405,6 @@ applications:
   #   source:
   #     path: components/tekton-dashboard
 
-  # pac-repository-config:
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "25"
-  #   source:
-  #     path: clusters/dev-acm/overlays/pac-repository-config
-
   image-registry-config:
     annotations:
       argocd.argoproj.io/sync-wave: "25"
@@ -399,6 +432,41 @@ applications:
       argocd.argoproj.io/sync-wave: "25"
     source:
       path: clusters/dev-acm/overlays/cert-manager-application
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - api.dev-acm.v3socp.boo
+                    target:
+                      kind: Certificate
+                      name: openshift-api
+                  - patch: |-
+                      - op: replace
+                        path: /spec/servingCerts/namedCertificates/0/names
+                        value:
+                          - api.dev-acm.v3socp.boo
+                    target:
+                      kind: APIServer
+                      name: cluster
+                  - patch: |-
+                      - op: replace
+                        path: /spec/dnsNames
+                        value:
+                          - '*.apps.dev-acm.v3socp.boo'
+                      - op: replace
+                        path: /spec/commonName
+                        value: '*.apps.dev-acm.v3socp.boo'
+                    target:
+                      kind: Certificate
+                      name: openshift-wildcard
 
   metallb-l2-config:
     annotations:
@@ -406,7 +474,22 @@ applications:
     destination:
       namespace: metallb-system
     source:
-      path: clusters/dev-acm/overlays/metallb-l2-config
+      path: components/metallb-l2-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: add
+                path: /patches/
+                value: |-
+                   - patch: |-
+                      - op: replace
+                        path: /spec/addresses
+                        value:
+                          - 10.30.30.190-10.30.30.194
+                    target:
+                      kind: IPAddressPool
 
   # patch-operator:
   #   annotations:
@@ -426,14 +509,6 @@ applications:
       namespace: developer-hub
     source:
       path: clusters/dev-acm/overlays/developer-hub-config
-
-  homelab-inventory-infraenv:
-    annotations:
-      argocd.argoproj.io/sync-wave: "35"
-    destination:
-      namespace: homelab-inventory
-    source:
-      path: clusters/dev-acm/overlays/homelab-inventory-infraenv
 
   # acm-policy-gitops-operator:
   #   annotations:
@@ -480,14 +555,14 @@ applications:
   #######################################
   ## configuration with sync wave of "75"
   #######################################
-  virt-vm:
-    annotations:
-      argocd.argoproj.io/sync-wave: "75"
-    autoSyncPrune: true
-    destination:
-      namespace: team-a-vm
-    source:
-      path: clusters/dev-acm/overlays/virt-vm
+  # virt-vm:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "75"
+  #   autoSyncPrune: true
+  #   destination:
+  #     namespace: team-a-vm
+  #   source:
+  #     path: clusters/dev-acm/overlays/virt-vm
 
   # image-pull-secret-sa:
   #   annotations:

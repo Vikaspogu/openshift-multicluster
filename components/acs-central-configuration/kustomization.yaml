@@ -12,3 +12,4 @@ resources:
   - create-cluster-init-bundle-job.yaml
   - secured-cluster.yaml
   - job-create-auth-provider.yaml
+  - ./console-link.yaml
