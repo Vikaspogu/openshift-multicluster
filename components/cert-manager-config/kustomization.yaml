@@ -7,8 +7,12 @@ resources:
   - ./externalsecret.yaml
   - ./prod-cluster-issuer.yaml
   - ./staging-cluster-issuer.yaml
-vars:
-  - name: DNS_ZONES
-    objref:
-      kind: ConfigMap
-      name: cert-manager-configmap
+patches:
+  - patch: ""
+    target:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+  - patch: ""
+    target:
+      kind: ClusterIssuer
+      name: letsencrypt-staging
