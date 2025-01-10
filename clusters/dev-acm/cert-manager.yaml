@@ -25,8 +25,8 @@ applications:
         name: argocd-lovely-plugin
         env:
           - name: LOVELY_ENV_PROPAGATION
-            value: true
-          - name: ARGOCD_ENV_DNS_ZONES
+            value: "true"
+          - name: DNS_ZONES
             value: "v3socp.boo"
 
   # cert-manager-application:
