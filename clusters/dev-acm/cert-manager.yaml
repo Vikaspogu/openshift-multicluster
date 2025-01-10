@@ -10,8 +10,9 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_HELM_TEMPLATE_PARAMS
-            value: "--set operators.0.channel=stable-v1"
+          - name: LOVELY_KUSTOMIZE_PATCH
+            value: |
+              [{ "op": "replace", "path": "/helmCharts/0/valuesInline/operators/0/channel", "value": "stable-v1" }]
 
   # cert-manager-config:
   #   annotations:
