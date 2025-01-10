@@ -6,4 +6,4 @@ applications:
     destination:
       namespace: reloader
     source:
-      path: groups/all/overlays/reloader-chart
+      path: components/reloader-chart
