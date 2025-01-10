@@ -10,17 +10,8 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_KUSTOMIZE_PATCH
-            value: |
-              - op: add
-                path: /patches/
-                value: |-
-                  - patch: |-
-                      - op: replace
-                        path: /spec/channel
-                        value: "stable-v1"
-                    target:
-                      kind: Subscription
+          - name: LOVELY_HELM_TEMPLATE_PARAMS
+            value: "--set operators.0.channel=stable-v1"
 
   # cert-manager-config:
   #   annotations:
