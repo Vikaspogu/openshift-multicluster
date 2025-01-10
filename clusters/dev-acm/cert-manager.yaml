@@ -24,22 +24,8 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_KUSTOMIZE_PATCH
-            value: |-
-              - op: replace
-                path: /patches/0/patch
-                value: |-
-                  - op: replace
-                    path: /spec/acme/solvers/0/selector/dnsZones
-                    value:
-                      - "v3socp.boo"
-              - op: replace
-                path: /patches/1/patch
-                value: |-
-                  - op: replace
-                    path: /spec/acme/solvers/0/selector/dnsZones
-                    value:
-                      - "v3socp.boo"
+          - name: LOVELY_PREPROCESSORS
+            value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g'
 
   # cert-manager-application:
   #   annotations:
