@@ -68,6 +68,12 @@ spec:
     path: {{ tpl $val.source.path $ }}
     repoURL: {{ $val.source.repoURL | default $.Values.default.app.source.repoURL | required (printf "No source.repoURL specified for %s" $key ) }}
     targetRevision: {{ $val.source.targetRevision | default $.Values.default.app.source.targetRevision | required (printf "No source.targetRevision specified for %s" $key ) }}
+    {{- if $val.source.plugin }}
+    {{- with $val.source.plugin }}
+    plugin:
+{{ toYaml . | indent 6 }}
+    {{- end }}
+    {{- end }}
 {{- end }}
 {{- if ($val.source | default dict ).extraSourceFields }}
 {{ tpl $val.source.extraSourceFields $ | indent 4 }}
