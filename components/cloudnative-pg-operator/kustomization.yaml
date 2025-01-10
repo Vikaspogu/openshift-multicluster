@@ -4,5 +4,18 @@ kind: Kustomization
 namespace: cloudnative-pg
 resources:
   - ./namespace.yaml
-  - ./operator.yaml
-  - ./subscription.yaml
+helmCharts:
+  - name: operators-installer
+    releaseName: cloudnative-pg
+    namespace: cloudnative-pg
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: stable-v1
+          installPlanApproval: Automatic
+          name: cloudnative-pg
+          source: certified-operators
+          sourceNamespace: openshift-marketplace
+      operatorGroups:
+        - createNamespace: false

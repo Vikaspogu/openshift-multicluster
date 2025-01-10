@@ -6,6 +6,11 @@ applications:
       namespace: open-cluster-management
     source:
       path: components/acm-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.channel="release-2.12"' subscription.yaml
 
   acm-config:
     annotations:

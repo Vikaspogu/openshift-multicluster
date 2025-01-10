@@ -4,5 +4,19 @@ kind: Kustomization
 namespace: rhacs-operator
 resources:
   - ./namespace.yaml
-  - ./operator.yaml
-  - ./subscription.yaml
+
+helmCharts:
+  - name: operators-installer
+    releaseName: rhacs-operator
+    namespace: rhacs-operator
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: stable
+          installPlanApproval: Automatic
+          name: rhacs-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+      operatorGroups:
+        - createNamespace: false

@@ -16,23 +16,5 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_KUSTOMIZE_PATCH
-            value: |
-              - op: add
-                path: /patches/
-                value: |-
-                  - patch: |-
-                      - op: replace
-                        path: /spec/dnsNames
-                        value:
-                          - central-stackrox.apps.dev-acm.v3socp.boo
-                    target:
-                      kind: Certificate
-                      name: central-default-tls-cert
-                  - patch: |-
-                      - op: replace
-                        path: /spec/applicationMenu/href
-                        value:
-                          - https://central-stackrox.apps.dev-acm.v3socp.boo/
-                    target:
-                      kind: ConsoleLink
+          - name: LOVELY_PREPROCESSORS
+            value: sed -i 's/<REPLACE_CENTRAL_ROUTE_URL>/central-stackrox.apps.dev-acm.v3socp.boo/g' *.yaml
