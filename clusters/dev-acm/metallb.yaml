@@ -29,5 +29,6 @@ applications:
                 path: /patches/0/patch
                 value: |-
                   - op: add
-                    path: /spec/ipAddressPools/0
-                    value: "10.30.30.190-10.30.30.194"
+                    path: /spec/ipAddressPools
+                    value:
+                      - 10.30.30.190-10.30.30.194
