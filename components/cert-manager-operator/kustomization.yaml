@@ -18,4 +18,4 @@ helmCharts:
           source: redhat-operators
           sourceNamespace: openshift-marketplace
       operatorGroups:
-        - createNamespace: false
+        - targetOwnNamespace: true
