@@ -23,15 +23,12 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_KUSTOMIZE_PATCH
-            value: |
-              - op: replace
-                path: /patches
-                value: |-
-                   - patch: |-
-                      - op: replace
-                        path: /spec/addresses
-                        value:
-                          - 10.30.30.190-10.30.30.194
-                    target:
-                      kind: IPAddressPool
+          - name: LOVELY_KUSTOMIZE_MERGE
+            value: |-
+              apiVersion: metallb.io/v1beta1
+              kind: IPAddressPool
+              metadata:
+                name: pool-1
+              spec:
+                addresses:
+                  - 10.30.30.190-10.30.30.194
