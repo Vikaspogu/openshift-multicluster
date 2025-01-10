@@ -25,7 +25,7 @@ applications:
         name: argocd-lovely-plugin
         env:
           - name: LOVELY_PREPROCESSORS
-            value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g'
+            value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g' *.yaml
 
   # cert-manager-application:
   #   annotations:
