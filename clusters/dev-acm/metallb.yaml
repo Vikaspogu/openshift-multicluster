@@ -23,9 +23,9 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: ARGOCD_ENV_LOVELY_KUSTOMIZE_PATCH
+          - name: LOVELY_KUSTOMIZE_PATCH
             value: |
-              - op: add
+              - op: replace
                 path: /patches/
                 value: |-
                    - patch: |-
