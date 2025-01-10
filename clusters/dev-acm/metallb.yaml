@@ -25,13 +25,10 @@ applications:
         env:
           - name: LOVELY_KUSTOMIZE_PATCH
             value: |
-              - op: add
-                path: /patches/0
+              - op: replace
+                path: /patches/0/patch
                 value: |-
-                  patch: |-
-                    - op: replace
-                      path: /spec/addresses
-                      value:
+                  - op: add
+                    path: /metadata/labels/testlabel
+                    value: "true"
                         - 10.30.30.190-10.30.30.194
-                  target:
-                    kind: IPAddressPool

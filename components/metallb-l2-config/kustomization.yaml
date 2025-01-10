@@ -5,4 +5,7 @@ namespace: metallb-system
 resources:
   - ./ipaddress-pool.yaml
   - ./l2advertisement.yaml
-patches: []
+patches:
+  - patch: ""
+    target:
+      kind: IPAddressPool
