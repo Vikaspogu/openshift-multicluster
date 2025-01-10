@@ -14,37 +14,21 @@ applications:
             value: |
               [{ "op": "replace", "path": "/helmCharts/0/valuesInline/operators/0/channel", "value": "stable-v1" }]
 
-  # cert-manager-config:
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "15"
-  #   destination:
-  #     namespace: cert-manager
-  #   source:
-  #     path: components/cert-manager-config
-  #     plugin:
-  #       name: argocd-lovely-plugin
-  #       env:
-  #         - name: LOVELY_KUSTOMIZE_PATCH
-  #           value: |
-  #             - op: replace
-  #               path: /patches/
-  #               value: |-
-  #                 - patch: |-
-  #                     - op: replace
-  #                       path: /spec/acme/solvers/0/selector/dnsZones
-  #                       value:
-  #                         - "v3socp.boo"
-  #                   target:
-  #                     kind: ClusterIssuer
-  #                     name: letsencrypt-prod
-  #                 - patch: |-
-  #                     - op: replace
-  #                       path: /spec/acme/solvers/0/selector/dnsZones
-  #                       value:
-  #                         - "v3socp.boo"
-  #                   target:
-  #                     kind: ClusterIssuer
-  #                     name: letsencrypt-staging
+  cert-manager-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: cert-manager
+    source:
+      path: components/cert-manager-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_ENV_PROPAGATION
+            value: true
+          - name: ARGOCD_ENV_DNS_ZONES
+            value: "v3socp.boo"
+
   # cert-manager-application:
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "25"
