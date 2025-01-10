@@ -35,5 +35,5 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_PREPROCESSORS
-            value: sed -i 's/<REPLACE_API_DNS_NAME>/api.dev-acm.v3socp.boo/g; s/<REPLACE_WILDCARD_DNS_NAME>/*.apps.dev-acm.v3socp.boo/g' *.yaml
+          - name: LOVELY_PREPROCESSORS_YAML
+            value: '{"openshift-api":["sed -i ''s/<REPLACE_API_DNS_NAME>/api.dev-acm.v3socp.boo/g'' *.yaml"],"openshift-wildcard":["sed -i ''s/<REPLACE_WILDCARD_DNS_NAME>/*.apps.dev-acm.v3socp.boo/g'' *.yaml"]}'
