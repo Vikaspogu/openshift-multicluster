@@ -18,4 +18,4 @@ spec:
               key: api-key
         selector:
           dnsZones:
-            - ${ARGOCD_ENV_DNS_ZONES}
+            - $(DNS_ZONES)

@@ -24,10 +24,12 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_ENV_PROPAGATION
-            value: "true"
-          - name: ARGOCD_ENV_DNS_ZONES
-            value: "v3socp.boo"
+          - name: LOVELY_KUSTOMIZE_MERGE
+            value: |-
+              configMapGenerator:
+                - name: cert-manager-configmap
+                  literals:
+                    - DNS_ZONES="v3socp.boo"
 
   # cert-manager-application:
   #   annotations:
