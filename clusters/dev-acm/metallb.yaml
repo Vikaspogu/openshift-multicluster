@@ -26,7 +26,7 @@ applications:
           - name: LOVELY_KUSTOMIZE_PATCH
             value: |
               - op: replace
-                path: /patches/
+                path: /patches
                 value: |-
                    - patch: |-
                       - op: replace
