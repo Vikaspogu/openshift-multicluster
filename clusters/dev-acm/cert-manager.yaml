@@ -7,6 +7,13 @@ applications:
       namespace: cert-manager
     source:
       path: components/cert-manager-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: ARGOCD_ENV_LOVELY_HELM_PATCH
+            value: |
+              [{ "op": "add", "path": "/operators/0/channel", "value": "stable-v1" }]
+
   # cert-manager-config:
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "15"

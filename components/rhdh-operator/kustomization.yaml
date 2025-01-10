@@ -4,5 +4,19 @@ kind: Kustomization
 
 resources:
   - ./namespace.yaml
-  - ./operator.yaml
-  - ./subscription.yaml
+
+helmCharts:
+  - name: operators-installer
+    releaseName: rhdh-operator
+    namespace: rhdh-operator
+    repo: https://redhat-cop.github.io/helm-charts
+    version: "3.0.1"
+    valuesInline:
+      operators:
+        - channel: fast
+          installPlanApproval: Automatic
+          name: rhdh
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+      operatorGroups:
+        - createNamespace: false
