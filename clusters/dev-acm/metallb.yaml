@@ -28,7 +28,7 @@ applications:
               - op: replace
                 path: /patches/0/patch
                 value: |-
-                  - op: add
+                  - op: replace
                     path: /spec/addresses
                     value:
                       - 10.30.30.190-10.30.30.194
