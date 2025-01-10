@@ -10,4 +10,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - <REPLACE>
+    - <REPLACE_API_DNS_NAME>

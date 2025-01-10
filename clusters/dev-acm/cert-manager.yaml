@@ -27,43 +27,13 @@ applications:
           - name: LOVELY_PREPROCESSORS
             value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g' *.yaml
 
-  # cert-manager-application:
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "25"
-  #   source:
-  #     path: components/cert-manager-application
-  #     plugin:
-  #       name: argocd-lovely-plugin
-  #       env:
-  #         - name: LOVELY_KUSTOMIZE_PATCH
-  #           value: |
-  #             - op: replace
-  #               path: /patches/
-  #               value: |-
-  #                 - patch: |-
-  #                     - op: replace
-  #                       path: /spec/dnsNames
-  #                       value:
-  #                         - api.dev-acm.v3socp.boo
-  #                   target:
-  #                     kind: Certificate
-  #                     name: openshift-api
-  #                 - patch: |-
-  #                     - op: replace
-  #                       path: /spec/servingCerts/namedCertificates/0/names
-  #                       value:
-  #                         - api.dev-acm.v3socp.boo
-  #                   target:
-  #                     kind: APIServer
-  #                     name: cluster
-  #                 - patch: |-
-  #                     - op: replace
-  #                       path: /spec/dnsNames
-  #                       value:
-  #                         - '*.apps.dev-acm.v3socp.boo'
-  #                     - op: replace
-  #                       path: /spec/commonName
-  #                       value: '*.apps.dev-acm.v3socp.boo'
-  #                   target:
-  #                     kind: Certificate
-  #                     name: openshift-wildcard
+  cert-manager-application:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: components/cert-manager-application
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: sed -i 's/<REPLACE_API_DNS_NAME>/api.dev-acm.v3socp.boo/g; s/<REPLACE_WILDCARD_DNS_NAME>/*.apps.dev-acm.v3socp.boo/g' *.yaml
