@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: openshift-pipelines
 resources:
   - ./tekton-config.yaml
-  - ./externalsecret.yaml
+  - ./pac-externalsecret.yaml
   - ./task-s2i.yaml
   - ./task-kube-tools.yaml
   - ./task-helm-uninstall.yaml
