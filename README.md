@@ -10,6 +10,13 @@ _... managed by ArgoCD_ <img src="https://redhat-scholars.github.io/argocd-tutor
 
 This repository provides the necessary files and instructions to manage multiple OpenShift clusters using ArgoCD and GitOps principles. This setup allows for consistent, repeatable, and automated configuration of your OpenShift environments. This repository follows standards from [gitops-standards-repo-template](https://github.com/redhat-cop/gitops-standards-repo-template.git)
 
+## Table of Contents
+
+1. [Installation of OpenShift cluster](#installing-openshift-cluster-with-agent-based-installer)
+2. [Bootstrap Argocd instance](#bootstrap-argocd-instance)
+3. [Repository Structure](https://github.com/redhat-cop/gitops-standards-repo-template?tab=readme-ov-file#repo-structure)
+4. [ArgoCD Plugins](#argocd-plugins-and-usage)
+
 ### Installing OpenShift cluster with Agent-based Installer
 
 [Getting started](https://docs.openshift.com/container-platform/4.12/installing/installing_with_agent_based_installer/installing-with-agent-based-installer.html) on Agent-based installer
@@ -33,18 +40,46 @@ This repository provides the necessary files and instructions to manage multiple
   ./openshift-install agent wait-for install-complete --dir installer/dev-acm --log-level=debug
   ```
 
-#### Automation
+#### Ansible workflow to deploy OpenShift cluster
 
-[Playbooks](https://github.com/Vikaspogu/aap-playbooks) to automate manual steps described above
+[Workflow](https://github.com/Vikaspogu/homelab-orchestrator/blob/main/ansible/awx/workflows/openshift-cluster.yaml) to automate manual steps described above
+
+## Bootstrap ArgoCD instance
+
+### Manual
+
+```bash
+oc login
+./.bootstrap/setup.sh
+```
+
+### Automated
+
+[Playbook](https://github.com/Vikaspogu/homelab-orchestrator/blob/main/ansible/playbooks/openshift/acm-gitops-bootstrap.yaml) to automate manual steps described above
+
+## ArgoCD Plugins and Usage
+
+Below are the list of plugins used in this Repository
+
+- [ArgoCD Lovely Plugin](https://github.com/crumbhole/argocd-lovely-plugin/tree/main)
+- [Custom Plugins](./components/openshift-gitops-config/)
+
+### ArgoCD Lovely Plugin
+
+ArgoCD Lovely Plugin facilitates the management of Kustomize patches and environment variable substitutions within the ArgoCD application specification.
+
+- [Patching Operator Channel in Helm values](./clusters/dev-acm/cert-manager.yaml#L15)
+- [Kustomize Patch](./clusters/dev-acm/metallb.yaml#L34)
+- [Using sed to replace variable in all yaml files](./clusters/dev-acm/cert-manager.yaml#L28)
+- [Using yq to replace variable in single yaml file](./clusters/dev-acm/acm.yaml#13)
 
 ## 🔍 Features
 
 - [x] ArgoCD with SOPS plugin
 - [x] Secret Management using External secrets and 1Password
-- [x] Cert manager for API and Wildcard certificate
-- [x] Multi cluster management
+- [x] Cert manager integration with Cloudflare for API and Wildcard certificate
+- [x] Multi cluster management using Red Hat ACM
 - [x] OpenShift Pipeline as Code
-- [x] Kyverno
 - [x] Renovate bot
 
 ## Resources
