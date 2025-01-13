@@ -30,8 +30,9 @@ applications:
         env:
           - name: LOVELY_HELM_MERGE
             value: |-
-              repositories:
-                - url: https://github.com/Vikaspogu/openshift-multicluster
-                  pacNamespace: cicd-openshift-multicluster-repo
-                  appNamespaces:
-                    - cicd-openshift-multicluster-repo
+              pac-repository:
+                repositories:
+                  - url: https://github.com/Vikaspogu/openshift-multicluster
+                    pacNamespace: cicd-openshift-multicluster-repo
+                    appNamespaces:
+                      - cicd-openshift-multicluster-repo
