@@ -6,6 +6,9 @@ resources:
   - ./ipaddress-pool.yaml
   - ./l2advertisement.yaml
 patches:
-  - patch: ""
+  - patch: |
+      - op: replace
+        path: /spec/addresses
+        value: ""
     target:
       kind: IPAddressPool

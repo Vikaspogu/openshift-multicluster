@@ -39,9 +39,9 @@ spec:
           - name: basic-auth
             workspace: basic-auth
         params:
-          - name: url
+          - name: URL
             value: $(params.repo_url)
-          - name: revision
+          - name: REVISION
             value: $(params.revision)
       - name: kube-conform
         taskRef:
