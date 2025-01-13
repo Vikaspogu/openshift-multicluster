@@ -1,18 +1,21 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: [
-    "config:recommended",
-    "docker:enableMajor",
-    ":disableRateLimiting",
-    ":dependencyDashboard",
-    ":semanticCommits",
-    ":automergeBranch",
-  ],
+  extends: ["config:recommended", ":dependencyDashboard", ":semanticCommits"],
   dependencyDashboard: true,
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
   suppressNotifications: ["prEditedNotification", "prIgnoreNotification"],
   rebaseWhen: "conflicted",
-  ignorePaths: ["**/*.sops.*", "helm/**", "installer/**"],
+  ignorePaths: [
+    "**/*.sops.*",
+    "helm/**",
+    "installer/**",
+    "scripts/**",
+    ".bootstrap/**",
+  ],
+  enabledManagers: ["helm-values", "kubernetes", "kustomize", "argocd"],
+  argocd: {
+    fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
+  },
   "helm-values": {
     fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
   },
@@ -21,9 +24,6 @@
   },
   kustomize: {
     fileMatch: ["(^|/)kustomization\\.ya?ml(?:\\.j2)?$"],
-  },
-  pip_requirements: {
-    fileMatch: ["(^|/)[\\w-]*requirements(-\\w+)?\\.(txt|pip)(?:\\.j2)?$"],
   },
   // commit message topics
   commitMessageTopic: "{{depName}}",
@@ -152,20 +152,6 @@
     {
       matchManagers: ["github-actions"],
       addLabels: ["renovate/github-action"],
-    },
-  ],
-  // custom managers
-  customManagers: [
-    {
-      customType: "regex",
-      description: ["Process custom dependencies"],
-      fileMatch: ["(^|/)+\\.ya?ml(?:\\.j2)?$"],
-      matchStrings: [
-        // # renovate: datasource=helm depName=cilium repository=https://helm.cilium.io
-        // version: 1.15.1
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+: (&\\S+\\s)?(?<currentValue>\\S+)",
-      ],
-      datasourceTemplate: "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
     },
   ],
 }
