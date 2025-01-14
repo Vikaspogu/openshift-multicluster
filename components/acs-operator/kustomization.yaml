@@ -14,7 +14,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: stable
-          installPlanApproval: Automatic
+          installPlanApproval: Manual
           name: rhacs-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace

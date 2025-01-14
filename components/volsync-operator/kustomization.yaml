@@ -11,7 +11,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: fast
-          installPlanApproval: Automatic
+          installPlanApproval: Manual
           name: web-terminal
           source: redhat-operators
           sourceNamespace: openshift-marketplace

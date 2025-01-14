@@ -13,7 +13,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: stable-v1
-          installPlanApproval: Automatic
+          installPlanApproval: Manual
           name: cloudnative-pg
           source: certified-operators
           sourceNamespace: openshift-marketplace

@@ -13,7 +13,7 @@ spec:
         namespace: openshift-operators
       spec:
         channel: latest
-        installPlanApproval: Automatic
+        installPlanApproval: Manual
         name: openshift-gitops-operator
         source: redhat-operators
         sourceNamespace: openshift-marketplace

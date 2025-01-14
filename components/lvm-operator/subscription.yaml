@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-storage
 spec:
   channel: <REPLACE>
-  installPlanApproval: Automatic
+  installPlanApproval: Manual
   name: lvms-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace

@@ -13,7 +13,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: <REPLACE>
-          installPlanApproval: Automatic
+          installPlanApproval: Manual
           name: openshift-cert-manager-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace

@@ -6,7 +6,7 @@ metadata:
   namespace: aap
 spec:
   channel: <REPLACE>
-  installPlanApproval: Automatic
+  installPlanApproval: Manual
   name: ansible-automation-platform-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
