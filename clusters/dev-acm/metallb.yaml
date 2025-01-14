@@ -31,4 +31,4 @@ applications:
                   - op: replace
                     path: /spec/addresses
                     value:
-                      - 10.30.30.190-10.30.30.194
+                      - 10.30.30.190-10.30.30.195
