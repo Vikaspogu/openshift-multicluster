@@ -11,7 +11,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: stable-6.1
-          installPlanApproval: Manual
+          installPlanApproval: Automatic
           name: cluster-logging
           source: redhat-operators
           sourceNamespace: openshift-marketplace

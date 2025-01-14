@@ -5,7 +5,7 @@ metadata:
   name: devspaces
 spec:
   channel: stable
-  installPlanApproval: Manual
+  installPlanApproval: Automatic
   name: devspaces
   source: redhat-operators
   sourceNamespace: openshift-marketplace

@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-operators
 spec:
   channel: latest
-  installPlanApproval: Manual
+  installPlanApproval: Automatic
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace

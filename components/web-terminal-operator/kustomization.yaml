@@ -11,7 +11,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: stable
-          installPlanApproval: Manual
+          installPlanApproval: Automatic
           name: volsync-product
           source: redhat-operators
           sourceNamespace: openshift-marketplace

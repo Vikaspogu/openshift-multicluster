@@ -6,7 +6,7 @@ metadata:
   namespace: patch-operator
 spec:
   channel: alpha
-  installPlanApproval: Manual
+  installPlanApproval: Automatic
   name: patch-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
