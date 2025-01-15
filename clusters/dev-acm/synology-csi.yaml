@@ -11,7 +11,7 @@ applications:
         group: security.openshift.io
         name: synology-csi-scc
         jsonPointers:
-          - /namespace
+          - /metadata/namespace
 
   synology-csi-config:
     annotations:
