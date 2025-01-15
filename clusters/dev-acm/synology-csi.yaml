@@ -6,6 +6,11 @@ applications:
       namespace: synology-csi
     source:
       path: components/synology-csi-chart
+      ignoreDifferences:
+        - kind: SecurityContextConstraints
+          name: synology-csi-scc
+          jsonPointers:
+            - /namespace
 
   synology-csi-config:
     annotations:
