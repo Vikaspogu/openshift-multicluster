@@ -7,6 +7,14 @@ applications:
     source:
       path: components/openshift-gitops-operator
 
+  openshift-gitops-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/openshift-gitops-config
+
   argocd-image-updater:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
