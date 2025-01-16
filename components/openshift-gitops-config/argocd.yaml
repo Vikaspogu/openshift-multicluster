@@ -684,7 +684,7 @@ spec:
         image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
         command: [sh, -c]
         args:
-          - "helm plugin install https://github.com/nico-ulbricht/helm-multivalues"
+          - "helm plugin list | grep multivalues; if [ $? -ne 0 ]; then helm plugin install https://github.com/nico-ulbricht/helm-multivalues; fi"
         env:
           - name: HELM_CACHE_HOME
             value: /helm-custom-config/cache
