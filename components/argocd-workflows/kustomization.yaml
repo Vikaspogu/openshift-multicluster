@@ -25,3 +25,7 @@ helmCharts:
             name: argo-workflows-sso
             key: client-secret
           redirectUrl: "https://argo-workflows-openshift-gitops.apps.dev-acm.v3socp.boo/oauth2/callback"
+          scopes:
+            - groups
+          filterGroupsRegex:
+            - "admins"
