@@ -46,3 +46,19 @@ applications:
       namespace: openshift-gitops
     source:
       path: components/argocd-webhook
+
+  argocd-events:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-events
+
+  argocd-workflows:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/argocd-workflows
