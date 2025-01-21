@@ -17,11 +17,11 @@ helmCharts:
           - sso
         sso:
           enabled: true
-          issuer: https://kubernetes.default.svc
+          issuer: https://id.vikaspogu.com/application/o/argocd-workflows/
           clientId:
             name: argo-workflows-sso
             key: client-id
           clientSecret:
             name: argo-workflows-sso
             key: client-secret
-          redirectUrl: "https://openshift-gitops-server-openshift-gitops.apps.dev-acm.v3socp.boo/api/dex/callback"
+          redirectUrl: "https://argo-workflows.apps.dev-acm.v3socp.boo/api/dex/callback"
