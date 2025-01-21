@@ -28,4 +28,4 @@ helmCharts:
           scopes:
             - groups
           filterGroupsRegex:
-            - "admins"
+            - ".*admins.*"
