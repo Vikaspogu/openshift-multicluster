@@ -17,7 +17,7 @@ helmCharts:
           - sso
         sso:
           enabled: true
-          userInfoPath: /application/o/userinfo/
+          userInfoPath: /application/o/userinfo
           issuer: https://id.vikaspogu.com/application/o/argocd-workflows/
           clientId:
             name: argo-workflows-sso
@@ -28,5 +28,8 @@ helmCharts:
           redirectUrl: "https://argo-workflows-openshift-gitops.apps.dev-acm.v3socp.boo/oauth2/callback"
           scopes:
             - groups
+            - openid
+            - profile
+            - email
           filterGroupsRegex:
             - ".*admins.*"
