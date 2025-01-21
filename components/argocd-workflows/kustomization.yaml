@@ -10,3 +10,17 @@ helmCharts:
     namespace: openshift-gitops
     repo: https://argoproj.github.io/argo-helm
     version: "0.45.4"
+    valuesInline:
+      server:
+        authModes:
+          - sso
+        sso:
+          enabled: true
+          issuer: https://id.vikaspogu.com/application/o/argocd-workflows/
+          clientId:
+            name: argo-workflows-sso
+            key: client-id
+          clientSecret:
+            name: argo-workflows-sso
+            key: client-secret
+          redirectUrl: "https://argo-workflows.apps.dev-acm.v3socp.boo/oauth2/callback"
