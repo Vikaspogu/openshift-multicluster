@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./route.yaml
+  - ./service-account.yaml
 
 helmCharts:
   - name: argo-workflows
