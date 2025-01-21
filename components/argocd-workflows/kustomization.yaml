@@ -24,4 +24,4 @@ helmCharts:
           clientSecret:
             name: argo-workflows-sso
             key: client-secret
-          redirectUrl: "https://argo-workflows.apps.dev-acm.v3socp.boo/api/dex/callback"
+          redirectUrl: "https://argo-workflows.apps.dev-acm.v3socp.boo/oauth2/callback"
