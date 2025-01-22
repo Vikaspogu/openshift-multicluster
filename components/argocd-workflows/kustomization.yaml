@@ -13,6 +13,15 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     version: "0.45.4"
     valuesInline:
+      workflow:
+        serviceAccount:
+          create: true
+          name: "argo-workflow"
+        rbac:
+          create: true
+          serviceAccounts:
+            - name: argo-workflows-admin-user
+              namespace: openshift-gitops
       controller:
         workflowNamespaces:
           - openshift-gitops
