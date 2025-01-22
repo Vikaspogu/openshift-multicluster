@@ -13,6 +13,9 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     version: "0.45.4"
     valuesInline:
+      controller:
+        workflowNamespaces:
+          - openshift-gitops
       server:
         authModes:
           - sso
