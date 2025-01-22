@@ -28,6 +28,7 @@ helmCharts:
       server:
         authModes:
           - sso
+          - client
         sso:
           enabled: true
           issuer: https://id.vikaspogu.com/application/o/argocd-workflows/
