@@ -30,6 +30,5 @@ helmCharts:
             - openid
             - profile
             - email
-            - groups
           filterGroupsRegex:
             - ".*admins.*"
