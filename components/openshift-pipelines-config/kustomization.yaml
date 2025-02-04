@@ -9,4 +9,6 @@ resources:
   - ./task-kube-tools.yaml
   - ./task-helm-uninstall.yaml
   - ./task-rhacs-image-scan.yaml
+  - ./task-open-pr.yaml
+  - ./task-replace-string.yaml
   - ./task-helm-upgrade-from-source.yaml

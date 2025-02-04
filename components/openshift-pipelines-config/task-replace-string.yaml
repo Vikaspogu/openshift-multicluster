@@ -1,0 +1,37 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  annotations:
+    tekton.dev/pipelines.minVersion: 0.12.1
+  name: replace-string
+  labels:
+    app.kubernetes.io/version: 0.1.0
+spec:
+  description: >-
+    This task will update the image tag in the values file for the app's corresponding environment.
+  params:
+    - name: REPLACE_STRING
+      type: string
+    - name: SEARCH_STRING
+      type: string
+
+  results:
+    - description: returns exit status of command
+      name: exit_status
+
+  workspaces:
+    - name: output
+      description: workspace onto which the file is updated
+
+  steps:
+    - name: replace-string
+      image: alpine:edge
+      workingDir: $(workspaces.output.path)
+      script: |
+        #!/bin/bash
+
+        # Find and replace the string in all files
+        find . -type f -exec sed -i '' "s/$(params.SEARCH_STRING)/$(params.REPLACE_STRING)/g" {} +
+
+        echo "String replacement completed!""

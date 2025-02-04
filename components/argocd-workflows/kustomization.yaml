@@ -5,6 +5,7 @@ resources:
   - ./externalsecret.yaml
   - ./route.yaml
   - ./service-account.yaml
+  - ./cluster-rolebinding.yaml
 
 helmCharts:
   - name: argo-workflows
