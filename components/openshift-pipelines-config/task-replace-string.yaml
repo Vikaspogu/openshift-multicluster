@@ -19,6 +19,7 @@ spec:
   results:
     - description: returns exit status of command
       name: exit_status
+      type: string
 
   workspaces:
     - name: output
@@ -27,6 +28,7 @@ spec:
   steps:
     - name: replace-string
       image: alpine:edge
+      resources: {}
       workingDir: $(workspaces.output.path)
       script: |
         #!/bin/bash
