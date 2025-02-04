@@ -75,9 +75,11 @@ spec:
   results:
     - name: NUMBER
       description: Number of the created pull request.
+      type: string
 
     - name: URL
       description: URL of the created pull request.
+      type: string
 
   volumes:
     - name: githubtoken
@@ -86,6 +88,7 @@ spec:
 
   steps:
     - name: open-pr
+      resources: {}
       volumeMounts:
         - name: githubtoken
           readOnly: true
