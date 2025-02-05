@@ -10,14 +10,19 @@ spec:
   params:
     - name: repo_url
       description: Git repository url
+      type: string
     - name: revision
       description: Git repository revision
+      type: string
     - name: csvName
       description: cluster service version name
+      type: string
     - name: approval
       description: approval type (manual or auto)
+      type: string
     - name: approved
       description: approval status (true or false)
+      type: string
   tasks:
     - name: fetch-repository
       taskRef:
