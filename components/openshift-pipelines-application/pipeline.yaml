@@ -57,7 +57,7 @@ spec:
           - name: kind
             value: task
       workspaces:
-        - name: output
+        - name: source
           workspace: source
         - name: basic-auth
           workspace: basic-auth
@@ -85,9 +85,6 @@ spec:
             value: openshift-pipelines
           - name: kind
             value: task
-      workspaces:
-        - name: output
-          workspace: source
       runAfter:
         - search-and-replace
       params:
