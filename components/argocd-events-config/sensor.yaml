@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: resource
+spec:
+  template:
+    serviceAccountName: argo-workflows-admin-user
+  dependencies:
+    - name: install-plan-spec
+      eventSourceName: resource
+      eventName: install-plan-add-update-filter
+  triggers:
+    - template:
+        name: pipeline-run-trigger
+        k8s:
+          operation: create
+          source:
+            resource:
+              apiVersion: tekton.dev/v1beta1
+              kind: PipelineRun
+              metadata:
+                generateName: install-plan-pipeline-trigger-
+                namespace: cicd-openshift-multicluster-repo
+              spec:
+                pipelineRef:
+                  name: install-plan-upgrade-pr
+                params:
+                  - name: csvName
+                    value: ""
+                  - name: approval
+                    value: ""
+                  - name: approved
+                    value: ""
+                serviceAccountName: pipeline-account
+                workspaces:
+                  - name: source
+                    persistentVolumeClaim:
+                      claimName: install-plan-source-pvc
+                  - name: basic-auth
+                    secret:
+                      secretName: gitauth
+          parameters:
+            - src:
+                dependencyName: install-plan-spec
+                dataKey: body.spec.clusterServiceVersionNames
+              dest: spec.params.value
+            - src:
+                dependencyName: install-plan-spec
+                dataKey: body.spec.approval
+              dest: spec.params.value
+            - src:
+                dependencyName: install-plan-spec
+                dataKey: body.spec.approved
+              dest: spec.params.value

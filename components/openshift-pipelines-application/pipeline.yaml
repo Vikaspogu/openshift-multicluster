@@ -1,0 +1,99 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: install-plan-upgrade-pr
+spec:
+  workspaces:
+    - name: source
+      description: The git repo
+    - name: basic-auth
+  params:
+    - name: repo_url
+      description: Git repository url
+    - name: revision
+      description: Git repository revision
+    - name: csvName
+      description: cluster service version name
+    - name: approval
+      description: approval type (manual or auto)
+    - name: approved
+      description: approval status (true or false)
+  tasks:
+    - name: fetch-repository
+      taskRef:
+        resolver: cluster
+        params:
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+          - name: kind
+            value: task
+      workspaces:
+        - name: output
+          workspace: source
+        - name: basic-auth
+          workspace: basic-auth
+      params:
+        - name: URL
+          value: $(params.repo_url)
+        - name: REVISION
+          value: $(params.revision)
+    - name: search-and-replace
+      taskRef:
+        resolver: cluster
+        params:
+          - name: name
+            value: git-cli
+          - name: namespace
+            value: openshift-pipelines
+          - name: kind
+            value: task
+      workspaces:
+        - name: output
+          workspace: source
+        - name: basic-auth
+          workspace: basic-auth
+      runAfter:
+        - fetch-repository
+      params:
+        - name: GIT_SCRIPT
+          value: |
+            #!/bin/bash
+            cd $(workspaces.output.path)  # change to the directory where your files are located
+            git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
+            if [ approval == "Manual" && approved == "false" ]; then
+              SEARCH_STRING=$(cut -d'.' -f1 <<< "$(params.csvName)")
+              find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $(params.SEARCH_STRING).*/cvs: $(params.csvName)/g" {} +
+            fi
+            git add .  # stage all changes
+            git commit -m "$(params.commit_message)"  # create a new commit with the specified message
+            git push --set-upstream origin feat/$(params.csvName)  # push to the remote repository
+    - name: open-pr
+      taskRef:
+        resolver: cluster
+        params:
+          - name: name
+            value: github-open-pr
+          - name: namespace
+            value: openshift-pipelines
+          - name: kind
+            value: task
+      workspaces:
+        - name: output
+          workspace: source
+      runAfter:
+        - search-and-replace
+      params:
+        - name: HEAD
+          value: "feat/$(params.csvName)"
+        - name: BASE
+          value: "main"
+        - name: AUTH_TYPE
+          value: Basic
+        - name: REPO_FULL_NAME
+          value: vikaspogu/openshift-multicluster
+        - name: TITLE
+          value: "Feature: upgrade $(params.csvName)"
+        - name: GITHUB_TOKEN_SECRET_NAME
+          value: gitauth

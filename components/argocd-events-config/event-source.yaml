@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: resource
+spec:
+  template:
+    serviceAccountName: argo-workflows-admin-user
+  resource:
+    install-plan-add-update-filter:
+      group: operators.coreos.com
+      version: "v1alpha1"
+      resource: installplans
+      eventTypes:
+        - ADD
