@@ -31,7 +31,7 @@ spec:
                     value: ""
                   - name: approved
                     value: ""
-                serviceAccountName: pipeline-account
+                serviceAccountName: pipeline
                 workspaces:
                   - name: source
                     persistentVolumeClaim:
