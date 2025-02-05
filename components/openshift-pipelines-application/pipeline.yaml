@@ -11,9 +11,11 @@ spec:
     - name: repo_url
       description: Git repository url
       type: string
+      default: https://github.com/vikaspogu/openshift-multicluster.git
     - name: revision
       description: Git repository revision
       type: string
+      default: main
     - name: csvName
       description: cluster service version name
       type: string
