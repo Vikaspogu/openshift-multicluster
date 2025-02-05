@@ -26,26 +26,6 @@ spec:
       description: approval status (true or false)
       type: string
   tasks:
-    - name: fetch-repository
-      taskRef:
-        resolver: cluster
-        params:
-          - name: name
-            value: git-clone
-          - name: namespace
-            value: openshift-pipelines
-          - name: kind
-            value: task
-      workspaces:
-        - name: output
-          workspace: source
-        - name: basic-auth
-          workspace: basic-auth
-      params:
-        - name: URL
-          value: $(params.repo_url)
-        - name: REVISION
-          value: $(params.revision)
     - name: search-and-replace
       taskRef:
         resolver: cluster
@@ -61,12 +41,11 @@ spec:
           workspace: source
         - name: basic-auth
           workspace: basic-auth
-      runAfter:
-        - fetch-repository
       params:
         - name: GIT_SCRIPT
           value: |
-            cd "$(workspaces.source.path)"  # change to the directory where your files are located
+            git clone --depth=1 $(params.repo_url) source
+            cd source  # change to the directory where your files are located
             git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
             if [ $(params.approval) == "Manual" && $(params.approved) == "false" ]; then
               SEARCH_STRING=$(cut -d'.' -f1 <<< $(params.csvName))
