@@ -66,7 +66,7 @@ spec:
               find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/cvs: $(params.csvName)/g" {} +
             fi
             git add .  # stage all changes
-            git commit -m "$(params.commit_message)"  # create a new commit with the specified message
+            git commit -m "operator upgrade feat/$(params.csvName)"  # create a new commit with the specified message
             git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
       taskRef:
