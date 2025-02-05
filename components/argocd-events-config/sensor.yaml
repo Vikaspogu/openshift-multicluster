@@ -43,12 +43,12 @@ spec:
             - src:
                 dependencyName: install-plan-spec
                 dataKey: body.spec.clusterServiceVersionNames
-              dest: spec.params.value
+              dest: spec.params.0.value
             - src:
                 dependencyName: install-plan-spec
                 dataKey: body.spec.approval
-              dest: spec.params.value
+              dest: spec.params.1.value
             - src:
                 dependencyName: install-plan-spec
                 dataKey: body.spec.approved
-              dest: spec.params.value
+              dest: spec.params.2.value
