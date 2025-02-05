@@ -51,12 +51,13 @@ spec:
             git clone --depth=1 $(params.repo_url) source
             cd source  # change to the directory where your files are located
             git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
-            if [ $(params.approval) == "Manual" && $(params.approved) == "false" ]; then
+            if [ $(params.approval) == "Manual" ] && [ $(params.approved) == "false" ]; then
+              echo "Replacing String"
               SEARCH_STRING=$(cut -d'.' -f1 <<< $(params.csvName))
               find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/cvs: $(params.csvName)/g" {} +
             fi
-            git add .  # stage all changes
-            git commit -m "operator upgrade feat/$(params.csvName)"  # create a new commit with the specified message
+            git status
+            git commit -am "operator upgrade feat/$(params.csvName)"  # create a new commit with the specified message
             git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
       taskRef:
