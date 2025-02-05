@@ -36,3 +36,12 @@ applications:
                     pacNamespace: cicd-openshift-multicluster-repo
                     appNamespaces:
                       - cicd-openshift-multicluster-repo
+
+  openshift-pipelines-application:
+    annotations:
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+      argocd.argoproj.io/sync-wave: "55"
+    destination:
+      namespace: cicd-openshift-multicluster-repo
+    source:
+      path: components/openshift-pipelines-application
