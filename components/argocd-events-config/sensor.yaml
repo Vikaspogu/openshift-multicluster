@@ -34,8 +34,13 @@ spec:
                 serviceAccountName: pipeline
                 workspaces:
                   - name: source
-                    persistentVolumeClaim:
-                      claimName: install-plan-source-pvc
+                    volumeClaimTemplate:
+                      spec:
+                        accessModes:
+                          - ReadWriteOnce
+                        resources:
+                          requests:
+                            storage: 1Gi
                   - name: basic-auth
                     secret:
                       secretName: gitauth
