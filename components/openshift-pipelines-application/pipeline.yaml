@@ -66,10 +66,10 @@ spec:
       params:
         - name: GIT_SCRIPT
           value: |
-            cd $(workspaces.output.path)  # change to the directory where your files are located
-            git checkout -b feat/"$(params.csvName)"  # checkout the desired branch or commit
+            cd "$(workspaces.source.path)"  # change to the directory where your files are located
+            git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
             if [ $(params.approval) == "Manual" && $(params.approved) == "false" ]; then
-              SEARCH_STRING=$(cut -d'.' -f1 <<< "$(params.csvName)")
+              SEARCH_STRING=$(cut -d'.' -f1 <<< $(params.csvName))
               find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/cvs: $(params.csvName)/g" {} +
             fi
             git add .  # stage all changes

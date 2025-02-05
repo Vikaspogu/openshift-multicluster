@@ -47,7 +47,7 @@ spec:
           parameters:
             - src:
                 dependencyName: install-plan-spec
-                dataKey: body.spec.clusterServiceVersionNames
+                dataKey: body.spec.clusterServiceVersionNames.0
               dest: spec.params.0.value
             - src:
                 dependencyName: install-plan-spec
