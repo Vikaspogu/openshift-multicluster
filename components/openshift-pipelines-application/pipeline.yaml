@@ -103,3 +103,5 @@ spec:
           value: "Feature: upgrade $(params.csvName)"
         - name: GITHUB_TOKEN_SECRET_NAME
           value: gitauth
+        - name: BODY
+          value: "Feature: upgrade operator to version $(params.csvName)"
