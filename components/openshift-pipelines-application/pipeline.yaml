@@ -59,16 +59,15 @@ spec:
       params:
         - name: GIT_SCRIPT
           value: |
-            #!/bin/bash
-            cd $(workspaces.output.path)  # change to the directory where your files are located
-            git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
+            cd "$(workspaces.output.path)"  # change to the directory where your files are located
+            git checkout -b feat/"$(params.csvName)"  # checkout the desired branch or commit
             if [ approval == "Manual" && approved == "false" ]; then
               SEARCH_STRING=$(cut -d'.' -f1 <<< "$(params.csvName)")
               find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $(params.SEARCH_STRING).*/cvs: $(params.csvName)/g" {} +
             fi
             git add .  # stage all changes
             git commit -m "$(params.commit_message)"  # create a new commit with the specified message
-            git push --set-upstream origin feat/$(params.csvName)  # push to the remote repository
+            git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
       taskRef:
         resolver: cluster
