@@ -48,8 +48,9 @@ spec:
           value: "Vikas Pogu"
         - name: GIT_SCRIPT
           value: |
-            git clone --depth=1 $(params.repo_url) source
-            cd source  # change to the directory where your files are located
+            git init
+            git remote add origin $(params.repo_url)
+            git pull origin $(params.revision)
             git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
             if [ $(params.approval) == "Manual" ] && [ $(params.approved) == "false" ]; then
               echo "Replacing String"
