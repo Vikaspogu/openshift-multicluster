@@ -27,6 +27,15 @@ spec:
       type: string
   tasks:
     - name: search-and-replace
+      when:
+        - input: $(params.approval)
+          operator: in
+          values:
+            - Manual
+        - input: $(params.approved)
+          operator: in
+          values:
+            - "false"
       taskRef:
         resolver: cluster
         params:
