@@ -93,6 +93,7 @@ spec:
 
   steps:
     - name: git
+      resources: {}
       image: $(params.BASE_IMAGE)
       workingDir: $(workspaces.source.path)
       env:
