@@ -17,6 +17,6 @@ helmCharts:
           name: metallb-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: metallb-operator.v4.17.0-202501081435
+          csv: metallb-operator.v4.17.0-202501241706
       operatorGroups:
         - createNamespace: false
