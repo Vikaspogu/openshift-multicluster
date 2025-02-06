@@ -55,7 +55,7 @@ spec:
             if [ $(params.approval) == "Manual" ] && [ $(params.approved) == "false" ]; then
               echo "Replacing String"
               SEARCH_STRING=$(cut -d'.' -f1 <<< $(params.csvName))
-              find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/cvs: $(params.csvName)/g" {} +
+              find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/csv: $(params.csvName)/g" {} +
             fi
             git status
             git commit -am "operator upgrade feat/$(params.csvName)"  # create a new commit with the specified message
