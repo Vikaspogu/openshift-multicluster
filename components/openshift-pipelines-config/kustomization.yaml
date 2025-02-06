@@ -12,3 +12,4 @@ resources:
   - ./task-open-pr.yaml
   - ./task-replace-string.yaml
   - ./task-helm-upgrade-from-source.yaml
+  - ./task-git-cli-custom.yaml

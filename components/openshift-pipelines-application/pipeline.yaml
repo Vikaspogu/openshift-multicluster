@@ -31,7 +31,7 @@ spec:
         resolver: cluster
         params:
           - name: name
-            value: git-cli
+            value: git-cli-custom
           - name: namespace
             value: openshift-pipelines
           - name: kind
