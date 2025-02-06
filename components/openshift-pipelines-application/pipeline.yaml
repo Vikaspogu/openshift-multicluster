@@ -43,7 +43,7 @@ spec:
           workspace: basic-auth
       params:
         - name: GIT_USER_EMAIL
-          value: vikaspogu@example.com
+          value: vikaspoguadf@gmail.com
         - name: GIT_USER_NAME
           value: "Vikas Pogu"
         - name: GIT_SCRIPT
