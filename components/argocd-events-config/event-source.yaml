@@ -17,3 +17,6 @@ spec:
           - key: spec.approval
             operation: ==
             value: Manual
+          - key: spec.approved
+            operation: ==
+            value: false
