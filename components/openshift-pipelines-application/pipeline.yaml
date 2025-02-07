@@ -56,11 +56,16 @@ spec:
               echo "Replacing String"
               SEARCH_STRING=$(cut -d'.' -f1 <<< $(params.csvName))
               find . -type f -name "*.yaml" -exec sed -i '' "s/csv: $SEARCH_STRING.*/csv: $(params.csvName)/g" {} +
+            else
+              echo "Nothing to do."
+              exit 0
             fi
             git status
             git commit -am "operator upgrade feat/$(params.csvName)"  # create a new commit with the specified message
             git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
+      when:
+        - cel: "'$(tasks.search-and-replace.results.commit)' != ''"
       taskRef:
         resolver: cluster
         params:
