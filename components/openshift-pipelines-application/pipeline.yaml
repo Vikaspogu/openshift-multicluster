@@ -65,7 +65,7 @@ spec:
             git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
       when:
-        - cel: $(tasks.search-and-replace.results.commit) != ""
+        - cel: "'$(tasks.search-and-replace.results.commit)' != ''"
       taskRef:
         resolver: cluster
         params:
