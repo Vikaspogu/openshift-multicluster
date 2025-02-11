@@ -90,6 +90,9 @@ spec:
     - name: commit
       description: The precise commit SHA after the git operation.
       type: string
+    - name: open_pr
+      description: Variable to determine to if changes exists and open a PR after the git operation.
+      type: string
 
   steps:
     - name: git
@@ -146,3 +149,4 @@ spec:
         fi
         # Make sure we don't add a trailing newline to the result!
         printf "%s" "$RESULT_SHA" > "$(results.commit.path)"
+        echo -n "true" > "$(results.open_pr)"

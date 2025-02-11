@@ -65,7 +65,9 @@ spec:
             git push --set-upstream origin feat/"$(params.csvName)"  # push to the remote repository
     - name: open-pr
       when:
-        - cel: "'$(tasks.search-and-replace.results.commit)' != ''"
+        - input: "$(tasks.search-and-replace.results.open_pr)"
+          operator: in
+          values: ["true"]
       taskRef:
         resolver: cluster
         params:
@@ -87,8 +89,8 @@ spec:
         - name: REPO_FULL_NAME
           value: vikaspogu/openshift-multicluster
         - name: TITLE
-          value: "Feature: upgrade $(params.csvName)"
+          value: "feat(operator)!: Update operator csv $(params.csvName)"
         - name: GITHUB_TOKEN_SECRET_NAME
           value: gitauth
         - name: BODY
-          value: "Feature: upgrade operator to version $(params.csvName)"
+          value: "feat(operator)!: Update operator csv $(params.csvName)"
