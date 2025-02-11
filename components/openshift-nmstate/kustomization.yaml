@@ -13,10 +13,11 @@ helmCharts:
     valuesInline:
       operators:
         - channel: stable
-          installPlanApproval: Automatic
+          installPlanApproval: Manual
           name: kubernetes-nmstate-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace
+          csv: kubernetes-nmstate-operator.4.17.0-202501301304
       operatorGroups:
         - createNamespace: false
           targetOwnNamespace: true
