@@ -4,8 +4,8 @@ kind: Kustomization
 
 helmCharts:
   - name: operators-installer
-    releaseName: volsync-operator
-    namespace: volsync-operator
+    releaseName: web-terminal-operator
+    namespace: web-terminal-operator
     repo: https://redhat-cop.github.io/helm-charts
     version: "3.1.0"
     valuesInline:
