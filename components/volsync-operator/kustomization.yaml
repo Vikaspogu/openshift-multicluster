@@ -10,11 +10,11 @@ helmCharts:
     version: "3.1.0"
     valuesInline:
       operators:
-        - channel: fast
+        - channel: <REPLACE>
           installPlanApproval: Manual
           name: web-terminal
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: web-terminal.v1.12.1
+          csv: <REPLACE>
       operatorGroups:
         - createNamespace: true

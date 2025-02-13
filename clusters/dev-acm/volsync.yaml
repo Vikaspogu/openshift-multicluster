@@ -6,3 +6,8 @@ applications:
       namespace: volsync-operator
     source:
       path: components/volsync-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.helmCharts.0.valuesInline.operators.0.channel="stable"' kustomization.yaml,yq -i '.helmCharts.0.valuesInline.operators.0.csv="volsync-product.v0.11.1"' kustomization.yaml

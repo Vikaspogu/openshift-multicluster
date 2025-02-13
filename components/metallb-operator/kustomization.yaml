@@ -12,11 +12,11 @@ helmCharts:
     version: "3.1.0"
     valuesInline:
       operators:
-        - channel: stable
+        - channel: <REPLACE>
           installPlanApproval: Manual
           name: metallb-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: metallb-operator.v4.17.0-202502051233
+          csv: <REPLACE>
       operatorGroups:
         - createNamespace: false

@@ -10,11 +10,11 @@ helmCharts:
     version: "3.1.0"
     valuesInline:
       operators:
-        - channel: stable
+        - channel: <REPLACE>
           installPlanApproval: Manual
           name: kubernetes-imagepuller-operator
           source: community-operators
           sourceNamespace: openshift-marketplace
-          csv: kubernetes-imagepuller-operator.v1.1.0
+          csv: <REPLACE>
       operatorGroups:
         - createNamespace: true

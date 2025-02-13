@@ -10,9 +10,8 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_KUSTOMIZE_PATCH
-            value: |
-              [{ "op": "replace", "path": "/helmCharts/0/valuesInline/operators/0/channel", "value": "stable-v1" }]
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.helmCharts.0.valuesInline.operators.0.channel="stable-v1"' kustomization.yaml
 
   cert-manager-config:
     annotations:

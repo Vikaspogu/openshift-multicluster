@@ -10,11 +10,11 @@ helmCharts:
     version: "3.1.0"
     valuesInline:
       operators:
-        - channel: stable
+        - channel: <REPLACE>
           installPlanApproval: Manual
           name: volsync-product
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: volsync-product.v0.11.1
+          csv: <REPLACE>
       operatorGroups:
         - createNamespace: true

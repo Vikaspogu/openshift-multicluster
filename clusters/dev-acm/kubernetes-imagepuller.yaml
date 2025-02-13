@@ -6,6 +6,11 @@ applications:
       namespace: kubernetes-imagepuller-operator
     source:
       path: components/kubernetes-imagepuller-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.helmCharts.0.valuesInline.operators.0.channel="stable"' kustomization.yaml,yq -i '.helmCharts.0.valuesInline.operators.0.csv="kubernetes-imagepuller-operator.v1.1.0"' kustomization.yaml
   kubernetes-imagepuller-config:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
