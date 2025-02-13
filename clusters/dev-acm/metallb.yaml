@@ -28,5 +28,12 @@ applications:
       plugin:
         name: argocd-lovely-plugin
         env:
-          - name: LOVELY_PREPROCESSORS
-            value: yq -i '.spec.addresses.0="10.30.30.190-10.30.30.194"' ipaddress-pool.yaml
+          - name: LOVELY_KUSTOMIZE_PATCH
+            value: |
+              - op: replace
+                path: /patches/0/patch
+                value: |-
+                  - op: replace
+                    path: /spec/addresses
+                    value:
+                      - 10.30.30.190-10.30.30.194
