@@ -12,7 +12,7 @@ helmCharts:
       operators:
         - channel: <REPLACE>
           installPlanApproval: Manual
-          name: web-terminal
+          name: volsync-product
           source: redhat-operators
           sourceNamespace: openshift-marketplace
           csv: <REPLACE>
