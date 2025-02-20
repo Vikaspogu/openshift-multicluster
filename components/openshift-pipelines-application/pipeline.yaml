@@ -54,7 +54,7 @@ spec:
             git checkout -b feat/$(params.csvName)  # checkout the desired branch or commit
             if [ $(params.approval) == "Manual" ] && [ $(params.approved) == "false" ]; then
               echo "Replacing String"
-              find . -type f -name "*.yaml" -exec sed -i '' 's/csv="\"$(cut -d'.' -f1 <<< $(params.csvName)).*\""/csv="\"$(params.csvName)\""/g' {} +
+              find . -type f -name "*.yaml" -exec sed -i '' "s/csv='"$(cut -d'.' -f1 <<< $(params.csvName)).*"'/csv='"$(params.csvName)"'/g" {} +
             else
               echo "Nothing to do."
               exit 0
