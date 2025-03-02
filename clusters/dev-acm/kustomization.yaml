@@ -50,10 +50,10 @@ helmCharts:
       - ./external-secrets.yaml
       - ./image-registry.yaml
       - ./kubernetes-imagepuller.yaml
-      - ./logging.yaml
+      # - ./logging.yaml
       - ./lvm.yaml
-      - ./metallb.yaml
-      - ./nmstate.yaml
+      # - ./metallb.yaml
+      # - ./nmstate.yaml
       - ./oauth.yaml
       - ./onepassword-connect.yaml
       - ./openshift-gitops.yaml
@@ -61,8 +61,8 @@ helmCharts:
       - ./reflector.yaml
       - ./reloader.yaml
       - ./synology-csi.yaml
-      - ./virtualization.yaml
-      - ./volsync.yaml
+      # - ./virtualization.yaml
+      # - ./volsync.yaml
       - ./web-terminal.yaml
     namespace: openshift-gitops
 
