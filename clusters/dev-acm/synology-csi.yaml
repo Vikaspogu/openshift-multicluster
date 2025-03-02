@@ -12,11 +12,3 @@ applications:
         name: synology-csi-scc
         jsonPointers:
           - /metadata/namespace
-
-  synology-csi-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "25"
-    destination:
-      namespace: synology-csi
-    source:
-      path: components/synology-csi-config
