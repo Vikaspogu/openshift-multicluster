@@ -7,7 +7,7 @@ helmCharts:
     releaseName: volsync-operator
     namespace: volsync-operator
     repo: https://redhat-cop.github.io/helm-charts
-    version: "3.1.0"
+    version: "3.1.1"
     valuesInline:
       operators:
         - channel: <REPLACE>

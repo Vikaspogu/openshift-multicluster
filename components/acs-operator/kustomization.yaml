@@ -10,7 +10,7 @@ helmCharts:
     releaseName: rhacs-operator
     namespace: rhacs-operator
     repo: https://redhat-cop.github.io/helm-charts
-    version: "3.1.0"
+    version: "3.1.1"
     valuesInline:
       operators:
         - channel: stable
