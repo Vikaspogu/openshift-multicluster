@@ -26,9 +26,9 @@ This repository provides the necessary files and instructions to manage multiple
 - Generate ISO
 
   ```bash
-  rm -rf installer/dev-acm #remove older cluster if any
-  cp -r installer/cluster installer/dev-acm #copy cluster config files
-  ./openshift-install agent create image --dir installer/dev-acm #create image
+  rm -rf installer/proxmox #remove older cluster if any
+  cp -r installer/cluster installer/proxmox #copy cluster config files
+  ./openshift-install agent create image --dir installer/proxmox #create image
   ```
 
 - Upload ISO to proxmox from GUI
@@ -36,8 +36,8 @@ This repository provides the necessary files and instructions to manage multiple
 - Start VMs and wait for the cluster installation to finish
 
   ```bash
-  export KUBECONFIG=installer/dev-acm/auth/kubeconfig
-  ./openshift-install agent wait-for install-complete --dir installer/dev-acm --log-level=debug
+  export KUBECONFIG=installer/proxmox/auth/kubeconfig
+  ./openshift-install agent wait-for install-complete --dir installer/proxmox --log-level=debug
   ```
 
 #### Ansible workflow to deploy OpenShift cluster
@@ -68,10 +68,10 @@ Below are the list of plugins used in this Repository
 
 ArgoCD Lovely Plugin facilitates the management of Kustomize patches and environment variable substitutions within the ArgoCD application specification.
 
-- [Patching Operator Channel in Helm values](./clusters/dev-acm/cert-manager.yaml#L15)
-- [Kustomize Patch](./clusters/dev-acm/metallb.yaml#L34)
-- [Using sed to replace variable in all yaml files](./clusters/dev-acm/cert-manager.yaml#L28)
-- [Using yq to replace variable in single yaml file](./clusters/dev-acm/acm.yaml#13)
+- [Patching Operator Channel in Helm values](./clusters/proxmox/cert-manager.yaml#L15)
+- [Kustomize Patch](./clusters/proxmox/metallb.yaml#L34)
+- [Using sed to replace variable in all yaml files](./clusters/proxmox/cert-manager.yaml#L28)
+- [Using yq to replace variable in single yaml file](./clusters/proxmox/acm.yaml#13)
 
 ## 🔍 Features
 

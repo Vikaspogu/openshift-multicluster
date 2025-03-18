@@ -14,4 +14,4 @@ spec:
     name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
-    - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.dev-acm.{{ .Values.baseDomain }}
+    - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.proxmox.{{ .Values.baseDomain }}

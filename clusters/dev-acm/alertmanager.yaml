@@ -1,8 +1,0 @@
-applications:
-  alertmanager-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "20"
-    destination:
-      namespace: openshift-monitoring
-    source:
-      path: components/alertmanager-config

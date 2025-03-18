@@ -37,7 +37,7 @@ spec:
       servingCerts:
         namedCertificates:
         - names:
-          - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.dev-acm.{{ .Values.baseDomain }}
+          - oauth-{{ .Values.clusterName }}-{{ .Values.clusterName }}.apps.proxmox.{{ .Values.baseDomain }}
           servingCertificate:
             name: oauth-cert
   platform:

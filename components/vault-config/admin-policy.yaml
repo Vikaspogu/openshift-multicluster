@@ -15,7 +15,7 @@ spec:
     }
 
     # mount database,kv secret engines
-    path "/sys/mounts/dev-acm/team-a-kubernetes/+" {
+    path "/sys/mounts/proxmox/team-a-kubernetes/+" {
       capabilities = [ "create", "read", "update", "delete"]
       allowed_parameters = {
         "type" = ["database","kv"]
@@ -24,17 +24,17 @@ spec:
     }
 
     # tune database,kv secret engines
-    path "/sys/mounts/dev-acm/team-a-kubernetes/+/tune" {
+    path "/sys/mounts/proxmox/team-a-kubernetes/+/tune" {
       capabilities = [ "create", "read", "update", "delete"]
     }
 
     # configure database,kv secrets engines
-    path "/dev-acm/team-a-kubernetes/+/config/+" {
+    path "/proxmox/team-a-kubernetes/+/config/+" {
       capabilities = [ "create", "read", "update", "delete"]
     }
 
     # configure database,kv roles
-    path "/dev-acm/team-a-kubernetes/+/roles/+" {
+    path "/proxmox/team-a-kubernetes/+/roles/+" {
       capabilities = [ "create", "read", "update", "delete"]
     }
 ---
@@ -47,7 +47,7 @@ spec:
   authentication:
     path: kubernetes
     role: policy-admin
-  path: dev-acm/team-a-kubernetes
+  path: proxmox/team-a-kubernetes
   policies:
     - team-a-secret-engine-admin
   targetServiceAccounts:
@@ -68,7 +68,7 @@ spec:
     role: policy-admin
   policy: |
     # Configure read secrets
-    path "/dev-acm/team-a-kubernetes/*" {
+    path "/proxmox/team-a-kubernetes/*" {
       capabilities = ["read"]
     }
 ---
@@ -81,7 +81,7 @@ spec:
   authentication:
     path: kubernetes
     role: policy-admin
-  path: dev-acm/team-a-kubernetes
+  path: proxmox/team-a-kubernetes
   policies:
     - team-a-secret-reader
   targetServiceAccounts:

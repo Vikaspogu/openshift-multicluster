@@ -1,8 +1,0 @@
-applications:
-  cloudnative-pg-operator:
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    destination:
-      namespace: cloudnative-pg
-    source:
-      path: components/cloudnative-pg-operator

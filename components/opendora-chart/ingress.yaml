@@ -14,7 +14,7 @@ metadata:
   namespace: apache-devlake
 spec:
   rules:
-    - host: open-dora-apache-devlake.apps.dev-acm.v3socp.boo
+    - host: open-dora-apache-devlake.apps.proxmox.v3socp.boo
       http:
         paths:
           - path: /

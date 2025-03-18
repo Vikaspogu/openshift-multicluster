@@ -12,4 +12,4 @@ patches:
         value: "https://github.com/Vikaspogu/openshift-multicluster.git"
       - op: replace
         path: /spec/source/path
-        value: "clusters/dev-acm"
+        value: "clusters/proxmox"

@@ -1,6 +1,6 @@
 app:
   title: Red Hat Developer Hub
-  baseUrl: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
 backend:
   auth:
     externalAccess:
@@ -8,9 +8,9 @@ backend:
         options:
           subject: legacy-default-config
           secret: "${BACKEND_SECRET}"
-  baseUrl: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
   cors:
-    origin: https://backstage-developer-hub-developer-hub.apps.dev-acm.v3socp.boo/
+    origin: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
     credentials: true
     methods:
       - GET
@@ -24,24 +24,24 @@ backend:
     connect-src: ["'self'", "http:", "https:", "data:"]
   reading:
     allow:
-      - host: "*.apps.dev-acm.v3socp.boo"
+      - host: "*.apps.proxmox.v3socp.boo"
 
 ansible:
   creatorService:
     baseUrl: ansible-dev-tools-rhel8-svc.developer-hub.svc.cluster.local
     port: "8000"
   devSpaces:
-    baseUrl: https://devspaces.apps.dev-acm.v3socp.boo/
+    baseUrl: https://devspaces.apps.proxmox.v3socp.boo/
   rhaap:
     baseUrl: ${AAP_URL}
     token: ${AAP_AUTH_TOKEN}
     checkSSL: false
 
 open-dora:
-  apiBaseUrl: https://open-dora-apache-devlake.apps.dev-acm.v3socp.boo
+  apiBaseUrl: https://open-dora-apache-devlake.apps.proxmox.v3socp.boo
 
 sonarQube:
-  baseUrl: https://sonarqube-cicd-tools.apps.dev-acm.v3socp.boo
+  baseUrl: https://sonarqube-cicd-tools.apps.proxmox.v3socp.boo
 
 orchestrator:
   sonataFlowService:
@@ -55,7 +55,7 @@ orchestrator:
     url: http://localhost:8899
 
 techRadar:
-  url: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/refs/heads/main/clusters/dev-acm/overlays/developer-hub-config/config/tech-radar.json
+  url: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/refs/heads/main/clusters/proxmox/overlays/developer-hub-config/config/tech-radar.json
 
 argocd:
   namespacedApps: true
@@ -64,7 +64,7 @@ argocd:
   appLocatorMethods:
     - instances:
         - name: team-alpha-cicd
-          url: https://team-a-cicd-server-team-a-cicd.apps.dev-acm.v3socp.boo
+          url: https://team-a-cicd-server-team-a-cicd.apps.proxmox.v3socp.boo
       type: config
 
 signInPage: github
@@ -93,12 +93,12 @@ proxy:
     "/developer-hub":
       target: https://raw.githubusercontent.com/
       pathRewrite:
-        "^/api/proxy/developer-hub/learning-paths": "/Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/learning-paths.json"
-        "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/clusters/dev-acm/overlays/developer-hub-config/config/home-page.json
+        "^/api/proxy/developer-hub/learning-paths": "/Vikaspogu/openshift-multicluster/main/clusters/proxmox/overlays/developer-hub-config/config/learning-paths.json"
+        "^/api/proxy/developer-hub": /Vikaspogu/openshift-multicluster/main/clusters/proxmox/overlays/developer-hub-config/config/home-page.json
       changeOrigin: true
       secure: true
     "/sonarqube":
-      target: https://sonarqube-cicd-tools.apps.dev-acm.v3socp.boo/api
+      target: https://sonarqube-cicd-tools.apps.proxmox.v3socp.boo/api
       allowedMethods: ["GET"]
       auth: ${SONARQUBE_TOKEN}
 
@@ -108,13 +108,13 @@ kubernetes:
   clusterLocatorMethods:
     - type: "config"
       clusters:
-        - url: https://api.dev-acm.v3socp.boo:6443
-          name: dev-acm
+        - url: https://api.proxmox.v3socp.boo:6443
+          name: proxmox
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${token}
           dashboardApp: openshift
-          dashboardUrl: https://console-openshift-console.apps.dev-acm.v3socp.boo/
+          dashboardUrl: https://console-openshift-console.apps.proxmox.v3socp.boo/
       customResources:
         - apiVersion: v1beta1
           group: tekton.dev
@@ -161,7 +161,7 @@ catalog:
     ocm:
       default:
         name: multiclusterhub
-        kubernetesPluginRef: dev-acm
+        kubernetesPluginRef: proxmox
     github:
       providerId:
         organization: "devhub-showcase"
