@@ -49,7 +49,7 @@ platform:
         password: ""
         port: 443
         server: vcenter.vikaspogu.com
-        user: OCP4Admin@vsphere.local
+        user: administrator@vsphere.local
     diskType: thin
 fips: False
 pullSecret: ""
