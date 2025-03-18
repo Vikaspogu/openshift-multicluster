@@ -1,0 +1,56 @@
+apiVersion: v1
+baseDomain: v3socp.boo
+compute:
+  - hyperthreading: Enabled
+    name: worker
+    replicas: 0
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 1
+  platform:
+    vsphere:
+      cpus: 16
+      memoryMB: 49152
+      osDisk:
+        diskSizeGB: 250
+metadata:
+  name: sno
+networking:
+  networkType: OVNKubernetes
+  clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+  serviceNetwork:
+    - 172.30.0.0/16
+  machineNetwork:
+    - cidr: 10.30.30.0/24
+platform:
+  vsphere:
+    apiVIPs:
+      - 10.30.30.147
+    failureDomains:
+      - name: homelab
+        region: homelab
+        server: vcenter.vikaspogu.com
+        topology:
+          computeCluster: "/homelab/host/cluster1"
+          datacenter: homelab
+          datastore: "/homelab/datastore/datastore1"
+          networks:
+            - "VM Network"
+          folder: "/homelab/vm/ocp"
+        zone: cluster1
+    ingressVIPs:
+      - 10.30.30.147
+    vcenters:
+      - datacenters:
+          - homelab
+        password: ""
+        port: 443
+        server: vcenter.vikaspogu.com
+        user: OCP4Admin@vsphere.local
+    diskType: thin
+fips: False
+pullSecret: ""
+sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEmAVZWnLeKQkHVuD5U0L2JOacFNBhn9m4tMXqN3/hUMRKSs9LvVkReFCSdOE0jmEZAEbLfExIbEzMhvYDcSJvXpHtHFYzlXADRL6IjqCv7XcuP6Ps/HQlRHmU57Y7OakB98Sv6LqyxPLq+gzVltXvwjjVZQU/ETqTdoe2tGTwFHRedzVATN/9YREMaSwY3XyP33g+lQiyztRDiLDq9fmw9PJ513E/EObuZ3J0iCcJYpGRlngm6Nqc7525mUIo5zsDcGaLh9STl1OXaeLQaNCcHrXazv1J9awrDpM/WyTDT0btVmZil7X2p7xyCGTxxW2WP9+f49Nq38S0uU3o8MYtbN/1Ok+3QsS2MtwmONy3cpOpoOZreUgU6mw4mqxVxd240ALd1aXqEXJr728fMFRrKu9xqqde4VWYJcaqOAT3AIm6jBdpZ1UXepxp/qoVDw5AXvfdjCs5/x3sPIGv8mZ7l0ElbK0nzZhUNI4VL8Fl2olooRCi4PdMk2U1+3eQHDc= vikaspogu@vpogu-mac
