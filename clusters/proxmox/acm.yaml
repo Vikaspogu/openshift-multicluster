@@ -1,0 +1,45 @@
+applications:
+  acm-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.channel="release-2.12"' subscription.yaml
+
+  acm-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-config
+
+  agent-service-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: multicluster-engine
+    source:
+      path: components/agent-service-config
+
+  acm-policy-argocd-notification-annotation-policy:
+    annotations:
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: openshift-gitops
+    source:
+      path: components/acm-policies-config/argocd-notification-annotation-policy
+
+  acm-policy-sops-auth-policy:
+    annotations:
+      argocd.argoproj.io/sync-wave: "35"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-policies-config/sops-auth-policy

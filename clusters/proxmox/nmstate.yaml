@@ -1,0 +1,20 @@
+applications:
+  openshift-nmstate:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.helmCharts.0.valuesInline.operators.0.channel="stable"' kustomization.yaml,yq -i '.helmCharts.0.valuesInline.operators.0.csv="kubernetes-nmstate-operator.4.17.0-202501301304"' kustomization.yaml
+  openshift-nmstate-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: openshift-nmstate
+    source:
+      path: components/openshift-nmstate-config

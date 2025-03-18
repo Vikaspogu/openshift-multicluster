@@ -1,0 +1,20 @@
+applications:
+  lvm-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.channel="stable-4.17"' subscription.yaml
+  lvm-storage:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: openshift-storage
+    source:
+      path: components/lvm-storage

@@ -1,0 +1,6 @@
+applications:
+  image-registry-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    source:
+      path: components/image-registry-config
