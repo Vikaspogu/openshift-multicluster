@@ -8,6 +8,12 @@ controlPlane:
   hyperthreading: Enabled
   name: master
   replicas: 3
+  platform:
+    vsphere:
+      cpus: 8
+      memoryMB: 20460
+      osDisk:
+        diskSizeGB: 200
 metadata:
   name: vsphere
 networking:
