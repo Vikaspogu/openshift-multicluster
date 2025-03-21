@@ -32,7 +32,7 @@ platform:
     failureDomains:
       - name: homelab
         region: homelab
-        server: vcenter.vikaspogu.com
+        server: vcenter.vikaspogu.internal
         topology:
           computeCluster: "/homelab/host/cluster1"
           datacenter: homelab
@@ -48,7 +48,7 @@ platform:
           - homelab
         password: ""
         port: 443
-        server: vcenter.vikaspogu.com
+        server: vcenter.vikaspogu.internal
         user: administrator@vsphere.local
     diskType: thin
 fips: False
