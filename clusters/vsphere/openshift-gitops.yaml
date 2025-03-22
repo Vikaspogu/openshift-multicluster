@@ -15,58 +15,58 @@ applications:
     source:
       path: components/openshift-gitops-config
 
-  argocd-image-updater:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-image-updater
+  # argocd-image-updater:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-image-updater
 
-  argocd-rollout:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-rollout
+  # argocd-rollout:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-rollout
 
-  argocd-notifications:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-notifications
+  # argocd-notifications:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-notifications
 
-  argocd-webhook:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-webhook
+  # argocd-webhook:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-webhook
 
-  argocd-events:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-events
+  # argocd-events:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-events
 
-  argocd-events-config:
-    annotations:
-      argocd.argoproj.io/sync-wave: "35"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-events-config
+  # argocd-events-config:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "35"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-events-config
 
-  argocd-workflows:
-    annotations:
-      argocd.argoproj.io/sync-wave: "15"
-    destination:
-      namespace: openshift-gitops
-    source:
-      path: components/argocd-workflows
+  # argocd-workflows:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: openshift-gitops
+  #   source:
+  #     path: components/argocd-workflows
