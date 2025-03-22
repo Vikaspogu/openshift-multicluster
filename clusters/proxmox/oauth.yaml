@@ -9,4 +9,4 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
     source:
-      path: components/oauth-config
+      path: clusters/proxmox/overlays/oauth-config

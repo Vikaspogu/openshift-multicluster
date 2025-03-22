@@ -25,5 +25,5 @@ spec:
         clientID: V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ
         clientSecret:
           name: oauth-secret
-        issuer: "https://id.vikaspogu.com/application/o/openshift"
+        issuer: "https://id.vikaspogu.com/application/o/openshift-proxmox"
       type: OpenID
