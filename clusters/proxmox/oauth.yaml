@@ -9,4 +9,9 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
     source:
-      path: clusters/proxmox/overlays/oauth-config
+      path: components/oauth-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.target.template.data.clientSecret="{{ .CLIENT_SECRET_PROXMOX }}"' externalsecret.yaml, yq -i '.spec.identityProviders.0.openID.clientID="V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ"' oauth.yaml, yq -i '.spec.identityProviders.0.openID.issuer="https://id.vikaspogu.com/application/o/openshift-proxmox"' oauth.yaml

@@ -9,4 +9,9 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
     source:
-      path: clusters/vsphere/overlays/oauth-config
+      path: components/oauth-config
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.target.template.data.clientSecret="{{ .CLIENT_SECRET_VSPHERE }}"' externalsecret.yaml, yq -i '.spec.identityProviders.0.openID.clientID="oztcmkQD4zn8D68KYoRNbyXPKmo6brfu8dMHXyGEr4WdA"' oauth.yaml, yq -i '.spec.identityProviders.0.openID.issuer="https://id.vikaspogu.com/application/o/openshift-vsphere"' oauth.yaml

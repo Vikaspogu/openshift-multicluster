@@ -22,8 +22,8 @@ spec:
             - name
           preferredUsername:
             - preferred_username
-        clientID: V9zsZk0StvJ2tPc9cipZ8rui7sejAqWS8PHCSgOQ
+        clientID: "<REPLACE>"
         clientSecret:
           name: oauth-secret
-        issuer: "https://id.vikaspogu.com/application/o/openshift-proxmox"
+        issuer: "<REPLACE>"
       type: OpenID

@@ -6,3 +6,8 @@ applications:
       namespace: networking
     source:
       path: components/cloudflared
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.cloudflared.ingress.0.hostname="console-openshift-console.apps.vsphere.v3socp.boo"' values.yaml
