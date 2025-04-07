@@ -8,6 +8,6 @@ helmCharts:
     releaseName: argo-events
     namespace: openshift-gitops
     repo: https://argoproj.github.io/argo-helm
-    version: "2.4.14"
+    version: "2.4.15"
     valuesInline:
       openshift: true
