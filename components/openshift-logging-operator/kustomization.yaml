@@ -7,7 +7,7 @@ helmCharts:
     releaseName: openshift-logging-operator
     namespace: openshift-logging
     repo: https://redhat-cop.github.io/helm-charts
-    version: "3.2.0"
+    version: "3.2.4"
     valuesInline:
       operators:
         - channel: stable-6.1
