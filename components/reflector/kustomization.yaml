@@ -10,7 +10,7 @@ helmCharts:
     releaseName: reflector
     namespace: reflector
     repo: https://emberstack.github.io/helm-charts
-    version: "9.0.322"
+    version: "9.0.342"
     valuesInline:
       nameOverride: reflector
       fullnameOverride: reflector
