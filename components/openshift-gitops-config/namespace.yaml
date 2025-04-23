@@ -6,6 +6,4 @@ metadata:
     argocd.argoproj.io/sync-options: ServerSideApply=true,Delete=false
   labels:
     openshift.io/cluster-monitoring: "true"
-    pod-security.kubernetes.io/warn: baseline
-    pod-security.kubernetes.io/audit: baseline
   name: openshift-gitops
