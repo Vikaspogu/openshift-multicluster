@@ -13,6 +13,8 @@ helmCharts:
     valuesInline:
       default:
         app:
+          finalizers:
+            - resources-finalizer.argocd.argoproj.io
           enabled: true
           enableAutoSync: true
           autoSyncPrune: true
@@ -35,11 +37,11 @@ helmCharts:
             - RespectIgnoreDifferences=true
             - CreateNamespace=false
           syncPolicyRetry:
-            limit: 5
+            limit: -1
             backoff:
-              duration: 1m
+              duration: 5s
               factor: 2
-              maxDuration: 5m
+              maxDuration: 10m
     additionalValuesFiles:
       - ./alertmanager.yaml
       - ./cert-manager.yaml

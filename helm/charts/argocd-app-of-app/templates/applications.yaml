@@ -24,6 +24,19 @@ metadata:
 {{ toYaml . | indent 4 }}
 {{- end }}
 {{- end }}
+{{- if or $val.finalizers $.Values.default.app.finalizers }}
+{{- $appFinalizers := list }}
+{{- $defaultFinalizers := list }}
+{{- if $val.finalizers }}
+{{- $appFinalizers = $val.finalizers }}
+{{- end }}
+{{- if $.Values.default.app.finalizers }}
+{{- $defaultFinalizers = $.Values.default.app.finalizers }}
+{{- end }}
+{{- $finalizers := uniq (concat $appFinalizers $defaultFinalizers) }}
+  finalizers:
+{{ toYaml $finalizers | indent 4 }}
+{{- end }}
 spec:
   destination:
     {{- if (($val.destination).namespace) }}
