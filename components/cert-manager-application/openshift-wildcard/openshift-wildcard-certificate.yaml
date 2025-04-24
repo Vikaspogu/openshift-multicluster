@@ -9,6 +9,6 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: <REPLACE_WILDCARD_DNS_NAME>
+  commonName: "*.apps.${PLATFORM_BASE_DOMAIN}"
   dnsNames:
-    - <REPLACE_WILDCARD_DNS_NAME>
+    - "*.apps.${PLATFORM_BASE_DOMAIN}"

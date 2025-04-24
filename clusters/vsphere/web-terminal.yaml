@@ -11,6 +11,7 @@ applications:
         env:
           - name: LOVELY_PREPROCESSORS
             value: yq -i '.helmCharts.0.valuesInline.operators.0.channel="fast"' kustomization.yaml,yq -i '.helmCharts.0.valuesInline.operators.0.csv="web-terminal.v1.12.1"' kustomization.yaml
+
   web-terminal-config:
     annotations:
       argocd.argoproj.io/sync-wave: "15"

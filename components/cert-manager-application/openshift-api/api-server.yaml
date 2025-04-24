@@ -9,6 +9,6 @@ spec:
   servingCerts:
     namedCertificates:
       - names:
-          - <REPLACE_API_DNS_NAME>
+          - api.${PLATFORM_BASE_DOMAIN}
         servingCertificate:
           name: openshift-api-certificate

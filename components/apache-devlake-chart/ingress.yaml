@@ -14,7 +14,7 @@ metadata:
     helm.sh/chart: devlake-0.21.0-beta7
 spec:
   rules:
-    - host: devlake-ui-apache-devlake.apps.proxmox.v3socp.boo
+    - host: devlake-ui-apache-devlake.apps.${PLATFORM_BASE_DOMAIN}
       http:
         paths:
           - path: /

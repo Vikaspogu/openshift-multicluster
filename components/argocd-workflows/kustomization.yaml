@@ -39,7 +39,7 @@ helmCharts:
           clientSecret:
             name: argo-workflows-sso
             key: client-secret
-          redirectUrl: "https://argo-workflows-openshift-gitops.apps.proxmox.v3socp.boo/oauth2/callback"
+          redirectUrl: "https://argo-workflows-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}/oauth2/callback"
           scopes:
             - openid
             - profile

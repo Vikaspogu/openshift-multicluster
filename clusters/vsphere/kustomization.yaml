@@ -50,10 +50,10 @@ helmCharts:
       - ./oauth.yaml
       - ./onepassword-connect.yaml
       - ./openshift-gitops.yaml
-      # - ./openshift-pipelines.yaml
+      - ./openshift-pipelines.yaml
       - ./reflector.yaml
       - ./reloader.yaml
-      # - ./web-terminal.yaml
+      - ./web-terminal.yaml
     namespace: openshift-gitops
 
 patches: []

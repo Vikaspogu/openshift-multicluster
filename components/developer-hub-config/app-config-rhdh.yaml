@@ -1,6 +1,6 @@
 app:
   title: Red Hat Developer Hub
-  baseUrl: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.${PLATFORM_BASE_DOMAIN}/
 backend:
   auth:
     externalAccess:
@@ -8,9 +8,9 @@ backend:
         options:
           subject: legacy-default-config
           secret: "${BACKEND_SECRET}"
-  baseUrl: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
+  baseUrl: https://backstage-developer-hub-developer-hub.apps.${PLATFORM_BASE_DOMAIN}/
   cors:
-    origin: https://backstage-developer-hub-developer-hub.apps.proxmox.v3socp.boo/
+    origin: https://backstage-developer-hub-developer-hub.apps.${PLATFORM_BASE_DOMAIN}/
     credentials: true
     methods:
       - GET
@@ -24,24 +24,24 @@ backend:
     connect-src: ["'self'", "http:", "https:", "data:"]
   reading:
     allow:
-      - host: "*.apps.proxmox.v3socp.boo"
+      - host: "*.apps.${PLATFORM_BASE_DOMAIN}"
 
 ansible:
   creatorService:
     baseUrl: ansible-dev-tools-rhel8-svc.developer-hub.svc.cluster.local
     port: "8000"
   devSpaces:
-    baseUrl: https://devspaces.apps.proxmox.v3socp.boo/
+    baseUrl: https://devspaces.apps.${PLATFORM_BASE_DOMAIN}/
   rhaap:
     baseUrl: ${AAP_URL}
     token: ${AAP_AUTH_TOKEN}
     checkSSL: false
 
 open-dora:
-  apiBaseUrl: https://open-dora-apache-devlake.apps.proxmox.v3socp.boo
+  apiBaseUrl: https://open-dora-apache-devlake.apps.${PLATFORM_BASE_DOMAIN}
 
 sonarQube:
-  baseUrl: https://sonarqube-cicd-tools.apps.proxmox.v3socp.boo
+  baseUrl: https://sonarqube-cicd-tools.apps.${PLATFORM_BASE_DOMAIN}
 
 orchestrator:
   sonataFlowService:
@@ -64,7 +64,7 @@ argocd:
   appLocatorMethods:
     - instances:
         - name: team-alpha-cicd
-          url: https://team-a-cicd-server-team-a-cicd.apps.proxmox.v3socp.boo
+          url: https://team-a-cicd-server-team-a-cicd.apps.${PLATFORM_BASE_DOMAIN}
       type: config
 
 signInPage: github
@@ -98,7 +98,7 @@ proxy:
       changeOrigin: true
       secure: true
     "/sonarqube":
-      target: https://sonarqube-cicd-tools.apps.proxmox.v3socp.boo/api
+      target: https://sonarqube-cicd-tools.apps.${PLATFORM_BASE_DOMAIN}/api
       allowedMethods: ["GET"]
       auth: ${SONARQUBE_TOKEN}
 
@@ -108,13 +108,13 @@ kubernetes:
   clusterLocatorMethods:
     - type: "config"
       clusters:
-        - url: https://api.proxmox.v3socp.boo:6443
+        - url: https://api.${PLATFORM_BASE_DOMAIN}:6443
           name: proxmox
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${token}
           dashboardApp: openshift
-          dashboardUrl: https://console-openshift-console.apps.proxmox.v3socp.boo/
+          dashboardUrl: https://console-openshift-console.apps.${PLATFORM_BASE_DOMAIN}/
       customResources:
         - apiVersion: v1beta1
           group: tekton.dev

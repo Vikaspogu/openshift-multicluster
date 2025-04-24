@@ -20,19 +20,9 @@ applications:
       namespace: cert-manager
     source:
       path: components/cert-manager-config
-      plugin:
-        name: argocd-lovely-plugin
-        env:
-          - name: LOVELY_PREPROCESSORS
-            value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g' *.yaml
 
   cert-manager-application:
     annotations:
       argocd.argoproj.io/sync-wave: "25"
     source:
       path: components/cert-manager-application
-      plugin:
-        name: argocd-lovely-plugin
-        env:
-          - name: LOVELY_PREPROCESSORS
-            value: sed -i 's/<REPLACE_API_DNS_NAME>/api.proxmox.v3socp.boo/g' openshift-api/*.yaml,yq -i '.spec.commonName="*.apps.proxmox.v3socp.boo",.spec.dnsNames[0]="*.apps.proxmox.v3socp.boo"' openshift-wildcard/openshift-wildcard-certificate.yaml
