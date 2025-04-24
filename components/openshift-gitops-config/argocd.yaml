@@ -6,31 +6,12 @@ metadata:
 spec:
   notifications:
     enabled: true
-    logLevel: debug
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
-    accounts.admin: apiKey
     resource.compareoptions: |
       ignoreAggregatedRoles: true
   server:
-    initContainers:
-      - env:
-          - name: EXTENSION_URL
-            value: "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.6/extension.tar"
-        image: "quay.io/argoprojlabs/argocd-extension-installer:v0.0.8"
-        name: rollout-extension
-        securityContext:
-          allowPrivilegeEscalation: false
-        volumeMounts:
-          - mountPath: /tmp/extensions/
-            name: extensions
-    volumeMounts:
-      - mountPath: /tmp/extensions/
-        name: extensions
-    volumes:
-      - emptyDir: {}
-        name: extensions
     autoscale:
       enabled: false
     grpc:
@@ -581,8 +562,8 @@ spec:
       enabled: false
   initialSSHKnownHosts: {}
   applicationSet:
-    extraCommandArgs:
-      - --enable-progressive-syncs
+    # extraCommandArgs:
+    #   - --enable-progressive-syncs
     resources:
       limits:
         cpu: "2"
@@ -600,6 +581,27 @@ spec:
     scopes: "[groups]"
   repo:
     sidecarContainers:
+      - name: setenv-plugin
+        command: [/var/run/argocd/argocd-cmp-server]
+        envFrom:
+          - configMapRef:
+              name: environment-variables
+        image: quay.io/raffaelespazzoli/raffa-envsub:1.1
+        imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: setenv-cmp-plugin
+          - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+            name: policy-generator
       - name: lovely-plugin
         resources: {}
         command: [/var/run/argocd/argocd-cmp-server]
@@ -611,58 +613,11 @@ spec:
             name: plugins
           - mountPath: /tmp
             name: tmp
-      - name: helm-multivalues-plugin
-        resources: {}
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
-        env:
-          - name: HELM_CACHE_HOME
-            value: /.config/helm/cache
-          - name: HELM_CONFIG_HOME
-            value: /.config/helm/config
-          - name: HELM_DATA_HOME
-            value: /.config/helm/data
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: plugin.yaml
-            name: helm-multivalues-plugin
-          - mountPath: /.config/helm
-            name: helm-custom-config
-      - name: setenv-cmp-plugin
-        resources: {}
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
-        env:
-          - name: KUSTOMIZE_PLUGIN_HOME
-            value: /etc/kustomize/plugin
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: plugin.yaml
-            name: setenv-cmp-plugin
     volumes:
-      - configMap:
-          name: helm-multivalues-plugin
-        name: helm-multivalues-plugin
       - configMap:
           name: setenv-cmp-plugin
         name: setenv-cmp-plugin
       - name: custom-tools
-        emptyDir: {}
-      - name: policy-generator
-        emptyDir: {}
-      - name: helm-custom-config
         emptyDir: {}
       - name: sops-age
         secret:
@@ -672,29 +627,9 @@ spec:
         value: /.config
       - name: SOPS_AGE_KEY_FILE
         value: /.config/sops/age/keys.txt
-      - name: HELM_CACHE_HOME
-        value: /.config/helm/cache
-      - name: HELM_CONFIG_HOME
-        value: /.config/helm/config
-      - name: HELM_DATA_HOME
-        value: /.config/helm/data
+      - name: KUSTOMIZE_PLUGIN_HOME
+        value: /etc/kustomize/plugin
     initContainers:
-      - name: install-helm-multivalues-plugin
-        resources: {}
-        image: registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:baec6d73a77b832df8131bac3c5a86dc405ef89f600e27a22f164ed3c72816db
-        command: [sh, -c]
-        args:
-          - "helm plugin list | grep multivalues; if [ $? -ne 0 ]; then helm plugin install https://github.com/nico-ulbricht/helm-multivalues; fi"
-        env:
-          - name: HELM_CACHE_HOME
-            value: /helm-custom-config/cache
-          - name: HELM_CONFIG_HOME
-            value: /helm-custom-config/config
-          - name: HELM_DATA_HOME
-            value: /helm-custom-config/data
-        volumeMounts:
-          - mountPath: /helm-custom-config
-            name: helm-custom-config
       - name: install-custom-tools
         resources: {}
         image: viaductoss/ksops:v4.1.0
@@ -704,21 +639,7 @@ spec:
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
-      - name: policy-generator-install
-        resources: {}
-        args:
-          - -c
-          - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-            /policy-generator/PolicyGenerator
-        command:
-          - /bin/bash
-        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.7
-        volumeMounts:
-          - mountPath: /policy-generator
-            name: policy-generator
     volumeMounts:
-      - name: policy-generator
-        mountPath: /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
       - mountPath: /usr/local/bin/kustomize
         name: custom-tools
         subPath: kustomize
@@ -728,8 +649,6 @@ spec:
       - mountPath: /.config/sops/age/keys.txt
         name: sops-age
         subPath: keys.txt
-      - mountPath: /.config/helm
-        name: helm-custom-config
     resources:
       limits:
         cpu: "1"

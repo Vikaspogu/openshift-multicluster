@@ -12,4 +12,14 @@ patches:
         value: "https://github.com/Vikaspogu/openshift-multicluster.git"
       - op: replace
         path: /spec/source/path
-        value: "clusters/proxmox"
+        value: ""
+configMapGenerator:
+  - name: environment-variables
+    literals:
+      - KUSTOMIZE_PLUGIN_HOME=/etc/kustomize/plugin
+      - CLUSTER_NAME=
+      - CLUSTER_BASE_DOMAIN=
+      - PLATFORM_BASE_DOMAIN=
+      - INFRA_GITOPS_REPO=
+generatorOptions:
+  disableNameSuffixHash: true
