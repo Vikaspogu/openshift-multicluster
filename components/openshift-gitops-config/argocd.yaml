@@ -600,7 +600,7 @@ spec:
           - mountPath: /home/argocd/cmp-server/config/plugin.yaml
             subPath: plugin.yaml
             name: setenv-cmp-plugin
-          - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+          - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
             name: ksops-generator
       - name: lovely-plugin
         resources: {}
@@ -624,7 +624,7 @@ spec:
           secretName: sops-age
     env:
       - name: XDG_CONFIG_HOME
-        value: /etc/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+        value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
       - name: SOPS_AGE_KEY_FILE
         value: /.config/sops/age/keys.txt
       - name: KUSTOMIZE_PLUGIN_HOME
@@ -635,14 +635,13 @@ spec:
         image: viaductoss/ksops:v4.1.0
         command: ["/bin/sh", "-c"]
         args:
-          - 'echo "Installing KSOPS..."; cp ksops /ksops-generator-tmp/; echo "Done.";'
+          - 'echo "Installing KSOPS..."; cp ksops /ksops-generator/ksops; echo "Done.";'
         volumeMounts:
           - mountPath: /ksops-generator
             name: ksops-generator
     volumeMounts:
-      - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+      - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
         name: ksops-generator
-        subPath: ksops
       - mountPath: /.config/sops/age/keys.txt
         name: sops-age
         subPath: keys.txt
