@@ -602,6 +602,9 @@ spec:
             name: setenv-cmp-plugin
           - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
             name: ksops-generator
+          - mountPath: /.config/sops/age/keys.txt
+            name: sops-age
+            subPath: keys.txt
       - name: lovely-plugin
         resources: {}
         command: [/var/run/argocd/argocd-cmp-server]
