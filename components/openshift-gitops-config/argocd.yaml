@@ -600,7 +600,7 @@ spec:
           - mountPath: /home/argocd/cmp-server/config/plugin.yaml
             subPath: plugin.yaml
             name: setenv-cmp-plugin
-          - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+          - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops/ksops
             name: custom-tools
       - name: lovely-plugin
         resources: {}
