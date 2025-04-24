@@ -20,11 +20,6 @@ applications:
       namespace: cert-manager
     source:
       path: components/cert-manager-config
-      plugin:
-        name: argocd-lovely-plugin
-        env:
-          - name: LOVELY_PREPROCESSORS
-            value: sed -i 's/<REPLACE_DNS_ZONE>/v3socp.boo/g' *.yaml
 
   cert-manager-application:
     annotations:

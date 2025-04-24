@@ -18,4 +18,4 @@ spec:
               key: api-key
         selector:
           dnsZones:
-            - <REPLACE_DNS_ZONE>
+            - ${CLUSTER_BASE_DOMAIN}
