@@ -4,3 +4,38 @@ kind: Kustomization
 namespace: openshift-monitoring
 resources:
   - ./externalsecret.yaml
+  - ./externalsecret-alertmanager.yaml
+helmCharts:
+  - name: app-template
+    releaseName: alertmanager-gotify
+    repo: https://bjw-s.github.io/helm-charts
+    version: "3.7.3"
+    valuesInline:
+      controllers:
+        alertmanager-gotify:
+          annotations:
+            reloader.stakater.com/auto: "true"
+          containers:
+            app:
+              image:
+                repository: ghcr.io/druggeri/alertmanager_gotify_bridge
+                tag: 2.3.2
+              envFrom:
+                - secretRef:
+                    name: alertmanager-gotify-secret
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities: { drop: ["ALL"] }
+              resources:
+                requests:
+                  cpu: 5m
+                  memory: 50Mi
+                limits:
+                  memory: 150Mi
+      service:
+        app:
+          controller: alertmanager-gotify
+          ports:
+            http:
+              port: 8080
