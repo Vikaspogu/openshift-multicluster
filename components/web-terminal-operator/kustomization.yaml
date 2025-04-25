@@ -11,10 +11,9 @@ helmCharts:
     valuesInline:
       operators:
         - channel: <REPLACE>
-          installPlanApproval: Manual
+          installPlanApproval: Automatic
           name: web-terminal
           source: redhat-operators
           sourceNamespace: openshift-marketplace
-          csv: <REPLACE>
       operatorGroups:
         - createNamespace: true

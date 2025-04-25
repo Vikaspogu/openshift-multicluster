@@ -11,7 +11,7 @@ helmCharts:
     valuesInline:
       operators:
         - channel: <REPLACE>
-          installPlanApproval: Manual
+          installPlanApproval: Automatic
           name: kubernetes-imagepuller-operator
           source: community-operators
           sourceNamespace: openshift-marketplace
