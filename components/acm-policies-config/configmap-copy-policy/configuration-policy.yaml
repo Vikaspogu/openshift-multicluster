@@ -5,7 +5,7 @@ metadata:
   name: configmap-copy-policy
 spec:
   object-templates-raw: |
-    {{- range var := ["test", "test1", "test2"] }}
+    {{- range $var := ["test", "test1", "test2"] }}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
@@ -14,7 +14,7 @@ spec:
           name: configmap-copy
           namespace: default
         data:
-          key: '{{ var }}'
+          key: '{{ $var }}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
