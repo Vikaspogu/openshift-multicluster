@@ -11,7 +11,7 @@ spec:
         apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: configmap-copy
+          name: configmap-copy-{{$var}}
           namespace: default
         data:
           key: '{{ $var }}'
