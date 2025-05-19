@@ -1,0 +1,29 @@
+applications:
+  acm-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-operator
+      plugin:
+        name: argocd-lovely-plugin
+        env:
+          - name: LOVELY_PREPROCESSORS
+            value: yq -i '.spec.channel="release-2.13"' subscription.yaml
+
+  acm-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: open-cluster-management
+    source:
+      path: components/acm-config
+
+  agent-service-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: multicluster-engine
+    source:
+      path: components/agent-service-config

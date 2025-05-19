@@ -43,6 +43,7 @@ helmCharts:
               factor: 2
               maxDuration: 10m
     additionalValuesFiles:
+      - ./acm.yaml
       - ./alertmanager.yaml
       - ./cert-manager.yaml
       - ./cloudflared.yaml
