@@ -5,15 +5,16 @@ metadata:
   name: configmap-copy-policy
 spec:
   object-templates-raw: |
-    {{- range (lookup "v1" "Namespace" "" "" "app.kubernetes.io/name=team-onboarding").items }}
+    {{- range var := ["test", "test1", "test2"] }}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
         kind: ConfigMap
         metadata:
           name: configmap-copy
-          namespace: {{ .metadata.name }}
-        data: '{{ copyConfigMapData "default" "configmap-original" }}'
+          namespace: default
+        data:
+          key: '{{ var }}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
