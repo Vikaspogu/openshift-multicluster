@@ -28,10 +28,18 @@ applications:
     source:
       path: components/agent-service-config
 
+  acm-policies:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: acm-policies
+    source:
+      path: components/acm-policies
+
   acm-policy-configmap-copy-policy:
     annotations:
       argocd.argoproj.io/sync-wave: "35"
     destination:
-      namespace: openshift-gitops
+      namespace: acm-policies
     source:
       path: components/acm-policies-config/configmap-copy-policy

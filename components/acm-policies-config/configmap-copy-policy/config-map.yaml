@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: machineset
+data:
+  zone1_cpu: "15"
+  ingress_cpu: "20"
+  ops_cpu: "25"
