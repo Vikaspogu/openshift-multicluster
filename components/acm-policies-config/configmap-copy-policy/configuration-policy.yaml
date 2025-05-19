@@ -14,7 +14,7 @@ spec:
           name: configmap-copy-{{var}}
           namespace: acm-policies
         data:
-          key: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "machineset").data."{{var}}"_cpu hub}}'
+          key: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "machineset").data.{{var}}_cpu hub}}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
