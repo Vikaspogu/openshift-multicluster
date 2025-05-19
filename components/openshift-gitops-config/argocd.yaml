@@ -605,6 +605,8 @@ spec:
           - mountPath: /.config/sops/age/keys.txt
             name: sops-age
             subPath: keys.txt
+          - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+            name: policy-generator
       - name: lovely-plugin
         resources: {}
         command: [/var/run/argocd/argocd-cmp-server]
@@ -625,6 +627,8 @@ spec:
       - name: sops-age
         secret:
           secretName: sops-age
+      - emptyDir: {}
+        name: policy-generator
     env:
       - name: XDG_CONFIG_HOME
         value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
@@ -642,12 +646,24 @@ spec:
         volumeMounts:
           - mountPath: /ksops-generator
             name: ksops-generator
+      - args:
+          - -c
+          - cp /policy-generator/PolicyGenerator-not-fips-compliant /policy-generator-tmp/PolicyGenerator
+        command:
+          - /bin/bash
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.11
+        name: policy-generator-install
+        volumeMounts:
+          - mountPath: /policy-generator-tmp
+            name: policy-generator
     volumeMounts:
       - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
         name: ksops-generator
       - mountPath: /.config/sops/age/keys.txt
         name: sops-age
         subPath: keys.txt
+      - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+        name: policy-generator
     resources:
       limits:
         cpu: "1"
