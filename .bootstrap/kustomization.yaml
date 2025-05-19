@@ -17,9 +17,9 @@ configMapGenerator:
   - name: environment-variables
     literals:
       - KUSTOMIZE_PLUGIN_HOME=/etc/kustomize/plugin
-      - CLUSTER_NAME=
-      - CLUSTER_BASE_DOMAIN=
-      - PLATFORM_BASE_DOMAIN=
-      - INFRA_GITOPS_REPO=
+      - CLUSTER_NAME=${CLUSTER_NAME}
+      - CLUSTER_BASE_DOMAIN=${CLUSTER_BASE_DOMAIN}
+      - PLATFORM_BASE_DOMAIN=${PLATFORM_BASE_DOMAIN}
+      - INFRA_GITOPS_REPO=https://github.com/Vikaspogu/openshift-multicluster.git
 generatorOptions:
   disableNameSuffixHash: true
