@@ -5,16 +5,16 @@ metadata:
   name: configmap-copy-policy
 spec:
   object-templates-raw: |
-    {{- range var := list "zone1" "ingress" "ops" }}
+    {{- range $var := list "zone1" "ingress" "ops" }}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: configmap-copy-{{var}}
+          name: configmap-copy-{{$var}}
           namespace: acm-policies
         data:
-          key: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "machineset").data.{{var}}_cpu hub}}'
+          key: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "machineset").data "$var_cpu" hub}}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
