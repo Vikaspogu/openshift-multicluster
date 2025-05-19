@@ -10,8 +10,8 @@ controlPlane:
   replicas: 3
   platform:
     vsphere:
-      cpus: 8
-      memoryMB: 20460
+      cpus: 12
+      memoryMB: 40960
       osDisk:
         diskSizeGB: 200
 metadata:
