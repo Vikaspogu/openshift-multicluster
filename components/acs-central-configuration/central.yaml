@@ -20,11 +20,9 @@ spec:
       persistence:
         persistentVolumeClaim:
           claimName: central-db
-          storageClassName: lvms-vg1
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
-        storageClassName: lvms-vg1
   egress:
     connectivityPolicy: Online
   scanner:

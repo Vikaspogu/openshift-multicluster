@@ -7,14 +7,12 @@ metadata:
     unsupported.agent-install.openshift.io/assisted-service-configmap: "assisted-service-config"
 spec:
   databaseStorage:
-    storageClassName: lvms-vg1
     accessModes:
       - ReadWriteOnce
     resources:
       requests:
         storage: 40Gi
   filesystemStorage:
-    storageClassName: lvms-vg1
     accessModes:
       - ReadWriteOnce
     resources:
