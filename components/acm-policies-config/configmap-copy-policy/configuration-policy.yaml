@@ -7,7 +7,7 @@ spec:
   object-templates-raw: |
     {{- range $var := list "zone1" "ingress" "ops" }}
     {{- $cm := lookup "v1" "ConfigMap" "acm-policies" "machineset" }}
-    {{- $cpu := printf("$cm.data.%s-cpu" $var)}}
+    {{- $cpu := printf "$cm.data.%s-cpu" $var}}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
