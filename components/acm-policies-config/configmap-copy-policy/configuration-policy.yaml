@@ -5,18 +5,19 @@ metadata:
   name: configmap-copy-policy
 spec:
   object-templates-raw: |
-    {{- range $var := list "zone1" "ingress" "ops" }}
-    {{- $cm := lookup "v1" "ConfigMap" "acm-policies" "machineset" }}
-    {{- $cpu := printf "$cm.data.%s-cpu" $var}}
+    {{hub- range $var := list "zone1" "ingress" "ops" hub}}
+    {{hub- $var_cpu := (printf "%s-cpu" $var) hub}}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: configmap-copy-{{$var}}
+          name: configmap-copy-{{hub $var hub}}
           namespace: acm-policies
         data:
-          cpu: '{{$cpu}}'
-      {{- end }}
+          cpu: '{{hub index (lookup "v1" "ConfigMap" "acm-policies" "machineset").data $var_cpu hub}}'
+    {{hub- end hub}}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
+# {{- $cm := lookup "v1" "ConfigMap" "acm-policies" (printf "machineset-%s" $var) }}
+# {{- $cpu := $cm.data.cpu }}
