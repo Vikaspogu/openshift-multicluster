@@ -6,7 +6,6 @@ metadata:
 spec:
   object-templates-raw: |
     {{- range $var := list "zone1" "ingress" "ops" }}
-    {{- $cm_name := printf "machineset-%s" $var }}
     - complianceType: musthave
       objectDefinition:
         apiVersion: v1
@@ -15,7 +14,7 @@ spec:
           name: configmap-copy-{{$var}}
           namespace: acm-policies
         data:
-          cpu: '{{hub (lookup "v1" "ConfigMap" "acm-policies" $cm_name).data.cpu hub}}'
+          cpu: '{{hub fromConfigMap "acm-policies" (printf "machineset-%s" $var) "cpu" | toInt hub}}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
