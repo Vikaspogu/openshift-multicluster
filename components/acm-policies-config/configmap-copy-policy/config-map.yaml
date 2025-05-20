@@ -1,8 +1,20 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: machineset
+  name: machineset-zone1
 data:
-  zone1_cpu: "15"
-  ingress_cpu: "20"
-  ops_cpu: "25"
+  cpu: "15"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: machineset-ingress
+data:
+  cpu: "20"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: machineset-ops
+data:
+  cpu: "25"
