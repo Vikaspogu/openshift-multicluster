@@ -14,7 +14,7 @@ spec:
           name: configmap-copy-{{$var}}
           namespace: acm-policies
         data:
-          cpu: '{{hub fromConfigMap "acm-policies" (printf "machineset-%s" $var) "cpu" | toInt hub}}'
+          cpu: '{{hub index (lookup "v1" "ConfigMap" "acm-policies" "machineset").data $var_cpu hub}}'
       {{- end }}
   remediationAction: enforce
   pruneObjectBehavior: DeleteAll
