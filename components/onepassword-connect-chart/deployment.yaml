@@ -97,6 +97,9 @@ spec:
       hostIPC: false
       hostNetwork: false
       hostPID: false
+      securityContext:
+        runAsGroup: 999
+        runAsUser: 999
       serviceAccountName: default
       volumes:
         - emptyDir: {}
