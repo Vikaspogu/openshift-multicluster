@@ -1,5 +1,5 @@
 ---
-apiVersion: operator.external-secrets.io/v1alpha1alpha1
+apiVersion: operator.external-secrets.io/v1alpha
 kind: OperatorConfig
 metadata:
   name: cluster
