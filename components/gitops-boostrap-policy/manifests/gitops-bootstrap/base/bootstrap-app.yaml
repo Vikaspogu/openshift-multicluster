@@ -23,8 +23,8 @@ object-templates-raw: |
 
         # Source of the application manifests
         source:
-          repoURL: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "environment-variables").data.INFRA_GITOPS_REPO hub}}'  # Can point to either a Helm chart repo or a git repo.
-          targetRevision: '{{hub (index (lookup "v1" "ConfigMap" "acm-policies" "cluster-versions").data .ManagedClusterName) hub}}'  # For Helm, this refers to the chart version.
+          repoURL: '{{hub (lookup "v1" "ConfigMap" "openshift-gitops" "environment-variables").data.INFRA_GITOPS_REPO hub}}'  # Can point to either a Helm chart repo or a git repo.
+          targetRevision: '{{hub (index (lookup "v1" "ConfigMap" "openshift-gitops" "cluster-versions").data .ManagedClusterName) hub}}'  # For Helm, this refers to the chart version.
           path: clusters/{{ fromClusterClaim "name" }}  # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 
         # Destination cluster and namespace to deploy the application
