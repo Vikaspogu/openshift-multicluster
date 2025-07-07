@@ -76,7 +76,9 @@ deployment:
 
   env: []
 
-  envFrom: []
+  envFrom:
+    - secretRef:
+        name: kubechecks
 
   startupProbe:
     failureThreshold: 30
