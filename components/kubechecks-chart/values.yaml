@@ -1,0 +1,148 @@
+# Labels to apply to all resources created by this Helm chart
+argocd:
+  namespace: openshift-gitops
+
+commonLabels: {}
+
+configMap:
+  create: true
+  env:
+    KUBECHECKS_ADDITIONAL_APPS_NAMESPACES: "*"
+    KUBECHECKS_ARGOCD_API_INSECURE: "true"
+    KUBECHECKS_ARGOCD_API_PATH_PREFIX: /
+    KUBECHECKS_ARGOCD_API_NAMESPACE: openshift-gitops
+    KUBECHECKS_ARGOCD_WEBHOOK_URL: http://openshift-gitops-server.openshift-gitops:80/api/webhook
+    KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: openshift-gitops-repo-server.openshift-gitops:8081
+    KUBECHECKS_ARGOCD_REPOSITORY_INSECURE: "true"
+    KUBECHECKS_FALLBACK_K8S_VERSION: "1.23.0"
+    KUBECHECKS_LOG_LEVEL: debug
+    KUBECHECKS_NAMESPACE: kubechecks
+    KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks-kubechecks.apps.vsphere.v3socp.boo
+    KUBECHECKS_WEBHOOK_URL_PREFIX: kubechecks
+    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server.openshift-gitops:80
+    ARGOCD_EXEC_TIMEOUT: 600s
+    KUBECHECKS_OTEL_COLLECTOR_PORT: "4317"
+    KUBECHECKS_OTEL_ENABLED: "true"
+    KUBECHECKS_VCS_TYPE: "github"
+    KUBECHECKS_VCS_USERNAME: "vikaspogu"
+    KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "hide" # other options delete
+
+deployment:
+  annotations:
+    reloader.stakater.com/auto: "true"
+
+  podAnnotations: {}
+
+  args: []
+
+  # Default values for kubechecks.
+  resources:
+    limits:
+      memory: 512Mi
+    requests:
+      memory: 256Mi
+      cpu: 200m
+
+  revisionHistoryLimit: 10
+  replicaCount: 1
+
+  image:
+    pullPolicy: Always
+    name: "ghcr.io/zapier/kubechecks"
+    tag: "v2.5.2"
+
+  imagePullSecrets: []
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  podSecurityContext:
+    {}
+    # runAsNonRoot: true
+    # runAsUser: 32123
+    # fsGroup: 32123
+
+  securityContext:
+    {}
+    # allowPrivilegeEscalation: false
+    # privileged: false
+    # capabilities:
+    #   drop:
+    #     - ALL
+    # readOnlyRootFilesystem: false
+
+  env: []
+
+  envFrom: []
+
+  startupProbe:
+    failureThreshold: 30
+    periodSeconds: 10
+
+  livenessProbe:
+    failureThreshold: 30
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
+  readinessProbe:
+    failureThreshold: 30
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
+  volumes: []
+  volumeMounts: []
+
+secrets:
+  create: false
+  name: '{{ include "kubechecks.fullname" . }}'
+  # envs can be used for writing sensitive environment variables
+  # to the secret resource. These should be passed into the
+  # deployment as arguments.
+  env: {}
+  # KUBECHECKS_VCS_TOKEN: <token>
+
+serviceAccount:
+  # Specifies whether a service account should be created or used
+  create: true
+  enabled: true
+  name: '{{ include "kubechecks.fullname" . }}'
+  annotations: {}
+
+service:
+  create: true
+  type: ClusterIP
+  port: 8080
+  name: http
+
+ingress:
+  create: false
+  className: ""
+  # annotations:
+  #   kubernetes.io/ingress.class: nginx
+  #   # See https://cert-manager.readthedocs.io/en/latest/reference/ingress-shim.html#supported-annotations
+  #   kubernetes.io/tls-acme: "true"
+  hosts:
+    kubechecks.local:
+      paths:
+        - path: "/hooks"
+          pathType: Prefix
+
+  # Secrets must be manually created in the namespace
+  # tls:
+  #  - secretName: kubechecks-ingress-tls
+  #    hosts:
+  #    - kubechecks.example.com
+
+autoscaling:
+  create: false
+  # minReplicas: 1
+  # maxReplicas: 100
+  # targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

@@ -15,6 +15,14 @@ applications:
     source:
       path: components/openshift-gitops-config
 
+  kubechecks-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: kubechecks
+    source:
+      path: components/kubechecks-chart
+
   # argocd-image-updater:
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "15"
