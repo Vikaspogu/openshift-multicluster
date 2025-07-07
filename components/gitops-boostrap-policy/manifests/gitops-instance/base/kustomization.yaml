@@ -1,0 +1,4 @@
+resources:
+  - setenv-cmp-plugin-configmap.yaml
+  - environment-variables-configmap.yaml
+  - argocd.yaml

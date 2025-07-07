@@ -1,0 +1,34 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: gitops-policy-generator
+policyDefaults:
+  namespace: acm-policies
+  remediationAction: enforce
+placementBindingDefaults:
+  name: "binding-policy-gitops"
+policies:
+  - name: policy-gitops-subscription
+    remediationAction: enforce
+    manifests:
+      - path: manifests/gitops-subscription/base/
+  - name: policy-gitops-instance
+    # Needed to fix issue with merging lists resulting in duplicates
+    configurationPolicyAnnotations:
+      apps.open-cluster-management.io/reconcile-option: replace
+    complianceType: "mustonlyhave"
+    manifests:
+      - path: manifests/gitops-instance/base/
+  - name: policy-gitops-bootstrap
+    manifests:
+      - path: manifests/gitops-bootstrap/base/bootstrap-app.yaml
+policySets:
+  - name: "gitops"
+    description: "Policy for bootstrapping cluster with gitops"
+    policies:
+      - policy-gitops-subscription
+      - policy-gitops-instance
+      - policy-gitops-bootstrap
+    generatePolicySetPlacement: false
+    placement:
+      name: placement-policy-gitops

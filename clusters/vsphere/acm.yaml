@@ -36,10 +36,10 @@ applications:
     source:
       path: components/acm-policies
 
-  acm-policy-configmap-copy-policy:
+  acm-policy-gitops-boostrap-policy:
     annotations:
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: acm-policies
     source:
-      path: components/acm-policies-config/configmap-copy-policy
+      path: components/gitops-boostrap-policy

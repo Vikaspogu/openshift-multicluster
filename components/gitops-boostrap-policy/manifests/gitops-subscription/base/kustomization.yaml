@@ -1,0 +1,4 @@
+resources:
+  - cluster-rolebinding.yaml
+  - subscription.yaml
+  - namespace.yaml

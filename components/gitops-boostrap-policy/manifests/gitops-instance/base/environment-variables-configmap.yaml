@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environment-variables
+  namespace: openshift-gitops
+data:
+  KUSTOMIZE_PLUGIN_HOME: /etc/kustomize/plugin
+  CLUSTER_NAME: '{{ fromClusterClaim "name" }}'
+  CLUSTER_BASE_DOMAIN:
+    '{{ fromClusterClaim "name" }}.{{hub (lookup "v1" "ConfigMap" "acm-policies" "environment-variables").data.PLATFORM_BASE_DOMAIN hub}}'
+    # all created clusters base domain should be <cluster-name>.<PLATFORM_BASE_DOMAIN>
+  PLATFORM_BASE_DOMAIN: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "environment-variables").data.PLATFORM_BASE_DOMAIN hub}}'
+  HUB_BASE_DOMAIN: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "environment-variables").data.CLUSTER_BASE_DOMAIN hub}}'
+  INFRA_GITOPS_REPO: '{{hub (lookup "v1" "ConfigMap" "acm-policies" "environment-variables").data.INFRA_GITOPS_REPO hub}}'
