@@ -23,6 +23,8 @@ configMap:
     ARGOCD_EXEC_TIMEOUT: 600s
     KUBECHECKS_OTEL_ENABLED: "false"
     KUBECHECKS_VCS_TYPE: "github"
+    KUBECHECKS_VCS_USERNAME: "vikaspogu"
+    KUBECHECKS_VCS_EMAIL: "vikaspoguadf@gmail.com"
     KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "hide" # other options delete
 
 deployment:
