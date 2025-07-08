@@ -371,7 +371,7 @@ spec:
       p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-      g, admin, role:admin
+      g, admins, role:admin
       p, role:kubechecks, applications, get, */*, allow
       p, role:kubechecks, applications, update, */*, allow
       g, kubechecks, role:kubechecks
