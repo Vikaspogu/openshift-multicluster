@@ -18,7 +18,6 @@ configMap:
     KUBECHECKS_LOG_LEVEL: debug
     KUBECHECKS_NAMESPACE: kubechecks
     KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.apps.${PLATFORM_BASE_DOMAIN}
-    KUBECHECKS_WEBHOOK_URL_PREFIX: hooks
     KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
     ARGOCD_EXEC_TIMEOUT: 600s
     KUBECHECKS_OTEL_ENABLED: "false"
@@ -133,7 +132,7 @@ ingress:
   hosts:
     kubechecks.apps.${PLATFORM_BASE_DOMAIN}:
       paths:
-        - path: "/hooks"
+        - path: "/"
           pathType: Prefix
 
   # Secrets must be manually created in the namespace
