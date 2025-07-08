@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: kubechecks
 resources:
   - ./namespace.yaml
+  - ./rolebinding.yaml
   - ./externalsecret.yaml
 
 helmCharts:
