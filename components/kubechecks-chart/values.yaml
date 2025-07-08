@@ -66,9 +66,8 @@ deployment:
     # fsGroup: 32123
 
   securityContext:
-    {}
-    # allowPrivilegeEscalation: false
-    # privileged: false
+    # allowPrivilegeEscalation: true
+    privileged: true
     # capabilities:
     #   drop:
     #     - ALL
