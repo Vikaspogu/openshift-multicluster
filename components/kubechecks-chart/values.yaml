@@ -12,14 +12,14 @@ configMap:
     KUBECHECKS_ARGOCD_API_PATH_PREFIX: /
     KUBECHECKS_ARGOCD_API_NAMESPACE: openshift-gitops
     KUBECHECKS_ARGOCD_WEBHOOK_URL: http://openshift-gitops-server.openshift-gitops:80/api/webhook
-    KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: openshift-gitops-repo-server.openshift-gitops:8081
+    KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: openshift-gitops-repo-server.openshift-gitops.svc.clsuter.local:8081
     KUBECHECKS_ARGOCD_REPOSITORY_INSECURE: "true"
     KUBECHECKS_FALLBACK_K8S_VERSION: "1.23.0"
     KUBECHECKS_LOG_LEVEL: debug
     KUBECHECKS_NAMESPACE: kubechecks
     KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks-kubechecks.apps.vsphere.v3socp.boo
     KUBECHECKS_WEBHOOK_URL_PREFIX: kubechecks
-    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server.openshift-gitops:80
+    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server.openshift-gitops.svc.clsuter.local:80
     ARGOCD_EXEC_TIMEOUT: 600s
     KUBECHECKS_OTEL_ENABLED: "false"
     KUBECHECKS_VCS_TYPE: "github"
