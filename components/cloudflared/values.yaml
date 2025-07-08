@@ -7,15 +7,19 @@ cloudflared:
   tunnelID: "76cace65-155d-4719-9b29-4bfb94f5c013"
   existingSecret: cloudflared
   ingress:
-    - hostname: "console-openshift-console.apps.${PLATFORM_BASE_DOMAIN}"
-      originRequest:
-        noTLSVerify: true
-      service: https://router-internal-default.openshift-ingress.svc.cluster.local
-    - hostname: "pipelines-as-code-controller-openshift-pipelines.apps.${PLATFORM_BASE_DOMAIN}"
-      originRequest:
-        noTLSVerify: true
-      service: https://router-internal-default.openshift-ingress.svc.cluster.local
+    # - hostname: "console-openshift-console.apps.${PLATFORM_BASE_DOMAIN}"
+    #   originRequest:
+    #     noTLSVerify: true
+    #   service: https://router-internal-default.openshift-ingress.svc.cluster.local
+    # - hostname: "pipelines-as-code-controller-openshift-pipelines.apps.${PLATFORM_BASE_DOMAIN}"
+    #   originRequest:
+    #     noTLSVerify: true
+    #   service: https://router-internal-default.openshift-ingress.svc.cluster.local
     - hostname: "openshift-gitops-server-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}"
+      originRequest:
+        noTLSVerify: true
+      service: https://router-internal-default.openshift-ingress.svc.cluster.local
+    - hostname: "kubechecks.apps.${PLATFORM_BASE_DOMAIN}"
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress.svc.cluster.local
