@@ -19,7 +19,7 @@ cloudflared:
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress.svc.cluster.local
-    - hostname: "kubechecks.apps.${PLATFORM_BASE_DOMAIN}/hooks"
+    - hostname: "kubechecks.apps.${PLATFORM_BASE_DOMAIN}"
       originRequest:
         noTLSVerify: true
       service: https://router-internal-default.openshift-ingress.svc.cluster.local
