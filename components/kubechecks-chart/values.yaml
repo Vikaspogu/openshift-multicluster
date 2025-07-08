@@ -126,7 +126,7 @@ ingress:
   create: true
   className: ""
   annotations:
-    route.openshift.io/termination: "passthrough"
+    route.openshift.io/termination: "edge"
   #   kubernetes.io/ingress.class: nginx
   #   # See https://cert-manager.readthedocs.io/en/latest/reference/ingress-shim.html#supported-annotations
   #   kubernetes.io/tls-acme: "true"
