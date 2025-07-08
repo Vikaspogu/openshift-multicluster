@@ -9,7 +9,7 @@ spec:
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone
   extraConfig:
-    "accounts.admin": "apiKey,login"
+    "accounts.admin": "apiKey"
     resource.compareoptions: |
       ignoreAggregatedRoles: true
   server:
