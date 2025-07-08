@@ -17,9 +17,9 @@ configMap:
     KUBECHECKS_FALLBACK_K8S_VERSION: "1.23.0"
     KUBECHECKS_LOG_LEVEL: debug
     KUBECHECKS_NAMESPACE: kubechecks
-    KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks-kubechecks.apps.vsphere.v3socp.boo
+    KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.apps.${PLATFORM_BASE_DOMAIN}
     KUBECHECKS_WEBHOOK_URL_PREFIX: kubechecks
-    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server-openshift-gitops.apps.vsphere.v3socp.boo
+    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
     ARGOCD_EXEC_TIMEOUT: 600s
     KUBECHECKS_OTEL_ENABLED: "false"
     KUBECHECKS_VCS_TYPE: "github"
@@ -123,14 +123,15 @@ service:
   name: http
 
 ingress:
-  create: false
+  create: true
   className: ""
-  # annotations:
+  annotations:
+    route.openshift.io/termination: "passthrough"
   #   kubernetes.io/ingress.class: nginx
   #   # See https://cert-manager.readthedocs.io/en/latest/reference/ingress-shim.html#supported-annotations
   #   kubernetes.io/tls-acme: "true"
   hosts:
-    kubechecks.local:
+    kubechecks.apps.${PLATFORM_BASE_DOMAIN}:
       paths:
         - path: "/hooks"
           pathType: Prefix
