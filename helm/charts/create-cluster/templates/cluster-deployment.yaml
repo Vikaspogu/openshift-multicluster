@@ -7,7 +7,7 @@ metadata:
   labels:
     cloud: 'vSphere'
     vendor: OpenShift
-    cluster.open-cluster-management.io/clusterset: 'default'
+    cluster.open-cluster-management.io/clusterset: {{.Values.acmClusterSet}}
     {{- include "create-cluster.labels" . | nindent 4 }}
 spec:
   baseDomain: {{ .Values.baseDomain }}

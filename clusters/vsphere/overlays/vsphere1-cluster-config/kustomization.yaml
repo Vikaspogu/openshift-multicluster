@@ -9,6 +9,8 @@ helmCharts:
   - name: create-cluster
     releaseName: create-cluster
     valuesInline:
+      gitopsDeploy: "true"
+      acmClusterSet: global
       clusterName: vsphere1
       baseDomain: v3socp.boo
       vips:
