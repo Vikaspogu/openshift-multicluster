@@ -1,0 +1,35 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmGlobals:
+  chartHome: ../../../../helm/charts
+
+helmCharts:
+  - name: create-cluster
+    releaseName: create-cluster
+    valuesInline:
+      clusterName: vsphere1
+      baseDomain: v3socp.boo
+      vips:
+        api: 10.30.30.149
+        ingress: 10.30.30.150
+      masterNode:
+        replicas: 3
+        cpus: 4
+        corePerSocket: 2
+        memoryMB: 16384
+        diskSizeGB: 120
+      workerNode:
+        replicas: 0
+        cpus: 4
+        corePerSocket: 2
+        memoryMB: 16384
+        diskSizeGB: 120
+
+      vcenter:
+        server: vcenter.vikaspogu.internal
+        cluster: "/homelab/host/cluster1"
+        datastore: "/homelab/datastore/datastore1"
+        network: "VM Network"
+        datacenter: homelab

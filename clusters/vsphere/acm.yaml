@@ -43,3 +43,11 @@ applications:
       namespace: acm-policies
     source:
       path: components/gitops-boostrap-policy
+
+  vsphere1-cluster-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "55"
+    destination:
+      namespace: vsphere1
+    source:
+      path: clusters/vsphere/overlays/vsphere1-cluster-config
