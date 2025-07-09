@@ -24,6 +24,7 @@ configMap:
     KUBECHECKS_VCS_USERNAME: "vikaspogu"
     KUBECHECKS_VCS_EMAIL: "vikaspoguadf@gmail.com"
     KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "hide" # other options delete
+    GRPC_ENFORCE_ALPN_ENABLED: "false"
 
 deployment:
   annotations:
