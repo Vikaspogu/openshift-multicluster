@@ -1,0 +1,22 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: {{ .Values.clusterName }}
+  namespace: {{ .Values.clusterName }}
+  labels:
+    {{- include "create-cluster.labels" . | nindent 4 }}
+spec:
+  clusterName: {{ .Values.clusterName }}
+  clusterNamespace: {{ .Values.clusterName }}
+  clusterLabels:
+    cloud: vSphere
+    vendor: OpenShift
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true

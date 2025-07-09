@@ -1,0 +1,25 @@
+
+clusterName:
+baseDomain:
+vips:
+  api:
+  ingress:
+masterNode:
+  replicas: 3
+  cpus: 4
+  corePerSocket: 2
+  memoryMB: 16384
+  diskSizeGB: 120
+workerNode:
+  replicas: 0
+  cpus: 4
+  corePerSocket: 2
+  memoryMB: 16384
+  diskSizeGB: 120
+
+vcenter:
+  server:
+  cluster:
+  datastore:
+  network:
+  datacenter:

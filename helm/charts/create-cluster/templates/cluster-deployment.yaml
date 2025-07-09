@@ -1,0 +1,39 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: {{ .Values.clusterName }}
+  namespace: {{ .Values.clusterName }}
+  labels:
+    cloud: 'vSphere'
+    vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: {{.Values.acmClusterSet}}
+    {{- include "create-cluster.labels" . | nindent 4 }}
+spec:
+  baseDomain: {{ .Values.baseDomain }}
+  clusterName: {{ .Values.clusterName }}
+  controlPlaneConfig:
+    servingCertificates: {}
+  installAttemptsLimit: 1
+  installed: false
+  platform:
+    vsphere:
+      cluster: {{ .Values.vcenter.cluster }}
+      certificatesSecretRef:
+        name: {{ .Values.clusterName }}-vsphere-certs
+      credentialsSecretRef:
+        name: {{ .Values.clusterName }}-vsphere-creds
+      vCenter: {{ .Values.vcenter.server }}
+      datacenter: {{ .Values.vcenter.datacenter }}
+      defaultDatastore: {{ .Values.vcenter.datastore }}
+      network: {{ .Values.vcenter.network }}
+  provisioning:
+    installConfigSecretRef:
+      name: {{ .Values.clusterName }}-install-config
+    sshPrivateKeySecretRef:
+      name: {{ .Values.clusterName }}-ssh-private-key
+    imageSetRef:
+       #quay.io/openshift-release-dev/ocp-release:4.19.2-multi
+      name: img4.19.2-multi-appsub
+  pullSecretRef:
+    name: {{ .Values.clusterName }}-pull-secret

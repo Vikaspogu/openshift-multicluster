@@ -1,0 +1,16 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  labels:
+    cloud: vSphere
+    name: {{ .Values.clusterName }}
+    vendor: OpenShift
+    cluster.open-cluster-management.io/clusterset: {{.Values.acmClusterSet}}
+    {{- if .Values.gitopsDeploy }}
+    gitops: 'deploy'
+    {{- end }}
+    {{- include "create-cluster.labels" . | nindent 4 }}
+  name: {{ .Values.clusterName }}
+spec:
+  hubAcceptsClient: true

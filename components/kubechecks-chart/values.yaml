@@ -9,8 +9,8 @@ configMap:
   env:
     KUBECHECKS_ADDITIONAL_APPS_NAMESPACES: "*"
     KUBECHECKS_ARGOCD_API_INSECURE: "true"
-    KUBECHECKS_ARGOCD_API_PATH_PREFIX: /api/v1
     KUBECHECKS_ARGOCD_API_NAMESPACE: openshift-gitops
+    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
     KUBECHECKS_ARGOCD_WEBHOOK_URL: http://openshift-gitops-server.openshift-gitops:80/api/webhook
     KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: openshift-gitops-repo-server.openshift-gitops.svc.clsuter.local:8081
     KUBECHECKS_ARGOCD_REPOSITORY_INSECURE: "true"
@@ -18,13 +18,13 @@ configMap:
     KUBECHECKS_LOG_LEVEL: debug
     KUBECHECKS_NAMESPACE: kubechecks
     KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.apps.${PLATFORM_BASE_DOMAIN}
-    KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server-openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
     ARGOCD_EXEC_TIMEOUT: 600s
     KUBECHECKS_OTEL_ENABLED: "false"
     KUBECHECKS_VCS_TYPE: "github"
     KUBECHECKS_VCS_USERNAME: "vikaspogu"
     KUBECHECKS_VCS_EMAIL: "vikaspoguadf@gmail.com"
     KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "hide" # other options delete
+    GRPC_ENFORCE_ALPN_ENABLED: "false"
 
 deployment:
   annotations:
@@ -96,24 +96,10 @@ deployment:
     successThreshold: 1
     timeoutSeconds: 5
 
-  volumes: []
-  volumeMounts: []
-
-secrets:
-  create: false
-  name: '{{ include "kubechecks.fullname" . }}'
-  # envs can be used for writing sensitive environment variables
-  # to the secret resource. These should be passed into the
-  # deployment as arguments.
-  env: {}
-  # KUBECHECKS_VCS_TOKEN: <token>
-
 serviceAccount:
-  # Specifies whether a service account should be created or used
   create: true
   enabled: true
   name: '{{ include "kubechecks.fullname" . }}'
-  annotations: {}
 
 service:
   create: true
@@ -126,24 +112,8 @@ ingress:
   className: ""
   annotations:
     route.openshift.io/termination: "edge"
-  #   kubernetes.io/ingress.class: nginx
-  #   # See https://cert-manager.readthedocs.io/en/latest/reference/ingress-shim.html#supported-annotations
-  #   kubernetes.io/tls-acme: "true"
   hosts:
     kubechecks.apps.${PLATFORM_BASE_DOMAIN}:
       paths:
         - path: "/"
           pathType: Prefix
-
-  # Secrets must be manually created in the namespace
-  # tls:
-  #  - secretName: kubechecks-ingress-tls
-  #    hosts:
-  #    - kubechecks.example.com
-
-autoscaling:
-  create: false
-  # minReplicas: 1
-  # maxReplicas: 100
-  # targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
