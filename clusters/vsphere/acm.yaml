@@ -47,6 +47,7 @@ applications:
   vsphere1-cluster-config:
     annotations:
       argocd.argoproj.io/sync-wave: "55"
+    enableAutoSync: false
     destination:
       namespace: vsphere1
     source:
