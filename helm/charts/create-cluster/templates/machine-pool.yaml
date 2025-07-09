@@ -1,0 +1,20 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: MachinePool
+metadata:
+  name: {{ .Values.clusterName }}-worker
+  namespace: {{ .Values.clusterName }}
+  labels:
+    {{- include "create-cluster.labels" . | nindent 4 }}
+spec:
+  clusterDeploymentRef:
+    name: {{ .Values.clusterName }}
+  name: worker
+  platform:
+    vsphere:
+      cpus:  {{ .Values.workerNode.cpus }}
+      coresPerSocket:  {{ .Values.workerNode.corePerSocket }}
+      memoryMB:  {{ .Values.workerNode.memoryMB }}
+      osDisk:
+        diskSizeGB: {{ .Values.workerNode.diskSizeGB }}
+  replicas: {{ .Values.workerNode.replicas }}
