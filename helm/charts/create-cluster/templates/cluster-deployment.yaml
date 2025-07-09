@@ -18,7 +18,7 @@ spec:
   installed: false
   platform:
     vsphere:
-      cluster:
+      cluster: {{ .Values.vcenter.cluster }}
       certificatesSecretRef:
         name: {{ .Values.clusterName }}-vsphere-certs
       credentialsSecretRef:
