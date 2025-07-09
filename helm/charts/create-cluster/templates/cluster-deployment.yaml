@@ -37,14 +37,3 @@ spec:
       name: img4.19.2-multi-appsub
   pullSecretRef:
     name: {{ .Values.clusterName }}-pull-secret
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: {{ .Values.clusterName }}-vsphere-certs
-  namespace: {{ .Values.clusterName }}
-  labels:
-    {{- include "create-cluster.labels" . | nindent 4 }}
-data:
-  .cacert: # injected on create
