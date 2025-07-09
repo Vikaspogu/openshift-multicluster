@@ -8,7 +8,7 @@ configMap:
   create: true
   env:
     KUBECHECKS_ADDITIONAL_APPS_NAMESPACES: "*"
-    KUBECHECKS_ARGOCD_API_INSECURE: "false"
+    KUBECHECKS_ARGOCD_API_INSECURE: "true"
     KUBECHECKS_ARGOCD_API_NAMESPACE: openshift-gitops
     KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server.openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
     KUBECHECKS_ARGOCD_WEBHOOK_URL: http://openshift-gitops-server.openshift-gitops:80/api/webhook
