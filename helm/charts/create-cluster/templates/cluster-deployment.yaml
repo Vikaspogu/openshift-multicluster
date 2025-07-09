@@ -42,7 +42,7 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: {{ .Values.clusterName }}
+  name: {{ .Values.clusterName }}-vsphere-certs
   namespace: {{ .Values.clusterName }}
   labels:
     {{- include "create-cluster.labels" . | nindent 4 }}
