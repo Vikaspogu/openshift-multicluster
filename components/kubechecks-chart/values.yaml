@@ -11,6 +11,7 @@ configMap:
     KUBECHECKS_ARGOCD_API_INSECURE: "true"
     KUBECHECKS_ARGOCD_API_NAMESPACE: openshift-gitops
     KUBECHECKS_ARGOCD_API_SERVER_ADDR: openshift-gitops-server.openshift-gitops.apps.${PLATFORM_BASE_DOMAIN}
+    KUBECHECKS_ARGOCD_API_PATH_PREFIX: /api/v1
     KUBECHECKS_ARGOCD_WEBHOOK_URL: http://openshift-gitops-server.openshift-gitops:80/api/webhook
     KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: openshift-gitops-repo-server.openshift-gitops.svc.clsuter.local:8081
     KUBECHECKS_ARGOCD_REPOSITORY_INSECURE: "true"
