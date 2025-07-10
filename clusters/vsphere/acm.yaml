@@ -36,13 +36,13 @@ applications:
     source:
       path: components/acm-policies
 
-  acm-policy-gitops-boostrap-policy:
+  acm-policy-gitops-bootstrap-policy:
     annotations:
       argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: acm-policies
     source:
-      path: components/gitops-boostrap-policy
+      path: components/gitops-bootstrap-policy
 
   vsphere1-cluster-config:
     annotations:
