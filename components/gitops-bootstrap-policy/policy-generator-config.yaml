@@ -5,6 +5,8 @@ metadata:
 policyDefaults:
   namespace: acm-policies
   remediationAction: enforce
+  hubTemplateOptions:
+    serviceAccountName: "policy-admin"
 placementBindingDefaults:
   name: "binding-policy-gitops"
 policies:
