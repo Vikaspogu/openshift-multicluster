@@ -1,0 +1,20 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: ConfigurationPolicy
+metadata:
+  name: managed-cluster-addon-policy
+spec:
+  object-templates-raw: |
+    {{- range $mc := (lookup "cluster.open-cluster-management.io/v1" "ManagedCluster" "" "" "local-cluster!=true").items }}
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: addon.open-cluster-management.io/v1alpha1
+        kind: ManagedClusterAddOn
+        metadata:
+          name: governance-standalone-hub-templating
+          namespace: '{{ $mc.metadata.name }}'
+          labels:
+            cluster.open-cluster-management.io/backup: ''
+        spec:
+          installNamespace: open-cluster-management-agent-addon
+    {{- end
