@@ -15,7 +15,7 @@ helmCharts:
     releaseName: devlake
     namespace: apache-devlake
     repo: https://apache.github.io/incubator-devlake-helm-chart
-    version: "1.0.1"
+    version: "1.0.2"
     valuesInline:
       lake:
         encryptionSecret:
