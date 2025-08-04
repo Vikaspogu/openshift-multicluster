@@ -15,5 +15,6 @@ helmCharts:
           name: cluster-logging
           source: redhat-operators
           sourceNamespace: openshift-marketplace
+          startingCSV: cluster-logging.v023
       operatorGroups:
         - createNamespace: true
