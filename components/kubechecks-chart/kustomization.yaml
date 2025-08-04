@@ -12,5 +12,5 @@ helmCharts:
     releaseName: kubechecks
     namespace: kubechecks
     repo: https://zapier.github.io/kubechecks/
-    version: "0.5.5"
+    version: "0.5.6"
     valuesFile: values.yaml
