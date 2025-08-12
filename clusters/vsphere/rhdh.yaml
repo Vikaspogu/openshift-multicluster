@@ -7,10 +7,10 @@ applications:
     source:
       path: components/rhdh-operator
 
-  # developer-hub-config:
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "15"
-  #   destination:
-  #     namespace: rhdh-operator
-  #   source:
-  #     path: components/developer-hub-config
+  developer-hub-config:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: rhdh-operator
+    source:
+      path: components/developer-hub-config

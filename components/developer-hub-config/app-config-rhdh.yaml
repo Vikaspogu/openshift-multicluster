@@ -144,24 +144,20 @@ catalog:
   rules:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
-    - type: url
-      target: https://github.com/devhub-showcase/software-templates/blob/main/scaffolder-templates/**/template.yaml
-      rules:
-        - allow: [Template]
+    # - type: url
+    #   target: https://github.com/devhub-showcase/software-templates/blob/main/scaffolder-templates/**/template.yaml
+    #   rules:
+    #     - allow: [Template]
     - target: https://github.com/devhub-showcase/software-templates/blob/main/org.yaml
       type: url
       rules:
         - allow: [Group, User]
-    - type: url
-      target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
-      rules:
-        - allow: [Template]
 
   providers:
     ocm:
       default:
         name: multiclusterhub
-        kubernetesPluginRef: proxmox
+        kubernetesPluginRef: vsphere
     github:
       providerId:
         organization: "devhub-showcase"

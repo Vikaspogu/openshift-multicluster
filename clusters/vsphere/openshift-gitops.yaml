@@ -17,7 +17,7 @@ applications:
 
   kubechecks-chart:
     annotations:
-      argocd.argoproj.io/sync-wave: "15"
+      argocd.argoproj.io/sync-wave: "35"
     destination:
       namespace: kubechecks
     source:
