@@ -43,17 +43,18 @@ helmCharts:
               factor: 2
               maxDuration: 10m
     additionalValuesFiles:
-      - ./acm.yaml
-      - ./alertmanager.yaml
+      # - ./acm.yaml
+      # - ./alertmanager.yaml
       - ./cert-manager.yaml
       - ./cloudflared.yaml
       - ./external-secrets.yaml
       - ./oauth.yaml
       - ./onepassword-connect.yaml
       - ./openshift-gitops.yaml
-      - ./openshift-pipelines.yaml
+      # - ./openshift-pipelines.yaml
       - ./reflector.yaml
       - ./reloader.yaml
+      - ./rhdh.yaml
       - ./web-terminal.yaml
     namespace: openshift-gitops
 
