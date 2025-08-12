@@ -8,12 +8,12 @@ resources:
   - ./backstage.yaml
   - ./externalsecret.yaml
   - ./externalsecret-pullsecret.yaml
-  - ./externalsecret-devhub-read.yaml
-  - ./externalsecret-pipeline-build.yaml
+  # - ./externalsecret-devhub-read.yaml
+  # - ./externalsecret-pipeline-build.yaml
   - ./rolebindings.yaml
   - ./ocm-rolebindings.yaml
   - ./console-link.yaml
-  - ./aap-tools-deployment.yaml
+  # - ./aap-tools-deployment.yaml
 
 configMapGenerator:
   - name: app-config-rhdh

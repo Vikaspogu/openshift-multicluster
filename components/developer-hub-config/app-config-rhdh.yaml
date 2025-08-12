@@ -26,33 +26,33 @@ backend:
     allow:
       - host: "*.apps.${PLATFORM_BASE_DOMAIN}"
 
-ansible:
-  creatorService:
-    baseUrl: ansible-dev-tools-rhel8-svc.developer-hub.svc.cluster.local
-    port: "8000"
-  devSpaces:
-    baseUrl: https://devspaces.apps.${PLATFORM_BASE_DOMAIN}/
-  rhaap:
-    baseUrl: ${AAP_URL}
-    token: ${AAP_AUTH_TOKEN}
-    checkSSL: false
+# ansible:
+#   creatorService:
+#     baseUrl: ansible-dev-tools-rhel8-svc.developer-hub.svc.cluster.local
+#     port: "8000"
+#   devSpaces:
+#     baseUrl: https://devspaces.apps.${PLATFORM_BASE_DOMAIN}/
+#   rhaap:
+#     baseUrl: ${AAP_URL}
+#     token: ${AAP_AUTH_TOKEN}
+#     checkSSL: false
 
-open-dora:
-  apiBaseUrl: https://open-dora-apache-devlake.apps.${PLATFORM_BASE_DOMAIN}
+# open-dora:
+#   apiBaseUrl: https://open-dora-apache-devlake.apps.${PLATFORM_BASE_DOMAIN}
 
-sonarQube:
-  baseUrl: https://sonarqube-cicd-tools.apps.${PLATFORM_BASE_DOMAIN}
+# sonarQube:
+#   baseUrl: https://sonarqube-cicd-tools.apps.${PLATFORM_BASE_DOMAIN}
 
-orchestrator:
-  sonataFlowService:
-    baseUrl: http://localhost
-    port: 8899
-    autoStart: true
-    workflowsSource:
-      gitRepositoryUrl: https://github.com/parodos-dev/backstage-orchestrator-workflows
-      localPath: /tmp/orchestrator/repository
-  dataIndexService:
-    url: http://localhost:8899
+# orchestrator:
+#   sonataFlowService:
+#     baseUrl: http://localhost
+#     port: 8899
+#     autoStart: true
+#     workflowsSource:
+#       gitRepositoryUrl: https://github.com/parodos-dev/backstage-orchestrator-workflows
+#       localPath: /tmp/orchestrator/repository
+#   dataIndexService:
+#     url: http://localhost:8899
 
 techRadar:
   url: https://raw.githubusercontent.com/Vikaspogu/openshift-multicluster/refs/heads/main/clusters/proxmox/overlays/developer-hub-config/config/tech-radar.json
@@ -109,7 +109,7 @@ kubernetes:
     - type: "config"
       clusters:
         - url: https://api.${PLATFORM_BASE_DOMAIN}:6443
-          name: proxmox
+          name: vsphere
           authProvider: "serviceAccount"
           skipTLSVerify: true
           serviceAccountToken: ${token}

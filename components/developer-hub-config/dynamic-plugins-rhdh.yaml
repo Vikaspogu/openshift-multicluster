@@ -1,60 +1,60 @@
 includes:
   - dynamic-plugins.default.yaml
 plugins:
-  - disabled: false
-    integrity: sha512-D2FSw+UZXXQQdQSLyNI0e5NUvTgMwidh3OBZRm4AMODzeAffL/mf5ZNnkVgtAUexTkkjZoVG6kRYzZ1NKiODIQ==
-    package: "https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-1.0.0.tgz"
-    pluginConfig:
-      dynamicPlugins:
-        frontend:
-          ansible.plugin-backstage-rhaap:
-            appIcons:
-              - importName: AnsibleLogo
-                name: AnsibleLogo
-            dynamicRoutes:
-              - importName: AnsiblePage
-                menuItem:
-                  icon: AnsibleLogo
-                  text: Ansible
-                path: /ansible
-  - disabled: false
-    integrity: sha512-myeuYBzGVXgLT3uCFiT39/rAw5R6tS6GlJdchxoa+DxQ8I1ytPP45ZL/6bNs+UBsivnGcHJCOWcsR8J1aQe3kw==
-    package: >-
-      https://static.vikaspogu.com/ansible-plugin-scaffolder-backend-module-backstage-rhaap-1.0.0.tgz
-    pluginConfig:
-      dynamicPlugins:
-        backend:
-          ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
-  - disabled: false
-    integrity: sha512-1E/PNbQ1yW0XpV87kaMobOoSCyxXe1KG5FsO+3UqzmHHLPTHuKGjjfTukIz51EQMzPSUES3tY3uryKAIe03OqQ==
-    package: >-
-      https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
-    pluginConfig:
-      dynamicPlugins:
-        backend:
-          ansible.plugin-backstage-rhaap-backend: null
-  - integrity: "sha512-fn6R8FFYSEjdfinApnSwvQumxIy2k2xVhl8dM4bFAkl00fmpfvURUyy2qfeDqQUzd0kOgid+eNuyhRx00zzGBg=="
-    disabled: false
-    package: https://static.vikaspogu.com/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
-  - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
-    package: https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
-  - integrity: "sha512-FekJ7hvUTMCEdtSImvUZ269rcLzJTw2HtaEflthksYbxvx9/G8Qqx4CCQ/+FNK/VnWdSnmxONYNKkJI1oTGj0w=="
-    package: "https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
-    pluginConfig:
-      dynamicPlugins:
-        frontend:
-          vikaspogu.rhdh-timesaver:
-            appIcons:
-              - name: timeSaverIcon
-                importName: TimeSaverIcon
-            dynamicRoutes:
-              - importName: TimeSaverPage
-                menuItem:
-                  text: TimeSaver
-                  icon: timeSaverIcon
-                path: /time-saver
-                config:
-                  pollingIntervalMs: 5000
+  # - disabled: false
+  #   integrity: sha512-D2FSw+UZXXQQdQSLyNI0e5NUvTgMwidh3OBZRm4AMODzeAffL/mf5ZNnkVgtAUexTkkjZoVG6kRYzZ1NKiODIQ==
+  #   package: "https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-1.0.0.tgz"
+  #   pluginConfig:
+  #     dynamicPlugins:
+  #       frontend:
+  #         ansible.plugin-backstage-rhaap:
+  #           appIcons:
+  #             - importName: AnsibleLogo
+  #               name: AnsibleLogo
+  #           dynamicRoutes:
+  #             - importName: AnsiblePage
+  #               menuItem:
+  #                 icon: AnsibleLogo
+  #                 text: Ansible
+  #               path: /ansible
+  # - disabled: false
+  #   integrity: sha512-myeuYBzGVXgLT3uCFiT39/rAw5R6tS6GlJdchxoa+DxQ8I1ytPP45ZL/6bNs+UBsivnGcHJCOWcsR8J1aQe3kw==
+  #   package: >-
+  #     https://static.vikaspogu.com/ansible-plugin-scaffolder-backend-module-backstage-rhaap-1.0.0.tgz
+  #   pluginConfig:
+  #     dynamicPlugins:
+  #       backend:
+  #         ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+  # - disabled: false
+  #   integrity: sha512-1E/PNbQ1yW0XpV87kaMobOoSCyxXe1KG5FsO+3UqzmHHLPTHuKGjjfTukIz51EQMzPSUES3tY3uryKAIe03OqQ==
+  #   package: >-
+  #     https://static.vikaspogu.com/ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
+  #   pluginConfig:
+  #     dynamicPlugins:
+  #       backend:
+  #         ansible.plugin-backstage-rhaap-backend: null
+  # - integrity: "sha512-fn6R8FFYSEjdfinApnSwvQumxIy2k2xVhl8dM4bFAkl00fmpfvURUyy2qfeDqQUzd0kOgid+eNuyhRx00zzGBg=="
+  #   disabled: false
+  #   package: https://static.vikaspogu.com/vikaspogu-custom-utils-backend-dynamic-0.0.4.tgz
+  # - integrity: "sha512-VN6E0Au444d52ooVSY9sl92tJEV0hkxhucrTYrsN34iT0W2wVl/aQH5uXrxMfBYqQDsPBjmzEKcQIJHol91Keg=="
+  #   package: https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-backend-dynamic-0.0.3.tgz
+  # - integrity: "sha512-FekJ7hvUTMCEdtSImvUZ269rcLzJTw2HtaEflthksYbxvx9/G8Qqx4CCQ/+FNK/VnWdSnmxONYNKkJI1oTGj0w=="
+  #   package: "https://static.vikaspogu.com/vikaspogu-dynamic-timesaver-dynamic-0.0.2.tgz"
+  #   pluginConfig:
+  #     dynamicPlugins:
+  #       frontend:
+  #         vikaspogu.rhdh-timesaver:
+  #           appIcons:
+  #             - name: timeSaverIcon
+  #               importName: TimeSaverIcon
+  #           dynamicRoutes:
+  #             - importName: TimeSaverPage
+  #               menuItem:
+  #                 text: TimeSaver
+  #                 icon: timeSaverIcon
+  #               path: /time-saver
+  #               config:
+  #                 pollingIntervalMs: 5000
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
   - disabled: false
