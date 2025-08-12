@@ -79,8 +79,8 @@ plugins:
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs
-  - disabled: false
-    package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
+  # - disabled: false
+  #   package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-quay
   - disabled: false
