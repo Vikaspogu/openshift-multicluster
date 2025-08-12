@@ -63,8 +63,8 @@ plugins:
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
-  - disabled: false
-    package: ./dynamic-plugins/dist/backstage-community-plugin-topology
+  # - disabled: false
+  #   package: ./dynamic-plugins/dist/backstage-community-plugin-topology
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
   - disabled: false
