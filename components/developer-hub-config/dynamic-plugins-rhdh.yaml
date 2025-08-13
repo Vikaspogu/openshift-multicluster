@@ -105,3 +105,13 @@ plugins:
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
   - disabled: false
     package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
