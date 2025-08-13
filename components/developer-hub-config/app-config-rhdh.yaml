@@ -152,7 +152,10 @@ catalog:
       type: url
       rules:
         - allow: [Group, User]
-
+    - type: url
+      target: https://gitlab.vikaspogu.com/Vikas/servicecatalogtemplates/-/blob/main/**/**.yaml?ref_type=heads
+      rules:
+        - allow: [Template, Location]
   providers:
     ocm:
       default:
