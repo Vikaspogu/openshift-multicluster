@@ -80,6 +80,8 @@ integrations:
   gitlab:
     - host: gitlab.vikaspogu.com
       token: ${GITLAB_TOKEN}
+      apiBaseUrl: https://gitlab.vikaspogu.com/api/v4
+      baseUrl: https://gitlab.vikaspogu.com
   github:
     - host: github.com
       apps:
