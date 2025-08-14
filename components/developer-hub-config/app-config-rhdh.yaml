@@ -158,7 +158,7 @@ catalog:
       rules:
         - allow: [Group, User]
     - type: url
-      target: hhttps://gitlab.vikaspogu.com/Vikas/servicecatalogtemplates/-/blob/main/catalog-info.yaml?ref_type=heads
+      target: https://gitlab.vikaspogu.com/Vikas/servicecatalogtemplates/-/blob/main/catalog-info.yaml?ref_type=heads
   providers:
     ocm:
       default:

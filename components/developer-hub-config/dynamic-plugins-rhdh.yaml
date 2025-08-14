@@ -115,3 +115,5 @@ plugins:
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-dynamic
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
+  - disabled: false
+    package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-module-http-request-dynamic
