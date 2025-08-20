@@ -90,9 +90,9 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-github-actions
+    package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-github-issues
+    package: ./dynamic-plugins/dist/backstage-community-plugin-github-issues
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
   - disabled: false
