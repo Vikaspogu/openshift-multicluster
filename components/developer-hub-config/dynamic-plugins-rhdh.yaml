@@ -64,7 +64,7 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
+    package: ./dynamic-plugins/dist/backstage-community-plugin-topology
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
   - disabled: false
@@ -80,9 +80,9 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-techdocs
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
+    package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
+    package: ./dynamic-plugins/dist/backstage-community-plugin-quay
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
   # - disabled: false
@@ -100,11 +100,11 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
+    package: ./dynamic-plugins/dist/backstage-community-plugin-ocm-backend-dynamic
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
+    package: ./dynamic-plugins/dist/backstage-community-plugin-ocm
   - disabled: false
-    package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-rbac
+    package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
   - disabled: false
