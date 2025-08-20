@@ -82,9 +82,10 @@ auth:
         prompt: auto
         signIn:
           resolvers:
-            - resolver: preferredUsernameMatchingUserEntityName
             - resolver: emailMatchingUserEntityProfileEmail
             - resolver: emailLocalPartMatchingUserEntityName
+              allowedDomains:
+                - ${PLATFORM_BASE_DOMAIN}
         sessionDuration: { hours: 2 }
     github:
       production:
