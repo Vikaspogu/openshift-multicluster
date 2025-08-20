@@ -176,10 +176,10 @@ catalog:
     #   target: https://github.com/devhub-showcase/software-templates/blob/main/scaffolder-templates/**/template.yaml
     #   rules:
     #     - allow: [Template]
-    - target: https://github.com/devhub-showcase/software-templates/blob/main/org.yaml
-      type: url
-      rules:
-        - allow: [Group, User]
+    # - target: https://github.com/devhub-showcase/software-templates/blob/main/org.yaml
+    #   type: url
+    #   rules:
+    #     - allow: [Group, User]
     - type: url
       target: https://gitlab.vikaspogu.com/Vikas/servicecatalogtemplates/-/blob/main/catalog-info.yaml?ref_type=heads
   providers:
