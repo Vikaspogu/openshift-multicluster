@@ -82,14 +82,9 @@ auth:
         prompt: auto
         signIn:
           resolvers:
-            - resolver: oidcSubClaimMatchingKeycloakUserId
-              dangerouslyAllowSignInWithoutUserInCatalog: true
             - resolver: preferredUsernameMatchingUserEntityName
-              dangerouslyAllowSignInWithoutUserInCatalog: true
             - resolver: emailMatchingUserEntityProfileEmail
-              dangerouslyAllowSignInWithoutUserInCatalog: true
             - resolver: emailLocalPartMatchingUserEntityName
-              dangerouslyAllowSignInWithoutUserInCatalog: true
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
