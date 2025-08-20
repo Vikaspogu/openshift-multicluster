@@ -78,13 +78,6 @@ auth:
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
         prompt: auto
-    keycloakOrg:
-      default:
-        realm: master
-        loginRealm: master
-        baseUrl: ${AUTH_OIDC_METADATA_URL}
-        clientId: ${AUTH_OIDC_CLIENT_ID}
-        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
@@ -184,6 +177,13 @@ catalog:
       default:
         name: multiclusterhub
         kubernetesPluginRef: vsphere
+    keycloakOrg:
+      default:
+        realm: master
+        loginRealm: master
+        baseUrl: ${AUTH_OIDC_METADATA_URL}
+        clientId: ${AUTH_OIDC_CLIENT_ID}
+        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
     github:
       providerId:
         organization: "devhub-showcase"
