@@ -80,6 +80,12 @@ auth:
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
         prompt: auto
+        signIn:
+          resolvers:
+            - resolver: oidcSubClaimMatchingKeycloakUserId
+            - resolver: preferredUsernameMatchingUserEntityName
+            - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
