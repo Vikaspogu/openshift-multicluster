@@ -85,6 +85,7 @@ auth:
             - resolver: preferredUsernameMatchingUserEntityName
             - resolver: emailMatchingUserEntityProfileEmail
             - resolver: emailLocalPartMatchingUserEntityName
+        sessionDuration: { hours: 2 }
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
@@ -189,7 +190,11 @@ catalog:
         baseUrl: ${AUTH_OIDC_METADATA_URL}
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+        realm: master
+        loginRealm: master
         schedule:
+          frequency: { minutes: 2 }
+          timeout: { minutes: 1 }
           initialDelay: { seconds: 15 }
     github:
       providerId:
