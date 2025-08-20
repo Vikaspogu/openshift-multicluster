@@ -1,0 +1,16 @@
+applications:
+  rhsso-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: sso
+    source:
+      path: components/rhsso-operator
+
+  # rhsso-config:
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "15"
+  #   destination:
+  #     namespace: sso
+  #   source:
+  #     path: components/rhsso-config
