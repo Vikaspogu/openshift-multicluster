@@ -2,11 +2,13 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: rhsso-operator
-  namespace: sso
+  labels:
+    operators.coreos.com/rhbk-operator.keycloak: ""
+  name: rhbk-operator
+  namespace: keycloak
 spec:
-  channel: stable
+  channel: "stable-v22"
   installPlanApproval: Automatic
-  name: rhsso-operator
+  name: rhbk-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
