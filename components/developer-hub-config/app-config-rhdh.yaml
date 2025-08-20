@@ -82,9 +82,7 @@ auth:
         prompt: auto
         signIn:
           resolvers:
-            - resolver: preferredUsernameMatchingUserEntityName
-            - resolver: emailMatchingUserEntityProfileEmail
-            - resolver: emailLocalPartMatchingUserEntityName
+            - resolver: usernameMatchingUserEntityName
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
