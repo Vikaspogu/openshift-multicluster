@@ -1,0 +1,16 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  labels:
+    app: devhub
+  name: devhub-realm
+  namespace: sso
+spec:
+  realm:
+    id: devhub
+    realm: devhub
+    enabled: true
+    displayName: DevHub Authentication Realm
+  instanceSelector:
+    matchLabels:
+      app: sso
