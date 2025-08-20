@@ -136,6 +136,12 @@ kubernetes:
         - apiVersion: v1
           group: postgresql.cnpg.io
           plural: cluster
+        - group: "argoproj.io"
+          apiVersion: "v1alpha1"
+          plural: "Rollouts"
+        - group: "argoproj.io"
+          apiVersion: "v1alpha1"
+          plural: "analysisruns"
 
 permission:
   enabled: true
@@ -143,7 +149,7 @@ permission:
     admin:
       superUsers:
         - name: user:default/vikaspogu
-    policies-csv-file: ./rbac-policy.csv
+    # policies-csv-file: ./rbac-policy.csv
 
 catalog:
   rules:
