@@ -80,7 +80,9 @@ plugins:
   - disabled: false
     package: ./dynamic-plugins/dist/backstage-community-plugin-quay
   - disabled: false
-    package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
+    package: ./dynamic-plugins/dist/backstage-community-plugin-tech-radar
+  - disabled: false
+    package: ./dynamic-plugins/dist/backstage-community-plugin-tech-radar-backend-dynamic
   # - disabled: false
   #   package: ./dynamic-plugins/dist/backstage-plugin-sonarqube
   # - disabled: false
