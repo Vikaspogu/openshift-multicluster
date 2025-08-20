@@ -165,6 +165,7 @@ permission:
     admin:
       superUsers:
         - name: user:default/vikaspogu
+        - name: user:default/admin
     # policies-csv-file: ./rbac-policy.csv
 
 catalog:
