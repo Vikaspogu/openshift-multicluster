@@ -78,6 +78,10 @@ auth:
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
         prompt: auto
+        signIn:
+          resolvers:
+            - resolver: oidcSubClaimMatchingKeycloakUserID
+              dangerouslyAllowSignInWithoutUserInCatalog: true
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
@@ -179,11 +183,12 @@ catalog:
         kubernetesPluginRef: vsphere
     keycloakOrg:
       default:
-        realm: master
-        loginRealm: master
         baseUrl: ${AUTH_OIDC_METADATA_URL}
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+        schedule:
+          frequency: { hours: 1 }
+          initialDelay: { seconds: 15 }
     github:
       providerId:
         organization: "devhub-showcase"
