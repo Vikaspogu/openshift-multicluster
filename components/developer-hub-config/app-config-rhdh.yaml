@@ -186,11 +186,10 @@ catalog:
         kubernetesPluginRef: vsphere
     keycloakOrg:
       default:
-        baseUrl: https://keycloak.apps.vsphere.v3socp.boo
+        baseUrl: ${AUTH_OIDC_METADATA_URL}
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
         schedule:
-          frequency: { hours: 1 }
           initialDelay: { seconds: 15 }
     github:
       providerId:
