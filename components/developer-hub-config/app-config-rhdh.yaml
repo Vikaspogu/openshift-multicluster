@@ -82,10 +82,7 @@ auth:
         prompt: auto
         signIn:
           resolvers:
-            - resolver: oidcSubClaimMatchingKeycloakUserId
             - resolver: preferredUsernameMatchingUserEntityName
-            - resolver: emailMatchingUserEntityProfileEmail
-            - resolver: emailLocalPartMatchingUserEntityName
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
