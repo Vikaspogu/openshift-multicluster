@@ -56,6 +56,7 @@ helmCharts:
       - ./reloader.yaml
       - ./rhdh.yaml
       - ./web-terminal.yaml
+      - ./sso.yaml
     namespace: openshift-gitops
 
 patches: []
