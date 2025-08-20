@@ -22,5 +22,3 @@ spec:
       key: password
   http:
     tlsSecret: keycloak-tls-cert
-  proxy:
-    headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
