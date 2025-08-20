@@ -67,10 +67,16 @@ argocd:
           url: https://team-a-cicd-server-team-a-cicd.apps.${PLATFORM_BASE_DOMAIN}
       type: config
 
-signInPage: github
+# signInPage: github
+signInPage: oidc
 auth:
   environment: production
   providers:
+    oidc:
+      production:
+        clientId: ${AUTH_OIDC_CLIENT_ID}
+        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+        prompt: auto
     github:
       production:
         clientId: ${GITHUB_APP_CLIENT_ID}
