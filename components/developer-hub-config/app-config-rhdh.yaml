@@ -85,7 +85,7 @@ auth:
             - resolver: emailMatchingUserEntityProfileEmail
             - resolver: emailLocalPartMatchingUserEntityName
               allowedDomains:
-                - ${PLATFORM_BASE_DOMAIN}
+                - example.com
         sessionDuration: { hours: 2 }
     github:
       production:
