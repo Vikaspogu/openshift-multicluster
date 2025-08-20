@@ -188,7 +188,7 @@ catalog:
         kubernetesPluginRef: vsphere
     keycloakOrg:
       default:
-        baseUrl: ${AUTH_OIDC_METADATA_URL}
+        baseUrl: https://keycloak.apps.vsphere.v3socp.boo/
         clientId: ${AUTH_OIDC_CLIENT_ID}
         clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
         realm: master
