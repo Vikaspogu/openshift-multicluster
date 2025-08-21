@@ -1,8 +1,13 @@
 result: CONDITIONAL
-roleEntityRef: <role_entity_reference>
-pluginId: <plugin_id>
+roleEntityRef: role:default/team2
+pluginId: catalog
 permissionMapping:
   - read
   - update
   - delete
-conditions: <conditions>
+conditions:
+  rule: IS_ENTITY_OWNER
+  resourceType: catalog-entity
+  params:
+    claims:
+      - "$currentUser"
