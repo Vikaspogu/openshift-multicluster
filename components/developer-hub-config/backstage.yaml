@@ -29,7 +29,7 @@ spec:
     extraFiles:
       mountPath: /opt/app-root/src
       configMaps:
-        - name: rbac-policy
+        - name: rbac-policies
     replicas: 1
     route:
       enabled: true

@@ -162,11 +162,13 @@ kubernetes:
 permission:
   enabled: true
   rbac:
+    conditionalPoliciesFile: /opt/app-root/src/rbac-conditional-policies.yaml
+    policies-csv-file: /opt/app-root/src/rbac-policies.csv
+    policyFileReload: true
     admin:
       superUsers:
         - name: user:default/vikaspogu
         - name: user:default/admin
-    # policies-csv-file: ./rbac-policy.csv
 
 catalog:
   rules:

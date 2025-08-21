@@ -1,0 +1,8 @@
+result: CONDITIONAL
+roleEntityRef: <role_entity_reference>
+pluginId: <plugin_id>
+permissionMapping:
+  - read
+  - update
+  - delete
+conditions: <conditions>

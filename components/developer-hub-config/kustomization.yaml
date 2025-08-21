@@ -22,9 +22,10 @@ configMapGenerator:
   - name: dynamic-plugins-rhdh
     files:
       - dynamic-plugins.yaml=./dynamic-plugins-rhdh.yaml
-  - name: rbac-policy
+  - name: rbac-policies
     files:
-      - rbac-policy.csv=./rbac-policy.csv
+      - rbac-policies.csv=./rbac-policies.csv
+      - rbac-conditional-policies.yaml=./rbac-conditional-policies.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

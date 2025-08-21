@@ -1,0 +1,4 @@
+p, role:default/team1, catalog-entity, read, allow
+g, user:default/user1, role:default/team1
+p, role:default/team2, catalog.entity.create, create, allow
+g, user:default/user2, role:default/team2
