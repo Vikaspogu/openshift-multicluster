@@ -1,87 +1,416 @@
-<!-- markdownlint-disable MD041 -->
+# Multi-Cluster OpenShift Management with GitOps
 
-<img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" align="left" width="45" height="47"/><h1>&nbsp;&nbsp;Multi-Cluster OpenShift Management with ArgoCD</h1>
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/792337?s=280&v=4" alt="Red Hat Logo" width="80" height="80"/>
+  <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-logo.png" alt="ArgoCD Logo" width="80" height="80"/>
+</div>
 
-_... managed by ArgoCD_ <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-logo.png" align="center" width="40px" height="40px"/>
+<div align="center">
+  <h3>Enterprise-grade multi-cluster OpenShift management using ArgoCD and GitOps principles</h3>
+
+[![OpenShift](https://img.shields.io/badge/OpenShift-4.12+-red?logo=redhat)](https://www.redhat.com/en/technologies/cloud-computing/openshift)
+[![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-blue?logo=argo)](https://argo-cd.readthedocs.io/)
+[![Helm](https://img.shields.io/badge/Helm-Charts-0f1689?logo=helm)](https://helm.sh/)
+[![Kustomize](https://img.shields.io/badge/Kustomize-Patches-326ce5?logo=kubernetes)](https://kustomize.io/)
+
+</div>
 
 ---
 
-## :wave: Overview
+## 📋 Table of Contents
 
-This repository provides the necessary files and instructions to manage multiple OpenShift clusters using ArgoCD and GitOps principles. This setup allows for consistent, repeatable, and automated configuration of your OpenShift environments. This repository follows standards from [gitops-standards-repo-template](https://github.com/redhat-cop/gitops-standards-repo-template.git)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Quick Start](#quick-start)
+- [Repository Structure](#repository-structure)
+- [Cluster Management](#cluster-management)
+- [Components & Features](#components--features)
+- [Development Environment](#development-environment)
+- [ArgoCD Plugins](#argocd-plugins-and-usage)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Resources](#resources)
 
-## Table of Contents
+## 📖 Overview
 
-1. [Installation of OpenShift cluster](#installing-openshift-cluster-with-agent-based-installer)
-2. [Bootstrap Argocd instance](#bootstrap-argocd-instance)
-3. [Repository Structure](https://github.com/redhat-cop/gitops-standards-repo-template?tab=readme-ov-file#repo-structure)
-4. [ArgoCD Plugins](#argocd-plugins-and-usage)
+This repository provides a production-ready, declarative approach to managing multiple OpenShift clusters using **GitOps principles** with ArgoCD. It enables:
 
-### Installing OpenShift cluster with Agent-based Installer
+- **Multi-cluster orchestration** with Red Hat Advanced Cluster Management (ACM)
+- **Consistent configuration** across development, staging, and production environments
+- **Automated deployments** and synchronization using ArgoCD
+- **Secure secret management** with External Secrets Operator and 1Password
+- **Infrastructure as Code** with Helm charts and Kustomize overlays
+- **Policy-based governance** and compliance automation
 
-[Getting started](https://docs.openshift.com/container-platform/4.12/installing/installing_with_agent_based_installer/installing-with-agent-based-installer.html) on Agent-based installer
+This setup follows the [GitOps Standards Repository Template](https://github.com/redhat-cop/gitops-standards-repo-template) from Red Hat Communities of Practice.
 
-#### Manual Steps
+## 🏗️ Architecture
 
-- Generate ISO
+```mermaid
+graph TB
+    subgraph "Management Hub Cluster"
+        ACM[Red Hat ACM]
+        ArgoCD[ArgoCD GitOps]
+        Vault[HashiCorp Vault]
+        ESO[External Secrets Operator]
+    end
 
-  ```bash
-  rm -rf installer/proxmox #remove older cluster if any
-  cp -r installer/cluster installer/proxmox #copy cluster config files
-  ./openshift-install agent create image --dir installer/proxmox #create image
-  ```
+    subgraph "Target Clusters"
+        Proxmox[Proxmox Cluster]
+        VSphere[vSphere Cluster]
+        HCP[Hosted Control Planes]
+    end
 
-- Upload ISO to proxmox from GUI
-- Create 3 VMs with CPU type as `max`
-- Start VMs and wait for the cluster installation to finish
+    subgraph "GitOps Repository"
+        Components[Components]
+        Clusters[Cluster Configs]
+        Helm[Helm Charts]
+        Policies[ACM Policies]
+    end
 
-  ```bash
-  export KUBECONFIG=installer/proxmox/auth/kubeconfig
-  ./openshift-install agent wait-for install-complete --dir installer/proxmox --log-level=debug
-  ```
+    ArgoCD --> Components
+    ArgoCD --> Clusters
+    ArgoCD --> Helm
+    ACM --> Policies
+    ACM --> Proxmox
+    ACM --> VSphere
+    ACM --> HCP
+    ESO --> Vault
 
-#### Ansible workflow to deploy OpenShift cluster
-
-[Workflow](https://github.com/Vikaspogu/homelab-orchestrator/blob/main/ansible/awx/workflows/openshift-cluster.yaml) to automate manual steps described above
-
-## Bootstrap ArgoCD instance
-
-### Manual
-
-```bash
-oc login
-./.bootstrap/setup.sh
+    style ACM fill:#e1f5fe
+    style ArgoCD fill:#f3e5f5
+    style Vault fill:#fff3e0
 ```
 
-### Automated
+### Key Components
 
-[Playbook](https://github.com/Vikaspogu/homelab-orchestrator/blob/main/ansible/playbooks/openshift/acm-gitops-bootstrap.yaml) to automate manual steps described above
+- **🎯 ArgoCD**: Continuous deployment and GitOps orchestration
+- **🌐 Red Hat ACM**: Multi-cluster management and governance
+- **🔐 External Secrets**: Secure secret injection from external systems
+- **📜 Cert Manager**: Automated TLS certificate management
+- **🔧 Operators**: 50+ OpenShift operators for various capabilities
+- **📊 Observability**: Integrated monitoring, logging, and alerting
 
-## ArgoCD Plugins and Usage
+## 🚀 Quick Start
 
-Below are the list of plugins used in this Repository
+### Prerequisites
 
-- [ArgoCD Lovely Plugin](https://github.com/crumbhole/argocd-lovely-plugin/tree/main)
-- [Custom Plugins](./components/openshift-gitops-config/)
+- OpenShift cluster with cluster-admin privileges
+- `oc` CLI tool installed and configured
+- Git repository access and credentials
+
+### 1. Deploy OpenShift Cluster
+
+#### Option A: Agent-based Installer (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/Vikaspogu/openshift-multicluster.git
+cd openshift-multicluster
+
+# Generate installation ISO
+rm -rf installer/proxmox
+cp -r installer/cluster installer/proxmox
+./openshift-install agent create image --dir installer/proxmox
+
+# Wait for installation to complete
+export KUBECONFIG=installer/proxmox/auth/kubeconfig
+./openshift-install agent wait-for install-complete --dir installer/proxmox --log-level=debug
+```
+
+#### Option B: Automated with Ansible
+
+Use the [automated workflow](https://github.com/Vikaspogu/homelab-orchestrator/blob/main/ansible/awx/workflows/openshift-cluster.yaml) for hands-off deployment.
+
+### 2. Bootstrap GitOps
+
+```bash
+# Login to your OpenShift cluster
+oc login --server=https://api.cluster.example.com:6443
+
+# Bootstrap ArgoCD and initial applications
+oc apply -k components/root-application/
+
+# Verify ArgoCD deployment
+oc get applications -n openshift-gitops
+```
+
+### 3. Configure Cluster-Specific Settings
+
+Update the cluster configuration in `clusters/<cluster-name>/kustomization.yaml` to match your environment:
+
+```yaml
+helmCharts:
+  - name: argocd-app-of-app
+    valuesInline:
+      default:
+        source:
+          repoURL: https://github.com/YOUR-USERNAME/openshift-multicluster.git
+```
+
+## 📁 Repository Structure
+
+```text
+openshift-multicluster/
+├── apps/                    # Application-specific configurations
+├── clusters/                # Cluster-specific configurations
+│   ├── proxmox/            # Proxmox cluster configuration
+│   └── vsphere/            # vSphere cluster configuration
+├── components/             # Reusable component definitions
+│   ├── operators/          # OpenShift operators
+│   ├── configs/            # Configuration components
+│   └── charts/             # Custom Helm charts
+├── groups/                 # Common configurations by environment
+│   ├── all/                # Applied to all clusters
+│   └── dev/                # Development environment specific
+├── helm/charts/            # Custom Helm charts
+├── installer/              # Cluster installation files
+└── scripts/                # Utility scripts
+```
+
+### Configuration Hierarchy
+
+1. **Groups** (`groups/`) - Environment-wide defaults
+2. **Clusters** (`clusters/`) - Cluster-specific overrides
+3. **Components** (`components/`) - Individual service configurations
+4. **Apps** (`apps/`) - Application deployments
+
+## 🎛️ Cluster Management
+
+### Supported Platforms
+
+| Platform                  | Status        | Features                            |
+| ------------------------- | ------------- | ----------------------------------- |
+| **Proxmox**               | ✅ Production | VM management, storage integration  |
+| **vSphere**               | ✅ Production | vCenter integration, DRS/HA support |
+| **Hosted Control Planes** | 🚧 Beta       | Cost-effective multi-tenancy        |
+
+### Adding a New Cluster
+
+1. **Create cluster directory:**
+
+   ```bash
+   mkdir clusters/new-cluster
+   cp clusters/proxmox/kustomization.yaml clusters/new-cluster/
+   ```
+
+2. **Customize configuration:**
+
+   ```bash
+   # Edit cluster-specific values
+   vim clusters/new-cluster/kustomization.yaml
+   ```
+
+3. **Deploy via ArgoCD:**
+
+   ```bash
+   # ArgoCD will automatically detect and sync the new cluster
+   oc get applications -n openshift-gitops
+   ```
+
+## 🧩 Components & Features
+
+### Core Infrastructure
+
+- **🔄 OpenShift GitOps** - ArgoCD for continuous deployment
+- **🌐 Red Hat ACM** - Multi-cluster management hub
+- **🔒 External Secrets** - Secret management with 1Password/Vault integration
+- **📜 Cert Manager** - Automated TLS certificates via Let's Encrypt/Cloudflare
+- **🔧 Patch Operator** - Dynamic cluster configuration updates
+
+### Security & Compliance
+
+- **🛡️ Red Hat ACS** - Advanced Cluster Security for Kubernetes
+- **📋 Kyverno** - Policy engine for security and best practices
+- **🔐 LDAP Sync** - Automated user and group synchronization
+- **🔑 OAuth** - External identity provider integration
+
+### Developer Experience
+
+- **🏗️ Red Hat Developer Hub** - Internal developer platform (Backstage)
+- **💻 OpenShift Dev Spaces** - Cloud-native development workspaces
+- **🚀 OpenShift Pipelines** - Tekton-based CI/CD with Pipeline-as-Code
+- **🖥️ Web Terminal** - Browser-based cluster access
+
+### Storage & Data
+
+- **💾 LVM Storage** - Local volume management for persistent storage
+- **📊 CloudNative-PG** - PostgreSQL operator for databases
+- **🔄 VolSync** - Volume replication and backup
+- **🗄️ Synology CSI** - Network-attached storage integration
+
+### Observability
+
+- **📊 Alertmanager** - Alert routing and management
+- **📋 OpenShift Logging** - Centralized log aggregation
+- **🔍 Log Forwarder** - External log shipping configuration
+
+### Networking
+
+- **⚖️ MetalLB** - Load balancer for bare-metal clusters
+- **🌐 NMState** - Declarative network configuration
+- **☁️ Cloudflared** - Secure tunnel management
+
+## 💻 Development Environment
+
+### DevSpaces Setup
+
+This repository includes a pre-configured development environment using OpenShift Dev Spaces:
+
+```yaml
+# devfile.yaml
+components:
+  - name: dev-tools
+    container:
+      image: quay.io/rhn_gps_vpogu/devspaces-fedora40-tooling:2.0.0
+      memoryLimit: 4Gi
+```
+
+### Task Runner
+
+Use the included Task runner for common operations:
+
+```bash
+# List all available tasks
+task --list
+
+# Example tasks (extend as needed)
+task volsync:snapshot    # Create volume snapshots
+task validate           # Validate YAML configurations
+task test               # Run integration tests
+```
+
+## 🔌 ArgoCD Plugins and Usage
 
 ### ArgoCD Lovely Plugin
 
-ArgoCD Lovely Plugin facilitates the management of Kustomize patches and environment variable substitutions within the ArgoCD application specification.
+The [ArgoCD Lovely Plugin](https://github.com/crumbhole/argocd-lovely-plugin) enhances Kustomize capabilities:
 
-- [Patching Operator Channel in Helm values](./clusters/proxmox/cert-manager.yaml#L15)
-- [Kustomize Patch](./clusters/proxmox/metallb.yaml#L34)
-- [Using sed to replace variable in all yaml files](./clusters/proxmox/cert-manager.yaml#L28)
-- [Using yq to replace variable in single yaml file](./clusters/proxmox/acm.yaml#13)
+- **Environment Variable Substitution**: Replace variables across multiple files
+- **Dynamic Patching**: Apply patches based on cluster context
+- **Channel Management**: Update operator channels dynamically
 
-## 🔍 Features
+#### Examples
 
-- [x] ArgoCD with SOPS plugin
-- [x] Secret Management using External secrets and 1Password
-- [x] Cert manager integration with Cloudflare for API and Wildcard certificate
-- [x] Multi cluster management using Red Hat ACM
-- [x] OpenShift Pipeline as Code
-- [x] Renovate bot
+**Operator Channel Patching:**
 
-## Resources
+```yaml
+# clusters/proxmox/cert-manager.yaml
+spec:
+  source:
+    plugin:
+      parameters:
+        - name: channel
+          value: "stable-v1.13"
+```
 
-- [GitOps Catalog by RedHat COP](https://github.com/redhat-cop/gitops-catalog)
+**Variable Replacement with sed:**
+
+```yaml
+parameters:
+  - name: sed
+    value: "s/CLUSTER_NAME/proxmox-cluster/g **/*.yaml"
+```
+
+**YAML Path Updates with yq:**
+
+```yaml
+parameters:
+  - name: yq
+    value: '.spec.domain = "apps.cluster.example.com" ingress.yaml'
+```
+
+### Custom Plugins
+
+Additional plugins are configured in [`components/openshift-gitops-config/`](./components/openshift-gitops-config/).
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**ArgoCD Application Sync Failures:**
+
+```bash
+# Check application status
+oc get applications -n openshift-gitops
+
+# View detailed sync status
+oc describe application <app-name> -n openshift-gitops
+
+# Force sync
+argocd app sync <app-name> --force
+```
+
+**External Secrets Not Syncing:**
+
+```bash
+# Check External Secrets operator logs
+oc logs deployment/external-secrets -n external-secrets-operator
+
+# Verify ClusterSecretStore connectivity
+oc get clustersecretstore vault-backend -o yaml
+```
+
+**Cert Manager Certificate Issues:**
+
+```bash
+# Check certificate status
+oc get certificates -A
+
+# Review cert-manager logs
+oc logs deployment/cert-manager -n cert-manager
+```
+
+### Validation
+
+```bash
+# Validate all YAML files
+find . -name "*.yaml" -exec yamllint {} \;
+
+# Check Kubernetes resource validity
+scripts/kubeconform.sh
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow the established directory structure
+- Use meaningful commit messages
+- Update documentation for new features
+- Test changes in a development cluster first
+- Ensure all YAML files pass validation
+
+## 📚 Resources
+
+### Documentation
+
+- [OpenShift Documentation](https://docs.openshift.com/)
+- [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
+- [Red Hat ACM Documentation](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/)
+
+### Community Resources
+
+- [GitOps Catalog by Red Hat COP](https://github.com/redhat-cop/gitops-catalog)
+- [GitOps Standards Template](https://github.com/redhat-cop/gitops-standards-repo-template)
+- [OpenShift GitOps Examples](https://github.com/redhat-developer/openshift-gitops-examples)
+
+### Related Projects
+
+- [Homelab Orchestrator](https://github.com/Vikaspogu/homelab-orchestrator) - Ansible automation for infrastructure
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for the OpenShift community</p>
+  <p>
+    <a href="https://github.com/Vikaspogu/openshift-multicluster/issues">Report Bug</a> •
+    <a href="https://github.com/Vikaspogu/openshift-multicluster/issues">Request Feature</a>
+  </p>
+</div>
