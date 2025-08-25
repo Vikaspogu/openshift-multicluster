@@ -6,8 +6,9 @@ permissionMapping:
   - update
   - delete
 conditions:
-  rule: IS_ENTITY_OWNER
+  rule: IS_ENTITY_OWNER # replace with label, not create or update
   resourceType: catalog-entity
   params:
     claims:
       - "$currentUser"
+# allOf, anyOf, not
