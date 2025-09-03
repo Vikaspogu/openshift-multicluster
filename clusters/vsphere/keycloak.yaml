@@ -9,7 +9,7 @@ applications:
 
   keycloak-config:
     annotations:
-      argocd.argoproj.io/sync-wave: "15"
+      argocd.argoproj.io/sync-wave: "30"
     destination:
       namespace: keycloak
     source:
