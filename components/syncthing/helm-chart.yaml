@@ -23,4 +23,4 @@ spec:
       config:
         type: hostPath
         hostPath: /storage0/syncthing
-        hostPathType: Directory
+        hostPathType: ""
