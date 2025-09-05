@@ -25,6 +25,11 @@ metadata:
   labels:
     app.kubernetes.io/instance: garage
     app.kubernetes.io/name: garage
+  annotations:
+    gethomepage.dev/href: "https://garage-ui.omv-loki.vikaspogu.internal"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Ingress
+    gethomepage.dev/icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/garage.png
 spec:
   entryPoints:
     - websecure

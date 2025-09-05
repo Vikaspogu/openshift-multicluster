@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  kubernetes.yaml: |
+    mode: cluster
+    ingress: true
+  settings.yaml: |
+    title: OMV Host Dashboard
+    background:
+      image: https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp5320845.jpg&f=1&nofb=1&ipt=53f7d5e1c810478d338de39a54e3cf32484354d092fc05e9b0aea3216f428c53
+      blur: sm
+      saturate: 50
+      brightness: 50
+      opacity: 50
+    theme: dark
+    color: slate
+    headerStyle: boxedWidgets
+    target: _blank
+    layout:
+      Ingress:
+        style: row
+        columns: 4
+        icon: mdi-chart-line
+  widgets.yaml: |
+    - resources:
+        backend: kubernetes
+        cpu: true
+        expanded: true
+        memory: true
+    - search:
+        provider: ["duckduckgo"]
+        focus: false
+        target: _blank
+    - greeting:
+        text_size: xl
+        text: "Welcome!"
+    - datetime:
+        text_size: l
+        format:
+          dateStyle: long
+          timeStyle: short
+          hourCycle: h23
+    - openmeteo:
+        label: Home
+        latitude: {{HOMEPAGE_VAR_LATITUDE}}
+        longitude: {{HOMEPAGE_VAR_LONGITUDE}}
+        units: metric
+        cache: 5
+  docker.yaml: ""

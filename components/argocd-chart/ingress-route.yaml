@@ -7,6 +7,11 @@ metadata:
   labels:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd
+  annotations:
+    gethomepage.dev/href: "https://argocd.omv-loki.vikaspogu.internal"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Ingress
+    gethomepage.dev/icon: argocd.png
 spec:
   entryPoints:
     - websecure

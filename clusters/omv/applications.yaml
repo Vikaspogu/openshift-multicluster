@@ -46,3 +46,11 @@ applications:
       namespace: default
     source:
       path: components/bytestash
+
+  homepage:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: default
+    source:
+      path: components/homepage

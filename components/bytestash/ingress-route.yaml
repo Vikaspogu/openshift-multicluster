@@ -6,6 +6,11 @@ metadata:
   labels:
     app.kubernetes.io/instance: bytestash
     app.kubernetes.io/name: bytestash
+  annotations:
+    gethomepage.dev/href: "https://bytestash.synlo.duckdns.org"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Ingress
+    gethomepage.dev/icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/bytestash.png
 spec:
   entryPoints:
     - websecure
