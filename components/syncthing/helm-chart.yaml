@@ -24,3 +24,7 @@ spec:
         type: hostPath
         hostPath: /storage0/syncthing
         hostPathType: ""
+      data:
+        type: hostPath
+        hostPath: /storage0/syncthing-data
+        hostPathType: ""

@@ -24,7 +24,7 @@ data:
     layout:
       Ingress:
         style: row
-        columns: 4
+        columns: 3
         icon: mdi-chart-line
   widgets.yaml: |
     - resources:
