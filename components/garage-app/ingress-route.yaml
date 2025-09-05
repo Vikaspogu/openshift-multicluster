@@ -1,0 +1,36 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: garage-s3
+  labels:
+    app.kubernetes.io/instance: garage
+    app.kubernetes.io/name: garage
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`s3.omv-loki.vikaspogu.internal`)
+      kind: Rule
+      services:
+        - name: garage
+          port: 3900
+  tls: {}
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: garage-ui
+  labels:
+    app.kubernetes.io/instance: garage
+    app.kubernetes.io/name: garage
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`garage-ui.omv-loki.vikaspogu.internal`)
+      kind: Rule
+      services:
+        - name: garage
+          port: 3909
+  tls: {}

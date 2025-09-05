@@ -1,0 +1,65 @@
+controllers:
+  garage:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      app:
+        image:
+          repository: dxflrs/garage
+          tag: v2.0.0@sha256:15b40e0dddd2e611aa746ff6f7c3bfe9f22735e4a2cc29e0abd89c268e9b79d9
+        env:
+          TZ: "America/New_York"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: 512Mi
+      webui:
+        image:
+          repository: khairul169/garage-webui
+          tag: 1.1.0@sha256:17c793551873155065bf9a022dabcde874de808a1f26e648d4b82e168806439c
+        env:
+          API_BASE_URL: "http://garage.default.svc.cluster.local:3903"
+          S3_ENDPOINT_URL: "http://garage.default.svc.cluster.local:3900"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            memory: 128Mi
+service:
+  app:
+    ports:
+      s3:
+        port: 3900
+      api:
+        port: 3903
+      webui:
+        port: 3909
+
+persistence:
+  data:
+    type: hostPath
+    path: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage
+    globalMounts:
+      - path: /data
+  meta:
+    type: hostPath
+    path: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage-meta
+    globalMounts:
+      - path: /meta
+
+  config:
+    enabled: true
+    type: secret
+    name: garage
+    globalMounts:
+      - path: /etc/garage.toml
+        subPath: configuration.toml

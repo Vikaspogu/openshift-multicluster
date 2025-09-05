@@ -22,3 +22,11 @@ applications:
       namespace: rancher-app
     source:
       path: components/rancher-ui
+
+  garage-app:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: default
+    source:
+      path: components/garage-app
