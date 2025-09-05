@@ -35,9 +35,11 @@ persistence:
     type: configMap
     name: homepage-config
     globalMounts:
-      - path: /app/config/bookmarks.yaml
-      - path: /app/config/docker.yaml
-      - path: /app/config/kubernetes.yaml
-      - path: /app/config/services.yaml
-      - path: /app/config/settings.yaml
-      - path: /app/config/widgets.yaml
+      - subPath: docker.yaml
+        path: /app/config/docker.yaml
+      - subPath: kubernetes.yaml
+        path: /app/config/kubernetes.yaml
+      - subPath: settings.yaml
+        path: /app/config/settings.yaml
+      - subPath: widgets.yaml
+        path: /app/config/widgets.yaml
