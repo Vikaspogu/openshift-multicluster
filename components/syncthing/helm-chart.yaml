@@ -11,6 +11,11 @@ spec:
   chart: syncthing
   targetNamespace: default
   valuesContent: |-
+    controllers:
+      main:
+        pod:
+          securityContext:
+            privileged: true
     persistence:
       config:
         type: hostPath
