@@ -8,7 +8,7 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
-    ingress: true
+    traefik: true
   settings.yaml: |
     title: OMV Host Dashboard
     background:
