@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: garage
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`s3.omv-loki.vikaspogu.internal`)
       kind: Rule
