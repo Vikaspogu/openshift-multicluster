@@ -15,9 +15,17 @@ applications:
     source:
       path: components/onepassword-connect-chart
 
-  rancher-ui:
+  traefik-chart:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: kube-system
+    source:
+      path: components/traefik-chart
+
+  rancher-ui:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
     destination:
       namespace: rancher-app
     source:
@@ -30,3 +38,11 @@ applications:
       namespace: default
     source:
       path: components/garage-app
+
+  bytestash:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: default
+    source:
+      path: components/bytestash

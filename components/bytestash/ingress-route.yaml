@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bytestash
+  labels:
+    app.kubernetes.io/instance: bytestash
+    app.kubernetes.io/name: bytestash
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`bytestash.synlo.duckdns.org`)
+      kind: Rule
+      services:
+        - name: bytestash
+          port: http
+  tls:
+    certResolver: letsencrypt
