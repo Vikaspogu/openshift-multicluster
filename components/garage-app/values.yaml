@@ -69,8 +69,8 @@ persistence:
 
   config:
     enabled: true
-    type: secret
-    name: garage
+    type: configMap
+    name: garage-configmap
     globalMounts:
       - path: /etc/garage.toml
         subPath: configuration.toml
