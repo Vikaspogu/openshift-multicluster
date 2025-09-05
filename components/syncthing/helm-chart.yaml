@@ -1,0 +1,26 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: syncthing
+  labels:
+    app.kubernetes.io/instance: syncthing
+    app.kubernetes.io/name: syncthing
+spec:
+  repo: http://brandan-schmitz.github.io/helm-charts
+  chart: syncthing
+  targetNamespace: default
+  valuesContent: |-
+    controllers:
+      main:
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 100
+            fsGroup: 100
+    persistence:
+      config:
+        type: hostPath
+        hostPath: /storage0/syncthing
+        hostPathType: Directory
