@@ -1,0 +1,24 @@
+applications:
+  external-secrets-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    destination:
+      namespace: external-secrets
+    source:
+      path: components/external-secrets-chart
+
+  onepassword-connect-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "10"
+    destination:
+      namespace: external-secrets
+    source:
+      path: components/onepassword-connect-chart
+
+  rancher-ui:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: rancher-app
+    source:
+      path: components/rancher-ui

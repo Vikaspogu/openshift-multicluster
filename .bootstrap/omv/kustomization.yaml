@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../components/root-application
+patches:
+  - target:
+      kind: Application
+    patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: "https://github.com/Vikaspogu/openshift-multicluster.git"
+      - op: replace
+        path: /spec/source/path
+        value: "clusters/omv"
+      - op: replace
+        path: /metadata/namespace
+        value: "argocd-app"
+      - op: replace
+        path: /spec/destination/namespace
+        value: "argocd-app"

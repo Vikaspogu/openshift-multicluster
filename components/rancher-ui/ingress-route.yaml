@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rancher-websecure
+  namespace: rancher-app
+  labels:
+    app.kubernetes.io/instance: rancher
+    app.kubernetes.io/name: rancher
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`rancher.omv-loki.vikaspogu.internal`)
+      kind: Rule
+      services:
+        - name: rancher
+          port: 80
+  tls: {}

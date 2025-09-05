@@ -43,7 +43,7 @@ spec:
                 secretKeyRef:
                   key: onepassword-credentials.json
                   name: onepassword-connect-secret
-          image: 1password/connect-api:1.7.3
+          image: 1password/connect-api:1.7.4
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 0
@@ -87,7 +87,7 @@ spec:
               value: "11221"
             - name: OP_BUS_PEERS
               value: localhost:11220
-          image: 1password/connect-sync:1.7.3
+          image: 1password/connect-sync:1.7.4
           name: sync
           volumeMounts:
             - mountPath: /home/opuser/.op/data
