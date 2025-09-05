@@ -11,14 +11,6 @@ spec:
   chart: syncthing
   targetNamespace: default
   valuesContent: |-
-    controllers:
-      main:
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 65534
-            runAsGroup: 100
-            fsGroup: 100
     persistence:
       config:
         type: hostPath
