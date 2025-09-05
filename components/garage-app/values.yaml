@@ -46,15 +46,13 @@ service:
 
 persistence:
   data:
-    type: nfs
-    server: omv-loki.vikaspogu.internal
-    path: /storage0/garage
+    type: hostPath
+    hostPath: /storage0/garage
     globalMounts:
       - path: /data
   meta:
-    type: nfs
-    server: omv-loki.vikaspogu.internal
-    path: /storage0/garage-meta
+    type: hostPath
+    hostPath: /storage0/garage-meta
     globalMounts:
       - path: /meta
 
