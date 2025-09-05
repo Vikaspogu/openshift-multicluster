@@ -6,6 +6,7 @@ resources:
   - configmap.yaml
   - externalsecret.yaml
   - rbac.yaml
+  - ingress-route.yaml
 generatorOptions:
   disableNameSuffixHash: true
 
