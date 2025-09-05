@@ -46,13 +46,15 @@ service:
 
 persistence:
   data:
-    type: hostPath
-    path: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage
+    type: nfs
+    server: omv-loki.vikaspogu.internal
+    path: /storage0/garage
     globalMounts:
       - path: /data
   meta:
-    type: hostPath
-    path: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage-meta
+    type: nfs
+    server: omv-loki.vikaspogu.internal
+    path: /storage0/garage-meta
     globalMounts:
       - path: /meta
 
