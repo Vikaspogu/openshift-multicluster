@@ -11,9 +11,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`rancher.omv-loki.vikaspogu.internal`)
+    - match: Host(`rancher.synlo.duckdns.org`)
       kind: Rule
       services:
         - name: rancher
           port: 80
-  tls: {}
+  tls:
+    certResolver: letsencrypt
