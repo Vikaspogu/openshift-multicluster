@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: rancher-app
 resources:
   - ./namespace.yaml
-  - ./external-secret.yaml
+  # - ./external-secret.yaml
   - ./helm-chart.yaml
   - ./ingress-route.yaml
