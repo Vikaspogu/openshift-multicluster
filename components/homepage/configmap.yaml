@@ -52,3 +52,5 @@ data:
         units: metric
         cache: 5
   docker.yaml: ""
+  services.yaml: ""
+  bookmarks.yaml: ""
