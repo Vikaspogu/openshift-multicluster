@@ -9,6 +9,6 @@ helmCharts:
   - name: app-template
     releaseName: bytestash
     namespace: default
-    repo: oci://ghcr.io/bjw-s-labs/helm/app-template
+    repo: oci://ghcr.io/bjw-s-labs/helm
     version: "4.2.0"
     valuesFile: values.yaml
