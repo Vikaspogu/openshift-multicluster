@@ -11,3 +11,13 @@ helmCharts:
     repo: https://bjw-s-labs.github.io/helm-charts
     version: "4.2.0"
     valuesFile: values.yaml
+
+configMapGenerator:
+  - files:
+      - resources/configuration.toml
+    name: garage-configmap
+generatorOptions:
+  annotations:
+    # Disable or env-sub no worky for authelia config
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+  disableNameSuffixHash: true
