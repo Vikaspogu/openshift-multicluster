@@ -16,9 +16,9 @@ spec:
         pod:
           securityContext:
             runAsNonRoot: false
-            runAsUser: 0
-            runAsGroup: 0
-            fsGroup: 0
+            runAsUser: 65534
+            runAsGroup: 100
+            fsGroup: 100
     persistence:
       config:
         type: hostPath
