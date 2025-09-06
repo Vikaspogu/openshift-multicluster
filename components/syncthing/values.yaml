@@ -51,6 +51,10 @@ persistence:
   config:
     type: hostPath
     hostPath: /storage0/syncthing/config
+    globalMounts:
+      - path: "/var/syncthing"
   data:
     type: hostPath
     hostPath: /storage0/syncthing/data
+    globalMounts:
+      - path: /data
