@@ -19,6 +19,6 @@ spec:
       kind: Rule
       services:
         - name: syncthing
-          port: 8384
+          port: http
   tls:
     certResolver: letsencrypt
