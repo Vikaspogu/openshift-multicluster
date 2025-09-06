@@ -33,13 +33,11 @@ controllers:
             memory: 250Mi
         securityContext:
           allowPrivilegeEscalation: true
-  defaultPodOptions:
-    securityContext:
-      runAsNonRoot: false
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 0
-      fsGroupChangePolicy: OnRootMismatch
+          runAsNonRoot: false
+          runAsUser: 0
+          runAsGroup: 0
+          fsGroup: 0
+          fsGroupChangePolicy: OnRootMismatch
 service:
   app:
     forceRename: syncthing
