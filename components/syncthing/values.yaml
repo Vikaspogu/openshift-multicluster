@@ -10,6 +10,8 @@ controllers:
           tag: 2.0.7@sha256:9f78e172614132f96befeec5c857164222df0da99aaf7620355c2d5d8ce09dac
         env:
           TZ: America/New_York
+          PGID: 0
+          PUID: 0
         probes:
           liveness: &probes
             enabled: true
@@ -29,6 +31,15 @@ controllers:
             memory: 100Mi
           limits:
             memory: 250Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+        fsGroupChangePolicy: OnRootMismatch
 service:
   app:
     forceRename: syncthing
