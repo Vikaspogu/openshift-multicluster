@@ -58,12 +58,12 @@ service:
 persistence:
   data:
     type: hostPath
-    hostPath: /storage0/garage
+    hostPath: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage
     globalMounts:
       - path: /data
   meta:
     type: hostPath
-    hostPath: /storage0/garage-meta
+    hostPath: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/garage-meta
     globalMounts:
       - path: /meta
 

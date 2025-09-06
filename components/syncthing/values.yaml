@@ -4,7 +4,6 @@ controllers:
     annotations:
       reloader.stakater.com/auto: "true"
     containers:
-      replicas: 0
       app:
         image:
           repository: ghcr.io/syncthing/syncthing
@@ -58,11 +57,11 @@ service:
 persistence:
   config:
     type: hostPath
-    hostPath: /storage0/syncthing/config
+    hostPath: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/syncthing/config
     globalMounts:
       - path: "/var/syncthing"
   data:
     type: hostPath
-    hostPath: /storage0/syncthing/data
+    hostPath: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/syncthing/data
     globalMounts:
       - path: /data

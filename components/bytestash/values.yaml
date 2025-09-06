@@ -39,6 +39,6 @@ service:
 persistence:
   data:
     type: hostPath
-    hostPath: /storage0/bytestash
+    hostPath: /srv/dev-disk-by-uuid-9d2e4cb9-8825-4168-8153-e020ee524474/storage0/bytestash
     globalMounts:
       - path: /data/snippets
