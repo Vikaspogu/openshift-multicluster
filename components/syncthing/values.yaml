@@ -36,8 +36,6 @@ controllers:
           runAsNonRoot: false
           runAsUser: 0
           runAsGroup: 0
-          fsGroup: 0
-          fsGroupChangePolicy: OnRootMismatch
 service:
   app:
     forceRename: syncthing
