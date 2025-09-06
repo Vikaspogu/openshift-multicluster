@@ -11,7 +11,7 @@ metadata:
     gethomepage.dev/href: "https://argocd.omv-loki.vikaspogu.internal"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Ingress
-    gethomepage.dev/icon: argocd.png
+    gethomepage.dev/icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/argo-cd.png
 spec:
   entryPoints:
     - websecure
