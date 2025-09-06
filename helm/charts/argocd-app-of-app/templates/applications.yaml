@@ -82,7 +82,12 @@ spec:
     helm:
 {{ toYaml . | indent 6 }}
   {{- end }}
+    {{- if $val.source.chart }}
+    chart: {{ $val.source.chart | default $.Values.default.app.source.chart | required (printf "No source.chart specified for %s" $key ) }}
+    {{- end }}
+    {{- if $val.source.path }}
     path: {{ tpl $val.source.path $ }}
+    {{- end }}
     repoURL: {{ $val.source.repoURL | default $.Values.default.app.source.repoURL | required (printf "No source.repoURL specified for %s" $key ) }}
     targetRevision: {{ $val.source.targetRevision | default $.Values.default.app.source.targetRevision | required (printf "No source.targetRevision specified for %s" $key ) }}
 {{- else }}

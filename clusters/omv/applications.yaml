@@ -15,6 +15,14 @@ applications:
     source:
       path: components/onepassword-connect-chart
 
+  argocd-chart:
+    annotations:
+      argocd.argoproj.io/sync-wave: "15"
+    destination:
+      namespace: argocd-app
+    source:
+      path: components/argocd-chart
+
   traefik-chart:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
@@ -62,3 +70,22 @@ applications:
       namespace: default
     source:
       path: components/syncthing
+
+  reloader:
+    annotations:
+      argocd.argoproj.io/sync-wave: "25"
+    destination:
+      namespace: default
+    source:
+      chart: reloader
+      repoURL: ghcr.io/stakater/charts
+      targetRevision: 2.2.0
+      helm:
+        releaseName: sealed-secrets
+        valuesObject:
+          fullnameOverride: reloader
+          reloader:
+            readOnlyRootFileSystem: true
+            podMonitor:
+              enabled: true
+              namespace: "{{ .Release.Namespace }}"
