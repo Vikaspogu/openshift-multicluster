@@ -12,7 +12,7 @@ spec:
   targetNamespace: default
   valuesContent: |-
     controllers:
-      syncthing:
+      main:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
