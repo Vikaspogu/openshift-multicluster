@@ -28,8 +28,8 @@ spec:
       config:
         type: hostPath
         hostPath: /storage0/syncthing/config
-        hostPathType: "Directory"
+        hostPathType: ""
       data:
         type: hostPath
         hostPath: /storage0/syncthing/data
-        hostPathType: "Directory"
+        hostPathType: ""
