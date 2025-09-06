@@ -15,10 +15,11 @@ spec:
       main:
         pod:
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 65534
-            runAsGroup: 100
-            fsGroup: 100
+            privileged: true
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
     persistence:
       config:
         type: hostPath
