@@ -22,9 +22,9 @@ spec:
     persistence:
       config:
         type: hostPath
-        hostPath: /storage0/syncthing
+        hostPath: /storage0/syncthing/config
         hostPathType: "Directory"
       data:
         type: hostPath
-        hostPath: /storage0/syncthing-data
+        hostPath: /storage0/syncthing/data
         hostPathType: "Directory"
