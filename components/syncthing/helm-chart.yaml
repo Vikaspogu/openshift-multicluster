@@ -12,18 +12,48 @@ spec:
   targetNamespace: default
   valuesContent: |-
     controllers:
-      main:
-        pod:
-          securityContext:
-            allowPrivilegeEscalation: true
-            runAsNonRoot: false
-            runAsUser: 0
-            runAsGroup: 0
-            fsGroup: 0
+      syncthing:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
+            image:
+              repository: ghcr.io/syncthing/syncthing
+              tag: 2.0.7@sha256:9f78e172614132f96befeec5c857164222df0da99aaf7620355c2d5d8ce09dac
+            env:
+              TZ: America/New_York
+              PGID: 1000
+              PUID: 1000
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /rest/noauth/health
+                    port: &port 8384
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 250Mi
             securityContext:
-              allowPrivilegeEscalation: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
         type: hostPath
