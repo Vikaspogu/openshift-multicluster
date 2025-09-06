@@ -15,16 +15,16 @@ spec:
       main:
         pod:
           securityContext:
-            runAsNonRoot: false
-            runAsUser: 0
-            runAsGroup: 0
-            fsGroup: 0
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 100
+            fsGroup: 100
     persistence:
       config:
         type: hostPath
         hostPath: /storage0/syncthing
-        hostPathType: ""
+        hostPathType: "Directory"
       data:
         type: hostPath
         hostPath: /storage0/syncthing-data
-        hostPathType: ""
+        hostPathType: "Directory"
