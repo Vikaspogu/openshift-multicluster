@@ -23,7 +23,7 @@ spec:
             env:
               TZ: America/New_York
               PGID: 1000
-              PUID: 1000
+              PUID: 65534
             probes:
               liveness: &probes
                 enabled: true
@@ -50,7 +50,7 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
+        runAsUser: 65534
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
