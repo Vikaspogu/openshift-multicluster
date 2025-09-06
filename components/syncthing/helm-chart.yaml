@@ -15,6 +15,7 @@ spec:
       main:
         pod:
           securityContext:
+            allowPrivilegeEscalation: true
             runAsNonRoot: false
             runAsUser: 0
             runAsGroup: 0
@@ -22,7 +23,7 @@ spec:
         containers:
           main:
             securityContext:
-              privileged: true
+              allowPrivilegeEscalation: true
     persistence:
       config:
         type: hostPath
