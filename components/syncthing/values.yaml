@@ -4,6 +4,7 @@ controllers:
     annotations:
       reloader.stakater.com/auto: "true"
     containers:
+      replicas: 0
       app:
         image:
           repository: ghcr.io/syncthing/syncthing
