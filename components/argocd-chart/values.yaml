@@ -55,6 +55,9 @@ repoServer:
         - secretRef:
             name: environment-variables
       image: quay.io/raffaelespazzoli/raffa-envsub:1.1
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
       imagePullPolicy: Always
       volumeMounts:
         - mountPath: /var/run/argocd
