@@ -14,7 +14,7 @@ patches:
         value: "clusters/omv"
       - op: replace
         path: /metadata/namespace
-        value: "argocd-app"
+        value: "argo-system"
       - op: replace
         path: /spec/destination/namespace
-        value: "argocd-app"
+        value: "argo-system"

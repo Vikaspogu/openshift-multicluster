@@ -19,7 +19,7 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "15"
     destination:
-      namespace: argocd-app
+      namespace: argo-system
     source:
       path: components/argocd-chart
 
