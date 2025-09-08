@@ -5,13 +5,14 @@ resources:
   - ./namespace.yaml
   - ./ingress-route.yaml
 
+generators:
+  - secret-generator.yaml
+
 configMapGenerator:
   - files:
       - plugin.yaml=setenv-cmp-plugin.yaml
     name: setenv-cmp-plugin
 
-generators:
-  - secret-generator.yaml
 helmCharts:
   - name: argo-cd
     releaseName: argo-cd
