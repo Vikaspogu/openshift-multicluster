@@ -3,5 +3,19 @@ kind: Kustomization
 namespace: argocd-app
 resources:
   - ./namespace.yaml
-  - ./helm-chart.yaml
   - ./ingress-route.yaml
+
+configMapGenerator:
+  - files:
+      - plugin.yaml=setenv-cmp-plugin.yaml
+    name: setenv-cmp-plugin
+
+helmCharts:
+  - name: argo-cd
+    releaseName: argo-cd
+    repo: https://argoproj.github.io/argo-helm
+    version: 8.3.5
+    valuesFile: values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,17 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: setenv-cmp-plugin
+spec:
+  version: v1.0
+  init:
+    command: [sh, -c, 'echo "Initializing setenv-plugin-cmp..."']
+  generate:
+    command:
+      - sh
+      - "-c"
+      - "set -o pipefail && kustomize build --load-restrictor LoadRestrictionsNone --enable-helm --enable-alpha-plugins . | envsub"
+  discover:
+    find:
+      command: [sh, -c, "find . -maxdepth 1 -name kustomization.yaml"]
