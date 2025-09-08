@@ -50,12 +50,10 @@ repoServer:
         - name: SOPS_AGE_KEY_FILE # For age
           value: /helm-secrets-private-keys/keys.txt
       envFrom:
-        - configMapRef:
+        - secretRef:
             name: environment-variables
       image: quay.io/raffaelespazzoli/raffa-envsub:1.1
       imagePullPolicy: Always
-      securityContext:
-        runAsNonRoot: true
       volumeMounts:
         - mountPath: /var/run/argocd
           name: var-files

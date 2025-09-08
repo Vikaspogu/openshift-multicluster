@@ -1,0 +1,22 @@
+Kind: Secret
+apiVersion: v1
+metadata:
+  name: environment-variables
+type: Opaque
+data:
+  CLUSTER_BASE_DOMAIN: ENC[AES256_GCM,data:1LiufCwzo3HWg+xAF6Hc+i8=,iv:tVfpTOJwdESctOLjjeE9+gi37SL9lUw26ZQFcEA2MFw=,tag:CyZ3hMu3jrdHCvAg5nKRXA==,type:str]
+sops:
+  age:
+    - recipient: age1ulfhs490lug3kres5qm5kfdmpqmcrwsfsc03eln0s3xffndnrcwq5u86tt
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwOEJzL1Jxcm96UnI3NHFW
+        bXFCWVJ3TnVVNURmQ2Y3aTBhRUtIRzFhVW04CjUyaE5rL0QxOUZTejlGZkxiMk16
+        WmVkdElValhjdVAwY3RZMEhwMnczR28KLS0tIDdDQkh1cUNORWJpdmkydDhUODFS
+        bDJCZFZ0MDdFQnUweTdyZHhFd3BWbDAK72kESSZbsd5Qn4TGR9mVGSVftKO5WbRK
+        8SP4yhsO0hl0BTBsuSFWcZ5Wa0wlPTzhmJKUFtvJwwGarKJ+X14Tdw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-08T15:24:12Z"
+  mac: ENC[AES256_GCM,data:mBxLKRUxGqlZE/IuopUD3e68fcWxmz3UEkDcBQKNCRCacQ9BysTZ+0OVw05TOwzqHgG/amacZQDsosn1ifvnynhUSU5BsSm8/KZoPBxjE6aW5nzPylezJimgtWRH8+lJCikmnVj5mfJFtvqUamwyi1HIf8+qOB4Amt1tuaZr+q4=,iv:9NIYL/ShPBsRcJvfHuSUyCQMpvfQVOdQNIesAonDpPk=,tag:tZWFFHrsKliOVp4khJgOzg==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.10.2
