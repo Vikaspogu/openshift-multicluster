@@ -14,7 +14,7 @@ controllers:
           tag: v1.4.6
         env:
           TZ: "America/New_York"
-          HOMEPAGE_ALLOWED_HOSTS: home.synlo.duckdns.org
+          HOMEPAGE_ALLOWED_HOSTS: home.${CLUSTER_DOMAIN}
         envFrom:
           - secretRef:
               name: homepage-secret

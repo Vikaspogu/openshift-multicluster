@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: syncthing
     app.kubernetes.io/name: syncthing
   annotations:
-    gethomepage.dev/href: "https://syncthing.synlo.duckdns.org"
+    gethomepage.dev/href: "https://syncthing.${CLUSTER_DOMAIN}"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Ingress
     gethomepage.dev/icon: syncthing.png
@@ -15,7 +15,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`syncthing.synlo.duckdns.org`)
+    - match: Host(`syncthing.${CLUSTER_DOMAIN}`)
       kind: Rule
       services:
         - name: syncthing

@@ -4,6 +4,7 @@ namespace: argo-system
 resources:
   - ./namespace.yaml
   - ./ingress-route.yaml
+  - ./external-secret.yaml
 
 configMapGenerator:
   - files:

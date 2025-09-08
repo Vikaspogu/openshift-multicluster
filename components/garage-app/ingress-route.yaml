@@ -10,7 +10,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`s3.synlo.duckdns.org`)
+    - match: Host(`s3.${CLUSTER_DOMAIN}`)
       kind: Rule
       services:
         - name: garage

@@ -12,8 +12,8 @@ spec:
   valuesContent: |-
     additionalArguments:
       - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-      - "--entrypoints.websecure.http.tls.domains[0].main=synlo.duckdns.org"
-      - "--entrypoints.websecure.http.tls.domains[0].sans=*.synlo.duckdns.org"
+      - "--entrypoints.websecure.http.tls.domains[0].main=${CLUSTER_DOMAIN}"
+      - "--entrypoints.websecure.http.tls.domains[0].sans=*.${CLUSTER_DOMAIN}"
     persistence:
       enabled: true
       size: 128Mi

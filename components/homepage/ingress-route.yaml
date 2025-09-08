@@ -10,7 +10,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`home.synlo.duckdns.org`)
+    - match: Host(`home.${CLUSTER_DOMAIN}`)
       kind: Rule
       services:
         - name: homepage
