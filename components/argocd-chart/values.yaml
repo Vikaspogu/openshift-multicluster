@@ -79,6 +79,10 @@ repoServer:
       value: /usr/local/bin/helm
     - name: SOPS_AGE_KEY_FILE # For age
       value: /helm-secrets-private-keys/keys.txt
+    - name: XDG_CONFIG_HOME
+      value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
+    - name: KUSTOMIZE_PLUGIN_HOME
+      value: /etc/kustomize/plugin
   volumes:
     - name: custom-tools
       emptyDir: {}
