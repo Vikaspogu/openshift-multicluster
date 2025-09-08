@@ -24,33 +24,6 @@ repoServer:
   extraContainers:
     - name: setenv-plugin
       command: [/var/run/argocd/argocd-cmp-server]
-      env:
-        - name: HELM_PLUGINS
-          value: /custom-tools/helm-plugins/
-        - name: HELM_SECRETS_CURL_PATH
-          value: /custom-tools/curl
-        - name: HELM_SECRETS_SOPS_PATH
-          value: /custom-tools/sops
-        - name: HELM_SECRETS_VALS_PATH
-          value: /custom-tools/vals
-        - name: HELM_SECRETS_KUBECTL_PATH
-          value: /custom-tools/kubectl
-        - name: HELM_SECRETS_BACKEND
-          value: sops
-        - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
-          value: "false"
-        - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
-          value: "true"
-        - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
-          value: "false"
-        - name: HELM_SECRETS_WRAPPER_ENABLED
-          value: "true"
-        - name: HELM_SECRETS_DECRYPT_SECRETS_IN_TMP_DIR
-          value: "true"
-        - name: HELM_SECRETS_HELM_PATH
-          value: /usr/local/bin/helm
-        - name: SOPS_AGE_KEY_FILE # For age
-          value: /helm-secrets-private-keys/keys.txt
       envFrom:
         - secretRef:
             name: environment-variables
@@ -69,19 +42,6 @@ repoServer:
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
           subPath: plugin.yaml
           name: setenv-cmp-plugin
-        - mountPath: /custom-tools
-          name: custom-tools
-        - mountPath: /usr/local/sbin/helm
-          subPath: helm
-          name: custom-tools
-        - mountPath: /usr/local/bin/kustomize
-          name: custom-tools
-          subPath: kustomize
-        - mountPath: /usr/local/bin/ksops
-          name: custom-tools
-          subPath: ksops
-        - mountPath: /helm-secrets-private-keys/
-          name: helm-secrets-private-keys
   serviceAccount:
     create: true
     name: argocd-repo-server
