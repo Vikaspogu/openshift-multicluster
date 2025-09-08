@@ -19,6 +19,8 @@ configs:
     argocdServerAdminPassword: $2a$10$GRTeAT.0uRW2HUk59OJn6OjYtWPROWimrka/EGkgDUsiNvmyep05e
     argocdServerAdminPasswordMtime: 2025-08-26T18:15:18
 repoServer:
+  deploymentAnnotations:
+    reloader.stakater.com/auto: "true"
   extraContainers:
     - name: setenv-plugin
       command: [/var/run/argocd/argocd-cmp-server]
