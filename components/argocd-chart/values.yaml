@@ -20,12 +20,8 @@ repoServer:
     - name: setenv-plugin
       command: [/var/run/argocd/argocd-cmp-server]
       env:
-        - name: XDG_CONFIG_HOME
-          value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
         - name: SOPS_AGE_KEY_FILE
           value: /.config/sops/age/keys.txt
-        - name: KUSTOMIZE_PLUGIN_HOME
-          value: /etc/kustomize/plugin
       envFrom:
         - secretRef:
             name: environment-variables
@@ -44,8 +40,12 @@ repoServer:
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
           subPath: plugin.yaml
           name: setenv-cmp-plugin
-        - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
-          name: ksops-generator
+        - mountPath: /usr/local/bin/kustomize
+          name: custom-tools
+          subPath: kustomize
+        - mountPath: /usr/local/bin/ksops
+          name: custom-tools
+          subPath: ksops
         - mountPath: /.config/sops/age/keys.txt
           name: sops-age
           subPath: keys.txt
@@ -60,14 +60,10 @@ repoServer:
       verbs:
         - get
   env:
-    - name: XDG_CONFIG_HOME
-      value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
     - name: SOPS_AGE_KEY_FILE
       value: /.config/sops/age/keys.txt
-    - name: KUSTOMIZE_PLUGIN_HOME
-      value: /etc/kustomize/plugin
   volumes:
-    - name: ksops-generator
+    - name: custom-tools
       emptyDir: {}
     - name: sops-age
       secret:
@@ -76,18 +72,24 @@ repoServer:
       configMap:
         name: setenv-cmp-plugin
   volumeMounts:
-    - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
-      name: ksops-generator
+    - mountPath: /usr/local/bin/kustomize
+      name: custom-tools
+      subPath: kustomize
+    - mountPath: /usr/local/bin/ksops
+      name: custom-tools
+      subPath: ksops
     - mountPath: /.config/sops/age/keys.txt
       name: sops-age
       subPath: keys.txt
   initContainers:
-    - name: install-ksops-generator
-      resources: {}
+    - name: install-ksops
       image: viaductoss/ksops:v4.4.0
       command: ["/bin/sh", "-c"]
       args:
-        - 'echo "Installing KSOPS..."; cp ksops /ksops-generator/ksops; echo "Done.";'
+        - echo "Installing KSOPS...";
+          mv ksops /custom-tools/;
+          mv kustomize /custom-tools/;
+          echo "Done.";
       volumeMounts:
-        - mountPath: /ksops-generator
-          name: ksops-generator
+        - mountPath: /custom-tools
+          name: custom-tools
