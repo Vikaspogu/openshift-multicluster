@@ -17,7 +17,7 @@ helmCharts:
             app-source: cluster-omv
             repo: default
           destination:
-            namespace: argocd-app
+            namespace: argo-system
             server: https://kubernetes.default.svc
           source:
             repoURL: https://github.com/Vikaspogu/openshift-multicluster.git
@@ -38,6 +38,6 @@ helmCharts:
               maxDuration: 10m
     additionalValuesFiles:
       - ./applications.yaml
-    namespace: argocd-app
+    namespace: argo-system
 
 patches: []
