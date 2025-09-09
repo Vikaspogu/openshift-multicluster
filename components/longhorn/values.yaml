@@ -14,7 +14,7 @@ csi:
     replicas: 1
 
 defaultSettings:
-  defaultDataPath: "/var/lib/longhorn"
+  defaultDataPath: "/srv/dev-disk-by-uuid-e486bb32-3762-4f61-bfeb-3d3b626159e8/longhorn"
   # DATA replica count - this is what matters for your question
   defaultDataLocality: "best-effort"
   # For 2 nodes: use 1 replica (no redundancy but works)
