@@ -84,7 +84,7 @@ repoServer:
   initContainers:
     - name: install-ksops-generator
       resources: {}
-      image: viaductoss/ksops:v4.1.0
+      image: viaductoss/ksops:v4.4.0
       command: ["/bin/sh", "-c"]
       args:
         - 'echo "Installing KSOPS..."; cp ksops /ksops-generator/ksops; echo "Done.";'
