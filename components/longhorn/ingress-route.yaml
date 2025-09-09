@@ -18,7 +18,7 @@ spec:
     - match: Host(`longhorn.${CLUSTER_DOMAIN}`)
       kind: Rule
       services:
-        - name: longhorn
+        - name: longhorn-frontend
           port: http
   tls:
     certResolver: letsencrypt
