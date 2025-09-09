@@ -83,7 +83,7 @@ repoServer:
       subPath: keys.txt
   initContainers:
     - name: install-ksops
-      image: viaductoss/ksops:v4.4.0
+      image: viaductoss/ksops:v4.4.0@sha256:78add3d6191b4efce197a3a5ddcb70ea478270bbf4c18101263ea4a3d7e2d2f6
       command: ["/bin/sh", "-c"]
       args:
         - echo "Installing KSOPS...";
