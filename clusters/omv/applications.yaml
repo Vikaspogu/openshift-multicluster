@@ -31,6 +31,14 @@ applications:
     source:
       path: components/traefik-chart
 
+  longhorn:
+    annotations:
+      argocd.argoproj.io/sync-wave: "20"
+    destination:
+      namespace: longhorn-system
+    source:
+      path: components/longhorn
+
   rancher-ui:
     annotations:
       argocd.argoproj.io/sync-wave: "25"
