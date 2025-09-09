@@ -10,11 +10,6 @@ configs:
   cm:
     statusbadge.enabled: true
     kustomize.buildOptions: "--enable-alpha-plugins --enable-exec  --load-restrictor LoadRestrictionsNone"
-    helm.valuesFileSchemes: >-
-      secrets+gpg-import, secrets+gpg-import-kubernetes,
-      secrets+age-import, secrets+age-import-kubernetes,
-      secrets, secrets+literal,
-      https
   secret:
     argocdServerAdminPassword: $2a$10$GRTeAT.0uRW2HUk59OJn6OjYtWPROWimrka/EGkgDUsiNvmyep05e
     argocdServerAdminPasswordMtime: 2025-08-26T18:15:18
@@ -42,6 +37,11 @@ repoServer:
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
           subPath: plugin.yaml
           name: setenv-cmp-plugin
+        - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
+          name: ksops-generator
+        - mountPath: /.config/sops/age/keys.txt
+          name: sops-age
+          subPath: keys.txt
   serviceAccount:
     create: true
     name: argocd-repo-server
@@ -53,69 +53,34 @@ repoServer:
       verbs:
         - get
   env:
-    - name: HELM_PLUGINS
-      value: /custom-tools/helm-plugins/
-    - name: HELM_SECRETS_CURL_PATH
-      value: /custom-tools/curl
-    - name: HELM_SECRETS_SOPS_PATH
-      value: /custom-tools/sops
-    - name: HELM_SECRETS_VALS_PATH
-      value: /custom-tools/vals
-    - name: HELM_SECRETS_KUBECTL_PATH
-      value: /custom-tools/kubectl
-    - name: HELM_SECRETS_BACKEND
-      value: sops
-    - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
-      value: "false"
-    - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
-      value: "true"
-    - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
-      value: "false"
-    - name: HELM_SECRETS_WRAPPER_ENABLED
-      value: "true"
-    - name: HELM_SECRETS_DECRYPT_SECRETS_IN_TMP_DIR
-      value: "true"
-    - name: HELM_SECRETS_HELM_PATH
-      value: /usr/local/bin/helm
-    - name: SOPS_AGE_KEY_FILE # For age
-      value: /helm-secrets-private-keys/keys.txt
     - name: XDG_CONFIG_HOME
       value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
+    - name: SOPS_AGE_KEY_FILE
+      value: /.config/sops/age/keys.txt
     - name: KUSTOMIZE_PLUGIN_HOME
       value: /etc/kustomize/plugin
   volumes:
-    - name: custom-tools
+    - name: ksops-generator
       emptyDir: {}
-    - name: helm-secrets-private-keys
+    - name: sops-age
       secret:
         secretName: helm-secrets-private-keys
     - name: setenv-cmp-plugin
       configMap:
         name: setenv-cmp-plugin
   volumeMounts:
-    - mountPath: /custom-tools
-      name: custom-tools
-    - mountPath: /usr/local/sbin/helm
-      subPath: helm
-      name: custom-tools
-    - mountPath: /usr/local/bin/kustomize
-      name: custom-tools
-      subPath: kustomize
-    - mountPath: /usr/local/bin/ksops
-      name: custom-tools
-      subPath: ksops
-    - mountPath: /helm-secrets-private-keys/
-      name: helm-secrets-private-keys
+    - mountPath: /etc/kustomize/plugin/viaduct.ai/v1/ksops
+      name: ksops-generator
+    - mountPath: /.config/sops/age/keys.txt
+      name: sops-age
+      subPath: keys.txt
   initContainers:
-    - name: gitops-tools
-      image: ajaykumar4/gitops-tools:2025.8.0
-      imagePullPolicy: Always
-      command: [sh, -ec]
+    - name: install-ksops-generator
+      resources: {}
+      image: viaductoss/ksops:v4.1.0
+      command: ["/bin/sh", "-c"]
       args:
-        - |
-          mkdir -p /custom-tools/
-          cp -rf /gitops-tools/* /custom-tools
-          chmod +x /custom-tools/*
+        - 'echo "Installing KSOPS..."; cp ksops /ksops-generator/ksops; echo "Done.";'
       volumeMounts:
-        - mountPath: /custom-tools
-          name: custom-tools
+        - mountPath: /ksops-generator
+          name: ksops-generator
