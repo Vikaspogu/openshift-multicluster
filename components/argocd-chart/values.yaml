@@ -19,6 +19,13 @@ repoServer:
   extraContainers:
     - name: setenv-plugin
       command: [/var/run/argocd/argocd-cmp-server]
+      env:
+        - name: XDG_CONFIG_HOME
+          value: /etc/kustomize/plugin/viaduct.ai/v1/ksops
+        - name: SOPS_AGE_KEY_FILE
+          value: /.config/sops/age/keys.txt
+        - name: KUSTOMIZE_PLUGIN_HOME
+          value: /etc/kustomize/plugin
       envFrom:
         - secretRef:
             name: environment-variables
