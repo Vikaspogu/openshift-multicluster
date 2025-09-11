@@ -43,7 +43,7 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "25"
     destination:
-      namespace: rancher-app
+      namespace: cattle-system
     source:
       path: components/rancher-ui
 
