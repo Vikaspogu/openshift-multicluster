@@ -1,8 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: rancher-app
+namespace: cattle-system
 resources:
   - ./namespace.yaml
   # - ./external-secret.yaml
-  - ./helm-chart.yaml
   - ./ingress-route.yaml
+
+helmCharts:
+  - name: rancher
+    releaseName: rancher
+    namespace: cattle-system
+    repo: https://releases.rancher.com/server-charts/stable
+    version: 2.12.0
+    valuesFile: values.yaml
