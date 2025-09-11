@@ -36,7 +36,7 @@ platform:
         topology:
           computeCluster: "/homelab/host/cluster1"
           datacenter: homelab
-          datastore: "/homelab/datastore/datastore1"
+          datastore: "/homelab/datastore/datastore0"
           networks:
             - "VM Network"
           folder: "/homelab/vm/ocp"
