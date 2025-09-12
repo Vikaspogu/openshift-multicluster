@@ -12,7 +12,7 @@ helmCharts:
     releaseName: argo-workflows
     namespace: openshift-gitops
     repo: https://argoproj.github.io/argo-helm
-    version: "0.45.23"
+    version: "0.45.24"
     valuesInline:
       workflow:
         serviceAccount:
