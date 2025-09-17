@@ -6,7 +6,7 @@ controllers:
       app:
         image:
           repository: dxflrs/garage
-          tag: v2.0.0@sha256:15b40e0dddd2e611aa746ff6f7c3bfe9f22735e4a2cc29e0abd89c268e9b79d9
+          tag: v2.1.0@sha256:4c9b34c113e61358466e83fd6e7d66e6d18657ede14b776eb78a93ee8da7cf6a
         env:
           TZ: "America/New_York"
         envFrom:
