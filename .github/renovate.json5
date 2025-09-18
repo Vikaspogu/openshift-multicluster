@@ -40,6 +40,13 @@
       ignoreTests: true,
       matchUpdateTypes: ["minor", "patch"],
     },
+    // version pinning
+    {
+      description: ["Pin viaductoss/ksops to v4.3.3"],
+      matchDatasources: ["docker"],
+      matchPackageNames: ["viaductoss/ksops"],
+      allowedVersions: ["v4.3.3"],
+    },
     // commit message topics
     {
       matchDatasources: ["helm"],
