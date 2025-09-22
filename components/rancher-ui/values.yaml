@@ -1,8 +1,0 @@
----
-hostname: "rancher.${CLUSTER_DOMAIN}"
-replicas: 1
-rancherImageTag: v2.12-head@sha256:55d6e2fe1fb13408398dc03028693b62f7c3e885433e656edc70611fa7e302c8
-ingress:
-  enabled: false
-tls: external
-agentTLSMode: "system-store"
