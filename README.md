@@ -384,12 +384,6 @@ Additional plugins are configured in [`components/openshift-gitops-config/`](./c
 
 ## ⭐ Stargazers
 
-<div align="center">
-
-[![Stargazers repo roster for @Vikaspogu/openshift-multicluster](https://reporoster.com/stars/Vikaspogu/openshift-multicluster)](https://github.com/Vikaspogu/openshift-multicluster/stargazers)
-
-### Star History
-
 [![Star History Chart](https://api.star-history.com/svg?repos=Vikaspogu/openshift-multicluster&type=Date)](https://star-history.com/#Vikaspogu/openshift-multicluster&Date)
 
 **⭐ If you find this project helpful, please consider giving it a star! ⭐**
